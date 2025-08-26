@@ -14,6 +14,9 @@
   <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
   <style>
     /* ======================= THEME TOKENS ======================= */
@@ -236,6 +239,26 @@
     .btn-ghost{border-color:var(--line);color:var(--ink);background:var(--panel-soft)}
     .btn-ghost:hover{border-color:var(--line-strong);transform:translateY(-2px);box-shadow:var(--soft)}
 
+    .btn-logout{
+      background:linear-gradient(135deg, #ef4444, #dc2626);
+      color:#fff;
+      border:1px solid transparent;
+      font-weight:700;
+      transition:.22s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:12px 16px;
+      border-radius:var(--r-pill);
+      cursor:pointer;
+      box-shadow:0 4px 12px rgba(239, 68, 68, 0.3);
+    }
+    .btn-logout:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(239, 68, 68, 0.4);
+      background:linear-gradient(135deg, #dc2626, #ef4444);
+    }
+
     .theme-toggle{
       width:44px;height:44px;border-radius:var(--r-pill);display:grid;place-items:center;
       border:1px solid var(--line);background:var(--panel-soft);color:var(--ink);
@@ -431,6 +454,12 @@
             <div class="auth" style="display:flex;align-items:center;gap:8px;margin-left:8px">
               @auth
                 <a href="{{ url('/dashboard') }}" class="btn btn-ghost">Dashboard</a>
+                <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                  @csrf
+                  <button type="submit" class="btn btn-logout" onclick="return confirm('Apakah Anda yakin ingin logout?')">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                  </button>
+                </form>
               @else
                 <a href="{{ route('login') }}" class="btn btn-ghost">Log in</a>
                 @if (Route::has('register'))
@@ -459,6 +488,12 @@
           @if (Route::has('login'))
             @auth
               <a href="{{ url('/dashboard') }}" class="btn btn-ghost" style="flex:1;justify-content:center">Dashboard</a>
+              <form method="POST" action="{{ route('logout') }}" style="flex:1;">
+                @csrf
+                <button type="submit" class="btn btn-logout" style="width:100%;justify-content:center" onclick="return confirm('Apakah Anda yakin ingin logout?')">
+                  Logout
+                </button>
+              </form>
             @else
               <a href="{{ route('login') }}" class="btn btn-ghost" style="flex:1;justify-content:center">Log in</a>
               @if (Route::has('register'))
