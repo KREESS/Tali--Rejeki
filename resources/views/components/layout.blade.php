@@ -6,7 +6,7 @@
   <meta name="description" content="Tali Rejeki — Distributor Insulasi Industri: Nitrile Rubber, Glasswool, Rockwool, aksesoris HVAC & proyek." />
   <meta name="theme-color" content="#7c1415" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Tali Rejeki — Distributor Insulasi Industri</title>
+  <title>@yield('title', 'Tali Rejeki') — Distributor Insulasi Industri</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
     @yield('content')
   </main>
 
-  @include('components.footer', ['produks' => $produks ?? []])
+  @include('components.footer')
 
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

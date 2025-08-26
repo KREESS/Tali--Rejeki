@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\MyWelcomeController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use Illuminate\Support\Facades\Auth;
 
 // === MIDDLEWARE ===
 use Spatie\WelcomeNotification\WelcomesNewUsers;
@@ -94,8 +95,15 @@ Route::middleware(['auth', 'role:admin'])
         // Dashboard
         Route::get('/dashboard', function () {
             return view('admin.dashboard', [
-                'title' => 'Dashboard Admin',
-                'message' => 'Halo Admin, selamat datang di dashboard Tali Rejeki!'
+                'title' => 'Dashboard Admin - Tali Rejeki',
+                'subtitle' => 'Panel administrasi untuk distributor insulasi industri',
+                'user' => Auth::user(),
+                'stats' => [
+                    'users' => 1234,
+                    'orders' => 567,
+                    'products' => 89,
+                    'revenue' => 2100000
+                ]
             ]);
         })->name('dashboard');
 

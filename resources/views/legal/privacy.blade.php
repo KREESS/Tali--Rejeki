@@ -1,5 +1,7 @@
 @extends('components.layout')
 
+@section('title', 'Privacy Policy - Tali Rejeki')
+
 @section('content')
 <style>
   /* ===== PREMIUM DARK THEME VARIABLES ===== */
