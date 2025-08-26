@@ -29,18 +29,13 @@ class PasswordResetLinkController extends Controller
         try {
             $user = User::where('email', $request->email)->first();
 
-            // Generate token dan simpan ke database
-            $token = Str::random(64);
-            DB::table('password_reset_tokens')->updateOrInsert(
-                ['email' => $request->email],
-                [
-                    'email' => $request->email,
-                    'token' => $token,
-                    'created_at' => now()
-                ]
-            );
+            if (!$user) {
+                return back()
+                    ->withInput()
+                    ->withErrors(['email' => 'Email tidak ditemukan.']);
+            }
 
-            // Kirim notifikasi
+            // Kirim welcome notification dengan expire time
             $user->sendWelcomeNotification(now()->addMinutes(30));
 
             Log::info('Password reset link sent to: ' . $request->email);
@@ -48,6 +43,10 @@ class PasswordResetLinkController extends Controller
             return back()->with('status', 'Link reset password telah dikirim ke email Anda.');
         } catch (\Exception $e) {
             Log::error('Failed to send password reset email: ' . $e->getMessage());
+            Log::error('Email error details: ', [
+                'email' => $request->email,
+                'error' => $e->getTraceAsString()
+            ]);
 
             return back()
                 ->withInput()

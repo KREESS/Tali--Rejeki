@@ -11,16 +11,34 @@ class WelcomeNotification extends BaseNotification
 {
     use Queueable;
 
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
     protected function buildWelcomeNotificationMessage(): MailMessage
     {
         return (new MailMessage)
-            ->subject(Lang::get('Reset Password - Tali Rejeki'))
-            ->greeting(Lang::get('Halo!'))
-            ->line(Lang::get('Anda menerima email ini karena kami mendapat permintaan reset password untuk akun Anda.'))
-            ->line(Lang::get('Silakan klik tombol di bawah ini untuk melakukan reset password:'))
-            ->action(Lang::get('Reset Password'), $this->showWelcomeFormUrl)
-            ->line(Lang::get('Link reset password ini akan kadaluarsa dalam 30 menit.'))
-            ->line(Lang::get('Jika Anda tidak meminta reset password, abaikan email ini.'))
-            ->salutation(Lang::get('Salam,') . ' ' . config('app.name'));
+            ->subject('Reset Password - Tali Rejeki')
+            ->from(config('mail.from.address', 'noreply@talirejeki.com'), config('mail.from.name', 'Tali Rejeki'))
+            ->greeting('Halo!')
+            ->line('Anda menerima email ini karena kami mendapat permintaan reset password untuk akun Anda.')
+            ->line('Silakan klik tombol di bawah ini untuk melakukan reset password:')
+            ->action('Reset Password', $this->showWelcomeFormUrl)
+            ->line('Link reset password ini akan kadaluarsa dalam 30 menit.')
+            ->line('Jika Anda tidak meminta reset password, abaikan email ini.')
+            ->salutation('Salam, Tim Tali Rejeki');
+    }
+
+    /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
+        return ['mail'];
     }
 }

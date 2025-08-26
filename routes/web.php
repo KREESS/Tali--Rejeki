@@ -33,7 +33,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->
 // =====================
 Route::middleware(['web', WelcomesNewUsers::class])->group(function () {
     Route::get('welcome/{user}', [MyWelcomeController::class, 'showWelcomeForm'])->name('welcome');
-    Route::post('welcome/{user}', [MyWelcomeController::class, 'savePassword']);
+    Route::post('welcome/{user}', [MyWelcomeController::class, 'savePassword'])->name('welcome.store');
 });
 
 // ===== LEGAL PAGES =====
