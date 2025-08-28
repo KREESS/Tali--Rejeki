@@ -85,20 +85,10 @@
                 <span>Artikel & Blog</span>
                 <div class="nav-indicator"></div>
             </a>
-            <a href="#" class="nav-item" data-tooltip="Halaman Statis">
-                <i class="fas fa-file-alt"></i>
-                <span>Halaman Statis</span>
-                <div class="nav-indicator"></div>
-            </a>
         </div>
 
         <div class="nav-section">
             <span class="nav-title">CUSTOMER & LEADS</span>
-            <a href="{{ route('admin.users') }}" class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}" data-tooltip="Semua Customer">
-                <i class="fas fa-users"></i>
-                <span>Semua Customer</span>
-                <div class="nav-indicator"></div>
-            </a>
             <a href="#" class="nav-item" data-tooltip="Inquiry & Leads">
                 <i class="fas fa-phone"></i>
                 <span>Inquiry & Leads</span>

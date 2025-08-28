@@ -110,14 +110,6 @@ Route::middleware(['auth', 'role:admin'])
             ]);
         })->name('dashboard');
 
-        // User Management
-        Route::get('/users', function () {
-            return view('admin.users', [
-                'title' => 'Kelola User',
-                'message' => 'Management area untuk mengelola user sistem.'
-            ]);
-        })->name('users');
-
         // Product Management Routes
         Route::resource('categories', CategoryController::class);
         Route::resource('subcategories', SubcategoryController::class);
