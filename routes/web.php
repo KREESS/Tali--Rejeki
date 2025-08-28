@@ -7,6 +7,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\MyWelcomeController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Auth;
 
 // === MIDDLEWARE ===
@@ -114,6 +117,17 @@ Route::middleware(['auth', 'role:admin'])
                 'message' => 'Management area untuk mengelola user sistem.'
             ]);
         })->name('users');
+
+        // Product Management Routes
+        Route::resource('categories', CategoryController::class);
+        Route::resource('subcategories', SubcategoryController::class);
+        Route::resource('products', ProductController::class);
+
+        // Product Image Management
+        Route::delete('/products/images/{image}', [ProductController::class, 'deleteImage'])
+            ->name('products.images.delete');
+        Route::post('/products/images/{image}/primary', [ProductController::class, 'setPrimaryImage'])
+            ->name('products.images.primary');
 
         // Reports
         Route::get('/reports', function () {

@@ -31,6 +31,87 @@
         position: relative;
     }
     
+    /* ====== ALERT STYLES ====== */
+    .alert {
+        border-radius: 10px !important;
+        border: none !important;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .alert::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, currentColor, transparent);
+        opacity: 0.6;
+    }
+    
+    .alert-success {
+        background: linear-gradient(135deg, 
+            rgba(40, 167, 69, 0.1), 
+            rgba(40, 167, 69, 0.05)) !important;
+        color: #155724 !important;
+        border-left: 4px solid #28a745 !important;
+    }
+    
+    .alert-danger {
+        background: linear-gradient(135deg, 
+            rgba(220, 53, 69, 0.1), 
+            rgba(220, 53, 69, 0.05)) !important;
+        color: #721c24 !important;
+        border-left: 4px solid #dc3545 !important;
+    }
+    
+    .alert-warning {
+        background: linear-gradient(135deg, 
+            rgba(255, 193, 7, 0.1), 
+            rgba(255, 193, 7, 0.05)) !important;
+        color: #856404 !important;
+        border-left: 4px solid #ffc107 !important;
+    }
+    
+    .alert-info {
+        background: linear-gradient(135deg, 
+            rgba(13, 202, 240, 0.1), 
+            rgba(13, 202, 240, 0.05)) !important;
+        color: #0c5460 !important;
+        border-left: 4px solid #0dcaf0 !important;
+    }
+    
+    .alert .btn-close {
+        font-size: 0.75rem;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+    }
+    
+    .alert .btn-close:hover {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    
+    /* Auto-hide animation */
+    .alert.auto-hide {
+        animation: alertSlideOut 0.5s ease-in-out 4.5s forwards;
+    }
+    
+    @keyframes alertSlideOut {
+        0% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
     .admin-main-content {
         margin-left: 280px;
         margin-top: 70px;
@@ -141,10 +222,108 @@
     @include('admin.components.sidebar')
     
     <main class="admin-main-content">
+        <!-- Alert Messages -->
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert" style="border-radius: 10px; border: none; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);">
+                <i class="fas fa-check-circle me-2"></i>
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="border-radius: 10px; border: none; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if(session('warning'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="border-radius: 10px; border: none; box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                {{ session('warning') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if(session('info'))
+            <div class="alert alert-info alert-dismissible fade show" role="alert" style="border-radius: 10px; border: none; box-shadow: 0 4px 15px rgba(13, 202, 240, 0.2);">
+                <i class="fas fa-info-circle me-2"></i>
+                {{ session('info') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="border-radius: 10px; border: none; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <strong>Terjadi kesalahan:</strong>
+                <ul class="mb-0 mt-2">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
         @yield('content')
     </main>
 
     @include('admin.components.footer')
+    
+    <!-- Alert Auto-hide Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-hide alerts after 5 seconds
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(function(alert) {
+            // Add auto-hide class for animation
+            setTimeout(function() {
+                alert.classList.add('auto-hide');
+                
+                // Remove the alert from DOM after animation
+                setTimeout(function() {
+                    if (alert.parentNode) {
+                        alert.remove();
+                    }
+                }, 500); // Animation duration
+            }, 5000); // 5 seconds delay
+        });
+
+        // Enhanced close button functionality
+        const closeButtons = document.querySelectorAll('.alert .btn-close');
+        closeButtons.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const alert = this.closest('.alert');
+                alert.style.transition = 'all 0.3s ease';
+                alert.style.transform = 'translateX(100%)';
+                alert.style.opacity = '0';
+                
+                setTimeout(function() {
+                    if (alert.parentNode) {
+                        alert.remove();
+                    }
+                }, 300);
+            });
+        });
+
+        // Add click to dismiss functionality
+        alerts.forEach(function(alert) {
+            alert.style.cursor = 'pointer';
+            alert.addEventListener('click', function(e) {
+                if (!e.target.closest('.btn-close')) {
+                    const closeBtn = this.querySelector('.btn-close');
+                    if (closeBtn) {
+                        closeBtn.click();
+                    }
+                }
+            });
+        });
+    });
+    </script>
+    
     @stack('scripts')
 </body>
 </html>

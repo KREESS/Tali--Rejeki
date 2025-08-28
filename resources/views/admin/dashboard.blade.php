@@ -1,6 +1,6 @@
 @extends('admin.components.layout')
 
-@section('title', 'Dashboard Admin - Tali Rejeki')
+@section('title', 'Dashboard Admin')
 
 @push('styles')
 <style>
