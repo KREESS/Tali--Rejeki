@@ -506,7 +506,7 @@
             {{-- Tombol Hapus --}}
             <button type="button" 
                     class="premium-btn premium-btn-outline" 
-                    onclick="deleteProduct()"
+                    onclick="deleteProduct({{ $product->id }})"
                     style="padding: 6px 12px; font-size: 0.8rem; background: rgba(220, 53, 69, 0.9); border-color: rgba(220, 53, 69, 0.9); color: white;">
                 <i class="fas fa-trash" style="font-size: 0.75rem;"></i>
                 Hapus
@@ -784,69 +784,6 @@
     </div>
 </div>
 
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">
-                    <i class="fas fa-exclamation-triangle me-2"></i>
-                    Konfirmasi Hapus Produk
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="text-center mb-3">
-                    <i class="fas fa-trash-alt text-danger" style="font-size: 3rem; opacity: 0.7;"></i>
-                </div>
-                
-                <p class="text-center mb-3" style="font-size: 1rem; font-weight: 500;">
-                    Apakah Anda yakin ingin menghapus produk ini?
-                </p>
-                
-                <div class="alert alert-warning d-flex align-items-center">
-                    <i class="fas fa-exclamation-circle me-2"></i>
-                    <div>
-                        <strong>Peringatan:</strong> Tindakan ini akan menghapus semua gambar produk dan tidak dapat dibatalkan!
-                    </div>
-                </div>
-                
-                <div class="bg-light p-3 rounded">
-                    <div class="row">
-                        <div class="col-4">
-                            <strong>Produk:</strong>
-                        </div>
-                        <div class="col-8">
-                            <span class="text-muted">{{ $product->name }}</span>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-4">
-                            <strong>Sub Kategori:</strong>
-                        </div>
-                        <div class="col-8">
-                            <span class="text-muted">{{ $product->subcategory->name }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="premium-btn premium-btn-outline" data-bs-dismiss="modal">
-                    <i class="fas fa-times me-1"></i>
-                    Batal
-                </button>
-                <form action="{{ route('admin.products.destroy', $product) }}" method="POST" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="premium-btn" style="background: linear-gradient(135deg, #dc3545, #c82333);">
-                        <i class="fas fa-trash me-1"></i>
-                        Hapus Produk
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @push('scripts')
@@ -871,65 +808,88 @@ function openImageModal(imageSrc, imageAlt) {
     };
 }
 
-// Delete product function with confirmation
-function deleteProduct() {
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'), {
-        backdrop: 'static',
-        keyboard: true
-    });
-    deleteModal.show();
-    
-    // Focus on cancel button for accessibility
-    deleteModal._element.addEventListener('shown.bs.modal', function() {
-        const cancelBtn = this.querySelector('.premium-btn-outline');
-        if (cancelBtn) cancelBtn.focus();
-    });
+// Delete product function with modern confirmation
+function deleteProduct(productId) {
+    // Show modern confirmation modal instead of Bootstrap modal
+    showModernConfirm(
+        'Hapus Produk?', 
+        'Apakah Anda yakin ingin menghapus produk ini? Tindakan ini akan menghapus semua gambar produk dan tidak dapat dibatalkan!',
+        'fas fa-trash-alt',
+        'danger',
+        function() {
+            // Show loading alert
+            showModernAlert('info', 'Memproses...', 'Sedang menghapus produk, harap tunggu.', 'fas fa-spinner fa-spin', 0);
+            
+            fetch(`/admin/products/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Remove loading alert
+                removeAlert();
+                
+                if (data.success) {
+                    showModernAlert('success', 'Berhasil!', data.message || 'Produk berhasil dihapus.', 'fas fa-check-circle');
+                    
+                    // Redirect to products index after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = '/admin/products';
+                    }, 2000);
+                } else {
+                    showModernAlert('danger', 'Gagal!', data.message || 'Gagal menghapus produk.', 'fas fa-exclamation-triangle');
+                }
+            })
+            .catch(error => {
+                // Remove loading alert
+                removeAlert();
+                console.error('Error:', error);
+                showModernAlert('danger', 'Error!', 'Terjadi kesalahan saat menghapus produk: ' + error.message, 'fas fa-exclamation-circle');
+            });
+        }
+    );
 }
 
-// Enhanced delete form handling
+// Enhanced form submission handling
 document.addEventListener('DOMContentLoaded', function() {
-    const deleteForm = document.querySelector('#deleteModal form');
-    if (deleteForm) {
-        deleteForm.addEventListener('submit', function(e) {
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const cancelBtn = document.querySelector('#deleteModal .premium-btn-outline');
+    // Add click effect to buttons
+    document.querySelectorAll('.premium-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Create ripple effect
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            this.appendChild(ripple);
             
-            // Prevent double submission
-            if (submitBtn.disabled) {
-                e.preventDefault();
-                return false;
-            }
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+            ripple.style.animation = 'ripple-animation 0.6s ease-out';
+            ripple.style.pointerEvents = 'none';
             
-            // Show loading state
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Menghapus...';
-            submitBtn.disabled = true;
-            submitBtn.style.opacity = '0.7';
-            
-            // Disable cancel button
-            if (cancelBtn) {
-                cancelBtn.disabled = true;
-                cancelBtn.style.opacity = '0.5';
-            }
-            
-            // Add timeout as safety measure
-            setTimeout(function() {
-                if (submitBtn.disabled) {
-                    submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i> Coba Lagi';
-                    submitBtn.disabled = false;
-                    submitBtn.style.opacity = '1';
-                    if (cancelBtn) {
-                        cancelBtn.disabled = false;
-                        cancelBtn.style.opacity = '1';
-                    }
-                }
-            }, 10000); // 10 seconds timeout
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
         });
-    }
+    });
     
-    // Enhanced modal animations
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        modal.addEventListener('show.bs.modal', function() {
+    // Enhanced modal animations for image modal
+    const imageModal = document.getElementById('imageModal');
+    if (imageModal) {
+        imageModal.addEventListener('show.bs.modal', function() {
             this.style.display = 'block';
             this.style.opacity = '0';
             setTimeout(() => {
@@ -938,46 +898,367 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 10);
         });
         
-        modal.addEventListener('hide.bs.modal', function() {
+        imageModal.addEventListener('hide.bs.modal', function() {
             this.style.opacity = '0';
         });
-    });
+    }
     
-    // Keyboard shortcuts
+    // Keyboard shortcuts for modern modals
     document.addEventListener('keydown', function(e) {
-        // ESC key to close modals
         if (e.key === 'Escape') {
-            const openModal = document.querySelector('.modal.show');
-            if (openModal) {
-                const modalInstance = bootstrap.Modal.getInstance(openModal);
-                if (modalInstance) modalInstance.hide();
+            const modernConfirm = document.getElementById('modernConfirmOverlay');
+            if (modernConfirm) {
+                removeConfirm();
+            } else {
+                // Handle image modal
+                const openModal = document.querySelector('.modal.show');
+                if (openModal) {
+                    const modalInstance = bootstrap.Modal.getInstance(openModal);
+                    if (modalInstance) modalInstance.hide();
+                }
             }
         }
     });
 });
 
-// Add click effect to buttons
-document.querySelectorAll('.premium-btn').forEach(button => {
-    button.addEventListener('click', function(e) {
-        // Create ripple effect
-        const ripple = document.createElement('span');
-        ripple.classList.add('ripple');
-        this.appendChild(ripple);
+// Modern Alert System
+function showModernAlert(type, title, message, icon, duration = 4000) {
+    // Remove existing alerts
+    removeAlert();
+    
+    const alertTypes = {
+        'success': {
+            bg: 'linear-gradient(135deg, #d1e7dd, #f8fff9)',
+            border: '#badbcc',
+            color: '#0f5132',
+            iconColor: '#198754'
+        },
+        'danger': {
+            bg: 'linear-gradient(135deg, #f8d7da, #fef5f5)',
+            border: '#f5c2c7',
+            color: '#842029',
+            iconColor: '#dc3545'
+        },
+        'warning': {
+            bg: 'linear-gradient(135deg, #fff3cd, #fffef5)',
+            border: '#ffecb5',
+            color: '#664d03',
+            iconColor: '#ffc107'
+        },
+        'info': {
+            bg: 'linear-gradient(135deg, #d1ecf1, #f5feff)',
+            border: '#b6d7e2',
+            color: '#055160',
+            iconColor: '#0dcaf0'
+        }
+    };
+    
+    const alertStyle = alertTypes[type] || alertTypes['info'];
+    
+    const alertHtml = `
+        <div class="modern-alert" id="modernAlert" style="
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            min-width: 350px;
+            max-width: 450px;
+            background: ${alertStyle.bg};
+            border: 1px solid ${alertStyle.border};
+            border-left: 4px solid ${alertStyle.iconColor};
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            padding: 20px;
+            color: ${alertStyle.color};
+            font-family: 'Inter', sans-serif;
+            animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        ">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background: ${alertStyle.iconColor};
+                    color: white;
+                    font-size: 16px;
+                    flex-shrink: 0;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                ">
+                    <i class="${icon}"></i>
+                </div>
+                <div style="flex: 1; padding-top: 2px;">
+                    <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">${title}</div>
+                    <div style="font-size: 14px; line-height: 1.4; opacity: 0.9;">${message}</div>
+                </div>
+                <button onclick="removeAlert()" style="
+                    background: none;
+                    border: none;
+                    color: ${alertStyle.color};
+                    font-size: 18px;
+                    line-height: 1;
+                    padding: 0;
+                    width: 24px;
+                    height: 24px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50%;
+                    opacity: 0.6;
+                    transition: all 0.2s ease;
+                    cursor: pointer;
+                    flex-shrink: 0;
+                " onmouseover="this.style.opacity='1'; this.style.background='rgba(0,0,0,0.1)'" onmouseout="this.style.opacity='0.6'; this.style.background='none'">
+                    ×
+                </button>
+            </div>
+        </div>
         
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+        <style>
+        @keyframes slideInRight {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
         
+        @keyframes slideOutRight {
+            0% {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100%) scale(0.8);
+                opacity: 0;
+            }
+        }
+        </style>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', alertHtml);
+    
+    if (duration > 0) {
         setTimeout(() => {
-            ripple.remove();
-        }, 600);
+            const alert = document.getElementById('modernAlert');
+            if (alert) {
+                alert.style.animation = 'slideOutRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+                setTimeout(() => removeAlert(), 400);
+            }
+        }, duration);
+    }
+}
+
+function removeAlert() {
+    const existingAlert = document.getElementById('modernAlert');
+    if (existingAlert) {
+        existingAlert.remove();
+    }
+}
+
+// Modern Confirmation Modal
+function showModernConfirm(title, message, icon, type = 'danger', onConfirm) {
+    const typeColors = {
+        'danger': { primary: '#dc3545', secondary: '#f8d7da' },
+        'warning': { primary: '#ffc107', secondary: '#fff3cd' },
+        'info': { primary: '#0dcaf0', secondary: '#d1ecf1' }
+    };
+    
+    const colors = typeColors[type] || typeColors['danger'];
+    
+    const modalHtml = `
+        <div class="modern-confirm-overlay" id="modernConfirmOverlay" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(5px);
+        ">
+            <div class="modern-confirm-modal" style="
+                background: white;
+                border-radius: 20px;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+                max-width: 450px;
+                width: 90%;
+                animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow: hidden;
+            ">
+                <div style="
+                    background: ${colors.secondary};
+                    padding: 30px 30px 20px;
+                    text-align: center;
+                    border-bottom: 1px solid rgba(0,0,0,0.1);
+                ">
+                    <div style="
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        background: ${colors.primary};
+                        color: white;
+                        font-size: 24px;
+                        margin-bottom: 20px;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                    ">
+                        <i class="${icon}"></i>
+                    </div>
+                    <h5 style="margin: 0 0 10px; font-weight: 600; color: #333;">${title}</h5>
+                    <p style="margin: 0; color: #666; font-size: 14px; line-height: 1.5;">${message}</p>
+                </div>
+                
+                <div style="
+                    padding: 20px 30px;
+                    display: flex;
+                    gap: 12px;
+                    justify-content: flex-end;
+                ">
+                    <button onclick="removeConfirm()" style="
+                        background: rgba(108, 117, 125, 0.1);
+                        border: 2px solid rgba(108, 117, 125, 0.3);
+                        color: #6c757d;
+                        padding: 12px 24px;
+                        border-radius: 12px;
+                        font-weight: 600;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        min-width: 100px;
+                    " onmouseover="this.style.background='rgba(108, 117, 125, 0.2)'; this.style.borderColor='#6c757d'" onmouseout="this.style.background='rgba(108, 117, 125, 0.1)'; this.style.borderColor='rgba(108, 117, 125, 0.3)'">
+                        Batal
+                    </button>
+                    <button onclick="confirmAction()" style="
+                        background: linear-gradient(135deg, ${colors.primary}, ${colors.primary}dd);
+                        border: none;
+                        color: white;
+                        padding: 12px 24px;
+                        border-radius: 12px;
+                        font-weight: 600;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        min-width: 100px;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)'">
+                        Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <style>
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        @keyframes scaleOut {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+        }
+        </style>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    
+    // Store the confirm callback
+    window.modernConfirmCallback = onConfirm;
+    
+    // Close on overlay click
+    document.getElementById('modernConfirmOverlay').addEventListener('click', function(e) {
+        if (e.target === this) {
+            removeConfirm();
+        }
     });
-});
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function escapeHandler(e) {
+        if (e.key === 'Escape') {
+            removeConfirm();
+            document.removeEventListener('keydown', escapeHandler);
+        }
+    });
+}
+
+function removeConfirm() {
+    const overlay = document.getElementById('modernConfirmOverlay');
+    if (overlay) {
+        const modal = overlay.querySelector('.modern-confirm-modal');
+        modal.style.animation = 'scaleOut 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        overlay.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => {
+            overlay.remove();
+            window.modernConfirmCallback = null;
+        }, 300);
+    }
+}
+
+function confirmAction() {
+    if (window.modernConfirmCallback) {
+        window.modernConfirmCallback();
+    }
+    removeConfirm();
+}
 </script>
 
 <style>
+/* Enhanced button hover effects */
+.premium-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(139, 0, 0, 0.3) !important;
+}
+
+.premium-btn:active {
+    transform: translateY(0) !important;
+    transition: transform 0.1s ease !important;
+}
+
+/* Loading spinner enhancement */
+.fa-spinner {
+    animation: spin 1s linear infinite !important;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 /* Ripple effect for buttons */
 .premium-btn {
     position: relative;
@@ -1001,79 +1282,6 @@ document.querySelectorAll('.premium-btn').forEach(button => {
         transform: scale(1);
         opacity: 0;
     }
-}
-
-/* Enhanced button hover effects */
-.premium-btn:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(139, 0, 0, 0.3) !important;
-}
-
-.premium-btn:active {
-    transform: translateY(0) !important;
-    transition: transform 0.1s ease !important;
-}
-
-/* Modal backdrop blur */
-.modal-backdrop {
-    z-index: 4990 !important;
-}
-
-/* Ensure modal is above all elements */
-.modal {
-    z-index: 5000 !important;
-}
-
-/* Loading spinner enhancement */
-.fa-spinner {
-    animation: spin 1s linear infinite !mportant;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* ====== ALERT Z-INDEX FIX ====== */
-/* Ensure alerts are above all blurred elements */
-.alert {
-    z-index: 10001 !important;
-    position: relative !important;
-}
-
-.alert, .alert * {
-    z-index: 10001 !important;
-    position: relative !important;
-    filter: none !important;
-    transform: none !important;
-    will-change: auto !important;
-}
-
-.alert .btn-close {
-    z-index: 10002 !important;
-    position: relative !important;
-    pointer-events: auto !important;
-}
-
-/* Override any container z-index for alerts */
-.admin-main-content > .alert {
-    z-index: 10003 !important;
-    position: relative !important;
-}
-
-/* Ensure all blurred elements are below alerts */
-.premium-card,
-.info-card,
-.gallery-item,
-.modal-content {
-    z-index: 1 !important;
-    position: relative;
-}
-
-/* Page header should be below alerts */
-.page-header {
-    z-index: 1 !important;
-    position: relative;
 }
 </style>
 @endpush

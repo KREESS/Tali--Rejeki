@@ -202,15 +202,37 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        // Delete all product images from storage
-        foreach ($product->images as $image) {
-            Storage::disk('public')->delete($image->image_path);
+        try {
+            // Delete all product images from storage
+            foreach ($product->images as $image) {
+                Storage::disk('public')->delete($image->image_path);
+            }
+
+            $productName = $product->name;
+            $product->delete();
+
+            // Check if request expects JSON (AJAX)
+            if (request()->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => "Produk '{$productName}' berhasil dihapus!"
+                ]);
+            }
+
+            // Traditional form submission
+            return redirect()->route('admin.products.index')
+                ->with('success', "Produk '{$productName}' berhasil dihapus!");
+        } catch (\Exception $e) {
+            if (request()->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Terjadi kesalahan saat menghapus produk: ' . $e->getMessage()
+                ], 500);
+            }
+
+            return redirect()->route('admin.products.index')
+                ->with('error', 'Gagal menghapus produk!');
         }
-
-        $product->delete();
-
-        return redirect()->route('admin.products.index')
-            ->with('success', 'Produk berhasil dihapus!');
     }
 
     public function deleteImage(ProductImage $image)

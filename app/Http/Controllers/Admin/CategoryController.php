@@ -88,15 +88,41 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        // Check if category has subcategories
-        if ($category->subcategories()->count() > 0) {
+        try {
+            // Check if category has subcategories
+            if ($category->subcategories()->count() > 0) {
+                if (request()->expectsJson()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Tidak dapat menghapus kategori yang masih memiliki sub kategori!'
+                    ], 422);
+                }
+
+                return redirect()->route('admin.categories.index')
+                    ->with('error', 'Tidak dapat menghapus kategori yang masih memiliki sub kategori!');
+            }
+
+            $category->delete();
+
+            if (request()->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Kategori berhasil dihapus!'
+                ]);
+            }
+
             return redirect()->route('admin.categories.index')
-                ->with('error', 'Tidak dapat menghapus kategori yang masih memiliki sub kategori!');
+                ->with('success', 'Kategori berhasil dihapus!');
+        } catch (\Exception $e) {
+            if (request()->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Terjadi kesalahan saat menghapus kategori: ' . $e->getMessage()
+                ], 500);
+            }
+
+            return redirect()->route('admin.categories.index')
+                ->with('error', 'Terjadi kesalahan saat menghapus kategori!');
         }
-
-        $category->delete();
-
-        return redirect()->route('admin.categories.index')
-            ->with('success', 'Kategori berhasil dihapus!');
     }
 }

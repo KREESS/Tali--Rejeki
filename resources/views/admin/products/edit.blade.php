@@ -5,18 +5,19 @@
 @push('styles')
 <style>
 .premium-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(139, 0, 0, 0.15);
-    border-radius: 25px;
-    box-shadow: 0 10px 40px rgba(139, 0, 0, 0.12);
+    background: white;
+    border: 1px solid rgba(139, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.08);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    z-index: 1;
+    position: relative;
 }
 
 .premium-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 50px rgba(139, 0, 0, 0.18);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(139, 0, 0, 0.18);
     border-color: rgba(139, 0, 0, 0.25);
 }
 
@@ -24,16 +25,16 @@
     background: linear-gradient(135deg, #8b0000, #a50000);
     border: none;
     color: white;
-    padding: 12px 24px;
-    border-radius: 15px;
-    font-weight: 700;
-    font-size: 0.9rem;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.85rem;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    box-shadow: 0 6px 20px rgba(139, 0, 0, 0.25);
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
 }
@@ -56,38 +57,56 @@
 .premium-btn:hover {
     background: linear-gradient(135deg, #a50000, #c50000);
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(139, 0, 0, 0.4);
+    box-shadow: 0 8px 25px rgba(139, 0, 0, 0.35);
     color: white;
 }
 
 .premium-btn-outline {
-    background: rgba(255, 255, 255, 0.95);
-    border: 2px solid rgba(255, 255, 255, 0.9);
+    background: white;
+    border: 2px solid rgba(139, 0, 0, 0.3);
     color: #8b0000;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .premium-btn-outline:hover {
-    background: rgba(255, 255, 255, 1);
-    border-color: rgba(255, 255, 255, 1);
+    background: rgba(139, 0, 0, 0.1);
+    border-color: #8b0000;
     color: #8b0000;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
 
 .form-control {
-    border: 1px solid rgba(139, 0, 0, 0.2);
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-size: 0.85rem;
-    transition: all 0.3s ease;
+    border: 2px solid rgba(139, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+    z-index: 1;
+    position: relative;
 }
 
 .form-control:focus {
     border-color: #8b0000;
-    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
-    outline: none;
+    box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.1);
+    background: white;
+    transform: translateY(-1px);
+}
+
+.form-select {
+    border: 2px solid rgba(139, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+    z-index: 1;
+    position: relative;
+}
+
+.form-select:focus {
+    border-color: #8b0000;
+    box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.1);
+    background: white;
 }
 
 .form-label {
@@ -100,12 +119,12 @@
 .page-header {
     background: linear-gradient(135deg, #8b0000, #a50000, #c50000);
     color: white;
-    padding: 35px;
+    padding: 30px;
     border-radius: 25px;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 15px 50px rgba(139, 0, 0, 0.25);
+    box-shadow: 0 10px 40px rgba(139, 0, 0, 0.2);
 }
 
 .page-header::before {
@@ -116,7 +135,7 @@
     width: 200%;
     height: 200%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-    animation: shimmer 4s infinite linear;
+    animation: shimmer 3s infinite linear;
 }
 
 @keyframes shimmer {
@@ -300,13 +319,13 @@
 .sticky-actions {
     position: sticky;
     bottom: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background: white;
     padding: 15px;
     border-radius: 10px;
     border: 1px solid rgba(139, 0, 0, 0.1);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+    z-index: 1;
 }
 </style>
 @endpush
@@ -726,7 +745,7 @@ imageInput.addEventListener('change', (e) => {
 function handleFiles(files) {
     files.forEach(file => {
         if (file.size > 2 * 1024 * 1024) {
-            alert(`File ${file.name} terlalu besar. Maksimal 2MB.`);
+            showModernAlert('warning', 'File Terlalu Besar!', `File ${file.name} melebihi batas maksimal 2MB.`, 'fas fa-exclamation-triangle');
             return;
         }
         
@@ -782,42 +801,45 @@ function updateFileInput() {
 
 // Existing image management
 function deleteExistingImage(imageId) {
-    if (!confirm('Yakin ingin menghapus gambar ini?')) {
-        return;
-    }
-    
-    fetch(`/admin/products/images/${imageId}`, {
-        method: 'DELETE',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            'Accept': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            document.getElementById(`image-${imageId}`).remove();
+    // Show modern confirmation modal instead of basic confirm
+    showModernConfirm(
+        'Hapus Gambar?', 
+        'Apakah Anda yakin ingin menghapus gambar ini? Tindakan ini tidak dapat dibatalkan.',
+        'fas fa-trash-alt',
+        'danger',
+        function() {
+            // Show loading alert
+            showModernAlert('info', 'Memproses...', 'Sedang menghapus gambar, harap tunggu.', 'fas fa-spinner fa-spin', 0);
             
-            // Show success message
-            const alert = document.createElement('div');
-            alert.className = 'alert alert-success alert-dismissible fade show';
-            alert.innerHTML = `
-                ${data.message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            `;
-            document.querySelector('.page-header').after(alert);
-            
-            setTimeout(() => {
-                alert.remove();
-            }, 3000);
-        } else {
-            alert(data.message);
+            fetch(`/admin/products/images/${imageId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Remove loading alert
+                removeAlert();
+                
+                if (data.success) {
+                    document.getElementById(`image-${imageId}`).remove();
+                    
+                    // Show modern success alert
+                    showModernAlert('success', 'Berhasil!', data.message, 'fas fa-check-circle');
+                } else {
+                    showModernAlert('danger', 'Gagal!', data.message, 'fas fa-exclamation-triangle');
+                }
+            })
+            .catch(error => {
+                // Remove loading alert
+                removeAlert();
+                console.error('Error:', error);
+                showModernAlert('danger', 'Error!', 'Terjadi kesalahan saat menghapus gambar.', 'fas fa-exclamation-circle');
+            });
         }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Terjadi kesalahan saat menghapus gambar.');
-    });
+    );
 }
 
 function setPrimaryImage(imageId) {
@@ -847,25 +869,15 @@ function setPrimaryImage(imageId) {
             // Hide primary button for this image
             imageItem.querySelector('.image-action-btn.primary').style.display = 'none';
             
-            // Show success message
-            const alert = document.createElement('div');
-            alert.className = 'alert alert-success alert-dismissible fade show';
-            alert.innerHTML = `
-                ${data.message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            `;
-            document.querySelector('.page-header').after(alert);
-            
-            setTimeout(() => {
-                alert.remove();
-            }, 3000);
+            // Show modern success alert
+            showModernAlert('success', 'Berhasil!', data.message, 'fas fa-star');
         } else {
-            alert(data.message);
+            showModernAlert('danger', 'Gagal!', data.message, 'fas fa-exclamation-triangle');
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Terjadi kesalahan saat mengubah gambar utama.');
+        showModernAlert('danger', 'Error!', 'Terjadi kesalahan saat mengubah gambar utama.', 'fas fa-exclamation-circle');
     });
 }
 
@@ -891,5 +903,332 @@ document.getElementById('currency').addEventListener('change', function() {
     priceInputGroup.textContent = symbol;
     priceStrikeInputGroup.textContent = symbol;
 });
+
+// Modern Alert System
+function showModernAlert(type, title, message, icon, duration = 4000) {
+    // Remove existing alerts
+    removeAlert();
+    
+    const alertTypes = {
+        'success': {
+            bg: 'linear-gradient(135deg, #d1e7dd, #f8fff9)',
+            border: '#badbcc',
+            color: '#0f5132',
+            iconColor: '#198754'
+        },
+        'danger': {
+            bg: 'linear-gradient(135deg, #f8d7da, #fef5f5)',
+            border: '#f5c2c7',
+            color: '#842029',
+            iconColor: '#dc3545'
+        },
+        'warning': {
+            bg: 'linear-gradient(135deg, #fff3cd, #fffef5)',
+            border: '#ffecb5',
+            color: '#664d03',
+            iconColor: '#ffc107'
+        },
+        'info': {
+            bg: 'linear-gradient(135deg, #d1ecf1, #f5feff)',
+            border: '#b6d7e2',
+            color: '#055160',
+            iconColor: '#0dcaf0'
+        }
+    };
+    
+    const alertStyle = alertTypes[type] || alertTypes['info'];
+    
+    const alertHtml = `
+        <div class="modern-alert" id="modernAlert" style="
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            min-width: 350px;
+            max-width: 450px;
+            background: ${alertStyle.bg};
+            border: 1px solid ${alertStyle.border};
+            border-left: 4px solid ${alertStyle.iconColor};
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            padding: 20px;
+            color: ${alertStyle.color};
+            font-family: 'Inter', sans-serif;
+            animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        ">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+                <div style="
+                    width: 40px;
+                    height: 40px;
+                    background: ${alertStyle.iconColor};
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                ">
+                    <i class="${icon}" style="color: white; font-size: 16px;"></i>
+                </div>
+                <div style="flex: 1; padding-top: 2px;">
+                    <div style="
+                        font-weight: 700;
+                        font-size: 16px;
+                        margin-bottom: 4px;
+                        color: ${alertStyle.iconColor};
+                    ">${title}</div>
+                    <div style="
+                        font-size: 14px;
+                        line-height: 1.4;
+                        opacity: 0.9;
+                    ">${message}</div>
+                </div>
+                <button onclick="removeAlert()" style="
+                    background: none;
+                    border: none;
+                    color: ${alertStyle.color};
+                    opacity: 0.6;
+                    cursor: pointer;
+                    padding: 4px;
+                    border-radius: 4px;
+                    transition: all 0.3s ease;
+                    width: 24px;
+                    height: 24px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                " onmouseover="this.style.opacity='1'; this.style.background='rgba(0,0,0,0.1)'" onmouseout="this.style.opacity='0.6'; this.style.background='none'">
+                    <i class="fas fa-times" style="font-size: 12px;"></i>
+                </button>
+            </div>
+        </div>
+        
+        <style>
+        @keyframes slideInRight {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            0% {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100%) scale(0.8);
+                opacity: 0;
+            }
+        }
+        </style>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', alertHtml);
+    
+    if (duration > 0) {
+        setTimeout(() => {
+            const alert = document.getElementById('modernAlert');
+            if (alert) {
+                alert.style.animation = 'slideOutRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+                setTimeout(() => removeAlert(), 400);
+            }
+        }, duration);
+    }
+}
+
+function removeAlert() {
+    const existingAlert = document.getElementById('modernAlert');
+    if (existingAlert) {
+        existingAlert.remove();
+    }
+}
+
+// Modern Confirmation Modal
+function showModernConfirm(title, message, icon, type = 'danger', onConfirm) {
+    const typeColors = {
+        'danger': { primary: '#dc3545', secondary: '#f8d7da' },
+        'warning': { primary: '#ffc107', secondary: '#fff3cd' },
+        'info': { primary: '#0dcaf0', secondary: '#d1ecf1' }
+    };
+    
+    const colors = typeColors[type] || typeColors['danger'];
+    
+    const modalHtml = `
+        <div class="modern-confirm-overlay" id="modernConfirmOverlay" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(5px);
+        ">
+            <div class="modern-confirm-modal" style="
+                background: white;
+                border-radius: 20px;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+                max-width: 450px;
+                width: 90%;
+                animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow: hidden;
+            ">
+                <div style="
+                    background: ${colors.secondary};
+                    padding: 25px;
+                    text-align: center;
+                    border-bottom: 1px solid rgba(0,0,0,0.1);
+                ">
+                    <div style="
+                        width: 60px;
+                        height: 60px;
+                        background: ${colors.primary};
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0 auto 15px;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                    ">
+                        <i class="${icon}" style="color: white; font-size: 24px;"></i>
+                    </div>
+                    <h4 style="
+                        margin: 0 0 8px;
+                        color: #333;
+                        font-weight: 700;
+                        font-size: 20px;
+                    ">${title}</h4>
+                    <p style="
+                        margin: 0;
+                        color: #666;
+                        font-size: 14px;
+                        line-height: 1.5;
+                    ">${message}</p>
+                </div>
+                
+                <div style="
+                    padding: 20px 25px;
+                    display: flex;
+                    gap: 12px;
+                    justify-content: flex-end;
+                ">
+                    <button onclick="removeConfirm()" style="
+                        background: #f8f9fa;
+                        border: 2px solid #dee2e6;
+                        color: #6c757d;
+                        padding: 12px 24px;
+                        border-radius: 12px;
+                        font-weight: 600;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        min-width: 100px;
+                    " onmouseover="this.style.background='#e9ecef'; this.style.borderColor='#adb5bd'" onmouseout="this.style.background='#f8f9fa'; this.style.borderColor='#dee2e6'">
+                        Batal
+                    </button>
+                    <button onclick="confirmAction()" style="
+                        background: ${colors.primary};
+                        border: 2px solid ${colors.primary};
+                        color: white;
+                        padding: 12px 24px;
+                        border-radius: 12px;
+                        font-weight: 600;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        min-width: 100px;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.2)'">
+                        Ya, Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <style>
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        @keyframes scaleOut {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+        }
+        </style>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    
+    // Store the confirm callback
+    window.modernConfirmCallback = onConfirm;
+    
+    // Close on overlay click
+    document.getElementById('modernConfirmOverlay').addEventListener('click', function(e) {
+        if (e.target === this) {
+            removeConfirm();
+        }
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function escapeHandler(e) {
+        if (e.key === 'Escape') {
+            removeConfirm();
+            document.removeEventListener('keydown', escapeHandler);
+        }
+    });
+}
+
+function removeConfirm() {
+    const overlay = document.getElementById('modernConfirmOverlay');
+    if (overlay) {
+        const modal = overlay.querySelector('.modern-confirm-modal');
+        modal.style.animation = 'scaleOut 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        overlay.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => {
+            overlay.remove();
+            window.modernConfirmCallback = null;
+        }, 300);
+    }
+}
+
+function confirmAction() {
+    if (window.modernConfirmCallback) {
+        window.modernConfirmCallback();
+    }
+    removeConfirm();
+}
 </script>
 @endpush

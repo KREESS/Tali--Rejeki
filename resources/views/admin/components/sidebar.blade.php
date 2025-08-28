@@ -36,11 +36,6 @@
 
         <div class="nav-section">
             <span class="nav-title">MANAJEMEN PRODUK</span>
-            <a href="{{ route('admin.products.index') }}" class="nav-item {{ request()->routeIs('admin.products.*') ? 'active' : '' }}" data-tooltip="Semua Produk">
-                <i class="fas fa-cubes"></i>
-                <span>Semua Produk</span>
-                <div class="nav-indicator"></div>
-            </a>
             <a href="{{ route('admin.categories.index') }}" class="nav-item {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}" data-tooltip="Kategori Produk">
                 <i class="fas fa-folder"></i>
                 <span>Kategori Produk</span>
@@ -49,6 +44,11 @@
             <a href="{{ route('admin.subcategories.index') }}" class="nav-item {{ request()->routeIs('admin.subcategories.*') ? 'active' : '' }}" data-tooltip="Sub Kategori">
                 <i class="fas fa-folder-open"></i>
                 <span>Sub Kategori</span>
+                <div class="nav-indicator"></div>
+            </a>
+            <a href="{{ route('admin.products.index') }}" class="nav-item {{ request()->routeIs('admin.products.*') ? 'active' : '' }}" data-tooltip="Semua Produk">
+                <i class="fas fa-cubes"></i>
+                <span>Semua Produk</span>
                 <div class="nav-indicator"></div>
             </a>
         </div>
