@@ -5,12 +5,13 @@
 @push('styles')
 <style>
 .premium-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(139, 0, 0, 0.2);
+    background: white;
+    border: 1px solid rgba(139, 0, 0, 0.1);
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(139, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(139, 0, 0, 0.08);
     transition: all 0.3s ease;
+    z-index: 1;
+    position: relative;
 }
 
 .premium-card:hover {
@@ -57,11 +58,12 @@
 }
 
 .premium-table {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
+    background: white;
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid rgba(139, 0, 0, 0.1);
+    z-index: 1;
+    position: relative;
 }
 
 .premium-table th {
@@ -113,7 +115,7 @@
 }
 
 .search-box {
-    background: rgba(255, 255, 255, 0.1);
+    background: white;
     border: 1px solid rgba(139, 0, 0, 0.2);
     border-radius: 8px;
     padding: 8px 12px;
@@ -126,7 +128,7 @@
     outline: none;
     border-color: #8b0000;
     box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.15);
+    background: white;
 }
 
 .page-header {
@@ -137,6 +139,7 @@
     margin-bottom: 20px;
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 
 .page-header::before {
@@ -178,6 +181,140 @@
 .btn-group .premium-btn:last-child {
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
+}
+
+/* Modal Improvements - Fix positioning and clickability */
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 1rem);
+    margin: 0.5rem auto;
+    z-index: 1055;
+}
+
+.modal-content {
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+    background: white !important;
+    position: relative;
+    z-index: 1056;
+}
+
+.modal-header {
+    border-radius: 20px 20px 0 0 !important;
+    background: linear-gradient(135deg, #8b0000, #a50000);
+    color: white;
+    border-bottom: none !important;
+    padding: 20px 25px;
+}
+
+.modal-header .modal-title {
+    font-weight: 700;
+    font-size: 1.1rem !important;
+}
+
+.modal-header .btn-close {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    filter: invert(1);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1057;
+}
+
+.modal-header .btn-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.modal-body {
+    padding: 25px;
+    font-size: 0.95rem;
+}
+
+.modal-footer {
+    padding: 20px 25px;
+    border-top: 1px solid rgba(139, 0, 0, 0.1) !important;
+    border-radius: 0 0 20px 20px !important;
+    background: rgba(248, 249, 250, 0.5);
+}
+
+.modal-footer .premium-btn {
+    padding: 12px 25px !important;
+    font-size: 0.9rem !important;
+    font-weight: 600;
+    border-radius: 12px;
+    min-width: 120px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1057;
+    cursor: pointer;
+}
+
+.modal-footer .premium-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 0, 0, 0.3);
+}
+
+.modal-footer .premium-btn-outline {
+    background: rgba(108, 117, 125, 0.1) !important;
+    border: 2px solid rgba(108, 117, 125, 0.3) !important;
+    color: #6c757d !important;
+}
+
+.modal-footer .premium-btn-outline:hover {
+    background: rgba(108, 117, 125, 0.2) !important;
+    border-color: #6c757d !important;
+    color: #6c757d !important;
+}
+
+/* Alert Styling in Modal */
+.modal-body .text-warning {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+/* Modal Animation */
+.modal.fade .modal-dialog {
+    transform: translate(0, -50px) scale(0.9);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal.show .modal-dialog {
+    transform: translate(0, 0) scale(1);
+}
+
+/* Ensure modal is above backdrop */
+.modal {
+    z-index: 5000 !important;
+}
+
+/* Fix modal backdrop */
+.modal-backdrop {
+    background: rgba(0, 0, 0, 0.3) !important;
+    z-index: 4990 !important;
+}
+
+/* Button click effect */
+.premium-btn {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.premium-btn:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
 }
 </style>
 @endpush
@@ -326,31 +463,43 @@
 </div>
 
 <!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)); backdrop-filter: blur(10px); border: 1px solid rgba(139, 0, 0, 0.2);">
-            <div class="modal-header" style="border-color: rgba(139, 0, 0, 0.2); padding: 15px;">
-                <h6 class="modal-title">
-                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
-                    Konfirmasi Hapus
-                </h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Konfirmasi Hapus Kategori
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="padding: 15px;">
-                <p style="font-size: 0.9rem;">Apakah Anda yakin ingin menghapus kategori ini?</p>
-                <p class="text-warning mb-0">
-                    <i class="fas fa-info-circle me-1"></i>
-                    <small style="font-size: 0.8rem;">Kategori yang memiliki sub kategori tidak dapat dihapus.</small>
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <i class="fas fa-trash-alt text-danger" style="font-size: 3rem; opacity: 0.7;"></i>
+                </div>
+                
+                <p class="text-center mb-3" style="font-size: 1rem; font-weight: 500;">
+                    Apakah Anda yakin ingin menghapus kategori ini?
                 </p>
+                
+                <div class="text-warning d-flex align-items-center">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <div>
+                        <strong>Peringatan:</strong> Kategori yang memiliki sub kategori tidak dapat dihapus.
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer" style="border-color: rgba(139, 0, 0, 0.2); padding: 10px 15px;">
-                <button type="button" class="premium-btn premium-btn-outline premium-btn-sm" data-bs-dismiss="modal">Batal</button>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="premium-btn premium-btn-outline" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>
+                    Batal
+                </button>
                 <form id="deleteForm" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="premium-btn premium-btn-sm" style="background: linear-gradient(135deg, #dc3545, #c82333);">
+                    <button type="submit" class="premium-btn" style="background: linear-gradient(135deg, #dc3545, #c82333);">
                         <i class="fas fa-trash me-1"></i>
-                        Hapus
+                        Hapus Kategori
                     </button>
                 </form>
             </div>
@@ -379,23 +528,125 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
     });
 });
 
-// Delete category function
+// Delete category function with proper modal handling
 function deleteCategory(categoryId) {
     const deleteForm = document.getElementById('deleteForm');
     deleteForm.action = `/admin/categories/${categoryId}`;
     
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'), {
+        backdrop: 'static',
+        keyboard: true,
+        focus: true
+    });
+    
     deleteModal.show();
+    
+    // Focus on cancel button for accessibility
+    deleteModal._element.addEventListener('shown.bs.modal', function() {
+        const cancelBtn = this.querySelector('.premium-btn-outline');
+        if (cancelBtn) cancelBtn.focus();
+    });
 }
 
-// Add loading states to buttons
-document.querySelectorAll('.premium-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        if (this.type === 'submit') {
-            this.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Loading...';
-            this.disabled = true;
+// Enhanced form submission handling
+document.addEventListener('DOMContentLoaded', function() {
+    const deleteForm = document.querySelector('#deleteModal form');
+    if (deleteForm) {
+        deleteForm.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const cancelBtn = document.querySelector('#deleteModal .premium-btn-outline');
+            
+            // Prevent double submission
+            if (submitBtn.disabled) {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Menghapus...';
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+            
+            // Disable cancel button
+            if (cancelBtn) {
+                cancelBtn.disabled = true;
+                cancelBtn.style.opacity = '0.5';
+            }
+            
+            // Add timeout as safety measure
+            setTimeout(function() {
+                if (submitBtn.disabled) {
+                    submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i> Coba Lagi';
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                    if (cancelBtn) {
+                        cancelBtn.disabled = false;
+                        cancelBtn.style.opacity = '1';
+                    }
+                }
+            }, 10000);
+        });
+    }
+    
+    // Add click effect to buttons
+    document.querySelectorAll('.premium-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Create ripple effect
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            this.appendChild(ripple);
+            
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+            ripple.style.animation = 'ripple-animation 0.6s ease-out';
+            ripple.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const openModal = document.querySelector('.modal.show');
+            if (openModal) {
+                const modalInstance = bootstrap.Modal.getInstance(openModal);
+                if (modalInstance) modalInstance.hide();
+            }
         }
     });
 });
 </script>
+
+<style>
+/* Ripple effect styles */
+@keyframes ripple-animation {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* Loading spinner */
+.fa-spinner {
+    animation: spin 1s linear infinite !important;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
 @endpush

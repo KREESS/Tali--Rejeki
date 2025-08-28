@@ -5,13 +5,14 @@
 @push('styles')
 <style>
 .premium-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(139, 0, 0, 0.15);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(139, 0, 0, 0.12);
+    background: white;
+    border: 1px solid rgba(139, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.08);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     margin-bottom: 25px;
+    z-index: 1;
+    position: relative;
 }
 
 .premium-card:hover {
@@ -67,10 +68,9 @@
 }
 
 .premium-btn-outline {
-    background: rgba(255, 255, 255, 0.9);
+    background: white;
     border: 2px solid rgba(139, 0, 0, 0.3);
     color: #8b0000;
-    backdrop-filter: blur(10px);
 }
 
 .premium-btn-outline:hover {
@@ -115,14 +115,14 @@
 }
 
 .product-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+    background: white;
     border: 1px solid rgba(139, 0, 0, 0.08);
-    border-radius: 20px;
+    border-radius: 15px;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 30px rgba(139, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.08);
+    z-index: 1;
 }
 
 .product-card:hover {
@@ -204,46 +204,49 @@
 }
 
 .search-filter-container {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
+    background: white;
+    border-radius: 15px;
     padding: 25px;
     margin-bottom: 25px;
     border: 1px solid rgba(139, 0, 0, 0.1);
-    box-shadow: 0 8px 30px rgba(139, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.08);
+    z-index: 1;
+    position: relative;
 }
 
 .form-control {
     border: 2px solid rgba(139, 0, 0, 0.1);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 12px 16px;
     font-size: 0.9rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    background: white;
+    z-index: 1;
+    position: relative;
 }
 
 .form-control:focus {
     border-color: #8b0000;
     box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.95);
+    background: white;
     transform: translateY(-1px);
 }
 
 .form-select {
     border: 2px solid rgba(139, 0, 0, 0.1);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 12px 16px;
     font-size: 0.9rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    background: white;
+    z-index: 1;
+    position: relative;
 }
 
 .form-select:focus {
     border-color: #8b0000;
     box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.95);
+    background: white;
 }
     transform: scale(1.05);
 }
@@ -307,8 +310,7 @@
 }
 
 .search-filters {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background: white;
     border-radius: 12px;
     padding: 15px;
     margin-bottom: 20px;
@@ -352,14 +354,15 @@
 }
 
 .view-mode-toggle {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    background: white;
     border: 1px solid rgba(139, 0, 0, 0.15);
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 6px;
     display: inline-flex;
     gap: 2px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(139, 0, 0, 0.1);
+    z-index: 1;
+    position: relative;
 }
 
 .view-btn {
@@ -403,8 +406,7 @@
 }
 
 .product-table {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
-    backdrop-filter: blur(20px);
+    background: white;
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid rgba(139, 0, 0, 0.1);
@@ -459,6 +461,131 @@
     border-radius: 6px;
     object-fit: cover;
     border: 2px solid rgba(139, 0, 0, 0.1);
+}
+
+/* Modal Improvements - Fix positioning and clickability */
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 1rem);
+    margin: 0.5rem auto;
+    z-index: 1055;
+}
+
+.modal-content {
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3) !important;
+    background: white !important;
+    position: relative;
+    z-index: 1056;
+}
+
+.modal-header {
+    border-radius: 20px 20px 0 0 !important;
+    background: linear-gradient(135deg, #8b0000, #a50000);
+    color: white;
+    border-bottom: none !important;
+    padding: 20px 25px;
+}
+
+.modal-header .modal-title {
+    font-weight: 700;
+    font-size: 1.1rem !important;
+}
+
+.modal-header .btn-close {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    filter: invert(1);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1057;
+}
+
+.modal-header .btn-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.modal-body {
+    padding: 25px;
+    font-size: 0.95rem;
+}
+
+.modal-footer {
+    padding: 20px 25px;
+    border-top: 1px solid rgba(139, 0, 0, 0.1) !important;
+    border-radius: 0 0 20px 20px !important;
+    background: rgba(248, 249, 250, 0.5);
+}
+
+.modal-footer .premium-btn {
+    padding: 12px 25px !important;
+    font-size: 0.9rem !important;
+    font-weight: 600;
+    border-radius: 12px;
+    min-width: 120px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1057;
+    cursor: pointer;
+}
+
+.modal-footer .premium-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 0, 0, 0.3);
+}
+
+.modal-footer .premium-btn-outline {
+    background: rgba(108, 117, 125, 0.1) !important;
+    border: 2px solid rgba(108, 117, 125, 0.3) !important;
+    color: #6c757d !important;
+}
+
+.modal-footer .premium-btn-outline:hover {
+    background: rgba(108, 117, 125, 0.2) !important;
+    border-color: #6c757d !important;
+    color: #6c757d !important;
+}
+
+/* Modal Animation */
+.modal.fade .modal-dialog {
+    transform: translate(0, -50px) scale(0.9);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal.show .modal-dialog {
+    transform: translate(0, 0) scale(1);
+}
+
+/* Ensure modal is above backdrop */
+.modal {
+    z-index: 5000 !important;
+}
+
+/* Fix modal backdrop */
+.modal-backdrop {
+    background: rgba(0, 0, 0, 0.3) !important;
+    z-index: 4990 !important;
+}
+
+/* Button click effect */
+.premium-btn {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.premium-btn:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
 }
 </style>
 @endpush
@@ -757,31 +884,43 @@
 </div>
 
 <!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)); backdrop-filter: blur(10px); border: 1px solid rgba(139, 0, 0, 0.2);">
-            <div class="modal-header" style="border-color: rgba(139, 0, 0, 0.2); padding: 12px 16px;">
-                <h5 class="modal-title" style="font-size: 1rem;">
-                    <i class="fas fa-exclamation-triangle text-warning me-2" style="font-size: 0.9rem;"></i>
-                    Konfirmasi Hapus
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Konfirmasi Hapus Produk
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="padding: 16px;">
-                <p style="font-size: 0.9rem;">Apakah Anda yakin ingin menghapus produk ini?</p>
-                <p class="text-danger mb-0">
-                    <i class="fas fa-exclamation-circle me-1" style="font-size: 0.8rem;"></i>
-                    <small style="font-size: 0.8rem;">Tindakan ini akan menghapus semua gambar produk dan tidak dapat dibatalkan!</small>
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <i class="fas fa-trash-alt text-danger" style="font-size: 3rem; opacity: 0.7;"></i>
+                </div>
+                
+                <p class="text-center mb-3" style="font-size: 1rem; font-weight: 500;">
+                    Apakah Anda yakin ingin menghapus produk ini?
                 </p>
+                
+                <div class="text-warning d-flex align-items-center">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <div>
+                        <strong>Peringatan:</strong> Tindakan ini akan menghapus semua gambar produk dan tidak dapat dibatalkan!
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer" style="border-color: rgba(139, 0, 0, 0.2); padding: 12px 16px;">
-                <button type="button" class="premium-btn premium-btn-outline" data-bs-dismiss="modal" style="padding: 6px 12px; font-size: 0.8rem;">Batal</button>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="premium-btn premium-btn-outline" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>
+                    Batal
+                </button>
                 <form id="deleteForm" method="POST" style="display: inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="premium-btn" style="background: linear-gradient(135deg, #dc3545, #c82333); padding: 6px 12px; font-size: 0.8rem;">
-                        <i class="fas fa-trash me-1" style="font-size: 0.7rem;"></i>
-                        Hapus
+                    <button type="submit" class="premium-btn" style="background: linear-gradient(135deg, #dc3545, #c82333);">
+                        <i class="fas fa-trash me-1"></i>
+                        Hapus Produk
                     </button>
                 </form>
             </div>
@@ -858,23 +997,125 @@ function clearFilters() {
     filterProducts();
 }
 
-// Delete product function
+// Delete product function with proper modal handling
 function deleteProduct(productId) {
     const deleteForm = document.getElementById('deleteForm');
     deleteForm.action = `/admin/products/${productId}`;
     
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'), {
+        backdrop: 'static',
+        keyboard: true,
+        focus: true
+    });
+    
     deleteModal.show();
+    
+    // Focus on cancel button for accessibility
+    deleteModal._element.addEventListener('shown.bs.modal', function() {
+        const cancelBtn = this.querySelector('.premium-btn-outline');
+        if (cancelBtn) cancelBtn.focus();
+    });
 }
 
-// Add loading states to buttons
-document.querySelectorAll('.premium-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        if (this.type === 'submit') {
-            this.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Loading...';
-            this.disabled = true;
+// Enhanced form submission handling
+document.addEventListener('DOMContentLoaded', function() {
+    const deleteForm = document.querySelector('#deleteModal form');
+    if (deleteForm) {
+        deleteForm.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const cancelBtn = document.querySelector('#deleteModal .premium-btn-outline');
+            
+            // Prevent double submission
+            if (submitBtn.disabled) {
+                e.preventDefault();
+                return false;
+            }
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Menghapus...';
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+            
+            // Disable cancel button
+            if (cancelBtn) {
+                cancelBtn.disabled = true;
+                cancelBtn.style.opacity = '0.6';
+            }
+            
+            // Add timeout as safety measure
+            setTimeout(function() {
+                if (submitBtn.disabled) {
+                    submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i> Coba Lagi';
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                    if (cancelBtn) {
+                        cancelBtn.disabled = false;
+                        cancelBtn.style.opacity = '1';
+                    }
+                }
+            }, 10000);
+        });
+    }
+    
+    // Add click effect to buttons
+    document.querySelectorAll('.premium-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Create ripple effect
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            this.appendChild(ripple);
+            
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+            ripple.style.animation = 'ripple-animation 0.6s ease-out';
+            ripple.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const openModal = document.querySelector('.modal.show');
+            if (openModal) {
+                const modalInstance = bootstrap.Modal.getInstance(openModal);
+                if (modalInstance) modalInstance.hide();
+            }
         }
     });
 });
 </script>
+
+<style>
+/* Ripple effect styles */
+@keyframes ripple-animation {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* Loading spinner */
+.fa-spinner {
+    animation: spin 1s linear infinite !important;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
 @endpush

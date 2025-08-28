@@ -20,11 +20,104 @@
     <link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
     
     <style>
+    /* ====== MODAL BACKDROP FIX ====== */
+    /* Ensure proper modal backdrop management */
+    .modal-backdrop {
+        z-index: 1055 !important;
+        background-color: rgba(0, 0, 0, 0.3) !important;
+        opacity: var(--bs-backdrop-opacity, 0.3) !important;
+    }
+    
+    .modal {
+        z-index: 1060 !important;
+    }
+    
+    .modal.show {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .modal-dialog {
+        margin: 0;
+        z-index: 1070;
+        pointer-events: auto;
+    }
+    
+    /* Prevent backdrop interference with buttons */
+    .modal-content {
+        z-index: 1075 !important;
+        position: relative;
+        background: white !important;
+        border: none !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    .modal-content * {
+        z-index: inherit;
+        pointer-events: auto !important;
+    }
+    
+    /* Enhanced button clickability in modals */
+    .modal .btn {
+        position: relative;
+        z-index: 9999 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+    }
+    
+    /* Prevent multiple backdrops */
+    body.modal-open {
+        overflow: hidden;
+    }
+    
+    body.modal-open .modal-backdrop + .modal-backdrop {
+        display: none !important;
+    }
+    
+    /* Force modal backdrop to not interfere with clicks */
+    .modal-backdrop.fade.show {
+        pointer-events: none !important;
+    }
+    
+    .modal.fade.show {
+        pointer-events: auto !important;
+    }
+    
+    .modal.fade.show .modal-dialog {
+        pointer-events: auto !important;
+    }
+    
+    .modal.fade.show .modal-content {
+        pointer-events: auto !important;
+    }
+    
+    /* Override Bootstrap backdrop opacity issues */
+    .modal-backdrop.show {
+        opacity: 0.3 !important;
+        background-color: rgba(0, 0, 0, 0.3) !important;
+    }
+    
+    /* Remove all blur effects globally */
+    .modal-content,
+    .premium-card,
+    .info-card,
+    .search-filter-container,
+    .form-control,
+    .form-select,
+    .view-mode-toggle,
+    .premium-table {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        filter: none !important;
+    }
+    
+    /* ====== END MODAL BACKDROP FIX ====== */
+    
     /* ====== ADMIN LAYOUT STYLES ====== */
     .admin-layout {
-        background: linear-gradient(135deg, 
-            rgba(248, 250, 252, 1) 0%, 
-            rgba(241, 245, 249, 1) 100%);
+        background: #f8fafc;
         min-height: 100vh;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         overflow-x: hidden;
@@ -33,83 +126,203 @@
     
     /* ====== ALERT STYLES ====== */
     .alert {
-        border-radius: 10px !important;
-        border: none !important;
-        font-size: 0.9rem;
+        border-radius: 12px;
+        font-size: 14px;
         margin-bottom: 20px;
-        backdrop-filter: blur(10px);
         position: relative;
-        overflow: hidden;
+        background: #fff;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        z-index: 9999 !important;
+        padding: 16px 20px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
     
     .alert::before {
         content: '';
+        width: 4px;
+        height: 100%;
         position: absolute;
-        top: 0;
         left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, transparent, currentColor, transparent);
-        opacity: 0.6;
+        top: 0;
+        border-radius: 12px 0 0 12px;
     }
     
+    /* Override Bootstrap alert backgrounds */
     .alert-success {
-        background: linear-gradient(135deg, 
-            rgba(40, 167, 69, 0.1), 
-            rgba(40, 167, 69, 0.05)) !important;
-        color: #155724 !important;
-        border-left: 4px solid #28a745 !important;
+        background: linear-gradient(135deg, #d1e7dd, #f8fff9) !important;
+        border-color: #badbcc !important;
+        color: #0f5132 !important;
+        border-left: 4px solid #198754;
+    }
+    
+    .alert-success::before {
+        background: #198754;
+    }
+    
+    .alert-success::after {
+        content: '\f058';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        color: #198754;
+        font-size: 18px;
+        margin-right: 8px;
     }
     
     .alert-danger {
-        background: linear-gradient(135deg, 
-            rgba(220, 53, 69, 0.1), 
-            rgba(220, 53, 69, 0.05)) !important;
-        color: #721c24 !important;
-        border-left: 4px solid #dc3545 !important;
+        background: linear-gradient(135deg, #f8d7da, #fef5f5) !important;
+        border-color: #f5c2c7 !important;
+        color: #842029 !important;
+        border-left: 4px solid #dc3545;
+    }
+    
+    .alert-danger::before {
+        background: #dc3545;
+    }
+    
+    .alert-danger::after {
+        content: '\f06a';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        color: #dc3545;
+        font-size: 18px;
+        margin-right: 8px;
     }
     
     .alert-warning {
-        background: linear-gradient(135deg, 
-            rgba(255, 193, 7, 0.1), 
-            rgba(255, 193, 7, 0.05)) !important;
-        color: #856404 !important;
-        border-left: 4px solid #ffc107 !important;
+        background: linear-gradient(135deg, #fff3cd, #fffef5) !important;
+        border-color: #ffecb5 !important;
+        color: #664d03 !important;
+        border-left: 4px solid #ffc107;
+    }
+    
+    .alert-warning::before {
+        background: #ffc107;
+    }
+    
+    .alert-warning::after {
+        content: '\f071';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        color: #ffc107;
+        font-size: 18px;
+        margin-right: 8px;
     }
     
     .alert-info {
-        background: linear-gradient(135deg, 
-            rgba(13, 202, 240, 0.1), 
-            rgba(13, 202, 240, 0.05)) !important;
-        color: #0c5460 !important;
-        border-left: 4px solid #0dcaf0 !important;
+        background: linear-gradient(135deg, #d1ecf1, #f5feff) !important;
+        border-color: #b6d7e2 !important;
+        color: #055160 !important;
+        border-left: 4px solid #0dcaf0;
+    }
+    
+    .alert-info::before {
+        background: #0dcaf0;
+    }
+    
+    .alert-info::after {
+        content: '\f05a';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        color: #0dcaf0;
+        font-size: 18px;
+        margin-right: 8px;
     }
     
     .alert .btn-close {
-        font-size: 0.75rem;
-        opacity: 0.7;
+        background: none;
+        border: none;
+        font-size: 16px;
+        opacity: 0.6;
         transition: all 0.3s ease;
+        padding: 8px;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        cursor: pointer;
+        position: relative;
+    }
+    
+    .alert .btn-close::before {
+        content: '\f00d';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        font-size: 16px;
+        color: currentColor;
+        line-height: 1;
     }
     
     .alert .btn-close:hover {
         opacity: 1;
+        background: rgba(0,0,0,0.1);
         transform: scale(1.1);
+    }
+    
+    .alert-success .btn-close:hover {
+        background: rgba(25, 135, 84, 0.1);
+        color: #198754;
+    }
+    
+    .alert-danger .btn-close:hover {
+        background: rgba(220, 53, 69, 0.1);
+        color: #dc3545;
+    }
+    
+    .alert-warning .btn-close:hover {
+        background: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+    }
+    
+    .alert-info .btn-close:hover {
+        background: rgba(13, 202, 240, 0.1);
+        color: #0dcaf0;
     }
     
     /* Auto-hide animation */
     .alert.auto-hide {
-        animation: alertSlideOut 0.5s ease-in-out 4.5s forwards;
+        animation: alertSlideIn 0.4s ease-out, alertSlideOut 0.4s ease-in-out 4.5s forwards;
+    }
+    
+    @keyframes alertSlideIn {
+        0% {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
     }
     
     @keyframes alertSlideOut {
         0% {
-            transform: translateX(0);
+            transform: translateX(0) scale(1);
             opacity: 1;
         }
         100% {
-            transform: translateX(100%);
+            transform: translateX(100%) scale(0.8);
             opacity: 0;
         }
+    }
+    
+    /* Alert hover effects */
+    .alert:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+    }
+    
+    /* Alert text content spacing */
+    .alert-content {
+        flex: 1;
+        line-height: 1.5;
     }
     
     .admin-main-content {
@@ -120,6 +333,13 @@
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         z-index: 1;
+        background: transparent;
+    }
+    
+    /* Alert container with highest z-index */
+    .admin-main-content > .alert {
+        z-index: 10001 !important;
+        position: relative;
     }
     
     /* Sidebar collapsed state adjustments */
@@ -159,19 +379,9 @@
         }
     }
     
-    /* Content area with premium styling */
+    /* Content area with simple styling */
     .admin-main-content::before {
-        content: '';
-        position: absolute;
-        top: -30px;
-        left: -30px;
-        right: -30px;
-        height: 1px;
-        background: linear-gradient(90deg, 
-            transparent, 
-            rgba(139, 0, 0, 0.1), 
-            transparent);
-        z-index: 1;
+        display: none;
     }
     
     /* Smooth transitions for all layout changes */
@@ -180,39 +390,125 @@
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    /* Enhanced backdrop blur for better performance */
+    /* Remove complex background effects */
     .admin-layout::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: 
-            radial-gradient(circle at 25% 75%, rgba(139, 0, 0, 0.03) 0%, transparent 50%),
-            radial-gradient(circle at 75% 25%, rgba(255, 68, 68, 0.02) 0%, transparent 50%);
-        pointer-events: none;
-        z-index: -1;
-        animation: backgroundFloat 20s ease-in-out infinite;
+        display: none;
     }
     
-    @keyframes backgroundFloat {
-        0%, 100% { 
-            transform: translate(0, 0) scale(1); 
-            opacity: 0.7;
-        }
-        25% { 
-            transform: translate(10px, -10px) scale(1.02); 
-            opacity: 0.9;
-        }
-        50% { 
-            transform: translate(-5px, 15px) scale(0.98); 
-            opacity: 1;
-        }
-        75% { 
-            transform: translate(15px, 5px) scale(1.01); 
-            opacity: 0.8;
-        }
+    /* Force clear rendering for all elements */
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Ensure no global blur effects */
+    body, html, .admin-layout, .admin-main-content {
+        filter: none !important;
+        backdrop-filter: none !important;
+        transform: none !important;
+        will-change: auto !important;
+    }
+    
+    /* Additional alert fixes */
+    .alert, .alert * {
+        filter: none !important;
+        backdrop-filter: none !important;
+        transform: none !important;
+        will-change: auto !important;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        z-index: 9999 !important;
+        position: relative;
+    }
+    
+    /* Alert buttons with highest priority */
+    .alert .btn-close {
+        z-index: 10000 !important;
+        position: relative;
+        pointer-events: auto !important;
+    }
+    
+    /* ====== MODAL CLOSE BUTTON FIXES ====== */
+    /* Fix all modal close buttons */
+    .modal .btn-close {
+        background: none !important;
+        border: none !important;
+        font-size: 16px;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+        padding: 8px;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+        z-index: 1070 !important;
+        pointer-events: auto !important;
+    }
+    
+    .modal .btn-close::before {
+        content: '\f00d';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        font-size: 14px;
+        color: currentColor;
+        line-height: 1;
+    }
+    
+    .modal .btn-close:hover {
+        opacity: 1;
+        background: rgba(0,0,0,0.1) !important;
+        transform: scale(1.1);
+    }
+    
+    /* Modal header close button specific styling */
+    .modal-header .btn-close {
+        background: rgba(255, 255, 255, 0.2) !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        color: white !important;
+        filter: none !important;
+    }
+    
+    .modal-header .btn-close::before {
+        color: white !important;
+    }
+    
+    .modal-header .btn-close:hover {
+        background: rgba(255, 255, 255, 0.3) !important;
+        border-color: rgba(255, 255, 255, 0.5) !important;
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    
+    /* Override Bootstrap default close button */
+    .btn-close {
+        box-sizing: content-box;
+        background: transparent !important;
+        border: 0;
+        border-radius: 0.375rem;
+        opacity: 0.8;
+    }
+    
+    .btn-close:hover {
+        opacity: 1;
+    }
+    
+    .btn-close:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(139, 0, 0, 0.25);
+        opacity: 1;
+    }
+    
+    .btn-close:disabled,
+    .btn-close.disabled {
+        pointer-events: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        opacity: 0.25;
     }
     </style>
 
@@ -224,46 +520,51 @@
     <main class="admin-main-content">
         <!-- Alert Messages -->
         @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert" style="border-radius: 10px; border: none; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);">
-                <i class="fas fa-check-circle me-2"></i>
-                {{ session('success') }}
+            <div class="alert alert-success alert-dismissible fade show auto-hide" role="alert">
+                <div class="alert-content">
+                    {{ session('success') }}
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
 
         @if(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="border-radius: 10px; border: none; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);">
-                <i class="fas fa-exclamation-circle me-2"></i>
-                {{ session('error') }}
+            <div class="alert alert-danger alert-dismissible fade show auto-hide" role="alert">
+                <div class="alert-content">
+                    {{ session('error') }}
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
 
         @if(session('warning'))
-            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="border-radius: 10px; border: none; box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);">
-                <i class="fas fa-exclamation-triangle me-2"></i>
-                {{ session('warning') }}
+            <div class="alert alert-warning alert-dismissible fade show auto-hide" role="alert">
+                <div class="alert-content">
+                    {{ session('warning') }}
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
 
         @if(session('info'))
-            <div class="alert alert-info alert-dismissible fade show" role="alert" style="border-radius: 10px; border: none; box-shadow: 0 4px 15px rgba(13, 202, 240, 0.2);">
-                <i class="fas fa-info-circle me-2"></i>
-                {{ session('info') }}
+            <div class="alert alert-info alert-dismissible fade show auto-hide" role="alert">
+                <div class="alert-content">
+                    {{ session('info') }}
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
 
         @if($errors->any())
-            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="border-radius: 10px; border: none; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);">
-                <i class="fas fa-exclamation-circle me-2"></i>
-                <strong>Terjadi kesalahan:</strong>
-                <ul class="mb-0 mt-2">
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+            <div class="alert alert-danger alert-dismissible fade show auto-hide" role="alert">
+                <div class="alert-content">
+                    <strong>Terjadi kesalahan:</strong>
+                    <ul class="mb-0 mt-2">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
@@ -275,30 +576,194 @@
     
     <!-- Alert Auto-hide Script -->
     <script>
+    // Global Modal Backdrop Management
     document.addEventListener('DOMContentLoaded', function() {
-        // Auto-hide alerts after 5 seconds
-        const alerts = document.querySelectorAll('.alert');
-        alerts.forEach(function(alert) {
-            // Add auto-hide class for animation
-            setTimeout(function() {
-                alert.classList.add('auto-hide');
+        console.log('Global modal management initialized');
+        
+        // Function to clean up stray backdrops
+        function cleanupBackdrops() {
+            const backdrops = document.querySelectorAll('.modal-backdrop');
+            if (backdrops.length > 1) {
+                // Keep only the last backdrop
+                for (let i = 0; i < backdrops.length - 1; i++) {
+                    backdrops[i].remove();
+                }
+            }
+            
+            // Ensure backdrop doesn't block clicks
+            backdrops.forEach(backdrop => {
+                backdrop.style.pointerEvents = 'none';
+                backdrop.style.zIndex = '1055';
+            });
+        }
+        
+        // Function to fix modal button clickability
+        function fixModalButtons() {
+            const modalButtons = document.querySelectorAll('.modal .btn');
+            modalButtons.forEach(btn => {
+                btn.style.position = 'relative';
+                btn.style.zIndex = '9999';
+                btn.style.pointerEvents = 'auto';
+                btn.style.cursor = 'pointer';
+            });
+        }
+        
+        // Monitor for modal events globally
+        document.addEventListener('show.bs.modal', function(e) {
+            console.log('Modal showing:', e.target.id);
+            cleanupBackdrops();
+            
+            // Ensure modal has proper z-index
+            e.target.style.zIndex = '1060';
+            e.target.style.pointerEvents = 'auto';
+        });
+        
+        document.addEventListener('shown.bs.modal', function(e) {
+            console.log('Modal shown:', e.target.id);
+            cleanupBackdrops();
+            fixModalButtons();
+            
+            // Force backdrop to not interfere
+            const backdrop = document.querySelector('.modal-backdrop:last-child');
+            if (backdrop) {
+                backdrop.style.zIndex = '1055';
+                backdrop.style.pointerEvents = 'none';
+            }
+            
+            // Ensure modal dialog is clickable
+            const modalDialog = e.target.querySelector('.modal-dialog');
+            if (modalDialog) {
+                modalDialog.style.pointerEvents = 'auto';
+                modalDialog.style.zIndex = '1070';
+            }
+            
+            // Ensure modal content is clickable
+            const modalContent = e.target.querySelector('.modal-content');
+            if (modalContent) {
+                modalContent.style.pointerEvents = 'auto';
+                modalContent.style.zIndex = '1075';
+            }
+        });
+        
+        document.addEventListener('hide.bs.modal', function(e) {
+            console.log('Modal hiding:', e.target.id);
+        });
+        
+        document.addEventListener('hidden.bs.modal', function(e) {
+            console.log('Modal hidden:', e.target.id);
+            cleanupBackdrops();
+            
+            // Remove modal-open class if no modals are visible
+            const visibleModals = document.querySelectorAll('.modal.show');
+            if (visibleModals.length === 0) {
+                document.body.classList.remove('modal-open');
+                // Remove all backdrops
+                const allBackdrops = document.querySelectorAll('.modal-backdrop');
+                allBackdrops.forEach(backdrop => backdrop.remove());
+            }
+        });
+        
+        // Global click event handler for modal buttons
+        document.addEventListener('click', function(e) {
+            // Ensure modal buttons always work
+            if (e.target.closest('.modal .btn')) {
+                const btn = e.target.closest('.modal .btn');
+                console.log('Modal button clicked:', btn.textContent.trim());
                 
-                // Remove the alert from DOM after animation
+                // Force the click to work
+                if (btn.type === 'submit') {
+                    // For submit buttons, ensure form submission
+                    const form = btn.closest('form');
+                    if (form && !btn.disabled) {
+                        console.log('Submitting form from modal button');
+                        e.stopPropagation();
+                        e.preventDefault();
+                        
+                        // Add visual feedback
+                        btn.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            btn.style.transform = '';
+                        }, 100);
+                        
+                        // Submit the form
+                        form.submit();
+                    }
+                } else if (btn.hasAttribute('data-bs-dismiss')) {
+                    // For dismiss buttons
+                    const modal = btn.closest('.modal');
+                    if (modal) {
+                        const modalInstance = bootstrap.Modal.getInstance(modal);
+                        if (modalInstance) {
+                            modalInstance.hide();
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Force click events through backdrop
+        document.addEventListener('mousedown', function(e) {
+            if (e.target.classList.contains('modal-backdrop')) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Backdrop click prevented');
+            }
+        });
+        
+        // Monitor and fix backdrop issues continuously
+        setInterval(function() {
+            const backdrops = document.querySelectorAll('.modal-backdrop');
+            backdrops.forEach(backdrop => {
+                if (backdrop.style.pointerEvents !== 'none') {
+                    backdrop.style.pointerEvents = 'none';
+                }
+            });
+            
+            // Fix modal buttons continuously
+            fixModalButtons();
+        }, 1000);
+        
+        // Enhanced alert functionality with better animations
+        const alerts = document.querySelectorAll('.alert');
+        
+        alerts.forEach(function(alert) {
+            // Add entrance animation
+            alert.style.transform = 'translateX(100%)';
+            alert.style.opacity = '0';
+            
+            // Trigger entrance animation
+            setTimeout(function() {
+                alert.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                alert.style.transform = 'translateX(0)';
+                alert.style.opacity = '1';
+            }, 100);
+            
+            // Auto-hide after 6 seconds
+            setTimeout(function() {
+                if (!alert.parentNode) return;
+                
+                alert.style.transition = 'all 0.4s ease';
+                alert.style.transform = 'translateX(100%) scale(0.8)';
+                alert.style.opacity = '0';
+                
                 setTimeout(function() {
                     if (alert.parentNode) {
                         alert.remove();
                     }
-                }, 500); // Animation duration
-            }, 5000); // 5 seconds delay
+                }, 400);
+            }, 6000);
         });
 
         // Enhanced close button functionality
         const closeButtons = document.querySelectorAll('.alert .btn-close');
         closeButtons.forEach(function(btn) {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
                 const alert = this.closest('.alert');
-                alert.style.transition = 'all 0.3s ease';
-                alert.style.transform = 'translateX(100%)';
+                alert.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                alert.style.transform = 'translateX(100%) scale(0.9)';
                 alert.style.opacity = '0';
                 
                 setTimeout(function() {
@@ -309,18 +774,30 @@
             });
         });
 
-        // Add click to dismiss functionality
+        // Add hover effects
         alerts.forEach(function(alert) {
-            alert.style.cursor = 'pointer';
-            alert.addEventListener('click', function(e) {
-                if (!e.target.closest('.btn-close')) {
-                    const closeBtn = this.querySelector('.btn-close');
-                    if (closeBtn) {
-                        closeBtn.click();
-                    }
-                }
+            alert.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            alert.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
             });
         });
+    });
+    
+    // Global error handler for debugging
+    window.addEventListener('error', function(e) {
+        console.error('JavaScript error:', e.error);
+    });
+    
+    // Ensure Bootstrap is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof bootstrap === 'undefined') {
+            console.error('Bootstrap is not loaded!');
+        } else {
+            console.log('Bootstrap is available, version:', bootstrap.Modal.VERSION || 'unknown');
+        }
     });
     </script>
     
