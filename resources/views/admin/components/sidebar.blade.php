@@ -36,9 +36,9 @@
 
         <div class="nav-section">
             <span class="nav-title">MANAJEMEN PRODUK</span>
-            <a href="{{ route('admin.categories.index') }}" class="nav-item {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}" data-tooltip="Kategori Produk">
+            <a href="{{ route('admin.categories.index') }}" class="nav-item {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}" data-tooltip="Kategori">
                 <i class="fas fa-folder"></i>
-                <span>Kategori Produk</span>
+                <span>Kategori</span>
                 <div class="nav-indicator"></div>
             </a>
             <a href="{{ route('admin.subcategories.index') }}" class="nav-item {{ request()->routeIs('admin.subcategories.*') ? 'active' : '' }}" data-tooltip="Sub Kategori">
@@ -56,18 +56,18 @@
         <div class="nav-section">
             <span class="nav-title">KATALOG PRODUK</span>
             
-            <a href="{{ route('admin.products.index') }}" 
-            class="nav-item {{ request()->routeIs('admin.products.*') ? 'active' : '' }}" 
-            data-tooltip="Semua Produk">
-                <i class="fas fa-box-open"></i>
+            <a href="{{ route('admin.catalog.index') }}" 
+            class="nav-item {{ request()->routeIs('admin.catalog.*') ? 'active' : '' }}" 
+            data-tooltip="Kelola Katalog">
+                <i class="fas fa-book-open"></i>
                 <span>Kelola Katalog</span>
                 <div class="nav-indicator"></div>
             </a>
 
-            <a href="{{ route('admin.categories.index') }}" 
-            class="nav-item {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}" 
-            data-tooltip="Kategori Produk">
-                <i class="fas fa-th-large"></i>
+            <a href="{{ route('admin.catalog.create') }}" 
+            class="nav-item {{ request()->routeIs('admin.catalog.create') ? 'active' : '' }}" 
+            data-tooltip="Tambah Katalog Baru">
+                <i class="fas fa-plus-circle"></i>
                 <span>Tambah Katalog</span>
                 <div class="nav-indicator"></div>
             </a>

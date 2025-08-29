@@ -14,6 +14,14 @@ class ProductImage extends Model
         'sort_order'
     ];
 
+    /**
+     * Get the full URL for the image
+     */
+    public function getImageUrlAttribute()
+    {
+        return asset($this->image_path);
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class);

@@ -536,10 +536,10 @@
             <div class="product-gallery">
                 @foreach($product->images as $image)
                 <div class="gallery-item">
-                    <img src="{{ asset('storage/' . $image->image_path) }}" 
+                    <img src="{{ asset($image->image_path) }}" 
                          alt="{{ $image->alt_text }}" 
                          class="gallery-image"
-                         onclick="openImageModal('{{ asset('storage/' . $image->image_path) }}', '{{ $image->alt_text }}')">
+                         onclick="openImageModal('{{ asset($image->image_path) }}', '{{ $image->alt_text }}')">
                     
                     @if($image->is_primary)
                         <div class="primary-badge">Utama</div>

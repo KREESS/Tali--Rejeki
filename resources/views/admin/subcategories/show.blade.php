@@ -399,7 +399,7 @@
                         <div class="product-card">
                             <div class="product-image">
                                 @if($product->primaryImage)
-                                    <img src="{{ asset('storage/' . $product->primaryImage->image_path) }}" 
+                                    <img src="{{ asset($product->primaryImage->image_path) }}" 
                                          alt="{{ $product->name }}">
                                 @else
                                     <i class="fas fa-cube"></i>

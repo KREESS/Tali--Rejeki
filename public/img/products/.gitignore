@@ -1,0 +1,3 @@
+# Ignore all product images except the directory structure
+*
+!.gitignore

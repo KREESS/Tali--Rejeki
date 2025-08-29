@@ -8,7 +8,6 @@ use App\Models\Subcategory;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -89,11 +88,21 @@ class ProductController extends Controller
         // Handle image uploads
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $image) {
-                $path = $image->store('products', 'public');
+                // Generate unique filename
+                $filename = time() . '_' . $index . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+
+                // Save directly to public/img/products directory
+                $destinationPath = public_path('img/products');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                $image->move($destinationPath, $filename);
+                $imagePath = 'img/products/' . $filename;
 
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image_path' => $path,
+                    'image_path' => $imagePath,
                     'alt_text' => $product->name,
                     'is_primary' => $index === 0, // First image is primary
                     'sort_order' => $index + 1
@@ -184,11 +193,21 @@ class ProductController extends Controller
             $existingImagesCount = $product->images()->count();
 
             foreach ($request->file('images') as $index => $image) {
-                $path = $image->store('products', 'public');
+                // Generate unique filename
+                $filename = time() . '_' . $index . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+
+                // Save directly to public/img/products directory
+                $destinationPath = public_path('img/products');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                $image->move($destinationPath, $filename);
+                $imagePath = 'img/products/' . $filename;
 
                 ProductImage::create([
                     'product_id' => $product->id,
-                    'image_path' => $path,
+                    'image_path' => $imagePath,
                     'alt_text' => $product->name,
                     'is_primary' => $existingImagesCount === 0 && $index === 0,
                     'sort_order' => $existingImagesCount + $index + 1
@@ -203,9 +222,12 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         try {
-            // Delete all product images from storage
+            // Delete all product images from public directory
             foreach ($product->images as $image) {
-                Storage::disk('public')->delete($image->image_path);
+                $imagePath = public_path($image->image_path);
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
             }
 
             $productName = $product->name;
@@ -256,7 +278,12 @@ class ProductController extends Controller
             }
         }
 
-        Storage::disk('public')->delete($image->image_path);
+        // Delete image file from public directory
+        $imagePath = public_path($image->image_path);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
         $image->delete();
 
         return response()->json([

@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CatalogController;
 use Illuminate\Support\Facades\Auth;
 
 // === MIDDLEWARE ===
@@ -120,6 +121,19 @@ Route::middleware(['auth', 'role:admin'])
             ->name('products.images.delete');
         Route::post('/products/images/{image}/primary', [ProductController::class, 'setPrimaryImage'])
             ->name('products.images.primary');
+
+        // Catalog Management Routes
+        Route::resource('catalog', CatalogController::class);
+
+        // Catalog Image Management
+        Route::delete('/catalog/images/{image}', [CatalogController::class, 'deleteImage'])
+            ->name('catalog.images.delete');
+        Route::post('/catalog/images/{image}/primary', [CatalogController::class, 'setPrimaryImage'])
+            ->name('catalog.images.primary');
+
+        // Catalog File Management
+        Route::delete('/catalog/files/{file}', [CatalogController::class, 'deleteFile'])
+            ->name('catalog.files.delete');
 
         // Reports
         Route::get('/reports', function () {

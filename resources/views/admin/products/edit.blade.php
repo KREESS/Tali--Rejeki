@@ -562,7 +562,7 @@
                 <div class="existing-images">
                     @foreach($product->images as $image)
                     <div class="existing-image-item" id="image-{{ $image->id }}">
-                        <img src="{{ asset('storage/' . $image->image_path) }}" 
+                        <img src="{{ asset($image->image_path) }}" 
                              alt="{{ $image->alt_text }}" 
                              class="existing-image">
                         
