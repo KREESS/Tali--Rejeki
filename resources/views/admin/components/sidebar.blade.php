@@ -75,14 +75,23 @@
 
         <div class="nav-section">
             <span class="nav-title">MANAJEMEN KONTEN</span>
+            <a href="{{ route('admin.article-categories.index') }}" 
+               class="nav-item {{ request()->routeIs('admin.article-categories.*') ? 'active' : '' }}" 
+               data-tooltip="Kategori Artikel">
+                <i class="fas fa-folder-open"></i>
+                <span>Kategori Artikel</span>
+                <div class="nav-indicator"></div>
+            </a>
+            <a href="{{ route('admin.articles.index') }}" 
+               class="nav-item {{ request()->routeIs('admin.articles.*') ? 'active' : '' }}" 
+               data-tooltip="Artikel & Blog">
+                <i class="fas fa-newspaper"></i>
+                <span>Artikel & Blog</span>
+                <div class="nav-indicator"></div>
+            </a>
             <a href="#" class="nav-item" data-tooltip="Galeri Media">
                 <i class="fas fa-images"></i>
                 <span>Galeri Media</span>
-                <div class="nav-indicator"></div>
-            </a>
-            <a href="#" class="nav-item" data-tooltip="Artikel & Blog">
-                <i class="fas fa-newspaper"></i>
-                <span>Artikel & Blog</span>
                 <div class="nav-indicator"></div>
             </a>
         </div>

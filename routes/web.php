@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CatalogController;
+use App\Http\Controllers\Admin\ArticleCategoryController;
+use App\Http\Controllers\Admin\ArticleController;
 use Illuminate\Support\Facades\Auth;
 
 // === MIDDLEWARE ===
@@ -134,6 +136,12 @@ Route::middleware(['auth', 'role:admin'])
         // Catalog File Management
         Route::delete('/catalog/files/{file}', [CatalogController::class, 'deleteFile'])
             ->name('catalog.files.delete');
+
+        // Article Management Routes
+        Route::resource('article-categories', ArticleCategoryController::class);
+        Route::post('article-categories/{articleCategory}/bulk-actions', [ArticleCategoryController::class, 'bulkActions'])
+            ->name('article-categories.bulk-actions');
+        Route::resource('articles', ArticleController::class);
 
         // Reports
         Route::get('/reports', function () {
