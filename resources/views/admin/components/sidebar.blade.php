@@ -98,7 +98,7 @@
             </a>
         </div>
 
-        <div class="nav-section">
+        {{-- <div class="nav-section">
             <span class="nav-title">CUSTOMER & LEADS</span>
             <a href="#" class="nav-item" data-tooltip="Inquiry & Leads">
                 <i class="fas fa-phone"></i>
@@ -110,9 +110,9 @@
                 <span>Newsletter</span>
                 <div class="nav-indicator"></div>
             </a>
-        </div>
+        </div> --}}
 
-        <div class="nav-section">
+        {{-- <div class="nav-section">
             <span class="nav-title">LAPORAN & ANALYTICS</span>
             <a href="#" class="nav-item" data-tooltip="Analytics Website">
                 <i class="fas fa-chart-line"></i>
@@ -127,6 +127,20 @@
             <a href="#" class="nav-item" data-tooltip="Visitor Tracking">
                 <i class="fas fa-eye"></i>
                 <span>Visitor Tracking</span>
+                <div class="nav-indicator"></div>
+            </a>
+        </div> --}}
+
+        <div class="nav-section">
+            <span class="nav-title">MANAJEMEN KARIER</span>
+            <a href="#" class="nav-item" data-tooltip="Analytics Website">
+                <i class="fas fa-chart-line"></i>
+                <span>Karier</span>
+                <div class="nav-indicator"></div>
+            </a>
+            <a href="#" class="nav-item" data-tooltip="Laporan Produk">
+                <i class="fas fa-download"></i>
+                <span>Tambah Karier</span>
                 <div class="nav-indicator"></div>
             </a>
         </div>
