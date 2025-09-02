@@ -89,7 +89,9 @@
                 <span>Artikel & Blog</span>
                 <div class="nav-indicator"></div>
             </a>
-            <a href="#" class="nav-item" data-tooltip="Galeri Media">
+            <a href="{{ route('admin.gallery.index') }}" 
+               class="nav-item {{ request()->routeIs('admin.gallery.*') ? 'active' : '' }}" 
+               data-tooltip="Galeri Media">
                 <i class="fas fa-images"></i>
                 <span>Galeri Media</span>
                 <div class="nav-indicator"></div>

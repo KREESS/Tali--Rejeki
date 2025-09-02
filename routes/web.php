@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CatalogController;
 use App\Http\Controllers\Admin\ArticleCategoryController;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\GalleryController;
 use Illuminate\Support\Facades\Auth;
 
 // === MIDDLEWARE ===
@@ -142,6 +143,32 @@ Route::middleware(['auth', 'role:admin'])
         Route::post('article-categories/{articleCategory}/bulk-actions', [ArticleCategoryController::class, 'bulkActions'])
             ->name('article-categories.bulk-actions');
         Route::resource('articles', ArticleController::class);
+
+        // Gallery Management Routes
+        Route::resource('gallery', GalleryController::class);
+
+        // Gallery Test Route
+        Route::get('/gallery/{gallery}/edit-test', function ($gallery) {
+            $gallery = \App\Models\Gallery::findOrFail($gallery);
+            $gallery->load(['images' => function ($query) {
+                $query->orderBy('sort_order');
+            }]);
+
+            return view('admin.gallery.edit_simple_test', [
+                'title' => 'Edit Galeri Test: ' . $gallery->title,
+                'gallery' => $gallery
+            ]);
+        })->name('gallery.edit.test');
+
+        // Gallery Status Toggle
+        Route::post('/gallery/{gallery}/toggle-status', [GalleryController::class, 'toggleStatus'])
+            ->name('gallery.toggle-status');
+
+        // Gallery Image Management
+        Route::delete('/gallery/images/{image}', [GalleryController::class, 'deleteImage'])
+            ->name('gallery.images.delete');
+        Route::post('/gallery/images/{image}/primary', [GalleryController::class, 'setPrimaryImage'])
+            ->name('gallery.images.primary');
 
         // Reports
         Route::get('/reports', function () {

@@ -26,6 +26,18 @@ class GalleryImage extends Model
         'sort_order' => 'integer',
     ];
 
+    // Accessor untuk mendapatkan filename dari image_url
+    public function getFilenameAttribute()
+    {
+        return basename($this->image_url);
+    }
+
+    // Accessor untuk mendapatkan full URL
+    public function getImageUrlFullAttribute()
+    {
+        return asset($this->image_url);
+    }
+
     /** Kolom generated: tidak perlu diekspos ke API */
     protected $hidden = [
         'primary_guard',
