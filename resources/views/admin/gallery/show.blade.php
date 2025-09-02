@@ -682,7 +682,7 @@ body {
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 999999;
+    z-index: 999998;
     backdrop-filter: blur(10px);
 }
 
@@ -762,9 +762,9 @@ body {
 /* ==================== ALERT SYSTEM ==================== */
 .alert-container {
     position: fixed;
-    top: 20px;
+    top: 80px;
     right: 20px;
-    z-index: 10000;
+    z-index: 999999;
     max-width: 400px;
     width: 100%;
 }
@@ -774,16 +774,30 @@ body {
     border-radius: var(--border-radius);
     padding: 16px 20px;
     margin-bottom: 12px;
-    box-shadow: var(--shadow-medium);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
     border-left: 4px solid;
     transform: translateX(100%);
     transition: var(--transition-medium);
     opacity: 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .alert.show {
     transform: translateX(0);
     opacity: 1;
+    animation: slideInAlert 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInAlert {
+    0% {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .alert-content {
@@ -825,9 +839,74 @@ body {
     background: linear-gradient(135deg, #d4edda, #c3e6cb);
 }
 
+.alert.alert-success.status-change-alert {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb, #a7e2a7);
+    border-left-width: 6px;
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.25);
+    animation: statusChangeGlow 0.8s ease-in-out;
+}
+
+@keyframes statusChangeGlow {
+    0% { 
+        box-shadow: 0 8px 25px rgba(40, 167, 69, 0.25);
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 0 12px 35px rgba(40, 167, 69, 0.4);
+        transform: scale(1.02);
+    }
+    100% { 
+        box-shadow: 0 8px 25px rgba(40, 167, 69, 0.25);
+        transform: scale(1);
+    }
+}
+
 .alert.alert-success .alert-icon,
 .alert.alert-success .alert-message {
     color: #155724;
+}
+
+.status-change-alert .alert-icon {
+    animation: iconPulse 1s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Celebration particle animation */
+.celebration-particles {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 1px;
+    z-index: 9999999;
+    pointer-events: none;
+}
+
+.celebration-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #28a745, #34ce57);
+    animation: celebrationBurst 1.5s ease-out forwards;
+}
+
+@keyframes celebrationBurst {
+    0% {
+        transform: translate(-50%, -50%) scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(
+            calc(-50% + cos(var(--angle)) * var(--distance)), 
+            calc(-50% + sin(var(--angle)) * var(--distance))
+        ) scale(1) rotate(360deg);
+        opacity: 0;
+    }
 }
 
 .alert.alert-error {
@@ -860,6 +939,38 @@ body {
     color: #0c5460;
 }
 
+/* Mobile responsive alerts */
+@media (max-width: 768px) {
+    .alert-container {
+        top: 70px;
+        right: 15px;
+        left: 15px;
+        max-width: none;
+    }
+    
+    .alert {
+        padding: 14px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .alert-icon {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .alert-container {
+        top: 65px;
+        right: 10px;
+        left: 10px;
+    }
+    
+    .alert {
+        padding: 12px 14px;
+        font-size: 0.85rem;
+    }
+}
+
 /* ==================== CONFIRMATION MODAL ==================== */
 .confirmation-modal {
     position: fixed;
@@ -867,7 +978,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 999999;
+    z-index: 999997;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1067,16 +1178,33 @@ body {
     margin-bottom: 20px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.4s ease;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
 }
 
 .status-indicator.status-published {
     background: rgba(40, 167, 69, 0.9);
     color: white;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
 }
 
 .status-indicator.status-draft {
     background: rgba(255, 193, 7, 0.9);
     color: #212529;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+
+.status-indicator i {
+    transition: all 0.3s ease;
+}
+
+.status-indicator:hover i {
+    transform: scale(1.2);
 }
 
 .hero-title {
@@ -1488,6 +1616,36 @@ body {
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.status-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: var(--transition-medium);
+}
+
+.status-badge:hover::before {
+    left: 100%;
+}
+
+.status-badge.status-published {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-badge.status-draft {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    color: #856404;
+    border: 1px solid #ffeaa7;
 }
 
 .status-badge.status-published {
@@ -1589,12 +1747,48 @@ body {
     background: linear-gradient(135deg, #28a745, #34ce57);
     color: white;
     border-color: #28a745;
+    position: relative;
+    overflow: hidden;
+}
+
+.success-action::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: var(--transition-medium);
+}
+
+.success-action:hover::after {
+    transform: translateX(100%);
 }
 
 .warning-action {
     background: linear-gradient(135deg, #ffc107, #ffca2c);
     color: #212529;
     border-color: #ffc107;
+    position: relative;
+    overflow: hidden;
+}
+
+.warning-action::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: var(--transition-medium);
+}
+
+.warning-action:hover::after {
+    transform: translateX(100%);
 }
 
 .info-action {
@@ -3316,7 +3510,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     /**
-     * Status toggle functionality
+     * Status toggle functionality with AJAX and alert notifications
      */
     window.toggleStatus = function(button) {
         const slug = button.dataset.slug;
@@ -3332,13 +3526,125 @@ document.addEventListener('DOMContentLoaded', function() {
         showLoading('Mengupdate status...');
         setButtonLoading(button, true);
         
-        // Submit form
-        setTimeout(() => {
-            form.submit();
-        }, 500);
+        // Get form data
+        const formData = new FormData(form);
+        
+        // Send AJAX request
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            hideLoading();
+            setButtonLoading(button, false);
+            
+            if (data.success) {
+                // Show success alert
+                showAlert(data.message, 'success');
+                
+                // Update button appearance based on new status
+                updateStatusButton(button, data.new_status);
+                
+                // Update all status indicators on the page
+                updatePageStatusIndicators(data.new_status);
+                
+                console.log(`✅ Status updated successfully to: ${data.new_status}`);
+            } else {
+                throw new Error(data.message || 'Gagal mengupdate status');
+            }
+        })
+        .catch(error => {
+            hideLoading();
+            setButtonLoading(button, false);
+            
+            console.error('❌ Error updating status:', error);
+            showAlert('Gagal mengupdate status: ' + error.message, 'error');
+        });
         
         return false;
     };
+    
+    /**
+     * Update status button appearance after successful toggle
+     */
+    function updateStatusButton(button, newStatus) {
+        const actionContent = button.querySelector('.action-content');
+        const actionIcon = button.querySelector('.action-icon i');
+        
+        if (newStatus === 'published') {
+            // Change to "Set to Draft" button
+            button.className = button.className.replace('success-action', 'warning-action');
+            if (actionIcon) {
+                actionIcon.className = 'fas fa-eye-slash';
+            }
+            if (actionContent) {
+                actionContent.querySelector('h4').textContent = 'Set to Draft';
+                actionContent.querySelector('p').textContent = 'Sembunyikan dari publik';
+            }
+        } else {
+            // Change to "Publish Gallery" button
+            button.className = button.className.replace('warning-action', 'success-action');
+            if (actionIcon) {
+                actionIcon.className = 'fas fa-eye';
+            }
+            if (actionContent) {
+                actionContent.querySelector('h4').textContent = 'Publish Gallery';
+                actionContent.querySelector('p').textContent = 'Tampilkan ke publik';
+            }
+        }
+    }
+    
+    /**
+     * Update all status indicators throughout the page
+     */
+    function updatePageStatusIndicators(newStatus) {
+        // Update hero status indicator
+        const heroStatus = document.querySelector('.status-indicator');
+        if (heroStatus) {
+            heroStatus.className = `status-indicator status-${newStatus}`;
+            const statusText = heroStatus.querySelector('span');
+            const statusIcon = heroStatus.querySelector('i');
+            
+            if (statusText) {
+                statusText.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
+            }
+            
+            if (statusIcon) {
+                statusIcon.className = `fas fa-${newStatus === 'published' ? 'eye' : 'edit'}`;
+            }
+        }
+        
+        // Update gallery info status badge
+        const statusBadges = document.querySelectorAll('.status-badge');
+        statusBadges.forEach(badge => {
+            badge.className = `status-badge status-${newStatus}`;
+            badge.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
+        });
+        
+        // Update gallery item value
+        const statusValue = document.querySelector('.gallery-item-value');
+        if (statusValue && statusValue.textContent.toLowerCase().includes('published') || statusValue.textContent.toLowerCase().includes('draft')) {
+            statusValue.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
+        }
+        
+        // Update gallery item icon
+        const statusIcons = document.querySelectorAll('.gallery-item-icon i');
+        statusIcons.forEach(icon => {
+            if (icon.className.includes('fa-eye') || icon.className.includes('fa-eye-slash')) {
+                icon.className = `fas fa-${newStatus === 'published' ? 'eye' : 'eye-slash'}`;
+            }
+        });
+    }
     
     /**
      * Delete functionality
@@ -3518,7 +3824,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     /**
-     * Show enhanced alert
+     * Show enhanced alert with special styling for status changes
      */
     function showAlert(message, type = 'info', duration = 5000) {
         const container = document.getElementById('alertContainer');
@@ -3535,6 +3841,13 @@ document.addEventListener('DOMContentLoaded', function() {
             info: 'fas fa-info-circle'
         };
         
+        // Special styling for status change messages
+        let specialClass = '';
+        if (message.toLowerCase().includes('status') && type === 'success') {
+            specialClass = ' status-change-alert';
+            duration = 6000; // Show longer for status changes
+        }
+        
         alert.innerHTML = `
             <div class="alert-content">
                 <i class="alert-icon ${icons[type] || icons.info}"></i>
@@ -3544,6 +3857,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 </button>
             </div>
         `;
+        
+        if (specialClass) {
+            alert.classList.add('status-change-alert');
+        }
         
         container.appendChild(alert);
         
@@ -3559,8 +3876,60 @@ document.addEventListener('DOMContentLoaded', function() {
             }, duration);
         }
         
+        // Add celebration effect for status changes
+        if (specialClass) {
+            addCelebrationEffect();
+        }
+        
         console.log(`📢 Alert (${type}): ${message}`);
         return alertId;
+    }
+    
+    /**
+     * Add celebration effect for successful status changes
+     */
+    function addCelebrationEffect() {
+        // Create celebration particles
+        for (let i = 0; i < 8; i++) {
+            setTimeout(() => {
+                createCelebrationParticle();
+            }, i * 100);
+        }
+    }
+    
+    /**
+     * Create individual celebration particle
+     */
+    function createCelebrationParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'celebration-particle';
+        particle.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: var(--crimson-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10001;
+            animation: celebrationBurst 1.5s ease-out forwards;
+        `;
+        
+        document.body.appendChild(particle);
+        
+        // Random direction for particle
+        const angle = Math.random() * 360;
+        const distance = 100 + Math.random() * 100;
+        
+        particle.style.setProperty('--angle', angle + 'deg');
+        particle.style.setProperty('--distance', distance + 'px');
+        
+        setTimeout(() => {
+            if (particle.parentNode) {
+                particle.parentNode.removeChild(particle);
+            }
+        }, 1500);
     }
     
     /**

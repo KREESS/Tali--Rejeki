@@ -93,7 +93,7 @@
                class="nav-item {{ request()->routeIs('admin.gallery.*') ? 'active' : '' }}" 
                data-tooltip="Galeri Media">
                 <i class="fas fa-images"></i>
-                <span>Galeri Media</span>
+                <span>Galeri Proyek</span>
                 <div class="nav-indicator"></div>
             </a>
         </div>
