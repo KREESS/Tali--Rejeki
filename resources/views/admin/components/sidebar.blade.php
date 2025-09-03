@@ -133,14 +133,14 @@
 
         <div class="nav-section">
             <span class="nav-title">MANAJEMEN KARIER</span>
-            <a href="#" class="nav-item" data-tooltip="Analytics Website">
-                <i class="fas fa-chart-line"></i>
-                <span>Karier</span>
+            <a href="{{ route('admin.jobs.index') }}" class="nav-item {{ request()->routeIs('admin.jobs.*') ? 'active' : '' }}" data-tooltip="Kelola Lowongan Kerja">
+                <i class="fas fa-briefcase"></i>
+                <span>Lowongan Kerja</span>
                 <div class="nav-indicator"></div>
             </a>
-            <a href="#" class="nav-item" data-tooltip="Laporan Produk">
-                <i class="fas fa-download"></i>
-                <span>Tambah Karier</span>
+            <a href="{{ route('admin.jobs.create') }}" class="nav-item {{ request()->routeIs('admin.jobs.create') ? 'active' : '' }}" data-tooltip="Tambah Lowongan Baru">
+                <i class="fas fa-plus-circle"></i>
+                <span>Tambah Lowongan</span>
                 <div class="nav-indicator"></div>
             </a>
         </div>

@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\CatalogController;
 use App\Http\Controllers\Admin\ArticleCategoryController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\JobController;
 use Illuminate\Support\Facades\Auth;
 
 // === MIDDLEWARE ===
@@ -169,6 +170,13 @@ Route::middleware(['auth', 'role:admin'])
             ->name('gallery.images.delete');
         Route::post('/gallery/images/{image}/primary', [GalleryController::class, 'setPrimaryImage'])
             ->name('gallery.images.primary');
+
+        // Job Management Routes
+        Route::resource('jobs', JobController::class);
+        Route::post('/jobs/{job}/toggle-status', [JobController::class, 'toggleStatus'])
+            ->name('jobs.toggle-status');
+        Route::post('/jobs/bulk-actions', [JobController::class, 'bulkActions'])
+            ->name('jobs.bulk-actions');
 
         // Reports
         Route::get('/reports', function () {
