@@ -102,16 +102,31 @@ Route::middleware(['auth', 'role:admin'])
 
         // Dashboard
         Route::get('/dashboard', function () {
+            // Ambil data real dari database
+            $totalUsers = \App\Models\User::count();
+            $totalProducts = \App\Models\Product::count();
+            $totalArticles = \App\Models\Article::count();
+            $totalJobs = \App\Models\Job::count();
+            $totalCategories = \App\Models\Category::count();
+            $totalGalleries = \App\Models\Gallery::count();
+            $totalCatalogs = \App\Models\CatalogItem::count();
+
+            // Data untuk stats cards
+            $stats = [
+                'users' => $totalUsers,
+                'products' => $totalProducts,
+                'articles' => $totalArticles,
+                'jobs' => $totalJobs,
+                'categories' => $totalCategories,
+                'galleries' => $totalGalleries,
+                'catalogs' => $totalCatalogs
+            ];
+
             return view('admin.dashboard', [
                 'title' => 'Dashboard Admin - Tali Rejeki',
                 'subtitle' => 'Panel administrasi untuk distributor insulasi industri',
                 'user' => Auth::user(),
-                'stats' => [
-                    'users' => 1234,
-                    'orders' => 567,
-                    'products' => 89,
-                    'revenue' => 2100000
-                ]
+                'stats' => $stats
             ]);
         })->name('dashboard');
 
