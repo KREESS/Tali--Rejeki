@@ -1,4 +1,6 @@
 <!-- Premium Admin Navbar -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <nav class="premium-navbar" id="adminNavbar">
     <div class="navbar-container">
         <!-- Mobile Menu Toggle -->
@@ -28,6 +30,50 @@
                     <i class="fas fa-cubes"></i>
                     <span>Produk</span>
                 </div>
+                <div class="filter-option" data-filter="product-categories">
+                    <i class="fas fa-tags"></i>
+                    <span>Kategori Produk</span>
+                </div>
+                <div class="filter-option" data-filter="product-subcategories">
+                    <i class="fas fa-tag"></i>
+                    <span>Sub-Kategori Produk</span>
+                </div>
+                <div class="filter-option" data-filter="manage-subcategories">
+                    <i class="fas fa-tags"></i>
+                    <span>Kelola Sub Kategori Produk</span>
+                </div>
+                <div class="filter-option" data-filter="catalog">
+                    <i class="fas fa-folder"></i>
+                    <span>Katalog</span>
+                </div>
+                <div class="filter-option" data-filter="manage-catalog">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Kelola Katalog</span>
+                </div>
+                <div class="filter-option" data-filter="article-categories">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Kategori Artikel</span>
+                </div>
+                <div class="filter-option" data-filter="manage-article-categories">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Kelola Kategori Artikel</span>
+                </div>
+                <div class="filter-option" data-filter="galleries">
+                    <i class="fas fa-images"></i>
+                    <span>Galeri</span>
+                </div>
+                <div class="filter-option" data-filter="gallery-projects">
+                    <i class="fas fa-camera"></i>
+                    <span>Gallery Proyek</span>
+                </div>
+                <div class="filter-option" data-filter="jobs">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Pekerjaan</span>
+                </div>
+                <div class="filter-option" data-filter="job-vacancies">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Lowongan Kerja</span>
+                </div>
                 <div class="filter-option" data-filter="customers">
                     <i class="fas fa-users"></i>
                     <span>Customer</span>
@@ -50,32 +96,60 @@
                 
                 <!-- Quick Add Dropdown -->
                 <div class="quick-add-dropdown" id="quickAddDropdown">
-                    <a href="#" class="quick-add-item">
+                    <a href="{{ route('admin.products.create') }}" class="quick-add-item">
                         <i class="fas fa-cube"></i>
                         <div class="item-content">
                             <span class="item-title">Produk Baru</span>
                             <span class="item-desc">Tambah produk insulasi</span>
                         </div>
                     </a>
-                    <a href="#" class="quick-add-item">
+                    <a href="{{ route('admin.categories.create') }}" class="quick-add-item">
                         <i class="fas fa-tags"></i>
                         <div class="item-content">
-                            <span class="item-title">Kategori</span>
+                            <span class="item-title">Kategori Produk</span>
                             <span class="item-desc">Buat kategori produk</span>
                         </div>
                     </a>
-                    <a href="#" class="quick-add-item">
+                    <a href="{{ route('admin.subcategories.create') }}" class="quick-add-item">
+                        <i class="fas fa-tag"></i>
+                        <div class="item-content">
+                            <span class="item-title">Sub-Kategori</span>
+                            <span class="item-desc">Buat sub-kategori produk</span>
+                        </div>
+                    </a>
+                    <a href="{{ route('admin.catalog.create') }}" class="quick-add-item">
+                        <i class="fas fa-folder-plus"></i>
+                        <div class="item-content">
+                            <span class="item-title">Katalog</span>
+                            <span class="item-desc">Upload katalog PDF</span>
+                        </div>
+                    </a>
+                    <a href="{{ route('admin.article-categories.create') }}" class="quick-add-item">
                         <i class="fas fa-newspaper"></i>
                         <div class="item-content">
-                            <span class="item-title">Artikel</span>
+                            <span class="item-title">Kategori Artikel</span>
+                            <span class="item-desc">Buat kategori artikel</span>
+                        </div>
+                    </a>
+                    <a href="{{ route('admin.articles.create') }}" class="quick-add-item">
+                        <i class="fas fa-edit"></i>
+                        <div class="item-content">
+                            <span class="item-title">Artikel Baru</span>
                             <span class="item-desc">Tulis artikel blog</span>
                         </div>
                     </a>
-                    <a href="#" class="quick-add-item">
-                        <i class="fas fa-image"></i>
+                    <a href="{{ route('admin.gallery.create') }}" class="quick-add-item">
+                        <i class="fas fa-images"></i>
                         <div class="item-content">
-                            <span class="item-title">Media</span>
-                            <span class="item-desc">Upload gambar/video</span>
+                            <span class="item-title">Galeri Proyek</span>
+                            <span class="item-desc">Upload galeri proyek</span>
+                        </div>
+                    </a>
+                    <a href="{{ route('admin.jobs.create') }}" class="quick-add-item">
+                        <i class="fas fa-briefcase"></i>
+                        <div class="item-content">
+                            <span class="item-title">Lowongan Kerja</span>
+                            <span class="item-desc">Buat lowongan kerja</span>
                         </div>
                     </a>
                 </div>
@@ -92,43 +166,19 @@
                 <div class="notifications-dropdown" id="notificationsDropdown">
                     <div class="dropdown-header">
                         <h4>Notifikasi</h4>
-                        <span class="mark-all-read">Tandai semua dibaca</span>
+                        <span class="mark-all-read" onclick="markAllNotificationsAsRead()">Tandai semua dibaca</span>
                     </div>
                     
-                    <div class="notification-item unread">
-                        <div class="notification-icon">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <div class="notification-content">
-                            <p>Customer baru mendaftar dari Jakarta</p>
-                            <span class="notification-time">5 menit lalu</span>
-                        </div>
-                        <div class="notification-status"></div>
-                    </div>
-                    
-                    <div class="notification-item unread">
-                        <div class="notification-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="notification-content">
-                            <p>Inquiry produk Glasswool dari Surabaya</p>
-                            <span class="notification-time">15 menit lalu</span>
-                        </div>
-                        <div class="notification-status"></div>
-                    </div>
-                    
-                    <div class="notification-item">
-                        <div class="notification-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="notification-content">
-                            <p>Traffic website naik 25% minggu ini</p>
-                            <span class="notification-time">1 jam lalu</span>
+                    <div class="dropdown-body">
+                        <!-- Notifications will be loaded here via JavaScript -->
+                        <div style="text-align: center; padding: 20px; color: #999;">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 10px;"></i>
+                            <p>Memuat notifikasi...</p>
                         </div>
                     </div>
                     
                     <div class="dropdown-footer">
-                        <a href="#" class="view-all-link">Lihat semua notifikasi</a>
+                        <a href="{{ route('admin.notifications.index') }}" class="view-all-link">Lihat semua notifikasi</a>
                     </div>
                 </div>
             </div>
@@ -141,21 +191,17 @@
                 
                 <!-- Settings Dropdown -->
                 <div class="settings-dropdown" id="settingsDropdown">
-                    <a href="#" class="settings-item">
-                        <i class="fas fa-palette"></i>
-                        <span>Tema & Tampilan</span>
+                    <a href="{{ route('admin.dashboard') }}" class="settings-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
                     </a>
-                    <a href="#" class="settings-item">
-                        <i class="fas fa-database"></i>
-                        <span>Backup Data</span>
+                    <a href="{{ route('admin.categories.index') }}" class="settings-item">
+                        <i class="fas fa-cogs"></i>
+                        <span>Kelola Kategori</span>
                     </a>
-                    <a href="#" class="settings-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>Keamanan</span>
-                    </a>
-                    <a href="#" class="settings-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>Email Settings</span>
+                    <a href="{{ route('admin.notifications.index') }}" class="settings-item">
+                        <i class="fas fa-bell"></i>
+                        <span>Pengaturan Notifikasi</span>
                     </a>
                 </div>
             </div>
@@ -564,6 +610,32 @@
     padding: 4px 8px;
     border-radius: 6px;
     font-weight: 500;
+}
+
+.result-actions {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.result-actions .action-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(139, 0, 0, 0.1);
+    border: none;
+    border-radius: 6px;
+    color: #8b0000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.result-actions .action-btn:hover {
+    background: rgba(139, 0, 0, 0.2);
+    transform: scale(1.1);
 }
 
 /* ====== ACTION BUTTONS ====== */
@@ -976,9 +1048,9 @@
 
 .search-results-content {
     position: absolute;
-    top: 50%;
+    top: 20%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
     width: 90%;
     max-width: 600px;
     background: white;
@@ -1283,6 +1355,7 @@
 <script>
 // Global dropdown state
 let activeDropdown = null;
+let notificationInterval = null;
 
 function toggleDropdown(dropdownId) {
     const dropdown = document.getElementById(dropdownId);
@@ -1303,6 +1376,11 @@ function toggleQuickAdd() {
 
 function toggleNotifications() {
     toggleDropdown('notificationsDropdown');
+    
+    // Load latest notifications when opened
+    if (document.getElementById('notificationsDropdown').classList.contains('active')) {
+        loadNotifications();
+    }
 }
 
 function toggleSettings() {
@@ -1315,6 +1393,25 @@ function toggleUserMenu() {
 
 function toggleSearchFilter() {
     toggleDropdown('searchFilterDropdown');
+}
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('adminSidebar');
+    if (sidebar) {
+        sidebar.classList.toggle('collapsed');
+        
+        // Adjust navbar position
+        setTimeout(adjustNavbar, 50);
+        
+        // Add visual feedback
+        const toggle = document.querySelector('.mobile-menu-toggle');
+        if (toggle) {
+            toggle.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                toggle.style.transform = '';
+            }, 150);
+        }
+    }
 }
 
 function closeSearchResults() {
@@ -1332,10 +1429,31 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Search functionality
+// Enhanced Search functionality with Database Integration
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('globalSearch');
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
     let searchTimeout;
+    let currentFilter = 'all';
+    
+    // Set CSRF token for all AJAX requests
+    if (csrfToken) {
+        // Set default headers for fetch requests
+        window.defaultHeaders = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken,
+            'Accept': 'application/json'
+        };
+        
+        // Also set for jQuery if available
+        if (typeof $ !== 'undefined') {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                }
+            });
+        }
+    }
     
     searchInput.addEventListener('input', function(e) {
         const query = e.target.value.trim();
@@ -1348,7 +1466,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Debounce search
         searchTimeout = setTimeout(() => {
             if (query.length > 2) {
-                performSearch(query);
+                performDatabaseSearch(query);
+                loadSearchSuggestions(query);
             } else {
                 clearSearchResults();
             }
@@ -1360,47 +1479,61 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const query = e.target.value.trim();
             if (query.length > 0) {
-                showSearchResults(query);
+                showFullSearchResults(query);
             }
         }
     });
     
-    // Enhanced search function
-    function performSearch(query) {
-        // Add loading state
+    // Database search function
+    function performDatabaseSearch(query) {
         const searchIcon = document.querySelector('.search-icon');
-        searchIcon.className = 'fas fa-spinner fa-spin search-icon';
+        searchIcon.className = 'fas fa-spinner fa-spin search-icon loading';
         
-        // Simulate API call (replace with actual search)
-        setTimeout(() => {
-            searchIcon.className = 'fas fa-search search-icon';
-            console.log('Searching for:', query);
-            
-            // Show live search suggestions
-            showSearchSuggestions(query);
-        }, 500);
+        fetch(`/admin/search/global?query=${encodeURIComponent(query)}&filter=${currentFilter}&limit=5`)
+            .then(response => response.json())
+            .then(data => {
+                searchIcon.className = 'fas fa-search search-icon';
+                
+                if (data.success) {
+                    console.log('Search results:', data.results);
+                } else {
+                    console.error('Search error:', data.message);
+                }
+            })
+            .catch(error => {
+                searchIcon.className = 'fas fa-search search-icon';
+                console.error('Search request failed:', error);
+            });
     }
     
-    function showSearchSuggestions(query) {
-        // Create suggestions dropdown if it doesn't exist
-        let suggestions = document.getElementById('searchSuggestions');
-        if (!suggestions) {
-            suggestions = document.createElement('div');
-            suggestions.id = 'searchSuggestions';
-            suggestions.className = 'search-suggestions';
-            document.querySelector('.navbar-search').appendChild(suggestions);
+    // Load search suggestions
+    function loadSearchSuggestions(query) {
+        fetch(`/admin/search/suggestions?query=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.suggestions.length > 0) {
+                    showSearchSuggestions(data.suggestions);
+                } else {
+                    clearSearchResults();
+                }
+            })
+            .catch(error => {
+                console.error('Suggestions request failed:', error);
+            });
+    }
+    
+    function showSearchSuggestions(suggestions) {
+        let suggestionsContainer = document.getElementById('searchSuggestions');
+        if (!suggestionsContainer) {
+            suggestionsContainer = document.createElement('div');
+            suggestionsContainer.id = 'searchSuggestions';
+            suggestionsContainer.className = 'search-suggestions';
+            document.querySelector('.navbar-search').appendChild(suggestionsContainer);
         }
         
-        // Sample suggestions (replace with actual data)
-        const sampleSuggestions = [
-            { type: 'product', title: 'Glasswool Premium', category: 'Produk' },
-            { type: 'customer', title: 'PT. Sejahtera Jakarta', category: 'Customer' },
-            { type: 'content', title: 'Artikel Insulasi Industri', category: 'Konten' }
-        ];
-        
-        suggestions.innerHTML = sampleSuggestions.map(item => `
-            <div class="suggestion-item" data-type="${item.type}">
-                <i class="fas fa-${item.type === 'product' ? 'cube' : item.type === 'customer' ? 'user' : 'file-alt'}"></i>
+        suggestionsContainer.innerHTML = suggestions.map(item => `
+            <div class="suggestion-item" data-url="${item.url}" onclick="navigateToSuggestion('${item.url}')">
+                <i class="fas fa-${item.icon}"></i>
                 <div class="suggestion-content">
                     <span class="suggestion-title">${item.title}</span>
                     <span class="suggestion-category">${item.category}</span>
@@ -1408,7 +1541,351 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `).join('');
         
-        suggestions.classList.add('active');
+        suggestionsContainer.classList.add('active');
+    }
+    
+    function showFullSearchResults(query) {
+        const modal = document.getElementById('searchResultsModal');
+        const resultsBody = modal.querySelector('.search-results-body');
+        const searchIcon = document.querySelector('.search-icon');
+        
+        searchIcon.className = 'fas fa-spinner fa-spin search-icon loading';
+        
+        fetch(`/admin/search/global?query=${encodeURIComponent(query)}&filter=${currentFilter}&limit=20`)
+            .then(response => response.json())
+            .then(data => {
+                searchIcon.className = 'fas fa-search search-icon';
+                
+                if (data.success) {
+                    resultsBody.innerHTML = generateSearchResultsHTML(data.results, query);
+                    modal.classList.add('active');
+                } else {
+                    alert('Pencarian gagal: ' + data.message);
+                }
+            })
+            .catch(error => {
+                searchIcon.className = 'fas fa-search search-icon';
+                console.error('Full search failed:', error);
+                alert('Terjadi kesalahan saat melakukan pencarian');
+            });
+    }
+    
+    function generateSearchResultsHTML(results, query) {
+        let html = '';
+        
+        // Products
+        if (results.products && results.products.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-cubes"></i> Produk (${results.products.length})</h4>
+                    ${results.products.map(product => `
+                        <div class="search-result-item" onclick="navigateToResult('${product.url}')">
+                            <i class="fas fa-${product.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${product.title}</span>
+                                <span class="result-desc">${product.description}</span>
+                                ${product.price ? `<small style="color: #8b0000; font-weight: 600;">${product.price}</small>` : ''}
+                            </div>
+                            <span class="result-type">Produk</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Categories (Kategori Produk)
+        if (results.categories && results.categories.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-tags"></i> Kategori Produk (${results.categories.length})</h4>
+                    ${results.categories.map(category => `
+                        <div class="search-result-item" onclick="navigateToResult('${category.url}')">
+                            <i class="fas fa-${category.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${category.title}</span>
+                                <span class="result-desc">${category.description}</span>
+                                <small style="color: #718096;">${category.products_count} produk</small>
+                            </div>
+                            <span class="result-type">Kategori</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Subcategories (Sub-Kategori Produk)
+        if (results.subcategories && results.subcategories.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-tag"></i> Sub-Kategori Produk (${results.subcategories.length})</h4>
+                    ${results.subcategories.map(subcategory => `
+                        <div class="search-result-item" onclick="navigateToResult('${subcategory.url}')">
+                            <i class="fas fa-${subcategory.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${subcategory.title}</span>
+                                <span class="result-desc">${subcategory.description}</span>
+                                <small style="color: #718096;">${subcategory.products_count} produk</small>
+                            </div>
+                            <span class="result-type">Sub-Kategori</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Catalogs (Kelola Katalog)
+        if (results.catalogs && results.catalogs.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-folder"></i> Katalog (${results.catalogs.length})</h4>
+                    ${results.catalogs.map(catalog => `
+                        <div class="search-result-item" onclick="navigateToResult('${catalog.url}')">
+                            <i class="fas fa-${catalog.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${catalog.title}</span>
+                                <span class="result-desc">${catalog.description}</span>
+                                <small style="color: #718096;">${catalog.files_count} file, ${catalog.images_count} gambar</small>
+                            </div>
+                            <span class="result-type">Katalog</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Article Categories (Kategori Artikel)
+        if (results.article_categories && results.article_categories.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-newspaper"></i> Kategori Artikel (${results.article_categories.length})</h4>
+                    ${results.article_categories.map(category => `
+                        <div class="search-result-item" onclick="navigateToResult('${category.url}')">
+                            <i class="fas fa-${category.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${category.title}</span>
+                                <span class="result-desc">${category.description}</span>
+                                <small style="color: #718096;">${category.articles_count} artikel</small>
+                            </div>
+                            <span class="result-type">Kategori Artikel</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Galleries (Galeri Proyek)
+        if (results.galleries && results.galleries.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-images"></i> Galeri Proyek (${results.galleries.length})</h4>
+                    ${results.galleries.map(gallery => `
+                        <div class="search-result-item" onclick="navigateToResult('${gallery.url}')">
+                            <i class="fas fa-${gallery.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${gallery.title}</span>
+                                <span class="result-desc">${gallery.description}</span>
+                                <small style="color: #718096;">Status: ${gallery.status}, ${gallery.images_count} gambar</small>
+                            </div>
+                            <span class="result-type">Galeri</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Jobs (Lowongan Kerja)
+        if (results.jobs && results.jobs.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-briefcase"></i> Lowongan Kerja (${results.jobs.length})</h4>
+                    ${results.jobs.map(job => `
+                        <div class="search-result-item" onclick="navigateToResult('${job.url}')">
+                            <i class="fas fa-${job.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${job.title}</span>
+                                <span class="result-desc">${job.description}</span>
+                                <small style="color: #718096;">${job.location} - ${job.employment_type}</small>
+                            </div>
+                            <span class="result-type">Lowongan</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Manage Subcategories (Kelola Sub Kategori Produk)
+        if (results.manage_subcategories && results.manage_subcategories.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-tags"></i> Kelola Sub Kategori (${results.manage_subcategories.length})</h4>
+                    ${results.manage_subcategories.map(item => `
+                        <div class="search-result-item" onclick="navigateToResult('${item.url}')">
+                            <i class="fas fa-${item.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${item.title}</span>
+                                <span class="result-desc">${item.description}</span>
+                                <small style="color: #718096;">Status: ${item.status}</small>
+                            </div>
+                            <div class="result-actions">
+                                <button onclick="event.stopPropagation(); navigateToResult('${item.edit_url}')" class="action-btn">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Manage Catalogs (Kelola Katalog)
+        if (results.manage_catalogs && results.manage_catalogs.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-folder-open"></i> Kelola Katalog (${results.manage_catalogs.length})</h4>
+                    ${results.manage_catalogs.map(item => `
+                        <div class="search-result-item" onclick="navigateToResult('${item.url}')">
+                            <i class="fas fa-${item.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${item.title}</span>
+                                <span class="result-desc">${item.description}</span>
+                                <small style="color: #718096;">Status: ${item.status} | ${item.files_count} file</small>
+                            </div>
+                            <div class="result-actions">
+                                <button onclick="event.stopPropagation(); navigateToResult('${item.edit_url}')" class="action-btn">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Manage Article Categories (Kelola Kategori Artikel)
+        if (results.manage_article_categories && results.manage_article_categories.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-newspaper"></i> Kelola Kategori Artikel (${results.manage_article_categories.length})</h4>
+                    ${results.manage_article_categories.map(item => `
+                        <div class="search-result-item" onclick="navigateToResult('${item.url}')">
+                            <i class="fas fa-${item.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${item.title}</span>
+                                <span class="result-desc">${item.description}</span>
+                                <small style="color: #718096;">Status: ${item.status} | ${item.articles_count} artikel</small>
+                            </div>
+                            <div class="result-actions">
+                                <button onclick="event.stopPropagation(); navigateToResult('${item.edit_url}')" class="action-btn">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Gallery Projects (Gallery Proyek)
+        if (results.gallery_projects && results.gallery_projects.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-camera"></i> Gallery Proyek (${results.gallery_projects.length})</h4>
+                    ${results.gallery_projects.map(item => `
+                        <div class="search-result-item" onclick="navigateToResult('${item.url}')">
+                            <i class="fas fa-${item.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${item.title}</span>
+                                <span class="result-desc">${item.description}</span>
+                                <small style="color: #718096;">Status: ${item.status} | ${item.images_count} gambar | ${item.date}</small>
+                            </div>
+                            <div class="result-actions">
+                                <button onclick="event.stopPropagation(); navigateToResult('${item.edit_url}')" class="action-btn">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Job Vacancies (Lowongan Kerja)
+        if (results.job_vacancies && results.job_vacancies.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-briefcase"></i> Lowongan Kerja (${results.job_vacancies.length})</h4>
+                    ${results.job_vacancies.map(item => `
+                        <div class="search-result-item" onclick="navigateToResult('${item.url}')">
+                            <i class="fas fa-${item.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${item.title}</span>
+                                <span class="result-desc">${item.description}</span>
+                                <small style="color: #718096;">Status: ${item.status} | Tutup: ${item.closing_date} | ${item.applications_count} aplikasi</small>
+                            </div>
+                            <div class="result-actions">
+                                <button onclick="event.stopPropagation(); navigateToResult('${item.edit_url}')" class="action-btn">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+        // Customers
+        if (results.customers && results.customers.length > 0) {
+            html += `
+                <div class="search-category">
+                    <h4><i class="fas fa-users"></i> Pengguna (${results.customers.length})</h4>
+                    ${results.customers.map(customer => `
+                        <div class="search-result-item" onclick="navigateToResult('${customer.url}')">
+                            <i class="fas fa-${customer.icon}"></i>
+                            <div class="result-content">
+                                <span class="result-title">${customer.title}</span>
+                                <span class="result-desc">${customer.description}</span>
+                                <small style="color: #718096;">${customer.role} - ${customer.created_at}</small>
+                            </div>
+                            <span class="result-type">Pengguna</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+        // Content (for backward compatibility)
+        if (results.content) {
+            if (results.content.articles && results.content.articles.length > 0) {
+                html += `
+                    <div class="search-category">
+                        <h4><i class="fas fa-newspaper"></i> Artikel (${results.content.articles.length})</h4>
+                        ${results.content.articles.map(article => `
+                            <div class="search-result-item" onclick="navigateToResult('${article.url}')">
+                                <i class="fas fa-${article.icon}"></i>
+                                <div class="result-content">
+                                    <span class="result-title">${article.title}</span>
+                                    <span class="result-desc">${article.description}</span>
+                                    <small style="color: #718096;">Status: ${article.status}</small>
+                                </div>
+                                <span class="result-type">Artikel</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+        
+        if (html === '') {
+            html = `
+                <div style="text-align: center; padding: 40px;">
+                    <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 15px;"></i>
+                    <h3 style="color: #666;">Tidak ada hasil ditemukan</h3>
+                    <p style="color: #999;">Coba gunakan kata kunci yang berbeda atau periksa ejaan Anda.</p>
+                </div>
+            `;
+        }
+        
+        return html;
     }
     
     function clearSearchResults() {
@@ -1418,60 +1895,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    function showSearchResults(query) {
-        const modal = document.getElementById('searchResultsModal');
-        const resultsBody = modal.querySelector('.search-results-body');
-        
-        // Populate with search results
-        resultsBody.innerHTML = `
-            <div class="search-category">
-                <h4><i class="fas fa-cubes"></i> Produk</h4>
-                <div class="search-result-item">
-                    <i class="fas fa-cube"></i>
-                    <div class="result-content">
-                        <span class="result-title">Glasswool Insulation Premium</span>
-                        <span class="result-desc">Insulasi berkualitas tinggi untuk industri</span>
-                    </div>
-                    <span class="result-type">Produk</span>
-                </div>
-                <div class="search-result-item">
-                    <i class="fas fa-cube"></i>
-                    <div class="result-content">
-                        <span class="result-title">Rockwool Fire Protection</span>
-                        <span class="result-desc">Insulasi tahan api untuk keamanan maksimal</span>
-                    </div>
-                    <span class="result-type">Produk</span>
-                </div>
-            </div>
-            
-            <div class="search-category">
-                <h4><i class="fas fa-users"></i> Customer</h4>
-                <div class="search-result-item">
-                    <i class="fas fa-user"></i>
-                    <div class="result-content">
-                        <span class="result-title">PT. Sejahtera Jakarta</span>
-                        <span class="result-desc">Customer aktif sejak 2023</span>
-                    </div>
-                    <span class="result-type">Customer</span>
-                </div>
-            </div>
-            
-            <div class="search-category">
-                <h4><i class="fas fa-file-alt"></i> Konten</h4>
-                <div class="search-result-item">
-                    <i class="fas fa-newspaper"></i>
-                    <div class="result-content">
-                        <span class="result-title">Panduan Insulasi Industri</span>
-                        <span class="result-desc">Artikel lengkap tentang insulasi</span>
-                    </div>
-                    <span class="result-type">Artikel</span>
-                </div>
-            </div>
-        `;
-        
-        modal.classList.add('active');
-    }
-    
     // Filter options
     const filterOptions = document.querySelectorAll('.filter-option');
     filterOptions.forEach(option => {
@@ -1479,83 +1902,41 @@ document.addEventListener('DOMContentLoaded', function() {
             filterOptions.forEach(opt => opt.classList.remove('active'));
             this.classList.add('active');
             
-            const filter = this.dataset.filter;
-            const searchContainer = document.querySelector('.search-container');
+            currentFilter = this.dataset.filter;
             const searchInput = document.getElementById('globalSearch');
             
             // Update placeholder based on filter
             const placeholders = {
-                'all': 'Cari produk, customer, atau konten...',
+                'all': 'Cari produk, customer, atau konten... (Ctrl+K)',
                 'products': 'Cari produk insulasi...',
-                'customers': 'Cari customer atau leads...',
-                'content': 'Cari artikel atau media...'
+                'customers': 'Cari customer atau pengguna...',
+                'content': 'Cari artikel, galeri atau konten...'
             };
             
-            searchInput.placeholder = placeholders[filter] || placeholders['all'];
+            searchInput.placeholder = placeholders[currentFilter] || placeholders['all'];
             
             // Close filter dropdown
             document.getElementById('searchFilterDropdown').classList.remove('active');
             
-            console.log('Filter selected:', filter);
+            // Refresh search if there's a query
+            const query = searchInput.value.trim();
+            if (query.length > 2) {
+                performDatabaseSearch(query);
+                loadSearchSuggestions(query);
+            }
         });
     });
     
-    // Enhanced notification interactions
-    const notificationItems = document.querySelectorAll('.notification-item');
-    notificationItems.forEach(item => {
-        item.addEventListener('click', function() {
-            this.classList.remove('unread');
-            
-            // Update notification badge
-            updateNotificationBadge();
-            
-            // Add click feedback
-            this.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 150);
-        });
-    });
+    // Load notifications on page load
+    loadNotificationCount();
     
-    // Mark all notifications as read
-    const markAllRead = document.querySelector('.mark-all-read');
-    if (markAllRead) {
-        markAllRead.addEventListener('click', function() {
-            const unreadItems = document.querySelectorAll('.notification-item.unread');
-            unreadItems.forEach(item => {
-                item.classList.remove('unread');
-            });
-            updateNotificationBadge();
-            
-            // Visual feedback
-            this.style.color = '#718096';
-            this.textContent = 'Semua sudah dibaca';
-            setTimeout(() => {
-                this.style.color = '#8b0000';
-                this.textContent = 'Tandai semua dibaca';
-            }, 2000);
-        });
-    }
-    
-    function updateNotificationBadge() {
-        const unreadCount = document.querySelectorAll('.notification-item.unread').length;
-        const badge = document.querySelector('.notification-badge');
-        
-        if (unreadCount > 0) {
-            badge.textContent = unreadCount;
-            badge.style.display = 'block';
-        } else {
-            badge.style.display = 'none';
-        }
-    }
+    // Auto-refresh notification count every 30 seconds
+    notificationInterval = setInterval(loadNotificationCount, 30000);
     
     // Close search suggestions when clicking outside
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.navbar-search')) {
-            const suggestions = document.getElementById('searchSuggestions');
-            if (suggestions) {
-                suggestions.classList.remove('active');
-            }
+            clearSearchResults();
         }
     });
     
@@ -1570,13 +1951,164 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (e.key === 'Escape') {
             closeSearchResults();
-            const suggestions = document.getElementById('searchSuggestions');
-            if (suggestions) {
-                suggestions.classList.remove('active');
-            }
+            clearSearchResults();
         }
     });
 });
+
+// Navigation functions
+function navigateToSuggestion(url) {
+    if (url && url !== '#') {
+        window.location.href = url;
+    }
+}
+
+function navigateToResult(url) {
+    if (url && url !== '#') {
+        window.location.href = url;
+    }
+}
+
+// Notification functions
+function loadNotifications() {
+    fetch('/admin/notifications/')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                updateNotificationsDropdown(data.notifications);
+                updateNotificationBadge(data.unread_count);
+            }
+        })
+        .catch(error => {
+            console.error('Failed to load notifications:', error);
+        });
+}
+
+function loadNotificationCount() {
+    fetch('/admin/notifications/unread-count')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                updateNotificationBadge(data.unread_count);
+            }
+        })
+        .catch(error => {
+            console.error('Failed to load notification count:', error);
+        });
+}
+
+function updateNotificationsDropdown(notifications) {
+    const container = document.querySelector('.notifications-dropdown .dropdown-body');
+    
+    if (!container) {
+        // Create dropdown body if it doesn't exist
+        const dropdownBody = document.createElement('div');
+        dropdownBody.className = 'dropdown-body';
+        
+        const header = document.querySelector('.notifications-dropdown .dropdown-header');
+        const footer = document.querySelector('.notifications-dropdown .dropdown-footer');
+        
+        if (header && footer) {
+            header.parentNode.insertBefore(dropdownBody, footer);
+        }
+    }
+    
+    const body = document.querySelector('.notifications-dropdown .dropdown-body') || container;
+    
+    if (notifications.length === 0) {
+        body.innerHTML = `
+            <div style="text-align: center; padding: 20px; color: #999;">
+                <i class="fas fa-bell-slash" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                <p>Tidak ada notifikasi</p>
+            </div>
+        `;
+        return;
+    }
+    
+    body.innerHTML = notifications.map(notification => `
+        <div class="notification-item ${!notification.is_read ? 'unread' : ''}" onclick="markNotificationAsRead('${notification.id}', '${notification.action_url}')">
+            <div class="notification-icon">
+                <i class="fas fa-${notification.icon}"></i>
+            </div>
+            <div class="notification-content">
+                <p>${notification.message}</p>
+                <span class="notification-time">${notification.created_at}</span>
+            </div>
+            ${!notification.is_read ? '<div class="notification-status"></div>' : ''}
+        </div>
+    `).join('');
+}
+
+function updateNotificationBadge(count) {
+    const badge = document.querySelector('.notification-badge');
+    
+    if (count > 0) {
+        badge.textContent = count > 99 ? '99+' : count;
+        badge.style.display = 'block';
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+function markNotificationAsRead(notificationId, actionUrl) {
+    fetch(`/admin/notifications/${notificationId}/read`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Refresh notification count
+            loadNotificationCount();
+            
+            // Navigate to action URL if provided
+            if (actionUrl && actionUrl !== '#' && actionUrl !== 'null') {
+                setTimeout(() => {
+                    window.location.href = actionUrl;
+                }, 100);
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Failed to mark notification as read:', error);
+    });
+}
+
+function markAllNotificationsAsRead() {
+    fetch('/admin/notifications/mark-all-read', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Refresh notifications
+            loadNotifications();
+            
+            // Visual feedback
+            const markAllBtn = document.querySelector('.mark-all-read');
+            if (markAllBtn) {
+                const originalText = markAllBtn.textContent;
+                markAllBtn.textContent = 'Semua sudah dibaca';
+                markAllBtn.style.color = '#718096';
+                
+                setTimeout(() => {
+                    markAllBtn.textContent = originalText;
+                    markAllBtn.style.color = '#8b0000';
+                }, 2000);
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Failed to mark all notifications as read:', error);
+    });
+}
 
 // Adjust navbar when sidebar is collapsed
 function adjustNavbar() {

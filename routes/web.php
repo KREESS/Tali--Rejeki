@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\ArticleCategoryController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\JobController;
+use App\Http\Controllers\Admin\SearchController;
+use App\Http\Controllers\Admin\NotificationController;
 use Illuminate\Support\Facades\Auth;
 
 // === MIDDLEWARE ===
@@ -138,8 +140,34 @@ Route::middleware(['auth', 'role:admin'])
         // Product Image Management
         Route::delete('/products/images/{image}', [ProductController::class, 'deleteImage'])
             ->name('products.images.delete');
-        Route::post('/products/images/{image}/primary', [ProductController::class, 'setPrimaryImage'])
-            ->name('products.images.primary');
+
+        // Search Routes
+        Route::prefix('search')->name('search.')->group(function () {
+            Route::get('/global', [SearchController::class, 'globalSearch'])
+                ->name('global');
+            Route::get('/suggestions', [SearchController::class, 'searchSuggestions'])
+                ->name('suggestions');
+            Route::get('/advanced', [SearchController::class, 'advancedSearch'])
+                ->name('advanced');
+        });
+
+        // Notification Routes
+        Route::prefix('notifications')->name('notifications.')->group(function () {
+            Route::get('/', [NotificationController::class, 'index'])
+                ->name('index');
+            Route::get('/unread-count', [NotificationController::class, 'getUnreadCount'])
+                ->name('unread-count');
+            Route::get('/recent-activity', [NotificationController::class, 'getRecentActivity'])
+                ->name('recent-activity');
+            Route::post('/', [NotificationController::class, 'create'])
+                ->name('create');
+            Route::patch('/{id}/read', [NotificationController::class, 'markAsRead'])
+                ->name('mark-read');
+            Route::patch('/mark-all-read', [NotificationController::class, 'markAllAsRead'])
+                ->name('mark-all-read');
+            Route::delete('/{id}', [NotificationController::class, 'delete'])
+                ->name('delete');
+        });
 
         // Catalog Management Routes
         Route::resource('catalog', CatalogController::class);

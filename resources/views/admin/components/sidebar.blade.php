@@ -145,7 +145,7 @@
             </a>
         </div>
 
-        <div class="nav-section">
+        {{-- <div class="nav-section">
             <span class="nav-title">SISTEM</span>
             <a href="#" class="nav-item" data-tooltip="Pengaturan">
                 <i class="fas fa-cogs"></i>
@@ -162,7 +162,7 @@
                 <span>Log Aktivitas</span>
                 <div class="nav-indicator"></div>
             </a>
-        </div>
+        </div> --}}
     </nav>
 
     <div class="sidebar-footer">
