@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Auth;
 
 // === MIDDLEWARE ===
@@ -32,9 +33,25 @@ use Spatie\WelcomeNotification\WelcomesNewUsers;
 */
 
 // ==================== LANDING PAGE ====================
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [PageController::class, 'index'])->name('home');
+
+// ==================== PUBLIC PAGES ====================
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/products', [PageController::class, 'products'])->name('products');
+Route::get('/products/category/{slug}', [PageController::class, 'productsByCategory'])->name('products.category');
+Route::get('/product/{slug}', [PageController::class, 'productDetail'])->name('product.detail');
+Route::get('/catalog', [PageController::class, 'catalog'])->name('catalog');
+Route::get('/catalog/{slug}', [PageController::class, 'catalogDetail'])->name('catalog.detail');
+Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
+Route::get('/gallery/{slug}', [PageController::class, 'galleryDetail'])->name('gallery.detail');
+Route::get('/career', [PageController::class, 'career'])->name('career');
+Route::get('/career/{slug}', [PageController::class, 'jobDetail'])->name('job.detail');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::post('/contact', [PageController::class, 'contactSubmit'])->name('contact.submit');
+Route::get('/blog', [PageController::class, 'blog'])->name('blog');
+Route::get('/blog/{slug}', [PageController::class, 'blogDetail'])->name('blog.detail');
+Route::get('/blog/category/{slug}', [PageController::class, 'blogByCategory'])->name('blog.category');
+Route::get('/search', [PageController::class, 'search'])->name('search');
 
 // ==================== AUTHENTICATION ====================
 

@@ -27,6 +27,14 @@ class Article extends Model
     ];
 
     /**
+     * Scope untuk artikel yang published
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published');
+    }
+
+    /**
      * Relasi: artikel milik satu kategori
      */
     public function category()

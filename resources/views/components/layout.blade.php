@@ -73,7 +73,6 @@
         main {
             flex: 1;
             min-height: calc(100vh - 200px);
-            padding-top: 130px; /* Space for topbar (45px) + navbar (~85px) */
         }
         
         .container-fluid {

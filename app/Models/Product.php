@@ -35,9 +35,15 @@ class Product extends Model
         'price_strike' => 'decimal:2',
     ];
 
+    // Relationships
     public function subcategory()
     {
         return $this->belongsTo(Subcategory::class);
+    }
+
+    public function category()
+    {
+        return $this->hasOneThrough(Category::class, Subcategory::class, 'id', 'id', 'subcategory_id', 'category_id');
     }
 
     public function images()
@@ -48,5 +54,21 @@ class Product extends Model
     public function primaryImage()
     {
         return $this->hasOne(ProductImage::class)->where('is_primary', true);
+    }
+
+    // Accessors for compatibility
+    public function getDescriptionAttribute()
+    {
+        return $this->attr1 ?? $this->meta_description ?? '';
+    }
+
+    public function getSpecificationsAttribute()
+    {
+        return $this->attr2 ?? '';
+    }
+
+    public function getCategoryIdAttribute()
+    {
+        return $this->subcategory ? $this->subcategory->category_id : null;
     }
 }

@@ -6,8 +6,7 @@
                 <div class="promo-text">
                     <i class="fas fa-fire text-warning me-2"></i>
                     <span class="promo-message" data-translate="promo-text">
-                        <strong>PROMO SPESIAL!</strong> Diskon hingga 25% untuk semua produk insulasi - 
-                        <span class="highlight">Berlaku sampai akhir bulan!</span>
+                        Diskon hingga 25% untuk semua produk insulasi
                     </span>
                 </div>
             </div>
@@ -971,18 +970,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const translations = {
             id: {
                 // Topbar
-                'promo-text': 'Diskon hingga 25% untuk semua produk insulasi',
+                'promo-text': '<strong>PROMO SPESIAL!</strong> Diskon hingga 25% untuk semua produk insulasi - <span class="highlight">Berlaku sampai akhir bulan!</span>',
                 'search-placeholder': 'Cari produk insulasi...',
                 'search-alert': 'Mencari',
                 
                 // Navbar
                 'nav-home': 'Beranda',
+                'nav-about': 'Tentang',
                 'nav-products': 'Produk',
-                'nav-services': 'Layanan',
+                'nav-catalog': 'Katalog Produk',
                 'nav-gallery': 'Galeri',
-                'nav-articles': 'Artikel',
-                'nav-contact': 'Kontak',
-                'nav-cta': 'Minta Penawaran',
+                'nav-career': 'Karier',
+                'nav-contact': 'Hubungi Kami',
                 
                 // Products dropdown
                 'product-glasswool': 'Glasswool',
@@ -1067,18 +1066,18 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             en: {
                 // Topbar
-                'promo-text': 'Up to 25% discount on all insulation products',
+                'promo-text': '<strong>SPECIAL PROMO!</strong> Up to 25% discount on all insulation products - <span class="highlight">Valid until end of month!</span>',
                 'search-placeholder': 'Search insulation products...',
                 'search-alert': 'Searching for',
                 
                 // Navbar
                 'nav-home': 'Home',
+                'nav-about': 'About',
                 'nav-products': 'Products',
-                'nav-services': 'Services',
+                'nav-catalog': 'Product Catalog',
                 'nav-gallery': 'Gallery',
-                'nav-articles': 'Articles',
-                'nav-contact': 'Contact',
-                'nav-cta': 'Get Quote',
+                'nav-career': 'Career',
+                'nav-contact': 'Contact Us',
                 
                 // Products dropdown
                 'product-glasswool': 'Glasswool',
@@ -1174,9 +1173,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (element.tagName === 'INPUT' && (element.type === 'text' || element.type === 'search')) {
                     element.placeholder = translations[lang][key];
                 } else {
-                    // Check if this is the promo text which needs special formatting
+                    // For promo-text, use innerHTML to preserve HTML formatting
                     if (key === 'promo-text') {
-                        element.innerHTML = `<strong>${lang === 'id' ? 'PROMO SPESIAL!' : 'SPECIAL PROMO!'}</strong> ${translations[lang][key].replace(/^[^!]*!/, '').trim()} - <span class="highlight">${lang === 'id' ? 'Berlaku sampai akhir bulan!' : 'Valid until end of month!'}</span>`;
+                        element.innerHTML = translations[lang][key];
                     } else {
                         element.textContent = translations[lang][key];
                     }
