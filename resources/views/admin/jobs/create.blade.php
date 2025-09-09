@@ -170,21 +170,6 @@
                                 @enderror
                             </div>
 
-                            <div class="field-group">
-                                <label for="requirements" class="field-label">
-                                    <i class="fas fa-check-square"></i>
-                                    Requirements
-                                </label>
-                                <textarea id="requirements" 
-                                          name="requirements" 
-                                          class="form-control auto-resize @error('requirements') is-invalid @enderror" 
-                                          rows="5" 
-                                          placeholder="List the required skills, experience, education, and qualifications...">{{ old('requirements') }}</textarea>
-                                @error('requirements')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
                             <div class="fields-row">
                                 <div class="field-group">
                                     <label for="employment_type" class="field-label">

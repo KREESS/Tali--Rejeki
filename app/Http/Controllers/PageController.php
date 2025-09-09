@@ -265,7 +265,7 @@ class PageController extends Controller
      */
     public function career()
     {
-        $jobs = Job::where('is_active', true)
+        $jobs = Job::open()
             ->latest()
             ->paginate(10);
 
@@ -281,13 +281,40 @@ class PageController extends Controller
     public function jobDetail($slug)
     {
         $job = Job::where('slug', $slug)
-            ->where('is_active', true)
+            ->open()
             ->firstOrFail();
 
         return view('pages.job-detail', [
             'title' => $job->title,
             'job' => $job
         ]);
+    }
+
+    /**
+     * Handle job application submission.
+     */
+    public function jobApply(Request $request, $slug)
+    {
+        $job = Job::where('slug', $slug)
+            ->open()
+            ->firstOrFail();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:20',
+            'experience' => 'nullable|string',
+            'cv' => 'required|file|mimes:pdf|max:5120', // 5MB
+            'cover_letter' => 'nullable|file|mimes:pdf|max:5120',
+            'portfolio' => 'nullable|file|mimes:pdf|max:10240', // 10MB
+            'message' => 'nullable|string',
+            'agree' => 'required|accepted'
+        ]);
+
+        // Here you can implement file storage and email sending logic
+        // For now, we'll just return success response
+
+        return back()->with('success', 'Terima kasih! Lamaran Anda telah terkirim. Tim HR akan menghubungi Anda jika ada kesesuaian.');
     }
 
     /**

@@ -121,35 +121,34 @@
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Light theme navbar */
+/* Light theme navbar - default white background */
 body.light-theme .premium-navbar {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 1);
+    border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+}
+
+/* Dark theme navbar - default black background */
+body.dark-theme .premium-navbar {
+    background: rgba(0, 0, 0, 1);
+    border-bottom: 1px solid rgba(71, 85, 105, 0.8);
+}
+
+/* General scrolled navbar - transparent effect */
+.premium-navbar.scrolled {
+    backdrop-filter: blur(5px) saturate(200%);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Light theme scrolled navbar - transparent white */
+body.light-theme .premium-navbar.scrolled {
+    background: rgba(255, 255, 255, 0.85);
     border-bottom: 1px solid rgba(229, 231, 235, 0.6);
 }
 
-/* Dark theme navbar */
-body.dark-theme .premium-navbar {
-    background: rgba(15, 23, 42, 0.95);
-    border-bottom: 1px solid rgba(71, 85, 105, 0.6);
-}
-
-.premium-navbar.scrolled {
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(25px) saturate(200%);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
-    border-bottom: 1px solid rgba(229, 231, 235, 0.8);
-}
-
-/* Light theme scrolled navbar */
-body.light-theme .premium-navbar.scrolled {
-    background: rgba(255, 255, 255, 0.98);
-    border-bottom: 1px solid rgba(229, 231, 235, 0.8);
-}
-
-/* Dark theme scrolled navbar */
+/* Dark theme scrolled navbar - transparent black */
 body.dark-theme .premium-navbar.scrolled {
-    background: rgba(15, 23, 42, 0.98);
-    border-bottom: 1px solid rgba(71, 85, 105, 0.8);
+    background: rgba(0, 0, 0, 0.85);
+    border-bottom: 1px solid rgba(71, 85, 105, 0.6);
 }
 
 .navbar-container {
@@ -521,27 +520,25 @@ body.dark-theme .premium-navbar.scrolled {
         display: flex;
     }
     
-    .navbar-menu {
-        position: fixed;
-        top: 75px;
-        left: 0;
-        right: 0;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(25px) saturate(180%);
-        border-top: 1px solid rgba(229, 231, 235, 0.8);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-        flex-direction: column;
-        padding: 25px;
-        gap: 0;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-20px);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        max-height: calc(100vh - 115px);
-        overflow-y: auto;
-    }
-    
-    .navbar-menu.active {
+        .navbar-menu {
+            position: fixed;
+            top: 75px;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(25px) saturate(180%);
+            border-top: 1px solid rgba(229, 231, 235, 0.8);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            flex-direction: column;
+            padding: 25px;
+            gap: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: calc(100vh - 115px);
+            overflow-y: auto;
+        }    .navbar-menu.active {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
@@ -863,13 +860,28 @@ body.dark-theme .theme-toggle-btn:hover {
 }
 
 @media (max-width: 768px) {
+    /* Light theme mobile navbar menu */
+    body.light-theme .navbar-menu {
+        background: rgba(255, 255, 255, 0.98);
+        border-top: 1px solid rgba(229, 231, 235, 0.8);
+    }
+    
+    /* Dark theme mobile navbar menu */
     body.dark-theme .navbar-menu {
-        background: rgba(15, 23, 42, 0.98);
+        background: rgba(0, 0, 0, 0.98);
         border-top: 1px solid rgba(71, 85, 105, 0.8);
     }
     
+    /* Light theme dropdown menu mobile */
+    body.light-theme .dropdown-menu {
+        background: rgba(248, 250, 252, 0.95);
+        border: 1px solid rgba(229, 231, 235, 0.5);
+    }
+    
+    /* Dark theme dropdown menu mobile */
     body.dark-theme .dropdown-menu {
-        background: rgba(30, 41, 59, 0.8);
+        background: rgba(30, 41, 59, 0.95);
+        border: 1px solid rgba(71, 85, 105, 0.5);
     }
 }
 </style>

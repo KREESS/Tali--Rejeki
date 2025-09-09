@@ -314,10 +314,14 @@
                                         <span class="product-count">{{ $subcategory->products_count }} produk</span>
                                     </td>
                                     <td>
-                                        <span class="text-muted" style="font-size: 0.8rem;">{{ Str::limit($subcategory->meta_title, 30) }}</span>
+                                        <span class="text-muted" style="font-size: 0.8rem;">
+                                            {{ $subcategory->meta_title ? Str::limit($subcategory->meta_title, 30) : 'No meta title' }}
+                                        </span>
                                     </td>
                                     <td>
-                                        <small class="text-muted" style="font-size: 0.75rem;">{{ $subcategory->created_at->format('d M Y') }}</small>
+                                        <small class="text-muted" style="font-size: 0.75rem;">
+                                            {{ $subcategory->created_at ? $subcategory->created_at->format('d M Y') : 'N/A' }}
+                                        </small>
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group">

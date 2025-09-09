@@ -14,13 +14,13 @@
             <!-- Social Media & Search Section -->
             <div class="social-section">
                 <div class="social-links">
-                    <a href="#" class="social-link" title="Follow us on TikTok">
+                    <a href="https://www.tiktok.com/@pt.tali.rejeki" target="_blank" class="social-link" title="Follow us on TikTok">
                         <i class="fab fa-tiktok"></i>
                     </a>
-                    <a href="#" class="social-link" title="Follow us on Instagram">
+                    <a href="https://instagram.com/PTTaliRejeki" target="_blank" class="social-link" title="Follow us on Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="social-link" title="Like us on Facebook">
+                    <a href="https://facebook.com/PTTaliRejeki" target="_blank" class="social-link" title="Like us on Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
                     <div class="divider"></div>
@@ -883,11 +883,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add your social media URLs here
             let url = '';
             if (platform.includes('tiktok')) {
-                url = 'https://tiktok.com/@talirejeki';
+                url = 'https://www.tiktok.com/@pt.tali.rejeki';
             } else if (platform.includes('instagram')) {
-                url = 'https://instagram.com/talirejeki';
+                url = 'https://instagram.com/PTTaliRejeki';
             } else if (platform.includes('facebook')) {
-                url = 'https://facebook.com/talirejeki';
+                url = 'https://facebook.com/PTTaliRejeki';
             }
             
             if (url) {
@@ -924,6 +924,12 @@ document.addEventListener('DOMContentLoaded', function() {
             themeToggle.classList.remove('dark');
             localStorage.setItem('theme', 'light');
         }
+        
+        // Dispatch theme change event for other components
+        const themeChangeEvent = new CustomEvent('themeChanged', {
+            detail: { theme: theme }
+        });
+        document.dispatchEvent(themeChangeEvent);
     }
     
     // Language switching functionality

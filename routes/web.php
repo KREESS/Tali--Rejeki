@@ -46,6 +46,7 @@ Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
 Route::get('/gallery/{slug}', [PageController::class, 'galleryDetail'])->name('gallery.detail');
 Route::get('/career', [PageController::class, 'career'])->name('career');
 Route::get('/career/{slug}', [PageController::class, 'jobDetail'])->name('job.detail');
+Route::post('/career/{slug}/apply', [PageController::class, 'jobApply'])->name('job.apply');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [PageController::class, 'contactSubmit'])->name('contact.submit');
 Route::get('/blog', [PageController::class, 'blog'])->name('blog');
@@ -157,6 +158,8 @@ Route::middleware(['auth', 'role:admin'])
         // Product Image Management
         Route::delete('/products/images/{image}', [ProductController::class, 'deleteImage'])
             ->name('products.images.delete');
+        Route::post('/products/images/{image}/primary', [ProductController::class, 'setPrimaryImage'])
+            ->name('products.images.primary');
 
         // Search Routes
         Route::prefix('search')->name('search.')->group(function () {

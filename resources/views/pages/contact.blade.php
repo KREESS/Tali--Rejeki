@@ -85,32 +85,32 @@
         <div class="row align-items-center min-vh-60">
             <div class="col-lg-6">
                 <div class="hero-content">
-                    <div class="hero-badge mb-4">
-                        <span class="badge hero-company-badge px-4 py-2 fs-6 fw-semibold">
+                    <div class="hero-badge mb-3">
+                        <span class="badge hero-company-badge px-3 py-1 fs-7 fw-semibold">
                             <i class="fas fa-building me-2"></i>PT. Tali Rejeki
                         </span>
                     </div>
-                    <h1 class="hero-title display-3 fw-bold mb-4 position-relative">
+                    <h1 class="hero-title display-4 fw-bold mb-3 position-relative">
                         Hubungi Kami
                         <div class="title-underline position-absolute"></div>
                     </h1>
-                    <p class="hero-description lead mb-5 lh-lg">
+                    <p class="hero-description mb-4 lh-base">
                         Temukan lokasi dan hubungi PT. Tali Rejeki untuk kebutuhan Anda. 
                         Kami siap melayani dengan sepenuh hati dan profesionalisme tinggi.
                     </p>
-                    <div class="hero-actions d-flex flex-wrap gap-3">
-                        <a href="#contact-info" class="btn hero-btn-primary btn-lg px-5 py-3">
+                    <div class="hero-actions d-flex flex-wrap gap-2">
+                        <a href="#contact-info" class="btn hero-btn-primary btn-md px-4 py-2">
                             <i class="fas fa-info-circle me-2"></i>Info Kontak
                             <span class="btn-shine position-absolute top-0 start-0 w-100 h-100"></span>
                         </a>
-                        <a href="https://wa.me/6281382523722" target="_blank" class="btn hero-btn-secondary btn-lg px-5 py-3">
+                        <a href="https://wa.me/6281382523722" target="_blank" class="btn hero-btn-secondary btn-md px-4 py-2">
                             <i class="fab fa-whatsapp me-2"></i>Chat WhatsApp
                             <span class="btn-shine position-absolute top-0 start-0 w-100 h-100"></span>
                         </a>
                     </div>
                     
                     <!-- Floating Stats -->
-                    <div class="hero-stats mt-5 d-flex flex-wrap gap-4">
+                    <div class="hero-stats mt-4 d-flex flex-wrap gap-3">
                         <div class="stat-item">
                             <div class="stat-number fw-bold">Senin-Jumat</div>
                             <div class="stat-label small">08:00 - 17:00 WIB</div>
@@ -540,10 +540,10 @@
                             <i class="fas fa-user fa-2x"></i>
                         </div>
                     </div>
-                    <h5 class="person-name fw-bold mb-2">Sari</h5>
+                    <h5 class="person-name fw-bold mb-2">Yovien Agustina</h5>
                     <p class="person-role mb-3">Marketing Consultant</p>
-                    <a href="https://wa.me/6281316826959" target="_blank" class="btn btn-whatsapp w-100 mb-2">
-                        <i class="fab fa-whatsapp me-2"></i>0813 1682 6959
+                    <a href="https://wa.me/6281385231149" target="_blank" class="btn btn-whatsapp w-100 mb-2">
+                        <i class="fab fa-whatsapp me-2"></i>0813 8523 1149
                     </a>
                 </div>
             </div>
@@ -753,16 +753,16 @@ body.dark-theme {
     --bg-tertiary: #404040;
     
     --text-primary: #ffffff;
-    --text-secondary: #b3b3b3;
-    --text-muted: #888888;
+    --text-secondary: #e0e0e0;
+    --text-muted: #b0b0b0;
     
     --border-color: #404040;
     --shadow-color: rgba(0, 0, 0, 0.3);
     --shadow-dark: rgba(0, 0, 0, 0.5);
     
-    --glass-bg: rgba(42, 42, 42, 0.95);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: rgba(0, 0, 0, 0.3);
+    --glass-bg: rgba(42, 42, 42, 0.98);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: rgba(0, 0, 0, 0.4);
 }
 
 /* Global Styles */
@@ -788,7 +788,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 /* Hero Section Styles */
 .hero-section {
-    min-height: 80vh;
+    min-height: 70vh;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
     position: relative;
     overflow: hidden;
@@ -862,7 +862,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 /* Hero Content */
 .min-vh-60 {
-    min-height: 60vh;
+    min-height: 50vh;
 }
 
 .hero-company-badge {
@@ -870,20 +870,22 @@ h1, h2, h3, h4, h5, h6, p, span, div {
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
     backdrop-filter: blur(10px);
-    border-radius: 50px;
+    border-radius: 25px;
+    font-size: 0.85rem;
 }
 
 .hero-title {
     color: white;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
 }
 
 .title-underline {
-    bottom: -10px;
+    bottom: -8px;
     left: 0;
-    width: 100px;
-    height: 4px;
+    width: 80px;
+    height: 3px;
     background: linear-gradient(90deg, white, rgba(255,255,255,0.5));
     border-radius: 2px;
     animation: underlineGrow 2s ease-out;
@@ -891,12 +893,13 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 @keyframes underlineGrow {
     0% { width: 0; }
-    100% { width: 100px; }
+    100% { width: 80px; }
 }
 
 .hero-description {
     color: rgba(255, 255, 255, 0.9);
-    line-height: 1.8;
+    line-height: 1.6;
+    font-size: 1rem;
 }
 
 /* Hero Buttons */
@@ -904,11 +907,12 @@ h1, h2, h3, h4, h5, h6, p, span, div {
     position: relative;
     overflow: hidden;
     border: none;
-    border-radius: 50px;
+    border-radius: 25px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     transition: all 0.3s ease;
+    font-size: 0.875rem;
 }
 
 .hero-btn-primary {
@@ -941,7 +945,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 /* Hero Stats */
 .hero-stats {
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 
 .stat-item {
@@ -950,33 +954,33 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 }
 
 .stat-number {
-    font-size: 2rem;
+    font-size: 1.5rem;
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .stat-label {
     opacity: 0.8;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
 }
 
 /* Hero Visual */
 .hero-icon-container {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     margin: 0 auto;
 }
 
 .hero-icon-bg {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     animation: pulse 3s ease-in-out infinite;
 }
 
 .hero-main-icon {
-    font-size: 8rem;
+    font-size: 6rem;
     color: rgba(255, 255, 255, 0.8);
     z-index: 2;
 }
@@ -1106,44 +1110,36 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 }
 
 .breadcrumb {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
     margin: 0;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--glass-border);
 }
 
 .breadcrumb-link {
     color: var(--primary-color) !important;
     text-decoration: none;
     font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-link:hover {
+    color: var(--primary-light) !important;
 }
 
 .breadcrumb-item.active {
-    color: #333333 !important;
+    color: var(--text-primary) !important;
     font-weight: 600;
 }
 
-/* Dark theme breadcrumb adjustments */
-body.dark-theme .breadcrumb {
-    background: rgba(42, 42, 42, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-body.dark-theme .breadcrumb-item.active {
-    color: #ffffff !important;
+.breadcrumb-item + .breadcrumb-item::before {
+    color: var(--text-secondary);
+    font-weight: bold;
 }
 
 /* Section Styles */
 .contact-section, .quick-actions-section, .features-section, .contact-persons-section {
-    color: #333333;
-}
-
-/* Dark theme section adjustments */
-body.dark-theme .contact-section, 
-body.dark-theme .quick-actions-section, 
-body.dark-theme .features-section,
-body.dark-theme .contact-persons-section {
-    color: #ffffff;
+    color: var(--text-primary);
 }
 
 .section-header {
@@ -1151,24 +1147,15 @@ body.dark-theme .contact-persons-section {
 }
 
 .section-title {
-    color: #333333;
-    font-size: 2.5rem;
+    color: var(--text-primary);
+    font-size: 2rem;
     margin-bottom: 1rem;
 }
 
 .section-subtitle {
-    color: #666666;
-    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-size: 1rem;
     margin-bottom: 2rem;
-}
-
-/* Dark theme section text */
-body.dark-theme .section-title {
-    color: #ffffff;
-}
-
-body.dark-theme .section-subtitle {
-    color: #b3b3b3;
 }
 
 .section-divider {
@@ -1221,19 +1208,14 @@ body.dark-theme .section-subtitle {
 
 .company-name {
     color: var(--primary-color);
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
 .company-tagline {
-    color: #666666;
-    font-size: 1.1rem;
-}
-
-/* Dark theme company info */
-body.dark-theme .company-tagline {
-    color: #b3b3b3;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
 }
 
 .company-rating .stars {
@@ -1274,53 +1256,35 @@ body.dark-theme .company-tagline {
 }
 
 .info-title {
-    color: #333333;
+    color: var(--text-primary);
     margin-bottom: 1.5rem;
     font-weight: 600;
 }
 
 .address-line {
-    color: #666666;
+    color: var(--text-secondary);
     margin-bottom: 0.5rem;
     line-height: 1.6;
 }
 
 .coordinate-label {
-    color: #666666;
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
-/* Dark theme info elements */
-body.dark-theme .info-title {
-    color: #ffffff;
-}
-
-body.dark-theme .address-line {
-    color: #b3b3b3;
-}
-
-body.dark-theme .coordinate-label {
-    color: #b3b3b3;
-}
-
 .coordinate-value {
-    color: #333333;
+    color: var(--text-primary);
     font-family: 'Courier New', monospace;
     font-weight: 600;
-}
-
-/* Dark theme coordinate value */
-body.dark-theme .coordinate-value {
-    color: #ffffff;
 }
 
 .copy-btn {
     background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
     color: white;
     border: none;
-    border-radius: 25px;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
+    border-radius: 15px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
     transition: all 0.3s ease;
 }
 
@@ -1348,7 +1312,7 @@ body.dark-theme .coordinate-value {
 }
 
 .method-link {
-    color: #333333;
+    color: var(--text-primary);
     text-decoration: none;
     flex: 1;
     transition: color 0.3s ease;
@@ -1356,11 +1320,6 @@ body.dark-theme .coordinate-value {
 
 .method-link:hover {
     color: var(--primary-color);
-}
-
-/* Dark theme method links */
-body.dark-theme .method-link {
-    color: #ffffff;
 }
 
 .method-status {
@@ -1390,21 +1349,12 @@ body.dark-theme .method-link {
 }
 
 .day {
-    color: #333333;
+    color: var(--text-primary);
     font-weight: 500;
 }
 
 .time {
-    color: #666666;
-}
-
-/* Dark theme operating hours */
-body.dark-theme .day {
-    color: #ffffff;
-}
-
-body.dark-theme .time {
-    color: #b3b3b3;
+    color: var(--text-secondary);
 }
 
 .status-indicator {
@@ -1455,21 +1405,14 @@ body.dark-theme .time {
 }
 
 .form-title {
-    color: #333333;
+    color: var(--text-primary);
     font-weight: 600;
+    font-size: 1.2rem;
 }
 
 .form-subtitle {
-    color: #666666;
-}
-
-/* Dark theme form elements */
-body.dark-theme .form-title {
-    color: #ffffff;
-}
-
-body.dark-theme .form-subtitle {
-    color: #b3b3b3;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
 }
 
 .modern-input {
@@ -1518,13 +1461,15 @@ body.dark-theme .form-subtitle {
     background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
     color: white;
     border: none;
-    border-radius: 50px;
+    border-radius: 25px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
+    font-size: 0.85rem;
+    padding: 0.75rem 1.5rem;
 }
 
 .form-submit-btn:hover {
@@ -1631,32 +1576,26 @@ body.dark-theme .form-subtitle {
 }
 
 .action-title {
-    color: #333333;
+    color: var(--text-primary);
     margin-bottom: 1rem;
+    font-size: 1.1rem;
 }
 
 .action-description {
-    color: #666666;
+    color: var(--text-secondary);
     margin-bottom: 1.5rem;
-}
-
-/* Dark theme action cards */
-body.dark-theme .action-title {
-    color: #ffffff;
-}
-
-body.dark-theme .action-description {
-    color: #b3b3b3;
+    font-size: 0.9rem;
 }
 
 .action-btn {
     border: none;
-    border-radius: 25px;
-    padding: 0.75rem 1.5rem;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
     display: inline-block;
+    font-size: 0.85rem;
 }
 
 .directions-btn { 
@@ -1797,24 +1736,17 @@ body.dark-theme .action-description {
 }
 
 .feature-title {
-    color: #333333;
+    color: var(--text-primary);
     margin-bottom: 1.5rem;
     font-weight: 600;
+    font-size: 1.2rem;
 }
 
 .feature-description {
-    color: #666666;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 1.5rem;
-}
-
-/* Dark theme feature cards */
-body.dark-theme .feature-title {
-    color: #ffffff;
-}
-
-body.dark-theme .feature-description {
-    color: #b3b3b3;
+    font-size: 0.9rem;
 }
 
 .feature-badge {
@@ -1861,22 +1793,13 @@ body.dark-theme .feature-description {
 }
 
 .mini-feature-title {
-    color: #333333;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 
 .mini-feature-text {
-    color: #666666;
+    color: var(--text-secondary);
     font-size: 0.9rem;
-}
-
-/* Dark theme mini features */
-body.dark-theme .mini-feature-title {
-    color: #ffffff;
-}
-
-body.dark-theme .mini-feature-text {
-    color: #b3b3b3;
 }
 
 /* Contact Persons Section */
@@ -1912,32 +1835,24 @@ body.dark-theme .mini-feature-text {
 }
 
 .person-name {
-    color: #333333;
-    font-size: 1.3rem;
+    color: var(--text-primary);
+    font-size: 1.1rem;
 }
 
 .person-role {
-    color: #666666;
-    font-size: 0.9rem;
-}
-
-/* Dark theme person cards */
-body.dark-theme .person-name {
-    color: #ffffff;
-}
-
-body.dark-theme .person-role {
-    color: #b3b3b3;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
 }
 
 .btn-whatsapp {
     background: linear-gradient(135deg, #25D366, #128C7E);
     color: white;
     border: none;
-    border-radius: 25px;
-    padding: 0.75rem 1rem;
+    border-radius: 20px;
+    padding: 0.5rem 0.75rem;
     font-weight: 600;
     transition: all 0.3s ease;
+    font-size: 0.85rem;
 }
 
 .btn-whatsapp:hover {
@@ -1948,21 +1863,84 @@ body.dark-theme .person-role {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-icon-container {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .hero-icon-bg {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .hero-main-icon {
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 992px) {
     .hero-section {
-        min-height: 70vh;
+        min-height: 60vh;
         text-align: center;
     }
     
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     
-    .map-section {
-        height: 40vh !important;
+    .section-title {
+        font-size: 1.6rem;
     }
     
-    .contact-info-item,
+    .section-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .hero-icon-container {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .hero-icon-bg {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .hero-main-icon {
+        font-size: 4rem;
+    }
+    
+    .hero-stats {
+        margin-top: 1.5rem;
+        justify-content: center;
+    }
+    
+    .stat-number {
+        font-size: 1.2rem;
+    }
+    
+    .stat-label {
+        font-size: 0.7rem;
+    }
+    
+    .company-info-card {
+        padding: 2rem;
+    }
+    
+    .contact-form-card {
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+    
     .action-card,
     .feature-card {
         margin-bottom: 2rem;
@@ -1972,49 +1950,560 @@ body.dark-theme .person-role {
     .feature-card:hover {
         transform: translateY(-5px) scale(1.01);
     }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 50vh;
+    }
     
-    .theme-toggle-btn {
-        width: 50px;
-        height: 50px;
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
     }
     
     .section-title {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     
-    .hero-stats {
-        flex-direction: column;
-        gap: 1rem;
+    .section-subtitle {
+        font-size: 0.9rem;
     }
     
-    .stat-item {
-        margin-bottom: 1rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .hero-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .hero-btn-primary,
-    .hero-btn-secondary {
-        width: 100%;
-        max-width: 300px;
+    .map-section {
+        height: 40vh !important;
     }
     
     .contact-info-item {
         padding: 1.5rem;
+        margin-bottom: 1.5rem;
     }
     
     .action-card,
     .feature-card {
         padding: 1.5rem;
+    }
+    
+    .form-title {
+        font-size: 1.1rem;
+    }
+    
+    .action-title {
+        font-size: 1rem;
+    }
+    
+    .feature-title {
+        font-size: 1.1rem;
+    }
+    
+    .company-name {
+        font-size: 1.3rem;
+    }
+    
+    .person-name {
+        font-size: 1rem;
+    }
+    
+    .action-icon,
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .hero-btn-primary,
+    .hero-btn-secondary {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .btn-whatsapp {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        min-height: 45vh;
+        padding: 2rem 0;
+    }
+    
+    .hero-title {
+        font-size: 1.6rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .hero-description {
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    .hero-btn-primary,
+    .hero-btn-secondary {
+        width: 100%;
+        max-width: 220px;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+    
+    .stat-item {
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-number {
+        font-size: 1rem;
+    }
+    
+    .stat-label {
+        font-size: 0.65rem;
+    }
+    
+    .map-section {
+        height: 35vh !important;
+    }
+    
+    .map-controls {
+        margin: 0.75rem;
+    }
+    
+    .map-control-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 0.8rem;
+    }
+    
+    .map-info-card {
+        margin: 0.75rem;
+    }
+    
+    .map-info-card .glass-card {
+        padding: 1rem;
+    }
+    
+    .map-title {
+        font-size: 0.9rem;
+    }
+    
+    .map-address {
+        font-size: 0.75rem;
+    }
+    
+    .contact-info-item {
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .info-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .info-title {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .address-line {
+        font-size: 0.8rem;
+    }
+    
+    .company-info-card {
+        padding: 1.5rem;
+    }
+    
+    .company-logo {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .company-name {
+        font-size: 1.1rem;
+    }
+    
+    .company-tagline {
+        font-size: 0.8rem;
+    }
+    
+    .contact-form-card {
+        padding: 1.25rem;
+    }
+    
+    .form-icon-container {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+    
+    .form-icon {
+        font-size: 1.5rem;
+    }
+    
+    .form-title {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .modern-input {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .form-submit-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.8rem;
+    }
+    
+    .action-card,
+    .feature-card {
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .action-icon,
+    .feature-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .action-title {
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .action-description {
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-title {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-description {
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .action-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+        border-radius: 15px;
+    }
+    
+    .person-card {
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    
+    .person-avatar {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+    
+    .avatar-icon {
+        font-size: 1.5rem;
+    }
+    
+    .person-name {
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .person-role {
+        font-size: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    
+    .btn-whatsapp {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.75rem;
+    }
+    
+    .copy-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+    }
+    
+    .mini-feature-card {
+        padding: 1rem;
+    }
+    
+    .mini-feature-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .mini-feature-title {
+        font-size: 0.9rem;
+    }
+    
+    .mini-feature-text {
+        font-size: 0.8rem;
+    }
+    
+    .breadcrumb {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .map-breadcrumb {
+        margin: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section {
+        min-height: 40vh;
+        padding: 1.5rem 0;
+    }
+    
+    .hero-title {
+        font-size: 1.4rem;
+    }
+    
+    .hero-description {
+        font-size: 0.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+    }
+    
+    .section-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .hero-btn-primary,
+    .hero-btn-secondary {
+        max-width: 200px;
+        font-size: 0.7rem;
+        padding: 0.45rem 0.6rem;
+    }
+    
+    .map-section {
+        height: 30vh !important;
+    }
+    
+    .contact-info-item,
+    .action-card,
+    .feature-card,
+    .person-card {
+        padding: 1rem;
+    }
+    
+    .company-info-card,
+    .contact-form-card {
+        padding: 1rem;
+    }
+    
+    .action-icon,
+    .feature-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    .person-avatar {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .avatar-icon {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.1rem;
+    }
+    
+    .hero-btn-primary,
+    .hero-btn-secondary {
+        max-width: 180px;
+        font-size: 0.65rem;
+    }
+    
+    .map-section {
+        height: 25vh !important;
+    }
+    
+    .contact-info-item,
+    .action-card,
+    .feature-card,
+    .person-card,
+    .company-info-card,
+    .contact-form-card {
+        padding: 0.75rem;
+    }
+}
+
+/* Additional responsive improvements */
+@media (max-width: 992px) {
+    .section-header {
+        margin-bottom: 3rem;
+    }
+    
+    .contact-grid {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-header {
+        margin-bottom: 2.5rem;
+    }
+    
+    .hero-content {
+        text-align: center;
+    }
+    
+    .hero-visual {
+        margin-top: 2rem;
+    }
+    
+    .contact-grid {
+        gap: 1rem;
+    }
+    
+    .method-link {
+        font-size: 0.9rem;
+    }
+    
+    .hours-row {
+        padding: 0.5rem 0;
+    }
+    
+    .day,
+    .time {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-header {
+        margin-bottom: 2rem;
+    }
+    
+    .hero-visual {
+        margin-top: 1.5rem;
+    }
+    
+    .hero-icon-container {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .hero-icon-bg {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .hero-main-icon {
+        font-size: 3rem;
+    }
+    
+    .contact-grid {
+        gap: 0.75rem;
+    }
+    
+    .method-link {
+        font-size: 0.85rem;
+    }
+    
+    .coordinate-value {
+        font-size: 0.8rem;
+    }
+    
+    .status-badge {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .rating-text {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-icon-container {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .hero-icon-bg {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .hero-main-icon {
+        font-size: 2.5rem;
+    }
+    
+    .section-divider {
+        width: 60px;
+        height: 3px;
+    }
+}
+
+/* Improve button touch targets on mobile */
+@media (hover: none) and (pointer: coarse) {
+    .hero-btn-primary,
+    .hero-btn-secondary,
+    .btn-whatsapp,
+    .action-btn,
+    .form-submit-btn {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .map-control-btn {
+        min-width: 44px;
+        min-height: 44px;
     }
 }
 
@@ -2026,6 +2515,37 @@ body.dark-theme .person-role {
 @keyframes fadeIn {
     0% { opacity: 0; transform: translateY(30px); }
     100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Improved typography scaling */
+@media (max-width: 1400px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 1200px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    html {
+        font-size: 11px;
+    }
 }
 
 /* Loading States */
