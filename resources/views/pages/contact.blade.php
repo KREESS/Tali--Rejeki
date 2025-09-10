@@ -2,11 +2,184 @@
 
 @section('title', $title)
 
+@push('head')
+<link rel="preload" href="{{ asset('img/kontak/110.png') }}" as="image" type="image/png">
+<!-- AOS Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Additional Animation Styles -->
+<style>
+/* Enhanced Button Animations */
+.hero-btn-primary, .hero-btn-secondary {
+    position: relative;
+    overflow: hidden;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+    z-index: 1;
+    text-decoration: none !important;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.hero-btn-primary:hover, .hero-btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    text-decoration: none !important;
+}
+
+.btn-shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-btn-primary:hover .btn-shine,
+.hero-btn-secondary:hover .btn-shine {
+    transform: translateX(100%);
+}
+
+/* Custom AOS animations */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Loading state for animations */
+.animate-slide-left {
+    animation: slideInFromLeft 0.8s ease-out;
+}
+
+.animate-slide-right {
+    animation: slideInFromRight 0.8s ease-out;
+}
+
+.animate-fade-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-zoom-in {
+    animation: zoomIn 0.6s ease-out;
+}
+
+.animate-bounce-in {
+    animation: bounceIn 0.8s ease-out;
+}
+
+/* Button Click Fix */
+.hero-actions a {
+    position: relative;
+    z-index: 10;
+    cursor: pointer !important;
+    pointer-events: all !important;
+    text-decoration: none !important;
+}
+
+.hero-actions a:hover {
+    text-decoration: none !important;
+}
+
+.hero-actions a * {
+    pointer-events: none;
+}
+
+.hero-actions a .btn-shine {
+    pointer-events: none !important;
+}
+
+/* Ensure buttons are clickable on all devices */
+.hero-btn-primary,
+.hero-btn-secondary {
+    display: inline-block;
+    position: relative;
+    z-index: 5;
+    cursor: pointer !important;
+    pointer-events: all !important;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.hero-btn-primary:active,
+.hero-btn-secondary:active {
+    transform: scale(0.98);
+}
+</style>
+@endpush
+
 @section('content')
 <!-- Interactive Map Section with Enhanced Design -->
-<div class="map-section position-relative" style="height: 50vh;">
+<div class="map-section position-relative" style="height: 50vh;" data-aos="fade-in" data-aos-duration="1000">
     <!-- Map Controls -->
-    <div class="map-controls position-absolute top-0 start-0 m-4" style="z-index: 10;">
+    <div class="map-controls position-absolute top-0 start-0 m-4" style="z-index: 10;" data-aos="slide-right" data-aos-delay="200">
         <div class="btn-group shadow-lg" role="group">
             <button class="btn map-control-btn" onclick="openMapsApp()" title="Buka di Google Maps">
                 <i class="fas fa-external-link-alt"></i>
@@ -37,7 +210,7 @@
     </div>
     
     <!-- Enhanced Floating Map Info -->
-    <div class="map-info-card position-absolute bottom-0 start-0 m-4">
+    <div class="map-info-card position-absolute bottom-0 start-0 m-4" data-aos="slide-up" data-aos-delay="400">
         <div class="glass-card p-4 shadow-lg">
             <div class="d-flex align-items-center">
                 <div class="map-pin-icon me-3">
@@ -60,7 +233,7 @@
     </div>
     
     <!-- Breadcrumb Navigation -->
-    <div class="map-breadcrumb position-absolute top-0 end-0 m-4">
+    <div class="map-breadcrumb position-absolute top-0 end-0 m-4" data-aos="slide-left" data-aos-delay="300">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb glass-card p-2 mb-0">
                 <li class="breadcrumb-item"><a href="/" class="breadcrumb-link">Home</a></li>
@@ -84,42 +257,46 @@
     <div class="container position-relative">
         <div class="row align-items-center min-vh-60">
             <div class="col-lg-6">
-                <div class="hero-content">
-                    <div class="hero-badge mb-3">
+                <div class="hero-content" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="hero-badge mb-3" data-aos="fade-down" data-aos-delay="400">
                         <span class="badge hero-company-badge px-3 py-1 fs-7 fw-semibold">
                             <i class="fas fa-building me-2"></i>PT. Tali Rejeki
                         </span>
                     </div>
-                    <h1 class="hero-title display-4 fw-bold mb-3 position-relative">
+                    <h1 class="hero-title display-4 fw-bold mb-3 position-relative" data-aos="fade-up" data-aos-delay="500">
                         Hubungi Kami
                         <div class="title-underline position-absolute"></div>
                     </h1>
-                    <p class="hero-description mb-4 lh-base">
+                    <p class="hero-description mb-4 lh-base" data-aos="fade-up" data-aos-delay="600">
                         Temukan lokasi dan hubungi PT. Tali Rejeki untuk kebutuhan Anda. 
                         Kami siap melayani dengan sepenuh hati dan profesionalisme tinggi.
                     </p>
-                    <div class="hero-actions d-flex flex-wrap gap-2">
-                        <a href="#contact-info" class="btn hero-btn-primary btn-md px-4 py-2">
+                    <div class="hero-actions d-flex flex-wrap gap-2" data-aos="fade-up" data-aos-delay="700">
+                        <a href="#contact-info" class="btn hero-btn-primary btn-md px-4 py-2" onclick="scrollToContact(event)">
                             <i class="fas fa-info-circle me-2"></i>Info Kontak
-                            <span class="btn-shine position-absolute top-0 start-0 w-100 h-100"></span>
+                            <div class="btn-shine"></div>
                         </a>
-                        <a href="https://wa.me/6281382523722" target="_blank" class="btn hero-btn-secondary btn-md px-4 py-2">
+                        <a href="https://wa.me/6281382523722?text=Halo,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" target="_blank" rel="noopener" class="btn hero-btn-secondary btn-md px-4 py-2" onclick="trackWhatsAppClick(event)">
                             <i class="fab fa-whatsapp me-2"></i>Chat WhatsApp
-                            <span class="btn-shine position-absolute top-0 start-0 w-100 h-100"></span>
+                            <div class="btn-shine"></div>
                         </a>
+                        <button class="btn hero-btn-primary btn-md px-4 py-2" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                            <i class="fas fa-moon theme-icon me-2"></i>Mode
+                            <div class="btn-shine"></div>
+                        </button>
                     </div>
                     
                     <!-- Floating Stats -->
-                    <div class="hero-stats mt-4 d-flex flex-wrap gap-3">
-                        <div class="stat-item">
+                    <div class="hero-stats mt-4 d-flex flex-wrap gap-3" data-aos="fade-up" data-aos-delay="800">
+                        <div class="stat-item" data-aos="zoom-in" data-aos-delay="900">
                             <div class="stat-number fw-bold">Senin-Jumat</div>
                             <div class="stat-label small">08:00 - 17:00 WIB</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item" data-aos="zoom-in" data-aos-delay="1000">
                             <div class="stat-number fw-bold">14+</div>
                             <div class="stat-label small">Tahun Pengalaman</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item" data-aos="zoom-in" data-aos-delay="1100">
                             <div class="stat-number fw-bold">1000+</div>
                             <div class="stat-label small">Klien Puas</div>
                         </div>
@@ -127,15 +304,15 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="hero-visual text-center position-relative">
+                <div class="hero-visual text-center position-relative" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
                     <div class="hero-icon-container position-relative">
                         <div class="hero-icon-bg position-absolute top-50 start-50 translate-middle"></div>
-                        <i class="hero-main-icon fas fa-map-marked-alt position-relative"></i>
+                        <i class="hero-main-icon fas fa-map-marked-alt position-relative" data-aos="zoom-in" data-aos-delay="800"></i>
                         <div class="icon-particles position-absolute top-0 start-0 w-100 h-100">
-                            <div class="particle particle-1"></div>
-                            <div class="particle particle-2"></div>
-                            <div class="particle particle-3"></div>
-                            <div class="particle particle-4"></div>
+                            <div class="particle particle-1" data-aos="fade-in" data-aos-delay="1200"></div>
+                            <div class="particle particle-2" data-aos="fade-in" data-aos-delay="1300"></div>
+                            <div class="particle particle-3" data-aos="fade-in" data-aos-delay="1400"></div>
+                            <div class="particle particle-4" data-aos="fade-in" data-aos-delay="1500"></div>
                         </div>
                     </div>
                 </div>
@@ -147,28 +324,28 @@
 <!-- Enhanced Contact Information Section -->
 <div class="contact-section py-5" id="contact-info">
     <div class="container">
-        <div class="section-header text-center mb-5">
-            <h2 class="section-title fw-bold mb-3">Informasi Kontak</h2>
-            <p class="section-subtitle">Berbagai cara untuk terhubung dengan kami</p>
-            <div class="section-divider mx-auto"></div>
+        <div class="section-header text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+            <h2 class="section-title fw-bold mb-3" data-aos="fade-up" data-aos-delay="200">Informasi Kontak</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="300">Berbagai cara untuk terhubung dengan kami</p>
+            <div class="section-divider mx-auto" data-aos="zoom-in" data-aos-delay="400"></div>
         </div>
         
         <div class="row g-4">
             <!-- Company Information Card -->
             <div class="col-lg-8">
-                <div class="company-info-card glass-card h-100 p-5">
+                <div class="company-info-card glass-card h-100 p-5" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">
                     <!-- Company Header -->
-                    <div class="company-header d-flex align-items-center mb-5">
-                        <div class="company-logo-container me-4">
+                    <div class="company-header d-flex align-items-center mb-5" data-aos="fade-up" data-aos-delay="400">
+                        <div class="company-logo-container me-4" data-aos="zoom-in" data-aos-delay="600">
                             <div class="company-logo">
                                 <i class="fas fa-building fa-2x"></i>
                             </div>
                             <div class="logo-glow"></div>
                         </div>
                         <div>
-                            <h2 class="company-name mb-2">PT. TALI REJEKI</h2>
-                            <p class="company-tagline mb-0">Your Trusted Business Partner Since 2011</p>
-                            <div class="company-rating mt-2">
+                            <h2 class="company-name mb-2" data-aos="fade-left" data-aos-delay="700">PT. TALI REJEKI</h2>
+                            <p class="company-tagline mb-0" data-aos="fade-left" data-aos-delay="800">Your Trusted Business Partner Since 2011</p>
+                            <div class="company-rating mt-2" data-aos="fade-left" data-aos-delay="900">
                                 <div class="stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -185,20 +362,20 @@
                     <div class="contact-grid row g-4">
                         <!-- Address Card -->
                         <div class="col-md-6">
-                            <div class="contact-info-item address-card h-100">
-                                <div class="info-icon">
+                            <div class="contact-info-item address-card h-100" data-aos="fade-up" data-aos-delay="500">
+                                <div class="info-icon" data-aos="pulse" data-aos-delay="700">
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
                                 <div class="info-content">
-                                    <h5 class="info-title mb-3">Alamat Lengkap</h5>
-                                    <div class="address-details">
+                                    <h5 class="info-title mb-3" data-aos="fade-up" data-aos-delay="800">Alamat Lengkap</h5>
+                                    <div class="address-details" data-aos="fade-up" data-aos-delay="900">
                                         <p class="address-line">JL. RAYA TARUMAJAYA NO. 11</p>
                                         <p class="address-line">RT 001 RW 029 DUSUN III</p>
                                         <p class="address-line">DESA SETIA ASIH</p>
                                         <p class="address-line">KEC. TARUMAJAYA</p>
                                         <p class="address-line fw-semibold">KAB. BEKASI 17215</p>
                                     </div>
-                                    <button class="btn copy-btn mt-3" onclick="copyAddress()">
+                                    <button class="btn copy-btn mt-3" onclick="copyAddress()" data-aos="fade-up" data-aos-delay="1000">
                                         <i class="fas fa-copy me-2"></i>Salin Alamat
                                     </button>
                                 </div>
@@ -207,13 +384,13 @@
                         
                         <!-- GPS Coordinates -->
                         <div class="col-md-6">
-                            <div class="contact-info-item coordinates-card h-100">
-                                <div class="info-icon">
+                            <div class="contact-info-item coordinates-card h-100" data-aos="fade-up" data-aos-delay="600">
+                                <div class="info-icon" data-aos="pulse" data-aos-delay="800">
                                     <i class="fas fa-globe"></i>
                                 </div>
                                 <div class="info-content">
-                                    <h5 class="info-title mb-3">Koordinat GPS</h5>
-                                    <div class="coordinates-details">
+                                    <h5 class="info-title mb-3" data-aos="fade-up" data-aos-delay="900">Koordinat GPS</h5>
+                                    <div class="coordinates-details" data-aos="fade-up" data-aos-delay="1000">
                                         <div class="coordinate-item mb-3">
                                             <label class="coordinate-label">Latitude:</label>
                                             <span class="coordinate-value" id="latitude">-6.165231597737094</span>
@@ -223,7 +400,7 @@
                                             <span class="coordinate-value" id="longitude">106.99002232946049</span>
                                         </div>
                                     </div>
-                                    <button class="btn copy-btn mt-3" onclick="copyCoordinates()">
+                                    <button class="btn copy-btn mt-3" onclick="copyCoordinates()" data-aos="fade-up" data-aos-delay="1100">
                                         <i class="fas fa-copy me-2"></i>Salin Koordinat
                                     </button>
                                 </div>
@@ -232,13 +409,13 @@
                         
                         <!-- Contact Methods -->
                         <div class="col-md-6">
-                            <div class="contact-info-item contact-methods-card h-100">
-                                <div class="info-icon">
+                            <div class="contact-info-item contact-methods-card h-100" data-aos="fade-up" data-aos-delay="700">
+                                <div class="info-icon" data-aos="pulse" data-aos-delay="900">
                                     <i class="fas fa-phone"></i>
                                 </div>
                                 <div class="info-content">
-                                    <h5 class="info-title mb-3">Hubungi Kami</h5>
-                                    <div class="contact-methods">
+                                    <h5 class="info-title mb-3" data-aos="fade-up" data-aos-delay="1000">Hubungi Kami</h5>
+                                    <div class="contact-methods" data-aos="fade-up" data-aos-delay="1100">
                                         <div class="contact-method">
                                             <i class="method-icon fas fa-phone-alt"></i>
                                             <a href="tel:+6202129470622" class="method-link">
@@ -274,30 +451,27 @@
                         
                         <!-- Operating Hours -->
                         <div class="col-md-6">
-                            <div class="contact-info-item hours-card h-100">
-                                <div class="info-icon">
+                            <div class="contact-info-item hours-card h-100" data-aos="fade-up" data-aos-delay="800">
+                                <div class="info-icon" data-aos="pulse" data-aos-delay="1000">
                                     <i class="fas fa-clock"></i>
                                 </div>
                                 <div class="info-content">
-                                    <h5 class="info-title mb-3">Jam Operasional</h5>
-                                    <div class="operating-hours">
+                                    <h5 class="info-title mb-3" data-aos="fade-up" data-aos-delay="1100">Jam Operasional</h5>
+                                    <div class="operating-hours" data-aos="fade-up" data-aos-delay="1200">
                                         <div class="hours-row">
                                             <span class="day">Senin - Jumat</span>
                                             <span class="time">08:00 - 17:00 WIB</span>
-                                            <span class="status-indicator open"></span>
                                         </div>
                                         <div class="hours-row">
                                             <span class="day">Sabtu</span>
                                             <span class="time">Tutup</span>
-                                            <span class="status-indicator closed"></span>
                                         </div>
                                         <div class="hours-row">
                                             <span class="day">Minggu</span>
                                             <span class="time">Tutup</span>
-                                            <span class="status-indicator closed"></span>
                                         </div>
                                     </div>
-                                    <div class="current-status mt-3">
+                                    <div class="current-status mt-3" data-aos="fade-up" data-aos-delay="1300">
                                         <span class="status-badge open">
                                             <i class="fas fa-circle me-2"></i>Jam Kerja Normal
                                         </span>
@@ -311,35 +485,35 @@
             
             <!-- Enhanced Contact Form -->
             <div class="col-lg-4">
-                <div class="contact-form-card glass-card h-100 p-4">
-                    <div class="form-header text-center mb-4">
-                        <div class="form-icon-container mb-3">
+                <div class="contact-form-card glass-card h-100 p-4" data-aos="fade-left" data-aos-delay="300">
+                    <div class="form-header text-center mb-4" data-aos="fade-up" data-aos-delay="500">
+                        <div class="form-icon-container mb-3" data-aos="zoom-in" data-aos-delay="700">
                             <i class="fas fa-paper-plane form-icon"></i>
                         </div>
-                        <h4 class="form-title mb-2">Kirim Pesan</h4>
-                        <p class="form-subtitle">Kami akan merespon dalam 24 jam</p>
+                        <h4 class="form-title mb-2" data-aos="fade-up" data-aos-delay="800">Kirim Pesan</h4>
+                        <p class="form-subtitle" data-aos="fade-up" data-aos-delay="900">Kami akan merespon dalam 24 jam</p>
                     </div>
                     
                     <form class="contact-form" id="contactForm">
-                        <div class="form-floating mb-3">
+                        <div class="form-floating mb-3" data-aos="fade-up" data-aos-delay="1000">
                             <input type="text" class="form-control modern-input" id="name" required placeholder="Nama Lengkap">
                             <label for="name">Nama Lengkap</label>
                             <div class="input-underline"></div>
                         </div>
                         
-                        <div class="form-floating mb-3">
+                        <div class="form-floating mb-3" data-aos="fade-up" data-aos-delay="1100">
                             <input type="email" class="form-control modern-input" id="email" required placeholder="Email">
                             <label for="email">Email</label>
                             <div class="input-underline"></div>
                         </div>
                         
-                        <div class="form-floating mb-3">
+                        <div class="form-floating mb-3" data-aos="fade-up" data-aos-delay="1200">
                             <input type="tel" class="form-control modern-input" id="phone" placeholder="Nomor Telepon">
                             <label for="phone">Nomor Telepon</label>
                             <div class="input-underline"></div>
                         </div>
                         
-                        <div class="form-floating mb-3">
+                        <div class="form-floating mb-3" data-aos="fade-up" data-aos-delay="1300">
                             <select class="form-select modern-input" id="category" required>
                                 <option value="">Pilih Kategori</option>
                                 <option value="general">Pertanyaan Umum</option>
@@ -352,13 +526,13 @@
                             <div class="input-underline"></div>
                         </div>
                         
-                        <div class="form-floating mb-4">
+                        <div class="form-floating mb-4" data-aos="fade-up" data-aos-delay="1400">
                             <textarea class="form-control modern-input" id="message" rows="4" required placeholder="Pesan Anda" style="height: 120px;"></textarea>
                             <label for="message">Pesan Anda</label>
                             <div class="input-underline"></div>
                         </div>
                         
-                        <button type="submit" class="btn form-submit-btn w-100 py-3 fw-semibold">
+                        <button type="submit" class="btn form-submit-btn w-100 py-3 fw-semibold" data-aos="fade-up" data-aos-delay="1500">
                             <span class="btn-content">
                                 <i class="fas fa-send me-2"></i>Kirim Pesan
                             </span>
@@ -368,7 +542,7 @@
                             </div>
                         </button>
                         
-                        <div class="form-footer text-center mt-3">
+                        <div class="form-footer text-center mt-3" data-aos="fade-up" data-aos-delay="1600">
                             <small class="form-note">
                                 <i class="fas fa-shield-alt me-1"></i>
                                 Data Anda aman dan tidak akan dibagikan
@@ -384,30 +558,29 @@
 <!-- Enhanced Quick Actions Section -->
 <div class="quick-actions-section py-5">
     <div class="container">
-        <div class="section-header text-center mb-5">
-            <h2 class="section-title fw-bold mb-3">Cara Mudah Menghubungi Kami</h2>
-            <p class="section-subtitle">Pilih cara yang paling nyaman untuk Anda</p>
-            <div class="section-divider mx-auto"></div>
+        <div class="section-header text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+            <h2 class="section-title fw-bold mb-3" data-aos="fade-up" data-aos-delay="200">Cara Mudah Menghubungi Kami</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="300">Pilih cara yang paling nyaman untuk Anda</p>
+            <div class="section-divider mx-auto" data-aos="zoom-in" data-aos-delay="400"></div>
         </div>
         
         <div class="row g-4">
             <div class="col-lg-3 col-md-6">
-                <div class="action-card glass-card h-100 text-center p-4 position-relative overflow-hidden">
+                <div class="action-card glass-card h-100 text-center p-4 position-relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
                     <div class="action-bg-pattern"></div>
                     <div class="action-content position-relative">
-                        <div class="action-icon-container mb-4">
+                        <div class="action-icon-container mb-4" data-aos="zoom-in" data-aos-delay="400">
                             <div class="action-icon directions-icon">
                                 <i class="fas fa-directions fa-2x"></i>
                             </div>
                             <div class="icon-glow directions-glow"></div>
                         </div>
-                        <h5 class="action-title fw-bold mb-3">Petunjuk Arah</h5>
-                        <p class="action-description mb-4">Dapatkan rute tercepat menuju lokasi kami dengan Google Maps</p>
-                        <a href="https://maps.google.com/?q=-6.165231597737094,106.99002232946049" 
-                           target="_blank" class="btn action-btn directions-btn px-4 py-2">
+                        <h5 class="action-title fw-bold mb-3" data-aos="fade-up" data-aos-delay="500">Petunjuk Arah</h5>
+                        <p class="action-description mb-4" data-aos="fade-up" data-aos-delay="600">Dapatkan rute tercepat menuju lokasi kami dengan Google Maps</p>
+                        <button onclick="getDirections()" class="btn action-btn directions-btn px-4 py-2" data-aos="fade-up" data-aos-delay="700">
                             <i class="fas fa-external-link-alt me-2"></i>Buka Maps
-                        </a>
-                        <div class="action-stats mt-3">
+                        </button>
+                        <div class="action-stats mt-3" data-aos="fade-up" data-aos-delay="800">
                             <small class="stat-text">
                                 <i class="fas fa-clock me-1"></i>±45 menit dari Jakarta
                             </small>
@@ -417,22 +590,21 @@
             </div>
             
             <div class="col-lg-3 col-md-6">
-                <div class="action-card glass-card h-100 text-center p-4 position-relative overflow-hidden">
+                <div class="action-card glass-card h-100 text-center p-4 position-relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
                     <div class="action-bg-pattern"></div>
                     <div class="action-content position-relative">
-                        <div class="action-icon-container mb-4">
+                        <div class="action-icon-container mb-4" data-aos="zoom-in" data-aos-delay="500">
                             <div class="action-icon whatsapp-icon">
                                 <i class="fab fa-whatsapp fa-2x"></i>
                             </div>
                             <div class="icon-glow whatsapp-glow"></div>
-
                         </div>
-                        <h5 class="action-title fw-bold mb-3">WhatsApp</h5>
-                        <p class="action-description mb-4">Chat langsung dengan tim marketing kami</p>
-                        <a href="https://wa.me/6281382523722" target="_blank" class="btn action-btn whatsapp-btn px-4 py-2">
+                        <h5 class="action-title fw-bold mb-3" data-aos="fade-up" data-aos-delay="600">WhatsApp</h5>
+                        <p class="action-description mb-4" data-aos="fade-up" data-aos-delay="700">Chat langsung dengan tim marketing kami</p>
+                        <a href="https://wa.me/6281382523722?text=Halo,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" target="_blank" rel="noopener" class="btn action-btn whatsapp-btn px-4 py-2" data-aos="fade-up" data-aos-delay="800">
                             <i class="fab fa-whatsapp me-2"></i>Chat Siti
                         </a>
-                        <div class="action-stats mt-3">
+                        <div class="action-stats mt-3" data-aos="fade-up" data-aos-delay="900">
                             <small class="stat-text">
                                 <i class="fas fa-user me-1"></i>Tim Marketing Tersedia
                             </small>
@@ -442,21 +614,21 @@
             </div>
             
             <div class="col-lg-3 col-md-6">
-                <div class="action-card glass-card h-100 text-center p-4 position-relative overflow-hidden">
+                <div class="action-card glass-card h-100 text-center p-4 position-relative overflow-hidden" data-aos="fade-up" data-aos-delay="400">
                     <div class="action-bg-pattern"></div>
                     <div class="action-content position-relative">
-                        <div class="action-icon-container mb-4">
+                        <div class="action-icon-container mb-4" data-aos="zoom-in" data-aos-delay="600">
                             <div class="action-icon email-icon">
                                 <i class="fas fa-envelope fa-2x"></i>
                             </div>
                             <div class="icon-glow email-glow"></div>
                         </div>
-                        <h5 class="action-title fw-bold mb-3">Email</h5>
-                        <p class="action-description mb-4">Kirim email untuk pertanyaan detail dan penawaran khusus</p>
-                        <a href="mailto:talirejeki@gmail.com" class="btn action-btn email-btn px-4 py-2">
+                        <h5 class="action-title fw-bold mb-3" data-aos="fade-up" data-aos-delay="700">Email</h5>
+                        <p class="action-description mb-4" data-aos="fade-up" data-aos-delay="800">Kirim email untuk pertanyaan detail dan penawaran khusus</p>
+                        <a href="mailto:talirejeki@gmail.com?subject=Pertanyaan%20tentang%20Produk&body=Halo%20PT.%20Tali%20Rejeki,%0A%0ASaya%20ingin%20bertanya%20tentang..." class="btn action-btn email-btn px-4 py-2" data-aos="fade-up" data-aos-delay="900">
                             <i class="fas fa-envelope me-2"></i>Kirim Email
                         </a>
-                        <div class="action-stats mt-3">
+                        <div class="action-stats mt-3" data-aos="fade-up" data-aos-delay="1000">
                             <small class="stat-text">
                                 <i class="fas fa-clock me-1"></i>Respon dalam 24 jam
                             </small>
@@ -466,21 +638,21 @@
             </div>
             
             <div class="col-lg-3 col-md-6">
-                <div class="action-card glass-card h-100 text-center p-4 position-relative overflow-hidden">
+                <div class="action-card glass-card h-100 text-center p-4 position-relative overflow-hidden" data-aos="fade-up" data-aos-delay="500">
                     <div class="action-bg-pattern"></div>
                     <div class="action-content position-relative">
-                        <div class="action-icon-container mb-4">
+                        <div class="action-icon-container mb-4" data-aos="zoom-in" data-aos-delay="700">
                             <div class="action-icon phone-icon">
                                 <i class="fas fa-phone fa-2x"></i>
                             </div>
                             <div class="icon-glow phone-glow"></div>
                         </div>
-                        <h5 class="action-title fw-bold mb-3">Telepon</h5>
-                        <p class="action-description mb-4">Hubungi langsung untuk konsultasi dan informasi produk</p>
-                        <a href="tel:+6202129470622" class="btn action-btn phone-btn px-4 py-2">
+                        <h5 class="action-title fw-bold mb-3" data-aos="fade-up" data-aos-delay="800">Telepon</h5>
+                        <p class="action-description mb-4" data-aos="fade-up" data-aos-delay="900">Hubungi langsung untuk konsultasi dan informasi produk</p>
+                        <a href="tel:+6202129470622" class="btn action-btn phone-btn px-4 py-2" data-aos="fade-up" data-aos-delay="1000">
                             <i class="fas fa-phone me-2"></i>Telepon
                         </a>
-                        <div class="action-stats mt-3">
+                        <div class="action-stats mt-3" data-aos="fade-up" data-aos-delay="1100">
                             <small class="stat-text">
                                 <i class="fas fa-user-headset me-1"></i>Tim siap melayani
                             </small>
@@ -495,69 +667,69 @@
 <!-- Contact Persons Section -->
 <div class="contact-persons-section py-5">
     <div class="container">
-        <div class="section-header text-center mb-5">
-            <h2 class="section-title fw-bold mb-3">Tim Marketing Kami</h2>
-            <p class="section-subtitle">Hubungi langsung tim marketing untuk kebutuhan Anda</p>
-            <div class="section-divider mx-auto"></div>
+        <div class="section-header text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+            <h2 class="section-title fw-bold mb-3" data-aos="fade-up" data-aos-delay="200">Tim Marketing Kami</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="300">Hubungi langsung tim marketing untuk kebutuhan Anda</p>
+            <div class="section-divider mx-auto" data-aos="zoom-in" data-aos-delay="400"></div>
         </div>
         
         <div class="row g-4 justify-content-center">
             <div class="col-lg-3 col-md-6">
-                <div class="person-card glass-card text-center p-4 h-100">
-                    <div class="person-avatar mb-3">
+                <div class="person-card glass-card text-center p-4 h-100" data-aos="fade-up" data-aos-delay="200">
+                    <div class="person-avatar mb-3" data-aos="zoom-in" data-aos-delay="400">
                         <div class="avatar-icon">
                             <i class="fas fa-user fa-2x"></i>
                         </div>
                     </div>
-                    <h5 class="person-name fw-bold mb-2">Siti</h5>
-                    <p class="person-role mb-3">Marketing Executive</p>
-                    <a href="https://wa.me/6281382523722" target="_blank" class="btn btn-whatsapp w-100 mb-2">
+                    <h5 class="person-name fw-bold mb-2" data-aos="fade-up" data-aos-delay="500">Siti</h5>
+                    <p class="person-role mb-3" data-aos="fade-up" data-aos-delay="600">Marketing Executive</p>
+                    <a href="https://wa.me/6281382523722?text=Halo%20Siti,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" target="_blank" rel="noopener" class="btn btn-whatsapp w-100 mb-2" data-aos="fade-up" data-aos-delay="700">
                         <i class="fab fa-whatsapp me-2"></i>0813 8252 3722
                     </a>
                 </div>
             </div>
             
             <div class="col-lg-3 col-md-6">
-                <div class="person-card glass-card text-center p-4 h-100">
-                    <div class="person-avatar mb-3">
+                <div class="person-card glass-card text-center p-4 h-100" data-aos="fade-up" data-aos-delay="300">
+                    <div class="person-avatar mb-3" data-aos="zoom-in" data-aos-delay="500">
                         <div class="avatar-icon">
                             <i class="fas fa-user fa-2x"></i>
                         </div>
                     </div>
-                    <h5 class="person-name fw-bold mb-2">Kurnia</h5>
-                    <p class="person-role mb-3">Marketing Specialist</p>
-                    <a href="https://wa.me/6281384808218" target="_blank" class="btn btn-whatsapp w-100 mb-2">
+                    <h5 class="person-name fw-bold mb-2" data-aos="fade-up" data-aos-delay="600">Kurnia</h5>
+                    <p class="person-role mb-3" data-aos="fade-up" data-aos-delay="700">Marketing Specialist</p>
+                    <a href="https://wa.me/6281384808218?text=Halo%20Kurnia,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" target="_blank" rel="noopener" class="btn btn-whatsapp w-100 mb-2" data-aos="fade-up" data-aos-delay="800">
                         <i class="fab fa-whatsapp me-2"></i>0813 8480 8218
                     </a>
-                    <small class="text-muted">(WhatsApp Only)</small>
+                    <small class="text-muted" data-aos="fade-up" data-aos-delay="900">(WhatsApp Only)</small>
                 </div>
             </div>
             
             <div class="col-lg-3 col-md-6">
-                <div class="person-card glass-card text-center p-4 h-100">
-                    <div class="person-avatar mb-3">
+                <div class="person-card glass-card text-center p-4 h-100" data-aos="fade-up" data-aos-delay="400">
+                    <div class="person-avatar mb-3" data-aos="zoom-in" data-aos-delay="600">
                         <div class="avatar-icon">
                             <i class="fas fa-user fa-2x"></i>
                         </div>
                     </div>
-                    <h5 class="person-name fw-bold mb-2">Yovien Agustina</h5>
-                    <p class="person-role mb-3">Marketing Consultant</p>
-                    <a href="https://wa.me/6281385231149" target="_blank" class="btn btn-whatsapp w-100 mb-2">
+                    <h5 class="person-name fw-bold mb-2" data-aos="fade-up" data-aos-delay="700">Yovien Agustina</h5>
+                    <p class="person-role mb-3" data-aos="fade-up" data-aos-delay="800">Marketing Consultant</p>
+                    <a href="https://wa.me/6281385231149?text=Halo%20Yovien,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" target="_blank" rel="noopener" class="btn btn-whatsapp w-100 mb-2" data-aos="fade-up" data-aos-delay="900">
                         <i class="fab fa-whatsapp me-2"></i>0813 8523 1149
                     </a>
                 </div>
             </div>
             
             <div class="col-lg-3 col-md-6">
-                <div class="person-card glass-card text-center p-4 h-100">
-                    <div class="person-avatar mb-3">
+                <div class="person-card glass-card text-center p-4 h-100" data-aos="fade-up" data-aos-delay="500">
+                    <div class="person-avatar mb-3" data-aos="zoom-in" data-aos-delay="700">
                         <div class="avatar-icon">
                             <i class="fas fa-user fa-2x"></i>
                         </div>
                     </div>
-                    <h5 class="person-name fw-bold mb-2">Edy Purwanto</h5>
-                    <p class="person-role mb-3">Senior Marketing</p>
-                    <a href="https://wa.me/6281514515990" target="_blank" class="btn btn-whatsapp w-100 mb-2">
+                    <h5 class="person-name fw-bold mb-2" data-aos="fade-up" data-aos-delay="800">Edy Purwanto</h5>
+                    <p class="person-role mb-3" data-aos="fade-up" data-aos-delay="900">Senior Marketing</p>
+                    <a href="https://wa.me/6281514515990?text=Halo%20Edy,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" target="_blank" rel="noopener" class="btn btn-whatsapp w-100 mb-2" data-aos="fade-up" data-aos-delay="1000">
                         <i class="fab fa-whatsapp me-2"></i>0815 1451 5990
                     </a>
                 </div>
@@ -569,18 +741,18 @@
 <!-- Enhanced Features Section -->
 <div class="features-section py-5">
     <div class="container">
-        <div class="section-header text-center mb-5">
-            <h2 class="section-title fw-bold mb-3">Mengapa Memilih PT. Tali Rejeki?</h2>
-            <p class="section-subtitle">Komitmen kami untuk memberikan pelayanan terbaik</p>
-            <div class="section-divider mx-auto"></div>
+        <div class="section-header text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="section-title fw-bold mb-3" data-aos="fade-up" data-aos-delay="200">Mengapa Memilih PT. Tali Rejeki?</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="300">Komitmen kami untuk memberikan pelayanan terbaik</p>
+            <div class="section-divider mx-auto" data-aos="scale-x" data-aos-delay="400"></div>
         </div>
         
         <div class="row g-4">
             <div class="col-lg-4 col-md-6">
-                <div class="feature-card glass-card text-center p-5 h-100 position-relative">
+                <div class="feature-card glass-card text-center p-5 h-100 position-relative" data-aos="flip-left" data-aos-delay="200">
                     <div class="feature-bg-pattern"></div>
                     <div class="feature-content position-relative">
-                        <div class="feature-icon-container mb-4">
+                        <div class="feature-icon-container mb-4" data-aos="zoom-in" data-aos-delay="400">
                             <div class="feature-icon quality-icon">
                                 <i class="fas fa-medal fa-3x"></i>
                             </div>
@@ -591,15 +763,15 @@
                                 <div class="particle"></div>
                             </div>
                         </div>
-                        <h4 class="feature-title fw-bold mb-3">Kualitas Terjamin</h4>
-                        <p class="feature-description mb-4">Produk berkualitas tinggi dengan standar internasional yang telah teruji dan bersertifikat</p>
-                        <div class="feature-stats mb-3">
+                        <h4 class="feature-title fw-bold mb-3" data-aos="fade-up" data-aos-delay="500">Kualitas Terjamin</h4>
+                        <p class="feature-description mb-4" data-aos="fade-up" data-aos-delay="600">Produk berkualitas tinggi dengan standar internasional yang telah teruji dan bersertifikat</p>
+                        <div class="feature-stats mb-3" data-aos="fade-up" data-aos-delay="700">
                             <div class="stat-badges d-flex justify-content-center gap-2 flex-wrap">
                                 <span class="badge feature-badge">ISO 9001:2015</span>
                                 <span class="badge feature-badge">SNI Certified</span>
                             </div>
                         </div>
-                        <div class="feature-metrics">
+                        <div class="feature-metrics" data-aos="fade-up" data-aos-delay="800">
                             <div class="metric">
                                 <span class="metric-number">99.9%</span>
                                 <span class="metric-label">Quality Rate</span>
@@ -610,10 +782,10 @@
             </div>
             
             <div class="col-lg-4 col-md-6">
-                <div class="feature-card glass-card text-center p-5 h-100 position-relative">
+                <div class="feature-card glass-card text-center p-5 h-100 position-relative" data-aos="flip-left" data-aos-delay="400">
                     <div class="feature-bg-pattern"></div>
                     <div class="feature-content position-relative">
-                        <div class="feature-icon-container mb-4">
+                        <div class="feature-icon-container mb-4" data-aos="zoom-in" data-aos-delay="600">
                             <div class="feature-icon shipping-icon">
                                 <i class="fas fa-shipping-fast fa-3x"></i>
                             </div>
@@ -624,15 +796,15 @@
                                 <div class="particle"></div>
                             </div>
                         </div>
-                        <h4 class="feature-title fw-bold mb-3">Pengiriman Cepat</h4>
-                        <p class="feature-description mb-4">Layanan pengiriman express ke seluruh Indonesia dengan jaminan keamanan dan ketepatan waktu</p>
-                        <div class="feature-stats mb-3">
+                        <h4 class="feature-title fw-bold mb-3" data-aos="fade-up" data-aos-delay="700">Pengiriman Cepat</h4>
+                        <p class="feature-description mb-4" data-aos="fade-up" data-aos-delay="800">Layanan pengiriman express ke seluruh Indonesia dengan jaminan keamanan dan ketepatan waktu</p>
+                        <div class="feature-stats mb-3" data-aos="fade-up" data-aos-delay="900">
                             <div class="stat-badges d-flex justify-content-center gap-2 flex-wrap">
                                 <span class="badge feature-badge">Same Day</span>
                                 <span class="badge feature-badge">Nationwide</span>
                             </div>
                         </div>
-                        <div class="feature-metrics">
+                        <div class="feature-metrics" data-aos="fade-up" data-aos-delay="1000">
                             <div class="metric">
                                 <span class="metric-number">1-3</span>
                                 <span class="metric-label">Hari Kerja</span>
@@ -643,10 +815,10 @@
             </div>
             
             <div class="col-lg-4 col-md-6">
-                <div class="feature-card glass-card text-center p-5 h-100 position-relative">
+                <div class="feature-card glass-card text-center p-5 h-100 position-relative" data-aos="flip-left" data-aos-delay="600">
                     <div class="feature-bg-pattern"></div>
                     <div class="feature-content position-relative">
-                        <div class="feature-icon-container mb-4">
+                        <div class="feature-icon-container mb-4" data-aos="zoom-in" data-aos-delay="800">
                             <div class="feature-icon support-icon">
                                 <i class="fas fa-headset fa-3x"></i>
                             </div>
@@ -657,15 +829,15 @@
                                 <div class="particle"></div>
                             </div>
                         </div>
-                        <h4 class="feature-title fw-bold mb-3">Customer Service 24/7</h4>
-                        <p class="feature-description mb-4">Tim customer service profesional siap membantu Anda dengan respon cepat dan solusi terbaik</p>
-                        <div class="feature-stats mb-3">
+                        <h4 class="feature-title fw-bold mb-3" data-aos="fade-up" data-aos-delay="900">Customer Service 24/7</h4>
+                        <p class="feature-description mb-4" data-aos="fade-up" data-aos-delay="1000">Tim customer service profesional siap membantu Anda dengan respon cepat dan solusi terbaik</p>
+                        <div class="feature-stats mb-3" data-aos="fade-up" data-aos-delay="1100">
                             <div class="stat-badges d-flex justify-content-center gap-2 flex-wrap">
                                 <span class="badge feature-badge">24/7 Support</span>
                                 <span class="badge feature-badge">Expert Team</span>
                             </div>
                         </div>
-                        <div class="feature-metrics">
+                        <div class="feature-metrics" data-aos="fade-up" data-aos-delay="1200">
                             <div class="metric">
                                 <span class="metric-number">&lt;30</span>
                                 <span class="metric-label">Menit Respon</span>
@@ -679,28 +851,28 @@
         <!-- Additional Features Row -->
         <div class="row g-4 mt-4">
             <div class="col-lg-6">
-                <div class="mini-feature-card glass-card p-4 h-100">
+                <div class="mini-feature-card glass-card p-4 h-100" data-aos="slide-right" data-aos-delay="300">
                     <div class="d-flex align-items-center">
-                        <div class="mini-feature-icon me-4">
+                        <div class="mini-feature-icon me-4" data-aos="bounce" data-aos-delay="500">
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <div>
-                            <h6 class="mini-feature-title fw-semibold mb-2">Garansi Produk</h6>
-                            <p class="mini-feature-text mb-0">Jaminan garansi resmi untuk semua produk yang kami jual</p>
+                            <h6 class="mini-feature-title fw-semibold mb-2" data-aos="fade-up" data-aos-delay="600">Garansi Produk</h6>
+                            <p class="mini-feature-text mb-0" data-aos="fade-up" data-aos-delay="700">Jaminan garansi resmi untuk semua produk yang kami jual</p>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="col-lg-6">
-                <div class="mini-feature-card glass-card p-4 h-100">
+                <div class="mini-feature-card glass-card p-4 h-100" data-aos="slide-left" data-aos-delay="500">
                     <div class="d-flex align-items-center">
-                        <div class="mini-feature-icon me-4">
+                        <div class="mini-feature-icon me-4" data-aos="bounce" data-aos-delay="700">
                             <i class="fas fa-award"></i>
                         </div>
                         <div>
-                            <h6 class="mini-feature-title fw-semibold mb-2">Trusted Partner</h6>
-                            <p class="mini-feature-text mb-0">Dipercaya oleh 1000+ perusahaan di seluruh Indonesia</p>
+                            <h6 class="mini-feature-title fw-semibold mb-2" data-aos="fade-up" data-aos-delay="800">Trusted Partner</h6>
+                            <p class="mini-feature-text mb-0" data-aos="fade-up" data-aos-delay="900">Dipercaya oleh 1000+ perusahaan di seluruh Indonesia</p>
                         </div>
                     </div>
                 </div>
@@ -789,9 +961,51 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 /* Hero Section Styles */
 .hero-section {
     min-height: 70vh;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    background-color: #1a1a1a; /* Fallback background */
+    background-image: url('{{ asset("img/kontak/110.png") }}');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     position: relative;
     overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('{{ asset("img/kontak/110.png") }}');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    filter: blur(2px);
+    z-index: 1;
+    transform: scale(1.05); /* Slight scale to hide blur edges */
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg, 
+        rgba(0, 0, 0, 0.5) 0%, 
+        rgba(0, 0, 0, 0.3) 50%, 
+        rgba(0, 0, 0, 0.5) 100%
+    );
+    z-index: 2;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 3;
 }
 
 .hero-bg-pattern {
@@ -799,6 +1013,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
         radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
     animation: patternMove 10s ease-in-out infinite alternate;
+    z-index: 4;
 }
 
 @keyframes patternMove {
@@ -808,6 +1023,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 .floating-shapes {
     pointer-events: none;
+    z-index: 4;
 }
 
 .shape {
@@ -913,6 +1129,9 @@ h1, h2, h3, h4, h5, h6, p, span, div {
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
     font-size: 0.875rem;
+    cursor: pointer;
+    pointer-events: all;
+    z-index: 1;
 }
 
 .hero-btn-primary {
@@ -927,9 +1146,16 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 }
 
 .btn-shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
     transform: translateX(-100%);
     transition: transform 0.6s ease;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .hero-btn-primary:hover .btn-shine,
@@ -1667,15 +1893,74 @@ h1, h2, h3, h4, h5, h6, p, span, div {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--text-primary);
     position: relative;
     z-index: 2;
     transition: all 0.4s ease;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--border-color);
+    box-shadow: 0 8px 32px var(--shadow-color);
 }
 
-.quality-icon { background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); }
-.shipping-icon { background: linear-gradient(135deg, #B22222, #CD5C5C); }
-.support-icon { background: linear-gradient(135deg, #A0522D, #CD853F); }
+/* Dark mode icon styles */
+body.dark-theme .feature-icon {
+    color: var(--text-primary);
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--border-color);
+}
+
+/* Specific icon background colors for better visibility */
+.quality-icon { 
+    background: linear-gradient(135deg, rgba(139, 0, 0, 0.1), rgba(220, 20, 60, 0.1)) !important;
+    color: var(--primary-color) !important;
+}
+
+.shipping-icon { 
+    background: linear-gradient(135deg, rgba(178, 34, 34, 0.1), rgba(205, 92, 92, 0.1)) !important;
+    color: #B22222 !important;
+}
+
+.support-icon { 
+    background: linear-gradient(135deg, rgba(160, 82, 45, 0.1), rgba(205, 133, 63, 0.1)) !important;
+    color: #A0522D !important;
+}
+
+/* Dark mode specific icon colors */
+body.dark-theme .quality-icon { 
+    background: linear-gradient(135deg, rgba(139, 0, 0, 0.3), rgba(220, 20, 60, 0.3)) !important;
+    color: var(--primary-light) !important;
+}
+
+body.dark-theme .shipping-icon { 
+    background: linear-gradient(135deg, rgba(178, 34, 34, 0.3), rgba(205, 92, 92, 0.3)) !important;
+    color: #CD5C5C !important;
+}
+
+body.dark-theme .support-icon { 
+    background: linear-gradient(135deg, rgba(160, 82, 45, 0.3), rgba(205, 133, 63, 0.3)) !important;
+    color: #CD853F !important;
+}
+
+/* Feature icon hover effects */
+.feature-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 40px var(--shadow-dark);
+}
+
+.quality-icon:hover { 
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light)) !important;
+    color: white !important;
+}
+
+.shipping-icon:hover { 
+    background: linear-gradient(135deg, #B22222, #CD5C5C) !important;
+    color: white !important;
+}
+
+.support-icon:hover { 
+    background: linear-gradient(135deg, #A0522D, #CD853F) !important;
+    color: white !important;
+}
 
 .feature-glow {
     position: absolute;
@@ -1783,13 +2068,33 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 .mini-feature-icon {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    background: rgba(139, 0, 0, 0.1);
+    border: 2px solid var(--primary-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--primary-color);
     font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+/* Dark mode mini feature icon */
+body.dark-theme .mini-feature-icon {
+    background: rgba(139, 0, 0, 0.3);
+    border: 2px solid var(--primary-light);
+    color: var(--primary-light);
+}
+
+.mini-feature-icon:hover {
+    transform: scale(1.1);
+    background: var(--primary-color);
+    color: white;
+}
+
+body.dark-theme .mini-feature-icon:hover {
+    background: var(--primary-light);
+    color: var(--text-primary);
 }
 
 .mini-feature-title {
@@ -1955,6 +2260,17 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 @media (max-width: 768px) {
     .hero-section {
         min-height: 50vh;
+        background-attachment: scroll; /* Disable fixed attachment on tablet for better performance */
+    }
+    
+    .hero-section::before {
+        filter: blur(1px); /* Reduce blur on mobile for better performance */
+        background-attachment: scroll;
+    }
+    }
+    
+    .hero-section::before {
+        filter: blur(2.5px); /* Slightly reduce blur on tablet */
     }
     
     .hero-title {
@@ -2030,6 +2346,18 @@ h1, h2, h3, h4, h5, h6, p, span, div {
     .hero-section {
         min-height: 45vh;
         padding: 2rem 0;
+        background-attachment: scroll; /* Disable fixed attachment on mobile for performance */
+        background-image: url('{{ asset("img/kontak/110.png") }}');
+        background-size: cover;
+        background-position: center center;
+    }
+    
+    .hero-section::before {
+        filter: blur(1px); /* Reduce blur on mobile for performance */
+        background-image: url('{{ asset("img/kontak/110.png") }}');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: scroll;
     }
     
     .hero-title {
@@ -2316,6 +2644,10 @@ h1, h2, h3, h4, h5, h6, p, span, div {
         max-width: 200px;
         font-size: 0.7rem;
         padding: 0.45rem 0.6rem;
+        cursor: pointer;
+        pointer-events: all;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
     }
     
     .map-section {
@@ -2962,8 +3294,220 @@ class PerformanceManager {
     }
 }
 
+// Button Click Functions
+function scrollToContact(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const contactSection = document.getElementById('contact-info');
+    if (contactSection) {
+        contactSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+        
+        // Add visual feedback
+        const button = event.currentTarget;
+        if (button) {
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = '';
+            }, 150);
+        }
+    }
+    return false;
+}
+
+function trackWhatsAppClick(event) {
+    // Add analytics tracking if needed
+    console.log('WhatsApp button clicked');
+    
+    // Add visual feedback
+    if (event && event.currentTarget) {
+        event.currentTarget.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            event.currentTarget.style.transform = '';
+        }, 150);
+    }
+    
+    // Let the default action proceed (opening WhatsApp link)
+    return true;
+}
+
+// Theme toggle function
+function toggleTheme() {
+    const body = document.body;
+    const themeIcon = document.querySelector('.theme-icon');
+    
+    if (body.classList.contains('dark-theme')) {
+        // Switch to light mode
+        body.classList.remove('dark-theme');
+        body.classList.add('light-theme');
+        if (themeIcon) {
+            themeIcon.className = 'fas fa-moon theme-icon me-2';
+        }
+        localStorage.setItem('theme', 'light');
+    } else {
+        // Switch to dark mode
+        body.classList.remove('light-theme');
+        body.classList.add('dark-theme');
+        if (themeIcon) {
+            themeIcon.className = 'fas fa-sun theme-icon me-2';
+        }
+        localStorage.setItem('theme', 'dark');
+    }
+    
+    // Update meta theme-color for mobile browsers
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', 
+            body.classList.contains('dark-theme') ? '#1a1a1a' : '#ffffff'
+        );
+    }
+}
+
+// Initialize theme on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    const body = document.body;
+    const themeIcon = document.querySelector('.theme-icon');
+    
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-theme');
+        body.classList.remove('light-theme');
+        if (themeIcon) {
+            themeIcon.className = 'fas fa-sun theme-icon me-2';
+        }
+    } else {
+        body.classList.add('light-theme');
+        body.classList.remove('dark-theme');
+        if (themeIcon) {
+            themeIcon.className = 'fas fa-moon theme-icon me-2';
+        }
+    }
+});
+
+// Map interaction functions
+function openMapsApp() {
+    const url = "https://maps.google.com/?q=-6.165231597737094,106.99002232946049";
+    window.open(url, '_blank');
+}
+
+function copyCoordinates() {
+    const coords = "-6.165231597737094, 106.99002232946049";
+    navigator.clipboard.writeText(coords).then(() => {
+        // Show success message
+        showNotification('Koordinat berhasil disalin!', 'success');
+    });
+}
+
+function copyAddress() {
+    const address = "JL. RAYA TARUMAJAYA NO. 11, RT 001 RW 029 DUSUN III, DESA SETIA ASIH, KEC. TARUMAJAYA, KAB. BEKASI 17215";
+    navigator.clipboard.writeText(address).then(() => {
+        showNotification('Alamat berhasil disalin!', 'success');
+    });
+}
+
+function getDirections() {
+    const url = "https://www.google.com/maps/dir/?api=1&destination=-6.165231597737094,106.99002232946049";
+    window.open(url, '_blank');
+}
+
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type} position-fixed`;
+    notification.style.cssText = `
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        min-width: 250px;
+        animation: slideInRight 0.3s ease;
+    `;
+    notification.innerHTML = `
+        <i class="fas fa-check-circle me-2"></i>
+        ${message}
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
 // Initialize all managers when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize AOS Animation Library
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: false,
+            mirror: true,
+            offset: 100,
+            delay: 0,
+            anchorPlacement: 'top-bottom',
+            disable: function() {
+                return window.innerWidth < 768; // Disable on mobile for performance
+            }
+        });
+        
+        // Refresh AOS on page load
+        setTimeout(() => {
+            AOS.refresh();
+        }, 100);
+        
+        // Handle page navigation
+        window.addEventListener('beforeunload', () => {
+            AOS.refresh();
+        });
+        
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                AOS.refresh();
+            }
+        });
+    } else {
+        console.warn('AOS library not loaded, using fallback animations');
+        // Fallback animation system
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('[data-aos]').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    }
+    
+    // Additional CSS animations for notification
+    if (!document.getElementById('notification-styles')) {
+        const style = document.createElement('style');
+        style.id = 'notification-styles';
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
     window.themeManager = new ThemeManager();
     window.contactFormManager = new ContactFormManager();
     window.animationManager = new AnimationManager();
@@ -3000,10 +3544,24 @@ window.addEventListener('resize', () => {
     // Recalculate animations on resize
     clearTimeout(window.resizeTimer);
     window.resizeTimer = setTimeout(() => {
+        // Refresh AOS on resize
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+        }
+        
         if (window.animationManager) {
             window.animationManager.observeElements();
         }
     }, 250);
+});
+
+// Handle orientation change for mobile devices
+window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+        }
+    }, 100);
 });
 
 // Add before unload handler for form
