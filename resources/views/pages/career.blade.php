@@ -600,6 +600,51 @@ html, body {
     --career-radius-lg: 32px;
 }
 
+/* Prevent animations from showing before initialization */
+.page-header:not(.ready),
+[data-aos]:not(.aos-init),
+.benefit-card:not(.ready),
+.job-card:not(.ready),
+.feature-item:not(.ready),
+.step-item:not(.ready) {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Show elements when AOS is initialized or page is ready */
+.aos-init,
+.page-header.ready,
+.benefit-card.ready,
+.job-card.ready,
+.feature-item.ready,
+.step-item.ready {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Fallback - show elements after 2 seconds regardless */
+.page-header,
+[data-aos],
+.benefit-card,
+.job-card,
+.feature-item,
+.step-item {
+    animation: fallbackShow 0.1s ease-in-out 2s forwards;
+}
+
+@keyframes fallbackShow {
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* Loading state */
+body.loading * {
+    animation-play-state: paused !important;
+    transition: none !important;
+}
+
 /* Dark Theme Variables */
 body.dark-theme {
     --career-text-primary: #f7fafc;
@@ -2766,6 +2811,7 @@ body.dark-theme .job-footer {
 /* Process Steps - Fixed Inline Layout */
 .recruitment-process {
     padding: 120px 0;
+    margin-bottom: 80px;
     overflow-x: hidden;
 }
 
@@ -3076,6 +3122,7 @@ body.dark-theme .job-footer {
 @media (max-width: 1024px) {
     .recruitment-process {
         padding: 100px 0;
+        margin-bottom: 60px;
     }
     
     .process-steps {
@@ -3182,6 +3229,10 @@ body.dark-theme .job-footer {
     .cta-section {
         padding: 80px 0;
     }
+    
+    .recruitment-process {
+        margin-bottom: 50px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -3263,6 +3314,10 @@ body.dark-theme .job-footer {
     .jobs-section,
     .recruitment-process {
         padding: 70px 0;
+    }
+    
+    .recruitment-process {
+        margin-bottom: 40px;
     }
     
     .cta-section {
@@ -3966,61 +4021,254 @@ body.dark-theme .job-footer {
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS with custom settings for this page
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 1000,
-            easing: 'ease-in-out-cubic',
-            once: true,
-            offset: 50,
-            delay: 0
+// Global animation controller
+window.careerAnimationController = {
+    isInitialized: false,
+    observers: [],
+    
+    // Reset all animations
+    reset: function() {
+        // Clear existing observers
+        this.observers.forEach(observer => observer.disconnect());
+        this.observers = [];
+        
+        // Reset AOS
+        if (typeof AOS !== 'undefined') {
+            AOS.refreshHard();
+        }
+        
+        // Reset all animated elements
+        this.resetAnimatedElements();
+        
+        // Mark as not initialized
+        this.isInitialized = false;
+    },
+    
+    // Reset all animated elements to initial state
+    resetAnimatedElements: function() {
+        // Reset all AOS elements
+        document.querySelectorAll('[data-aos]').forEach(element => {
+            element.classList.remove('aos-animate');
+            element.style.transform = '';
+            element.style.opacity = '';
+            element.style.transition = '';
+        });
+        
+        // Reset custom animated elements
+        document.querySelectorAll('.stat-number, .benefit-card, .job-card, .feature-item, .step-item').forEach(element => {
+            element.classList.remove('ready');
+            element.style.transform = '';
+            element.style.opacity = '';
+            element.style.transition = '';
+            element.style.visibility = '';
+        });
+        
+        // Reset page header
+        const pageHeader = document.querySelector('.page-header');
+        if (pageHeader) {
+            pageHeader.classList.remove('ready');
+            pageHeader.style.opacity = '';
+            pageHeader.style.transform = '';
+            pageHeader.style.transition = '';
+            pageHeader.style.visibility = '';
+        }
+        
+        // Reset stat counters
+        document.querySelectorAll('.stat-number[data-count]').forEach(stat => {
+            stat.textContent = '0+';
         });
     }
+};
+
+// Handle page navigation and refresh
+function handlePageTransitions() {
+    // Force scroll to top immediately when page loads
+    if (performance.navigation.type === 1) {
+        // Page was refreshed
+        window.history.scrollRestoration = 'manual';
+        window.scrollTo(0, 0);
+    }
     
+    // Reset animations when navigating back to page
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted || performance.navigation.type === 2) {
+            // Page was loaded from cache or user navigated back
+            window.scrollTo(0, 0);
+            setTimeout(() => {
+                window.careerAnimationController.reset();
+                initializeAnimations();
+            }, 100);
+        }
+    });
+    
+    // Reset animations on hash change
+    window.addEventListener('hashchange', function() {
+        setTimeout(() => {
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+            }
+        }, 100);
+    });
+    
+    // Reset animations on visibility change
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            setTimeout(() => {
+                // Force re-initialization if coming back to page
+                if (!window.careerAnimationController.isInitialized) {
+                    initializeAnimations();
+                }
+                
+                if (typeof AOS !== 'undefined') {
+                    AOS.refresh();
+                }
+            }, 200);
+        }
+    });
+    
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', function() {
+        window.scrollTo(0, 0);
+        setTimeout(() => {
+            window.careerAnimationController.reset();
+            initializeAnimations();
+        }, 50);
+    });
+    
+    // Handle focus events (when switching tabs back)
+    window.addEventListener('focus', function() {
+        setTimeout(() => {
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+            }
+        }, 100);
+    });
+}
+
+// Main initialization function
+function initializeAnimations() {
+    if (window.careerAnimationController.isInitialized) {
+        return;
+    }
+    
+    // Wait for AOS to be available
+    function waitForAOS(callback, attempts = 0) {
+        if (typeof AOS !== 'undefined') {
+            callback();
+        } else if (attempts < 50) { // Wait max 5 seconds
+            setTimeout(() => waitForAOS(callback, attempts + 1), 100);
+        } else {
+            console.warn('AOS not found, using fallback animations');
+            // Use fallback animations without AOS
+            initAnimationFeatures();
+        }
+    }
+    
+    waitForAOS(() => {
+        console.log('Career page: Initializing animations...');
+        
+        // Initialize AOS with enhanced settings
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 1200,
+                easing: 'ease-out-cubic',
+                once: false, // Allow re-animation
+                offset: 120,
+                delay: 0,
+                anchorPlacement: 'top-bottom',
+                disable: false,
+                startEvent: 'load', // Changed from DOMContentLoaded
+                initClassName: 'aos-init',
+                animatedClassName: 'aos-animate',
+                useClassNames: false,
+                disableMutationObserver: false,
+                debounceDelay: 50,
+                throttleDelay: 99
+            });
+            
+            console.log('Career page: AOS initialized');
+            
+            // Multiple refresh attempts to ensure it works
+            setTimeout(() => AOS.refresh(), 100);
+            setTimeout(() => AOS.refresh(), 300);
+            setTimeout(() => AOS.refresh(), 500);
+        }
+        
+        // Continue with other initializations
+        initAnimationFeatures();
+    });
+    
+    // Continue with other initializations
+    initAnimationFeatures();
+}
+
+// Separate function for animation features
+function initAnimationFeatures() {
     // Enhanced page entrance animation
     function initPageEntrance() {
-        // Add staggered entrance animation to main sections
-        const sections = document.querySelectorAll('section');
-        sections.forEach((section, index) => {
-            if (!section.hasAttribute('data-aos')) {
-                section.setAttribute('data-aos', 'fade-up');
-                section.setAttribute('data-aos-delay', (index * 200).toString());
-            }
-        });
+        console.log('Career page: Setting up page entrance...');
+        
+        // Ensure page starts from top
+        window.scrollTo(0, 0);
+        
+        // Check if AOS is available, if not use fallback
+        if (typeof AOS === 'undefined') {
+            document.body.classList.add('fallback-animate');
+            console.log('Career page: Using fallback animations');
+        }
         
         // Special entrance animation for page header
         const pageHeader = document.querySelector('.page-header');
         if (pageHeader) {
             pageHeader.style.opacity = '0';
-            pageHeader.style.transform = 'scale(0.95)';
+            pageHeader.style.transform = 'translateY(30px) scale(0.98)';
+            pageHeader.style.transition = 'none';
+            pageHeader.style.visibility = 'visible';
+            
+            // Force a reflow
+            pageHeader.offsetHeight;
             
             setTimeout(() => {
-                pageHeader.style.transition = 'all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1)';
+                pageHeader.style.transition = 'all 1.5s cubic-bezier(0.165, 0.84, 0.44, 1)';
                 pageHeader.style.opacity = '1';
-                pageHeader.style.transform = 'scale(1)';
-            }, 300);
+                pageHeader.style.transform = 'translateY(0) scale(1)';
+                pageHeader.classList.add('ready');
+            }, 300); // Increased delay
         }
-    }
-    
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+        
+        // Ensure all sections have proper AOS attributes and are visible
+        const sections = document.querySelectorAll('section:not(.page-header)');
+        sections.forEach((section, index) => {
+            // Make section visible first
+            section.style.visibility = 'visible';
+            
+            if (!section.hasAttribute('data-aos') && typeof AOS !== 'undefined') {
+                section.setAttribute('data-aos', 'fade-up');
+                section.setAttribute('data-aos-delay', (index * 150).toString());
+                section.setAttribute('data-aos-duration', '1000');
             }
         });
-    });
+        
+        // Make all animated elements ready after a delay
+        setTimeout(() => {
+            document.querySelectorAll('.benefit-card, .job-card, .feature-item, .step-item').forEach(element => {
+                element.style.visibility = 'visible';
+                element.classList.add('ready');
+            });
+            
+            // Force AOS refresh after making elements visible
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+            }
+            
+            console.log('Career page: Elements made visible and ready');
+        }, 600);
+    }
     
     // Enhanced Counter Animation for Header Stats
-    function animateCounter(element, target, duration = 2000) {
+    function animateCounter(element, target, duration = 2500) {
         let start = 0;
-        const increment = target / (duration / 16); // 60fps
+        const increment = target / (duration / 16);
         
         function updateCounter() {
             start += increment;
@@ -4035,16 +4283,20 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCounter();
     }
     
-    // Advanced Intersection Observer for various animations
+    // Advanced Intersection Observer with improved settings
     const createObserver = (callback, options = {}) => {
-        return new IntersectionObserver(callback, {
+        const observer = new IntersectionObserver(callback, {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px',
             ...options
         });
+        
+        // Store observer for cleanup
+        window.careerAnimationController.observers.push(observer);
+        return observer;
     };
     
-    // Stats animation observer
+    // Stats animation observer with reset capability
     const statsObserver = createObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -4053,34 +4305,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 statNumbers.forEach((stat, index) => {
                     const targetCount = parseInt(stat.getAttribute('data-count'));
                     
+                    // Reset counter first
+                    stat.textContent = '0+';
+                    
                     setTimeout(() => {
                         animateCounter(stat, targetCount, 2500);
-                    }, index * 300);
+                    }, index * 200);
                 });
-                
-                statsObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.3 });
     
-    // Cards hover enhancement observer
+    // Cards animation observer with stagger effect
     const cardsObserver = createObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const cards = entry.target.querySelectorAll('.benefit-card, .job-card, .feature-item');
                 
                 cards.forEach((card, index) => {
-                    card.style.transform = 'translateY(30px)';
+                    // Reset card state
+                    card.style.transform = 'translateY(50px)';
                     card.style.opacity = '0';
-                    card.style.transition = 'all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
+                    card.style.transition = 'none';
+                    
+                    // Force reflow
+                    card.offsetHeight;
                     
                     setTimeout(() => {
+                        card.style.transition = 'all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
                         card.style.transform = 'translateY(0)';
                         card.style.opacity = '1';
-                    }, index * 150);
+                    }, index * 100);
                 });
-                
-                cardsObserver.unobserve(entry.target);
             }
         });
     });
@@ -4092,17 +4348,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 const steps = entry.target.querySelectorAll('.step-item');
                 
                 steps.forEach((step, index) => {
+                    // Reset step state
                     step.style.opacity = '0';
                     step.style.transform = 'translateX(-50px) scale(0.9)';
-                    step.style.transition = 'all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
+                    step.style.transition = 'none';
+                    
+                    // Force reflow
+                    step.offsetHeight;
                     
                     setTimeout(() => {
+                        step.style.transition = 'all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
                         step.style.opacity = '1';
                         step.style.transform = 'translateX(0) scale(1)';
-                    }, index * 200);
+                    }, index * 150);
                 });
-                
-                processObserver.unobserve(entry.target);
             }
         });
     });
@@ -4114,24 +4373,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 const images = entry.target.querySelectorAll('img');
                 
                 images.forEach((img, index) => {
+                    // Reset image state
                     img.style.opacity = '0';
                     img.style.transform = 'scale(1.1)';
-                    img.style.transition = 'all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1)';
                     img.style.filter = 'blur(10px)';
+                    img.style.transition = 'none';
+                    
+                    // Force reflow
+                    img.offsetHeight;
                     
                     setTimeout(() => {
+                        img.style.transition = 'all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1)';
                         img.style.opacity = '1';
                         img.style.transform = 'scale(1)';
                         img.style.filter = 'blur(0)';
-                    }, index * 100);
+                    }, index * 200);
                 });
-                
-                imageObserver.unobserve(entry.target);
             }
         });
     });
     
-    // Initialize observers
+    // Initialize observers with proper cleanup
     function initObservers() {
         // Header stats
         const headerStats = document.querySelector('.header-stats');
@@ -4140,7 +4402,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Card sections
-        const cardSections = document.querySelectorAll('.benefits-section, .jobs-section');
+        const cardSections = document.querySelectorAll('.benefits-section, .jobs-section, .company-culture');
         cardSections.forEach(section => {
             cardsObserver.observe(section);
         });
@@ -4158,56 +4420,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Smooth scrolling for anchor links
+    function initSmoothScrolling() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    }
+    
     // Floating animation for decorative elements
     function initFloatingAnimations() {
         const floatingElements = document.querySelectorAll('.decoration-circle, .decoration-dot, .decoration-orb');
         
         floatingElements.forEach((element, index) => {
-            element.style.animation = `float 3s ease-in-out infinite`;
-            element.style.animationDelay = `${index * 0.5}s`;
+            element.style.animation = `float 4s ease-in-out infinite`;
+            element.style.animationDelay = `${index * 0.7}s`;
         });
     }
-    
-    // Add CSS for floating animation
-    const floatingCSS = `
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0px) translateX(0px) rotate(0deg); 
-            }
-            25% { 
-                transform: translateY(-20px) translateX(10px) rotate(1deg); 
-            }
-            50% { 
-                transform: translateY(-10px) translateX(-10px) rotate(-1deg); 
-            }
-            75% { 
-                transform: translateY(-15px) translateX(15px) rotate(0.5deg); 
-            }
-        }
-        
-        @keyframes glow {
-            0%, 100% { 
-                box-shadow: 0 0 20px rgba(139, 0, 0, 0.3); 
-            }
-            50% { 
-                box-shadow: 0 0 40px rgba(139, 0, 0, 0.6); 
-            }
-        }
-        
-        @keyframes pulseGlow {
-            0%, 100% { 
-                box-shadow: 0 0 0 0 rgba(139, 0, 0, 0.7); 
-            }
-            70% { 
-                box-shadow: 0 0 0 10px rgba(139, 0, 0, 0); 
-            }
-        }
-    `;
-    
-    // Add styles to page
-    const styleSheet = document.createElement('style');
-    styleSheet.textContent = floatingCSS;
-    document.head.appendChild(styleSheet);
     
     // Enhanced hover effects
     function initEnhancedHovers() {
@@ -4215,12 +4452,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const benefitCards = document.querySelectorAll('.benefit-card');
         benefitCards.forEach(card => {
             card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-15px) scale(1.03) rotateY(5deg)';
+                card.style.transform = 'translateY(-15px) scale(1.03)';
                 card.style.boxShadow = '0 25px 60px rgba(139, 0, 0, 0.2)';
             });
             
             card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0) scale(1) rotateY(0deg)';
+                card.style.transform = 'translateY(0) scale(1)';
                 card.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.1)';
             });
         });
@@ -4252,25 +4489,231 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Page visibility animation
-    function initPageVisibility() {
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
-                // Refresh animations when page becomes visible
-                if (typeof AOS !== 'undefined') {
-                    AOS.refresh();
-                }
-            }
-        });
+    // Run all initialization functions
+    initPageEntrance();
+    initObservers();
+    initSmoothScrolling();
+    initFloatingAnimations();
+    initEnhancedHovers();
+    
+    // Mark as initialized
+    window.careerAnimationController.isInitialized = true;
+    
+    // Final AOS refresh after everything is set up
+    setTimeout(() => {
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+        }
+    }, 1000);
+}
+
+// Add CSS for enhanced animations
+const enhancedCSS = `
+    @keyframes float {
+        0%, 100% { 
+            transform: translateY(0px) translateX(0px) rotate(0deg); 
+        }
+        25% { 
+            transform: translateY(-15px) translateX(8px) rotate(1deg); 
+        }
+        50% { 
+            transform: translateY(-8px) translateX(-8px) rotate(-1deg); 
+        }
+        75% { 
+            transform: translateY(-12px) translateX(12px) rotate(0.5deg); 
+        }
     }
     
-    // Initialize all features
+    @keyframes slideInUp {
+        0% {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideInLeft {
+        0% {
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes fadeInScale {
+        0% {
+            transform: scale(0.9);
+            opacity: 0;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+    
+    /* Fallback animations when AOS is not available */
+    .fallback-animate .page-header {
+        animation: fadeInScale 1.5s ease-out 0.3s both;
+    }
+    
+    .fallback-animate section:nth-child(2) { animation: slideInUp 1s ease-out 0.5s both; }
+    .fallback-animate section:nth-child(3) { animation: slideInUp 1s ease-out 0.7s both; }
+    .fallback-animate section:nth-child(4) { animation: slideInUp 1s ease-out 0.9s both; }
+    .fallback-animate section:nth-child(5) { animation: slideInUp 1s ease-out 1.1s both; }
+    .fallback-animate section:nth-child(6) { animation: slideInUp 1s ease-out 1.3s both; }
+    
+    .fallback-animate .benefit-card,
+    .fallback-animate .job-card,
+    .fallback-animate .feature-item {
+        animation: slideInUp 0.8s ease-out both;
+    }
+    
+    .fallback-animate .benefit-card:nth-child(1) { animation-delay: 0.1s; }
+    .fallback-animate .benefit-card:nth-child(2) { animation-delay: 0.2s; }
+    .fallback-animate .benefit-card:nth-child(3) { animation-delay: 0.3s; }
+    .fallback-animate .benefit-card:nth-child(4) { animation-delay: 0.4s; }
+    .fallback-animate .benefit-card:nth-child(5) { animation-delay: 0.5s; }
+    .fallback-animate .benefit-card:nth-child(6) { animation-delay: 0.6s; }
+    
+    .fallback-animate .step-item {
+        animation: slideInLeft 0.8s ease-out both;
+    }
+    
+    .fallback-animate .step-item:nth-child(1) { animation-delay: 0.2s; }
+    .fallback-animate .step-item:nth-child(2) { animation-delay: 0.4s; }
+    .fallback-animate .step-item:nth-child(3) { animation-delay: 0.6s; }
+    .fallback-animate .step-item:nth-child(4) { animation-delay: 0.8s; }
+    .fallback-animate .step-item:nth-child(5) { animation-delay: 1.0s; }
+    
+    /* Ensure smooth transitions */
+    .page-header,
+    .benefit-card,
+    .job-card,
+    .feature-item,
+    .step-item {
+        will-change: transform, opacity;
+    }
+    
+    /* Prevent flash of unstyled content */
+    .aos-init {
+        opacity: 1;
+    }
+    
+    /* Better loading state */
+    body.loading .page-header {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+`;
+
+// Add enhanced styles to page
+const enhancedStyleSheet = document.createElement('style');
+enhancedStyleSheet.textContent = enhancedCSS;
+document.head.appendChild(enhancedStyleSheet);
+
+// Main document ready handler
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Career page: DOM Content Loaded');
+    
+    // Add loading class initially
+    document.body.classList.add('loading');
+    
+    // Immediately show critical elements to prevent flashing
     setTimeout(() => {
-        initPageEntrance();
-        initObservers();
-        initFloatingAnimations();
-        initEnhancedHovers();
-        initPageVisibility();
+        document.querySelectorAll('.page-header, section').forEach(element => {
+            element.style.visibility = 'visible';
+        });
+    }, 50);
+    
+    // Initialize page transitions handler
+    handlePageTransitions();
+    
+    // First attempt to initialize
+    setTimeout(() => {
+        document.body.classList.remove('loading');
+        initializeAnimations();
     }, 100);
-});</script>
+});
+
+// Handle page load events - Critical for first visit
+window.addEventListener('load', function() {
+    console.log('Career page: Window Load Event');
+    
+    // Ensure animations work after full page load - this is crucial for first visit
+    setTimeout(() => {
+        console.log('Career page: Post-load initialization check');
+        
+        // Force re-initialization if not already done
+        if (!window.careerAnimationController.isInitialized) {
+            console.log('Career page: Re-initializing animations');
+            initializeAnimations();
+        }
+        
+        // Always refresh AOS on load
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+            console.log('Career page: AOS refreshed on load');
+        }
+        
+        // Make sure all elements are visible
+        document.querySelectorAll('.page-header, [data-aos], .benefit-card, .job-card, .feature-item, .step-item').forEach(element => {
+            if (!element.style.visibility || element.style.visibility === 'hidden') {
+                element.style.visibility = 'visible';
+            }
+        });
+        
+        console.log('Career page: All elements visibility ensured');
+    }, 200);
+    
+    // Additional safety net
+    setTimeout(() => {
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+        }
+    }, 500);
+    
+    // Emergency fallback - force show all elements after 3 seconds
+    setTimeout(() => {
+        document.querySelectorAll('.page-header, [data-aos], .benefit-card, .job-card, .feature-item, .step-item').forEach(element => {
+            if (element.style.visibility === 'hidden' || element.style.opacity === '0') {
+                element.style.visibility = 'visible';
+                element.style.opacity = '1';
+                element.classList.add('ready');
+            }
+        });
+        
+        // Force AOS refresh
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+        }
+    }, 3000);
+});
+
+// Handle scroll to top on page refresh
+window.addEventListener('beforeunload', function() {
+    window.scrollTo(0, 0);
+});
+
+// Ensure page starts from top on all loads
+if (window.performance && window.performance.navigation.type === 1) {
+    // Page was refreshed
+    window.scrollTo(0, 0);
+}
+
+// Additional scroll handling for various scenarios
+window.addEventListener('pagehide', function() {
+    window.scrollTo(0, 0);
+});
+
+// Set scroll restoration to manual
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+</script>
 @endsection

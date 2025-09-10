@@ -733,8 +733,12 @@ body {
 }
 
 @media (max-width: 480px) {
+    .premium-navbar {
+        top: 35px;
+    }
+
     body {
-        padding-top: ; /* 35px (topbar mobile) + 70px (navbar mobile) */
+        padding-top: 110px; /* 35px (topbar mobile) + 70px (navbar mobile) */
     }
 }
 
