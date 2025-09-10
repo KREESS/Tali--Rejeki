@@ -559,58 +559,27 @@
     }
 }
 
-/* Enhanced Overflow Prevention and Performance */
+/* Prevent Horizontal Overflow */
 html, body {
-    overflow-x: hidden !important;
+    overflow-x: hidden;
     max-width: 100vw;
-    position: relative;
 }
 
-*, *::before, *::after {
+* {
     box-sizing: border-box;
 }
 
-/* Container and Layout Fixes */
-.container {
-    max-width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-left: auto;
-    margin-right: auto;
+/* Fix for elements that might cause overflow */
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-.row {
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: calc(-1 * var(--bs-gutter-y));
-    margin-right: calc(-.5 * var(--bs-gutter-x));
-    margin-left: calc(-.5 * var(--bs-gutter-x));
-}
-
-.row > * {
-    flex-shrink: 0;
-    width: 100%;
-    max-width: 100%;
-    padding-right: calc(var(--bs-gutter-x) * .5);
-    padding-left: calc(var(--bs-gutter-x) * .5);
-    margin-top: var(--bs-gutter-y);
-}
-
-/* Section Spacing */
-section {
-    width: 100%;
+/* Ensure all positioned elements stay within viewport */
+.page-header *,
+.header-decoration *,
+.decoration-circle {
     max-width: 100vw;
-    overflow: hidden;
-}
-
-/* Enhanced Page Header Responsiveness */
-.page-header {
-    width: 100%;
-    max-width: 100vw;
-    overflow: hidden;
-    position: relative;
 }
 
 /* Enhanced Modern Career Page with Elegant Design */
@@ -2026,186 +1995,70 @@ body.dark-theme .job-footer {
     }
 }
 
-/* Ultra Small Mobile (320px and below) */
-@media (max-width: 320px) {
-    .container {
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-    
+/* Extra Small Mobile */
+@media (max-width: 360px) {
     .page-header {
-        padding: 25px 0 35px;
-        min-height: 55vh;
+        padding: 30px 0 40px;
+        min-height: 60vh;
     }
     
     .page-title {
-        font-size: 1.4rem;
-        line-height: 1.1;
+        font-size: 1.6rem;
     }
     
     .title-highlight {
-        font-size: 1rem;
-    }
-    
-    .page-description {
-        font-size: 0.9rem;
-        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
     }
     
     .header-badge {
-        padding: 6px 12px;
-        font-size: 10px;
-        margin-bottom: 1rem;
+        padding: 8px 16px;
+        font-size: 11px;
     }
     
     .stat-item {
-        padding: 0.5rem 0.6rem;
-        min-width: 120px;
+        padding: 0.6rem 0.8rem;
+        min-width: 130px;
     }
     
     .stat-number {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     
-    .stat-label {
-        font-size: 0.7rem;
-    }
-    
-    .section-title {
-        font-size: 1.3rem;
-    }
-    
-    .section-badge {
-        padding: 8px 16px;
-        font-size: 10px;
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
     }
     
     .feature-item,
     .benefit-card,
     .job-card {
-        padding: 0.8rem;
-        margin-bottom: 0.8rem;
+        padding: 1rem;
     }
     
-    .benefit-icon,
-    .feature-icon {
+    .process-steps {
+        padding: 1rem 5px;
+    }
+    
+    .step-icon {
         width: 40px;
         height: 40px;
         font-size: 1rem;
     }
     
-    .benefit-title,
-    .feature-content h4 {
-        font-size: 0.9rem;
-    }
-    
-    .benefit-description,
-    .feature-content p {
-        font-size: 0.75rem;
-        line-height: 1.3;
-    }
-    
-    .job-title {
-        font-size: 1rem;
-    }
-    
-    .job-description {
-        font-size: 0.75rem;
-    }
-    
-    .job-actions .btn {
-        padding: 8px 12px;
-        font-size: 10px;
-    }
-    
-    .step-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 0.9rem;
-    }
-    
     .step-item h4 {
-        font-size: 0.7rem;
-    }
-    
-    .step-item p {
-        font-size: 0.6rem;
-    }
-    
-    .cta-title {
-        font-size: 1.2rem;
-    }
-    
-    .cta-description {
         font-size: 0.8rem;
     }
     
-    .cta-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
+    .step-item p {
+        font-size: 0.65rem;
     }
     
-    .decoration-circle-1,
-    .decoration-circle-2,
-    .decoration-circle-3 {
-        display: none;
-    }
-}
-
-/* Responsive Bootstrap Grid Overrides */
-@media (max-width: 575.98px) {
-    .col-sm-6 {
-        width: 100%;
-        flex: 0 0 auto;
-    }
-}
-
-@media (min-width: 576px) and (max-width: 767.98px) {
-    .col-sm-6 {
-        width: 50%;
-        flex: 0 0 auto;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .col-md-6 {
-        width: 50%;
-        flex: 0 0 auto;
-    }
-}
-
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    .col-lg-4 {
-        width: 33.333333%;
-        flex: 0 0 auto;
-    }
-}
-
-@media (min-width: 1200px) {
-    .col-xl-4 {
-        width: 33.333333%;
-        flex: 0 0 auto;
-    }
-}
-
-/* Enhanced Grid Spacing */
-.g-4 {
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 1.5rem;
-}
-
-@media (max-width: 768px) {
-    .g-4 {
-        --bs-gutter-x: 1rem;
-        --bs-gutter-y: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .g-4 {
-        --bs-gutter-x: 0.75rem;
-        --bs-gutter-y: 0.75rem;
+    .company-culture,
+    .benefits-section,
+    .jobs-section,
+    .recruitment-process,
+    .cta-section {
+        padding: 50px 0;
     }
 }
 
@@ -3417,121 +3270,20 @@ body.dark-theme .job-footer {
     }
 }
 
-/* Performance Optimizations */
-.page-header-bg,
-.page-header-overlay,
-.header-decoration,
-.decoration-circle {
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-}
-
-/* Floating Elements Containment */
-.header-decoration {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 3;
-    pointer-events: none;
-}
-
-.decoration-circle {
-    position: absolute;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
-    backdrop-filter: blur(10px);
-    animation: circleFloat 20s ease-in-out infinite;
-    pointer-events: none;
-    max-width: 200px;
-    max-height: 200px;
-}
-
-.decoration-circle-1 {
-    width: min(200px, 15vw);
-    height: min(200px, 15vw);
-    top: 10%;
-    right: max(5%, 10px);
-}
-
-.decoration-circle-2 {
-    width: min(150px, 12vw);
-    height: min(150px, 12vw);
-    top: 60%;
-    left: max(5%, 10px);
-}
-
-.decoration-circle-3 {
-    width: min(100px, 8vw);
-    height: min(100px, 8vw);
-    top: 80%;
-    right: max(10%, 15px);
-}
-
-/* Text Wrapping and Overflow Prevention */
-.job-title,
-.benefit-title,
-.feature-content h4,
-.step-item h4 {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    line-height: 1.2;
-}
-
-.job-description,
-.benefit-description,
-.feature-content p,
-.step-item p,
-.requirements-content {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-    text-align: justify;
-}
-
-/* Image Responsiveness */
-img {
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-/* Table Responsiveness (if any) */
-table {
-    width: 100%;
-    table-layout: fixed;
-}
-
-table td, table th {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-/* Form Elements Responsiveness */
-input, textarea, select {
-    max-width: 100%;
+/* Smooth animations and transitions */
+* {
     box-sizing: border-box;
 }
 
-/* Print Styles */
+.section-header {
+    margin-bottom: 3rem;
+}
+
+/* Print styles */
 @media print {
     .cta-section,
     .page-header::before,
-    .benefit-card::before,
-    .decoration-circle,
-    .header-decoration,
-    .visual-decoration {
+    .benefit-card::before {
         display: none !important;
     }
     
@@ -3539,106 +3291,15 @@ input, textarea, select {
         background: white !important;
         color: black !important;
         box-shadow: none !important;
-        text-shadow: none !important;
-    }
-    
-    .page-header {
-        background: white !important;
-        color: black !important;
-        min-height: auto;
-        padding: 20px 0;
-    }
-    
-    .job-card,
-    .benefit-card,
-    .feature-item {
-        break-inside: avoid;
-        page-break-inside: avoid;
-        border: 1px solid #ccc !important;
-        margin-bottom: 20px;
-        padding: 15px;
     }
 }
 
-/* Accessibility Improvements */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --career-text-primary: #f7fafc;
-        --career-text-secondary: #a0aec0;
-        --career-bg-primary: #1a202c;
-        --career-bg-secondary: #2d3748;
-        --career-bg-tertiary: #4a5568;
-        --career-border: #4a5568;
-        --career-shadow: rgba(0, 0, 0, 0.3);
-        --career-shadow-lg: rgba(0, 0, 0, 0.4);
-    }
-}
-
-/* Focus Management */
-*:focus {
-    outline: 2px solid var(--career-primary);
-    outline-offset: 2px;
-}
-
-.btn:focus,
-.job-title a:focus {
-    outline: 2px solid var(--career-primary);
-    outline-offset: 2px;
-    box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.1);
-}
-
-/* High Contrast Mode Support */
-@media (prefers-contrast: high) {
-    .job-card,
-    .benefit-card,
-    .feature-item {
-        border: 2px solid var(--career-text-primary);
-    }
-    
-    .btn-primary,
-    .btn-outline-primary {
-        border-width: 2px;
-    }
-}
-
-/* Screen Reader Only Content */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* Smooth scrolling */
-html {
-    scroll-behavior: smooth;
-}
-
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-}
-
-/* Section header styling */
-.section-header {
-    margin-bottom: 3rem;
-}
-
-@media (max-width: 768px) {
-    .section-header {
-        margin-bottom: 2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .section-header {
-        margin-bottom: 1.5rem;
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
 

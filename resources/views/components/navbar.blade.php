@@ -691,13 +691,14 @@ body.dark-theme .nav-link:focus {
 }
 
 @media (max-width: 480px) {
+    .premium-navbar {
+        top: 35px;
+    }
+
     .navbar-container {
-        padding: 0 20px;
-        height: 70px;
     }
     
     .navbar-menu {
-        top: 105px; /* 35px (topbar mobile) + 70px (navbar mobile) */
         padding: 20px;
     }
     
@@ -733,7 +734,7 @@ body {
 
 @media (max-width: 480px) {
     body {
-        padding-top: 105px; /* 35px (topbar mobile) + 70px (navbar mobile) */
+        padding-top: ; /* 35px (topbar mobile) + 70px (navbar mobile) */
     }
 }
 

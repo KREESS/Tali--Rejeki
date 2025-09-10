@@ -4,7 +4,7 @@
             <!-- Promo/Tagline Section -->
             <div class="promo-section">
                 <div class="promo-text">
-                    <i class="fas fa-fire text-warning me-2"></i>
+                    <i class="fas fa-fire text-warning me-2" aria-hidden="true"></i>
                     <span class="promo-message" data-translate="promo-text">
                         Diskon hingga 25% untuk semua produk insulasi
                     </span>
@@ -14,34 +14,34 @@
             <!-- Social Media & Search Section -->
             <div class="social-section">
                 <div class="social-links">
-                    <a href="https://www.tiktok.com/@pt.tali.rejeki" target="_blank" class="social-link" title="Follow us on TikTok">
-                        <i class="fab fa-tiktok"></i>
+                    <a href="https://www.tiktok.com/@pt.tali.rejeki" target="_blank" rel="noopener noreferrer" class="social-link" title="Follow us on TikTok" aria-label="Follow us on TikTok">
+                        <i class="fab fa-tiktok" aria-hidden="true"></i>
                     </a>
-                    <a href="https://instagram.com/PTTaliRejeki" target="_blank" class="social-link" title="Follow us on Instagram">
-                        <i class="fab fa-instagram"></i>
+                    <a href="https://instagram.com/PTTaliRejeki" target="_blank" rel="noopener noreferrer" class="social-link" title="Follow us on Instagram" aria-label="Follow us on Instagram">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
                     </a>
-                    <a href="https://facebook.com/PTTaliRejeki" target="_blank" class="social-link" title="Like us on Facebook">
-                        <i class="fab fa-facebook-f"></i>
+                    <a href="https://facebook.com/PTTaliRejeki" target="_blank" rel="noopener noreferrer" class="social-link" title="Like us on Facebook" aria-label="Like us on Facebook">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
                     </a>
-                    <div class="divider"></div>
-                    <button class="search-btn" title="Search" onclick="toggleSearch()">
-                        <i class="fas fa-search"></i>
+                    <div class="divider" aria-hidden="true"></div>
+                    <button class="search-btn" title="Search" aria-label="Open search" onclick="toggleSearch()">
+                        <i class="fas fa-search" aria-hidden="true"></i>
                     </button>
-                    <button class="theme-toggle" title="Toggle Dark/Light Mode" onclick="toggleTheme()">
+                    <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle theme" onclick="toggleTheme()">
                         <div class="theme-toggle-track">
                             <div class="theme-toggle-thumb">
-                                <i class="fas fa-sun sun-icon"></i>
-                                <i class="fas fa-moon moon-icon"></i>
+                                <i class="fas fa-sun sun-icon" aria-hidden="true"></i>
+                                <i class="fas fa-moon moon-icon" aria-hidden="true"></i>
                             </div>
                         </div>
                     </button>
-                    <div class="language-toggle">
-                        <button class="lang-btn active" data-lang="id" title="Bahasa Indonesia">
-                            <img src="https://flagcdn.com/w20/id.png" alt="ID" class="flag-icon">
+                    <div class="language-toggle" role="group" aria-label="Language selection">
+                        <button class="lang-btn active" data-lang="id" title="Bahasa Indonesia" aria-label="Switch to Indonesian">
+                            <img src="https://flagcdn.com/w20/id.png" alt="ID" class="flag-icon" loading="lazy">
                             <span class="lang-text">ID</span>
                         </button>
-                        <button class="lang-btn" data-lang="en" title="English">
-                            <img src="https://flagcdn.com/w20/us.png" alt="EN" class="flag-icon">
+                        <button class="lang-btn" data-lang="en" title="English" aria-label="Switch to English">
+                            <img src="https://flagcdn.com/w20/us.png" alt="EN" class="flag-icon" loading="lazy">
                             <span class="lang-text">EN</span>
                         </button>
                     </div>
@@ -50,14 +50,14 @@
         </div>
         
         <!-- Search Box (Hidden by default) -->
-        <div class="search-box" id="searchBox">
+        <div class="search-box" id="searchBox" role="search" aria-hidden="true">
             <div class="search-container">
-                <input type="text" class="search-input" data-translate="search-placeholder" placeholder="Cari produk insulasi..." id="searchInput">
-                <button class="search-submit" type="button">
-                    <i class="fas fa-search"></i>
+                <input type="text" class="search-input" data-translate="search-placeholder" placeholder="Cari produk insulasi..." id="searchInput" aria-label="Search products">
+                <button class="search-submit" type="button" aria-label="Submit search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
                 </button>
-                <button class="search-close" onclick="toggleSearch()">
-                    <i class="fas fa-times"></i>
+                <button class="search-close" onclick="toggleSearch()" aria-label="Close search">
+                    <i class="fas fa-times" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
@@ -65,7 +65,7 @@
 </div>
 
 <style>
-/* ===== TOPBAR STYLING ===== */
+/* ===== ENHANCED TOPBAR STYLING ===== */
 .topbar {
     position: fixed;
     top: 0;
@@ -82,12 +82,16 @@
     box-shadow: 0 2px 10px rgba(124, 20, 21, 0.3);
     transition: all 0.3s ease;
     font-size: 14px;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
 }
 
 .topbar .container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 30px;
+    width: 100%;
 }
 
 .topbar-content {
@@ -96,6 +100,8 @@
     justify-content: space-between;
     height: 45px;
     position: relative;
+    width: 100%;
+    gap: 15px;
 }
 
 /* Promo Section */
@@ -103,6 +109,8 @@
     flex: 1;
     display: flex;
     align-items: center;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .promo-text {
@@ -111,11 +119,16 @@
     display: flex;
     align-items: center;
     animation: slideInLeft 0.8s ease-out;
+    width: 100%;
+    min-width: 0;
 }
 
 .promo-message {
     font-size: 13px;
     line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .promo-message .highlight {
@@ -128,12 +141,14 @@
 .social-section {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .social-links {
     display: flex;
     align-items: center;
     gap: 15px;
+    flex-wrap: nowrap;
 }
 
 .social-link {
@@ -429,7 +444,7 @@
     letter-spacing: 0.5px;
 }
 
-/* Search Box */
+/* Enhanced Search Box */
 .search-box {
     position: absolute;
     top: 100%;
@@ -448,6 +463,9 @@
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s ease;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
 }
 
 .search-box.active {
@@ -463,6 +481,9 @@
     max-width: 600px;
     margin: 0 auto;
     position: relative;
+    padding: 0 30px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .search-input {
@@ -476,6 +497,8 @@
     outline: none;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(124, 20, 21, 0.08);
+    min-width: 0;
+    width: 100%;
 }
 
 .search-input:focus {
@@ -500,6 +523,7 @@
     box-shadow: 0 4px 15px rgba(124, 20, 21, 0.3);
     font-size: 16px;
     min-width: 60px;
+    flex-shrink: 0;
 }
 
 .search-submit:hover {
@@ -521,6 +545,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .search-close:hover {
@@ -540,10 +565,47 @@
     }
 }
 
-/* Responsive Design */
+/* Enhanced Responsive Design */
+
+/* Large Tablets (768px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .topbar .container {
+        padding: 0 25px;
+    }
+    
+    .promo-message {
+        font-size: 12px;
+    }
+    
+    .social-links {
+        gap: 12px;
+    }
+    
+    .search-input {
+        font-size: 15px;
+        padding: 13px 18px;
+    }
+    
+    .search-submit {
+        padding: 13px 18px;
+        font-size: 15px;
+    }
+}
+
+/* Medium Tablets (768px and below) */
 @media (max-width: 768px) {
+    .topbar .container {
+        padding: 0 20px;
+    }
+    
     .topbar-content {
-        height: 40px;
+        height: 42px;
+        gap: 10px;
+    }
+    
+    .promo-section {
+        flex: 1;
+        min-width: 0;
     }
     
     .promo-text {
@@ -552,28 +614,41 @@
     
     .promo-message {
         font-size: 11px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+    
+    .social-section {
+        flex-shrink: 0;
     }
     
     .social-links {
-        gap: 10px;
+        gap: 8px;
+        flex-wrap: nowrap;
     }
     
     .social-link,
     .search-btn {
-        width: 28px;
-        height: 28px;
+        width: 30px;
+        height: 30px;
         font-size: 12px;
+        flex-shrink: 0;
     }
     
     .theme-toggle {
-        width: 42px;
-        height: 22px;
-        margin-left: 8px;
+        width: 44px;
+        height: 24px;
+        margin-left: 6px;
+        flex-shrink: 0;
     }
     
     .theme-toggle-thumb {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
+        top: 2px;
+        left: 2px;
     }
     
     .theme-toggle.dark .theme-toggle-thumb {
@@ -582,17 +657,19 @@
     
     .theme-toggle-thumb .sun-icon,
     .theme-toggle-thumb .moon-icon {
-        font-size: 8px;
+        font-size: 9px;
     }
     
     .language-toggle {
-        margin-left: 8px;
+        margin-left: 6px;
         padding: 2px;
+        flex-shrink: 0;
     }
     
     .lang-btn {
-        padding: 4px 8px;
+        padding: 5px 8px;
         font-size: 10px;
+        gap: 4px;
     }
     
     .flag-icon {
@@ -612,29 +689,174 @@
     .search-submit {
         padding: 12px 16px;
         font-size: 14px;
-        min-width: 50px;
+        min-width: 52px;
+    }
+    
+    .search-close {
+        width: 36px;
+        height: 36px;
     }
 }
 
+/* Small Mobile (480px and below) */
 @media (max-width: 480px) {
     .topbar .container {
-        padding: 0 20px;
+        padding: 0 15px;
     }
     
     .topbar-content {
-        height: 35px;
+        height: 38px;
+        gap: 8px;
+    }
+    
+    .promo-section {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+    }
+    
+    .promo-text {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
     }
     
     .promo-text .fas {
-        display: none;
+        font-size: 12px;
+        margin-right: 6px;
+        flex-shrink: 0;
     }
     
     .promo-message {
         font-size: 10px;
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .social-section {
+        flex-shrink: 0;
     }
     
     .social-links {
+        gap: 6px;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    
+    .social-link,
+    .search-btn {
+        width: 26px;
+        height: 26px;
+        font-size: 11px;
+        flex-shrink: 0;
+    }
+    
+    .divider {
+        height: 16px;
+        margin: 0 3px;
+    }
+    
+    .theme-toggle {
+        width: 38px;
+        height: 20px;
+        margin-left: 4px;
+        flex-shrink: 0;
+    }
+    
+    .theme-toggle-thumb {
+        width: 16px;
+        height: 16px;
+        top: 2px;
+        left: 2px;
+    }
+    
+    .theme-toggle.dark .theme-toggle-thumb {
+        transform: translateX(18px);
+    }
+    
+    .theme-toggle-thumb .sun-icon,
+    .theme-toggle-thumb .moon-icon {
+        font-size: 7px;
+    }
+    
+    .language-toggle {
+        margin-left: 4px;
+        padding: 2px;
+        flex-shrink: 0;
+    }
+    
+    .lang-btn {
+        padding: 3px 6px;
+        font-size: 9px;
+        gap: 3px;
+        min-width: 28px;
+    }
+    
+    .flag-icon {
+        width: 12px;
+        height: 9px;
+    }
+    
+    .lang-text {
+        font-size: 8px;
+        font-weight: 700;
+    }
+    
+    .search-box {
+        padding: 15px 0;
+    }
+    
+    .search-container {
+        padding: 0 15px;
         gap: 8px;
+    }
+    
+    .search-input {
+        font-size: 14px;
+        padding: 10px 14px;
+    }
+    
+    .search-submit {
+        padding: 10px 14px;
+        font-size: 13px;
+        min-width: 46px;
+    }
+    
+    .search-close {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+}
+
+/* Extra Small Mobile (360px and below) */
+@media (max-width: 360px) {
+    .topbar .container {
+        padding: 0 12px;
+    }
+    
+    .topbar-content {
+        height: 36px;
+        gap: 6px;
+    }
+    
+    .promo-text .fas {
+        font-size: 10px;
+        margin-right: 4px;
+    }
+    
+    .promo-message {
+        font-size: 9px;
+        line-height: 1.1;
+    }
+    
+    .social-links {
+        gap: 4px;
     }
     
     .social-link,
@@ -644,19 +866,26 @@
         font-size: 10px;
     }
     
+    .divider {
+        height: 14px;
+        margin: 0 2px;
+    }
+    
     .theme-toggle {
-        width: 36px;
+        width: 34px;
         height: 18px;
-        margin-left: 6px;
+        margin-left: 3px;
     }
     
     .theme-toggle-thumb {
         width: 14px;
         height: 14px;
+        top: 2px;
+        left: 2px;
     }
     
     .theme-toggle.dark .theme-toggle-thumb {
-        transform: translateX(18px);
+        transform: translateX(16px);
     }
     
     .theme-toggle-thumb .sun-icon,
@@ -665,37 +894,267 @@
     }
     
     .language-toggle {
-        margin-left: 6px;
-        padding: 2px;
+        margin-left: 3px;
+        padding: 1px;
     }
     
     .lang-btn {
-        padding: 3px 6px;
-        font-size: 9px;
-        gap: 3px;
+        padding: 2px 4px;
+        font-size: 8px;
+        gap: 2px;
+        min-width: 24px;
     }
     
     .flag-icon {
-        width: 12px;
+        width: 10px;
         height: 8px;
     }
     
     .lang-text {
-        font-size: 8px;
-    }
-    
-    .search-box {
-        padding: 15px 0;
+        font-size: 7px;
     }
     
     .search-container {
-        padding: 0 20px;
+        padding: 0 12px;
+        gap: 6px;
     }
+    
+    .search-input {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+    
+    .search-submit {
+        padding: 8px 12px;
+        font-size: 12px;
+        min-width: 40px;
+    }
+    
+    .search-close {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+    }
+}
+
+/* Ultra Small Mobile (320px and below) */
+@media (max-width: 320px) {
+    .topbar .container {
+        padding: 0 10px;
+    }
+    
+    .topbar-content {
+        height: 34px;
+        gap: 4px;
+    }
+    
+    .promo-text .fas {
+        font-size: 9px;
+        margin-right: 3px;
+    }
+    
+    .promo-message {
+        font-size: 8px;
+        line-height: 1;
+    }
+    
+    .social-links {
+        gap: 3px;
+    }
+    
+    .social-link,
+    .search-btn {
+        width: 22px;
+        height: 22px;
+        font-size: 9px;
+    }
+    
+    .divider {
+        height: 12px;
+        margin: 0 1px;
+    }
+    
+    .theme-toggle {
+        width: 30px;
+        height: 16px;
+        margin-left: 2px;
+    }
+    
+    .theme-toggle-thumb {
+        width: 12px;
+        height: 12px;
+        top: 2px;
+        left: 2px;
+    }
+    
+    .theme-toggle.dark .theme-toggle-thumb {
+        transform: translateX(14px);
+    }
+    
+    .theme-toggle-thumb .sun-icon,
+    .theme-toggle-thumb .moon-icon {
+        font-size: 5px;
+    }
+    
+    .language-toggle {
+        margin-left: 2px;
+        padding: 1px;
+    }
+    
+    .lang-btn {
+        padding: 1px 3px;
+        font-size: 7px;
+        gap: 1px;
+        min-width: 20px;
+    }
+    
+    .flag-icon {
+        width: 8px;
+        height: 6px;
+    }
+    
+    .lang-text {
+        font-size: 6px;
+    }
+    
+    .search-container {
+        padding: 0 10px;
+        gap: 4px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-input {
+        font-size: 12px;
+        padding: 6px 10px;
+        margin-bottom: 5px;
+    }
+    
+    .search-submit {
+        padding: 6px 10px;
+        font-size: 11px;
+        min-width: 36px;
+        align-self: flex-end;
+    }
+    
+    .search-close {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+/* Performance Optimizations and Overflow Prevention */
+* {
+    box-sizing: border-box;
+}
+
+/* Ensure no horizontal overflow */
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 /* Hide/Show based on scroll */
 .topbar.hidden {
     transform: translateY(-100%);
+}
+
+/* Responsive Text Handling */
+.promo-message {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Button and Icon Accessibility */
+.social-link,
+.search-btn,
+.theme-toggle,
+.lang-btn {
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Focus states for accessibility */
+.social-link:focus,
+.search-btn:focus,
+.theme-toggle:focus,
+.lang-btn:focus,
+.search-input:focus,
+.search-submit:focus,
+.search-close:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
+}
+
+/* Prevent text selection on UI elements */
+.topbar-content,
+.social-links,
+.theme-toggle,
+.language-toggle {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Smooth scroll behavior */
+@media (prefers-reduced-motion: no-preference) {
+    .topbar {
+        scroll-behavior: smooth;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .topbar {
+        border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+    }
+    
+    .social-link,
+    .search-btn,
+    .theme-toggle,
+    .lang-btn {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* Print styles */
+@media print {
+    .topbar {
+        display: none;
+    }
+}
+
+/* Loading state optimization */
+.topbar {
+    will-change: transform;
+    contain: layout style paint;
+}
+
+.search-box {
+    will-change: opacity, transform;
+    contain: layout style paint;
+}
+
+/* Safari specific fixes */
+@supports (-webkit-appearance: none) {
+    .search-input {
+        -webkit-appearance: none;
+        border-radius: 25px;
+    }
+    
+    .search-submit,
+    .search-close {
+        -webkit-appearance: none;
+    }
 }
 
 /* Dark Theme Styles */
@@ -833,12 +1292,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Search functionality
     window.toggleSearch = function() {
+        const searchBox = document.getElementById('searchBox');
+        const searchInput = document.getElementById('searchInput');
+        
         searchBox.classList.toggle('active');
         
         if (searchBox.classList.contains('active')) {
+            searchBox.setAttribute('aria-hidden', 'false');
             setTimeout(() => {
                 searchInput.focus();
             }, 300);
+        } else {
+            searchBox.setAttribute('aria-hidden', 'true');
         }
     };
     
