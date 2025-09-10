@@ -4,40 +4,40 @@
 
 @section('content')
 <!-- Page Header with Enhanced Design -->
-<section class="page-header">
+<section class="page-header page-entrance" data-aos="fade-in" data-aos-duration="1500">
     <div class="page-header-bg" style="background-image: url('{{ asset('img/career/carir.jpg') }}');"></div>
     <div class="page-header-overlay"></div>
     <div class="header-decoration">
-        <div class="decoration-circle decoration-circle-1"></div>
-        <div class="decoration-circle decoration-circle-2"></div>
-        <div class="decoration-circle decoration-circle-3"></div>
+        <div class="decoration-circle decoration-circle-1" data-aos="fade-down" data-aos-delay="1600"></div>
+        <div class="decoration-circle decoration-circle-2" data-aos="fade-left" data-aos-delay="1700"></div>
+        <div class="decoration-circle decoration-circle-3" data-aos="fade-right" data-aos-delay="1800"></div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
                 <div class="header-content" data-aos="fade-up">
-                    <div class="header-badge">
+                    <div class="header-badge" data-aos="zoom-in" data-aos-delay="500">
                         <i class="fas fa-briefcase"></i>
                         <span>Karier & Kesempatan</span>
                     </div>
-                    <h1 class="page-title">
-                        <span class="title-main">Karier</span>
-                        <span class="title-highlight">Bersama Kami</span>
+                    <h1 class="page-title" data-aos="fade-up" data-aos-delay="600">
+                        <span class="title-main" data-aos="fade-right" data-aos-delay="700">Karier</span>
+                        <span class="title-highlight" data-aos="fade-left" data-aos-delay="800">Bersama Kami</span>
                     </h1>
-                    <p class="page-description">
+                    <p class="page-description" data-aos="fade-up" data-aos-delay="900">
                         Bergabunglah dengan tim profesional kami dan bangun karier yang cemerlang di industri insulasi terdepan. 
                         Wujudkan potensi terbaik Anda bersama Tali Rejeki.
                     </p>
                     <div class="header-stats">
-                        <div class="stat-item">
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="1000">
                             <div class="stat-number" data-count="14">0+</div>
                             <div class="stat-label">Tahun Pengalaman</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="1100">
                             <div class="stat-number" data-count="100">0+</div>
                             <div class="stat-label">Tim Profesional</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item" data-aos="fade-up" data-aos-delay="1200">
                             <div class="stat-number" data-count="500">0+</div>
                             <div class="stat-label">Proyek Sukses</div>
                         </div>
@@ -54,16 +54,16 @@
         <div class="row align-items-center">
             <div class="col-lg-6" data-aos="fade-right">
                 <div class="culture-content">
-                    <div class="section-badge">
+                    <div class="section-badge" data-aos="zoom-in" data-aos-delay="300">
                         <i class="fas fa-heart"></i>
                         <span>Budaya Perusahaan</span>
                     </div>
-                    <h2 class="section-title">Mengapa Bergabung dengan Tali Rejeki?</h2>
-                    <p class="section-description">
+                    <h2 class="section-title" data-aos="fade-up" data-aos-delay="400">Mengapa Bergabung dengan Tali Rejeki?</h2>
+                    <p class="section-description" data-aos="fade-up" data-aos-delay="500">
                         Kami percaya bahwa SDM adalah aset terpenting perusahaan. Bergabunglah dengan lingkungan kerja 
                         yang mendukung pengembangan diri dan memberikan kesempatan berkembang bagi setiap individu.
                     </p>
-                    
+
                     <div class="culture-features">
                         <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
                             <div class="feature-icon">
@@ -113,12 +113,8 @@
             <div class="col-lg-6" data-aos="fade-left">
                 <div class="culture-visual">
                     <div class="image-container">
-                        <img src="{{ asset('img/career-culture.jpg') }}" alt="Budaya Perusahaan" class="img-fluid rounded-3">
+                        <img src="{{ asset('img/career/104.png') }}" alt="Budaya Perusahaan" class="img-fluid rounded-3">
                         <div class="image-overlay">
-                            <div class="overlay-content">
-                                <i class="fas fa-play-circle"></i>
-                                <span>Lihat Kultur Kerja Kami</span>
-                            </div>
                         </div>
                     </div>
                     <div class="visual-decoration">
@@ -136,17 +132,17 @@
 <section class="benefits-section py-5">
     <div class="container">
         <div class="section-header text-center mb-5" data-aos="fade-up">
-            <div class="section-badge">
+            <div class="section-badge" data-aos="zoom-in" data-aos-delay="200">
                 <i class="fas fa-gift"></i>
                 <span>Benefit & Fasilitas</span>
             </div>
-            <h2 class="section-title">Paket Kompensasi & Benefit</h2>
-            <p class="section-description">
+            <h2 class="section-title" data-aos="fade-up" data-aos-delay="300">Paket Kompensasi & Benefit</h2>
+            <p class="section-description" data-aos="fade-up" data-aos-delay="400">
                 Kami menyediakan paket kompensasi yang kompetitif dan berbagai benefit menarik untuk mendukung kesejahteraan karyawan
             </p>
         </div>
         
-        <div class="row g-4">
+        <div class="row g-4 stagger-children" data-aos="fade-up" data-aos-delay="500">
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="benefit-card premium-card">
                     <div class="card-decoration">
@@ -164,7 +160,7 @@
                     <p class="benefit-description">
                         Sistem remunerasi yang adil dan kompetitif sesuai dengan industri dan kinerja, plus bonus tahunan
                     </p>
-                    <div class="benefit-highlight">
+                    <div class="benefit-highlight" data-aos="zoom-in" data-aos-delay="300">
                         <i class="fas fa-check-circle"></i>
                         <span>Bonus Performa</span>
                     </div>
@@ -184,7 +180,7 @@
                     <p class="benefit-description">
                         Jaminan kesehatan untuk karyawan dan keluarga dengan coverage yang luas dan layanan premium
                     </p>
-                    <div class="benefit-highlight">
+                    <div class="benefit-highlight" data-aos="zoom-in" data-aos-delay="400">
                         <i class="fas fa-shield-alt"></i>
                         <span>Coverage Keluarga</span>
                     </div>
@@ -204,7 +200,7 @@
                     <p class="benefit-description">
                         Cuti tahunan, cuti sakit, dan berbagai jenis leave yang fleksibel untuk work-life balance optimal
                     </p>
-                    <div class="benefit-highlight">
+                    <div class="benefit-highlight" data-aos="zoom-in" data-aos-delay="500">
                         <i class="fas fa-calendar-alt"></i>
                         <span>18 Hari Cuti/Tahun</span>
                     </div>
@@ -224,7 +220,7 @@
                     <p class="benefit-description">
                         Program pelatihan internal dan eksternal untuk meningkatkan kompetensi dan sertifikasi profesional
                     </p>
-                    <div class="benefit-highlight">
+                    <div class="benefit-highlight" data-aos="zoom-in" data-aos-delay="600">
                         <i class="fas fa-graduation-cap"></i>
                         <span>Sertifikasi Gratis</span>
                     </div>
@@ -244,7 +240,7 @@
                     <p class="benefit-description">
                         Sistem bonus kinerja dan insentif untuk pencapaian target tertentu dengan reward menarik
                     </p>
-                    <div class="benefit-highlight">
+                    <div class="benefit-highlight" data-aos="zoom-in" data-aos-delay="700">
                         <i class="fas fa-star"></i>
                         <span>Reward System</span>
                     </div>
@@ -264,7 +260,7 @@
                     <p class="benefit-description">
                         Fleksibilitas waktu kerja dan work from home untuk posisi tertentu dengan teknologi terdepan
                     </p>
-                    <div class="benefit-highlight">
+                    <div class="benefit-highlight" data-aos="zoom-in" data-aos-delay="800">
                         <i class="fas fa-clock"></i>
                         <span>Flexible Hours</span>
                     </div>
@@ -278,69 +274,104 @@
 <section class="jobs-section py-5" id="jobs">
     <div class="container">
         <div class="section-header text-center mb-5" data-aos="fade-up">
-            <div class="section-badge">
+            <div class="section-badge" data-aos="zoom-in" data-aos-delay="200">
                 <i class="fas fa-briefcase"></i>
                 <span>Lowongan Kerja</span>
             </div>
-            <h2 class="section-title">Posisi yang Tersedia</h2>
-            <p class="section-description">
+            <h2 class="section-title" data-aos="fade-up" data-aos-delay="300">Posisi yang Tersedia</h2>
+            <p class="section-description" data-aos="fade-up" data-aos-delay="400">
                 Temukan posisi yang sesuai dengan keahlian dan minat Anda
             </p>
         </div>
         
         @if($jobs->count() > 0)
         <div class="jobs-grid">
-            @foreach($jobs as $index => $job)
-            <div class="job-card" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                <div class="job-header">
-                    <div class="job-meta">
-                        <span class="job-type">{{ $job->employment_type ?? 'Full Time' }}</span>
-                        <span class="job-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            {{ $job->location ?? 'Jakarta' }}
-                        </span>
-                    </div>
-                    
-                    <h3 class="job-title">
-                        <a href="{{ route('job.detail', $job->slug) }}">{{ $job->title }}</a>
-                    </h3>
-                    
-                    <div class="job-department">
-                        <i class="fas fa-building"></i>
-                        {{ $job->department ?? 'General' }}
+            <div class="row g-4 justify-content-center">
+                @foreach($jobs as $index => $job)
+                <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                    <div class="job-card h-100 w-100">
+                        <div class="job-status">
+                            <span class="status-badge status-active">
+                                <i class="fas fa-circle"></i>
+                                Aktif
+                            </span>
+                        </div>
+                        
+                        <div class="job-header">
+                            <div class="job-meta">
+                                <span class="job-type">{{ $job->employment_type ?? 'Full Time' }}</span>
+                                <span class="job-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ $job->location ?? 'Jakarta' }}
+                                </span>
+                            </div>
+                            
+                            <h3 class="job-title">
+                                <a href="{{ route('job.detail', $job->slug) }}">{{ $job->title }}</a>
+                            </h3>
+                            
+                            <div class="job-department">
+                                <i class="fas fa-building"></i>
+                                {{ $job->department ?? 'General' }}
+                            </div>
+                        </div>
+                        
+                        <div class="job-content">
+                            <p class="job-description">{{ Str::limit($job->summary ?? 'Deskripsi akan segera diperbarui.', 120) }}</p>
+                            
+                            @if($job->salary_display)
+                            <div class="job-salary">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>{{ $job->salary_display }}</span>
+                            </div>
+                            @endif
+                            
+                            @if($job->description_html)
+                            <div class="job-requirements">
+                                <div class="requirements-label">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Persyaratan Utama</span>
+                                </div>
+                                <div class="requirements-content">
+                                    {!! Str::limit(strip_tags($job->description_html), 200) !!}
+                                </div>
+                            </div>
+                            @else
+                            <div class="job-requirements">
+                                <div class="requirements-label">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Persyaratan Utama</span>
+                                </div>
+                                <ul class="requirements-list">
+                                    <li>Minimal S1 sesuai bidang</li>
+                                    <li>Pengalaman kerja relevan</li>
+                                    <li>Komunikasi yang baik</li>
+                                </ul>
+                            </div>
+                            @endif
+                        </div>
+                        
+                        <div class="job-footer">
+                            <div class="job-posted">
+                                <i class="fas fa-clock"></i>
+                                <span>{{ $job->created_at->diffForHumans() }}</span>
+                            </div>
+                            
+                            <div class="job-actions">
+                                <a href="{{ route('job.detail', $job->slug) }}" class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-info-circle"></i>
+                                    Detail
+                                </a>
+                                <a href="{{ route('job.detail', $job->slug) }}#apply" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Lamar
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="job-content">
-                    <p class="job-description">{{ Str::limit($job->summary ?? 'Deskripsi akan segera diperbarui.', 150) }}</p>
-                    
-                    @if($job->salary_display)
-                    <div class="job-salary">
-                        <i class="fas fa-money-bill-wave"></i>
-                        {{ $job->salary_display }}
-                    </div>
-                    @endif
-                </div>
-                
-                <div class="job-footer">
-                    <div class="job-posted">
-                        <i class="fas fa-clock"></i>
-                        Diposting {{ $job->created_at->diffForHumans() }}
-                    </div>
-                    
-                    <div class="job-actions">
-                        <a href="{{ route('job.detail', $job->slug) }}" class="btn btn-outline-primary btn-sm">
-                            <i class="fas fa-info-circle"></i>
-                            Detail
-                        </a>
-                        <a href="{{ route('job.detail', $job->slug) }}#apply" class="btn btn-primary btn-sm">
-                            <i class="fas fa-paper-plane"></i>
-                            Lamar
-                        </a>
-                    </div>
-                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
         
         <!-- Pagination -->
@@ -369,12 +400,12 @@
 <section class="recruitment-process py-5">
     <div class="container">
         <div class="section-header text-center mb-5" data-aos="fade-up">
-            <div class="section-badge">
+            <div class="section-badge" data-aos="zoom-in" data-aos-delay="200">
                 <i class="fas fa-route"></i>
                 <span>Proses Rekrutmen</span>
             </div>
-            <h2 class="section-title">Langkah-Langkah Melamar</h2>
-            <p class="section-description">
+            <h2 class="section-title" data-aos="fade-up" data-aos-delay="300">Langkah-Langkah Melamar</h2>
+            <p class="section-description" data-aos="fade-up" data-aos-delay="400">
                 Proses rekrutmen yang transparan dan profesional untuk memastikan kandidat terbaik
             </p>
         </div>
@@ -424,23 +455,23 @@
 </section>
 
 <!-- CTA Section -->
-<section class="cta-section py-5">
+<section class="cta-section py-5" data-aos="fade-up" data-aos-delay="100">
     <div class="container">
-        <div class="cta-content text-center" data-aos="fade-up">
-            <div class="cta-icon">
+        <div class="cta-content text-center" data-aos="zoom-in" data-aos-delay="300">
+            <div class="cta-icon" data-aos="bounce-in" data-aos-delay="500">
                 <i class="fas fa-rocket"></i>
             </div>
-            <h2 class="cta-title">Siap Memulai Karier Bersama Kami?</h2>
-            <p class="cta-description">
+            <h2 class="cta-title" data-aos="fade-up" data-aos-delay="600">Siap Memulai Karier Bersama Kami?</h2>
+            <p class="cta-description" data-aos="fade-up" data-aos-delay="700">
                 Jangan lewatkan kesempatan untuk menjadi bagian dari tim yang inovatif dan berdedikasi. 
                 Mulai perjalanan karier Anda bersama Tali Rejeki!
             </p>
-            <div class="cta-actions">
-                <a href="#jobs" class="btn btn-primary btn-lg me-3">
+            <div class="cta-actions" data-aos="fade-up" data-aos-delay="800">
+                <a href="#jobs" class="btn btn-primary btn-lg me-3" data-aos="fade-right" data-aos-delay="900">
                     <i class="fas fa-search"></i>
                     Lihat Lowongan
                 </a>
-                <a href="{{ route('contact') }}" class="btn btn-outline-primary btn-lg">
+                <a href="{{ route('contact') }}" class="btn btn-outline-primary btn-lg" data-aos="fade-left" data-aos-delay="1000">
                     <i class="fas fa-envelope"></i>
                     Kirim CV
                 </a>
@@ -450,6 +481,84 @@
 </section>
 
 <style>
+/* Page Entrance Animations */
+.page-entrance {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: pageEnter 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes pageEnter {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stagger-children > * {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: staggerIn 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes staggerIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced AOS Custom Animations */
+[data-aos="bounce-in"] {
+    transform: scale(0.3);
+    opacity: 0;
+}
+
+[data-aos="bounce-in"].aos-animate {
+    animation: bounceIn 1s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+[data-aos="zoom-in-up"] {
+    opacity: 0;
+    transform: scale(0.8) translateY(50px);
+}
+
+[data-aos="zoom-in-up"].aos-animate {
+    animation: zoomInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes zoomInUp {
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
 /* Enhanced Modern Career Page with Elegant Design */
 :root {
     --career-primary: #8B0000;
@@ -502,6 +611,7 @@ body.dark-theme {
     background-position: center top;
     background-repeat: no-repeat;
     z-index: 1;
+    filter: blur(5px);
 }
 
 .page-header-overlay {
@@ -510,7 +620,11 @@ body.dark-theme {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(139, 0, 0, 0.85) 0%, rgba(220, 20, 60, 0.8) 25%, rgba(255, 107, 107, 0.75) 50%, rgba(220, 20, 60, 0.8) 75%, rgba(139, 0, 0, 0.85) 100%);
+    background: 
+        radial-gradient(circle at 30% 40%, rgba(0, 0, 0, 0.3) 0%, transparent 70%),
+        radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.2) 0%, transparent 70%),
+        linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.3) 100%);
+    backdrop-filter: blur(2px);
     z-index: 2;
 }
 
@@ -554,29 +668,6 @@ body.dark-theme {
     animation: circleFloat 20s ease-in-out infinite;
 }
 
-.decoration-circle-1 {
-    width: 300px;
-    height: 300px;
-    top: -150px;
-    right: -150px;
-    animation-delay: 0s;
-}
-
-.decoration-circle-2 {
-    width: 200px;
-    height: 200px;
-    bottom: -100px;
-    left: -100px;
-    animation-delay: -7s;
-}
-
-.decoration-circle-3 {
-    width: 150px;
-    height: 150px;
-    top: 50%;
-    right: 10%;
-    animation-delay: -14s;
-}
 
 @keyframes circleFloat {
     0%, 100% { transform: translate(0, 0) scale(1); }
@@ -849,6 +940,67 @@ body.dark-theme .feature-content p {
     color: var(--career-text-secondary);
 }
 
+/* Dark Mode Support for Jobs Section */
+body.dark-theme .job-card {
+    background: var(--career-bg-primary);
+    border-color: var(--career-border);
+    box-shadow: 0 10px 40px var(--career-shadow);
+}
+
+body.dark-theme .job-card:hover {
+    border-color: var(--career-secondary);
+    box-shadow: 0 25px 60px var(--career-shadow-lg);
+}
+
+body.dark-theme .job-title a {
+    color: var(--career-text-primary);
+}
+
+body.dark-theme .job-title a:hover {
+    color: var(--career-primary);
+}
+
+body.dark-theme .job-description {
+    color: var(--career-text-secondary);
+}
+
+body.dark-theme .job-department {
+    color: var(--career-text-secondary);
+}
+
+body.dark-theme .job-location {
+    color: var(--career-text-secondary);
+}
+
+body.dark-theme .job-requirements {
+    background: linear-gradient(135deg, 
+        rgba(139, 0, 0, 0.08) 0%, 
+        rgba(220, 20, 60, 0.05) 100%);
+    border-color: rgba(139, 0, 0, 0.15);
+}
+
+body.dark-theme .requirements-label {
+    color: var(--career-text-primary);
+}
+
+body.dark-theme .requirements-content {
+    color: var(--career-text-secondary);
+}
+
+body.dark-theme .requirements-list li {
+    color: var(--career-text-secondary);
+}
+
+body.dark-theme .job-posted {
+    color: var(--career-text-secondary);
+    background: var(--career-bg-secondary);
+    border-color: var(--career-border);
+}
+
+body.dark-theme .job-footer {
+    border-top-color: var(--career-border);
+}
+
 .feature-progress {
     height: 6px;
     background: var(--career-bg-secondary);
@@ -875,10 +1027,19 @@ body.dark-theme .feature-content p {
     border-radius: var(--career-radius-lg);
     overflow: hidden;
     box-shadow: 0 25px 60px var(--career-shadow-lg);
+    aspect-ratio: 4/5;
+    width: 100%;
+    height: auto;
+    max-height: 800px;
 }
 
 .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
     transition: all 0.4s ease;
+    border-radius: var(--career-radius-lg);
 }
 
 .image-overlay {
@@ -893,31 +1054,34 @@ body.dark-theme .feature-content p {
     justify-content: center;
     opacity: 0;
     transition: all 0.4s ease;
-}
-
-.image-container:hover .image-overlay {
-    opacity: 1;
-}
-
-.image-container:hover img {
-    transform: scale(1.1);
+    border-radius: var(--career-radius-lg);
 }
 
 .overlay-content {
     text-align: center;
     color: white;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.image-container:hover .overlay-content {
+    transform: translateY(0);
 }
 
 .overlay-content i {
     font-size: 4rem;
     margin-bottom: 1rem;
     animation: pulse 2s infinite;
+    color: white;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .overlay-content span {
     display: block;
     font-weight: 700;
     font-size: 1.1rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.5px;
 }
 
 .visual-decoration {
@@ -1408,15 +1572,8 @@ body.dark-theme .feature-content p {
     font-size: 0.95rem;
 }
 
-.culture-visual img {
-    border-radius: var(--career-radius-lg);
-    box-shadow: 0 20px 50px var(--career-shadow-lg);
-    transition: all 0.3s ease;
-}
-
-.culture-visual img:hover {
-    transform: scale(1.02) rotate(1deg);
-    box-shadow: 0 25px 60px var(--career-shadow-lg);
+.culture-visual {
+    position: relative;
 }
 
 /* Benefits Section */
@@ -1503,14 +1660,27 @@ body.dark-theme .feature-content p {
 
 /* Jobs Section */
 .jobs-section {
-    padding: 80px 0;
+    padding: 100px 0;
     background: transparent;
+    position: relative;
 }
 
 .jobs-grid {
-    display: grid;
-    gap: 2rem;
     margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.jobs-grid .row {
+    justify-content: center;
+}
+
+.jobs-grid [class*="col-"] {
+    display: flex;
+    justify-content: center;
 }
 
 .job-card {
@@ -1521,7 +1691,12 @@ body.dark-theme .feature-content p {
     border: 2px solid var(--career-border);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 30px var(--career-shadow);
+    box-shadow: 0 10px 40px var(--career-shadow);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 380px;
+    width: 100%;
 }
 
 .job-card::before {
@@ -1535,15 +1710,70 @@ body.dark-theme .feature-content p {
     transition: all 0.3s ease;
 }
 
+.job-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
 .job-card:hover {
-    transform: translateY(-8px) scale(1.02);
+    transform: translateY(-12px) scale(1.03);
     border-color: var(--career-secondary);
-    box-shadow: 0 20px 50px var(--career-shadow-lg);
+    box-shadow: 0 25px 60px var(--career-shadow-lg);
 }
 
 .job-card:hover::before {
     width: 8px;
     background: linear-gradient(135deg, var(--career-secondary), var(--career-accent));
+}
+
+.job-card:hover::after {
+    opacity: 1;
+    animation: cardShine 0.6s ease-out;
+}
+
+@keyframes cardShine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.job-status {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+}
+
+.status-badge i {
+    font-size: 6px;
+    animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
 }
 
 .job-header {
@@ -1621,6 +1851,9 @@ body.dark-theme .feature-content p {
 
 .job-content {
     margin-bottom: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .job-description {
@@ -1636,22 +1869,106 @@ body.dark-theme .feature-content p {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     font-size: 1rem;
     background: rgba(22, 163, 74, 0.1);
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
     border: 1px solid rgba(22, 163, 74, 0.2);
+    transition: all 0.3s ease;
+}
+
+.job-salary:hover {
+    background: rgba(22, 163, 74, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(22, 163, 74, 0.2);
+}
+
+.job-requirements {
+    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    background: linear-gradient(135deg, 
+        rgba(139, 0, 0, 0.05) 0%, 
+        rgba(220, 20, 60, 0.03) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(139, 0, 0, 0.1);
+}
+
+.requirements-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    color: var(--career-text-primary);
+    font-size: 0.9rem;
+}
+
+.requirements-label i {
+    color: var(--career-primary);
+    font-size: 14px;
+}
+
+.requirements-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.requirements-list li {
+    color: var(--career-text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.4;
+}
+
+.requirements-list li::before {
+    content: '•';
+    color: var(--career-primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.requirements-content {
+    color: var(--career-text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0.8rem 0;
+    text-align: justify;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.requirements-content p {
+    margin: 0 0 0.5rem 0;
+    color: inherit;
+}
+
+.requirements-content ul,
+.requirements-content ol {
+    margin: 0.5rem 0;
+    padding-left: 1.2rem;
+}
+
+.requirements-content li {
+    margin-bottom: 0.3rem;
+    color: inherit;
 }
 
 .job-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 1rem;
+    padding-top: 1.5rem;
     border-top: 2px solid var(--career-border);
     flex-wrap: wrap;
     gap: 1rem;
+    margin-top: auto;
 }
 
 .job-posted {
@@ -1661,23 +1978,104 @@ body.dark-theme .feature-content p {
     align-items: center;
     gap: 0.5rem;
     font-weight: 500;
+    background: var(--career-bg-secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid var(--career-border);
+}
+
+.job-posted i {
+    color: var(--career-primary);
 }
 
 .job-actions {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
-/* No Jobs */
+.job-actions .btn {
+    border-radius: 12px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.job-actions .btn-outline-primary {
+    border: 2px solid var(--career-primary);
+    color: var(--career-primary);
+    background: transparent;
+}
+
+.job-actions .btn-outline-primary:hover {
+    background: var(--career-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 0, 0, 0.3);
+}
+
+.job-actions .btn-primary {
+    background: linear-gradient(135deg, var(--career-primary), var(--career-secondary));
+    border: none;
+    color: white;
+}
+
+.job-actions .btn-primary:hover {
+    background: linear-gradient(135deg, var(--career-secondary), var(--career-accent));
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139, 0, 0, 0.4);
+}
+
+.job-actions .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.job-actions .btn:hover::before {
+    left: 100%;
+}
+
+/* No Jobs Enhanced */
 .no-jobs {
     padding: 5rem 2rem;
     text-align: center;
+    background: var(--career-bg-primary);
+    border-radius: var(--career-radius-lg);
+    border: 2px solid var(--career-border);
+    box-shadow: 0 15px 40px var(--career-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.no-jobs::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(139, 0, 0, 0.03) 0%, 
+        transparent 50%, 
+        rgba(220, 20, 60, 0.03) 100%);
+    pointer-events: none;
 }
 
 .no-jobs-icon {
     width: 120px;
     height: 120px;
-    background: var(--career-bg-secondary);
+    background: linear-gradient(135deg, var(--career-bg-secondary), var(--career-bg-tertiary));
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1686,7 +2084,53 @@ body.dark-theme .feature-content p {
     color: var(--career-text-secondary);
     margin: 0 auto 2rem;
     border: 3px solid var(--career-border);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.no-jobs-icon:hover {
+    transform: scale(1.1) rotate(10deg);
+    color: var(--career-primary);
+    border-color: var(--career-primary);
+    box-shadow: 0 15px 30px var(--career-shadow-lg);
+}
+
+.no-jobs h3 {
+    color: var(--career-text-primary);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.no-jobs p {
+    color: var(--career-text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.no-jobs .btn {
+    position: relative;
+    z-index: 1;
+    border-radius: 15px;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.4s ease;
+}
+
+.no-jobs .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(139, 0, 0, 0.3);
 }
 
 .no-jobs-icon:hover {
@@ -2012,6 +2456,16 @@ body.dark-theme .feature-content p {
 }
 
 /* Responsive Design for Fixed Inline Steps */
+@media (min-width: 1400px) {
+    .jobs-grid {
+        max-width: 1400px;
+    }
+    
+    .job-card {
+        max-width: 400px;
+    }
+}
+
 @media (max-width: 1024px) {
     .recruitment-process {
         padding: 100px 0;
@@ -2749,10 +3203,67 @@ body.dark-theme .feature-content p {
         flex-direction: column;
         align-items: stretch;
         text-align: center;
+        gap: 1rem;
     }
     
     .job-actions {
         justify-content: center;
+        gap: 0.8rem;
+    }
+    
+    .job-actions .btn {
+        flex: 1;
+        min-width: 120px;
+    }
+    
+    .job-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        min-height: 380px;
+    }
+    
+    .job-title {
+        font-size: 1.2rem;
+    }
+    
+    .job-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+    
+    .job-requirements {
+        padding: 1rem;
+    }
+    
+    .requirements-list li {
+        font-size: 0.8rem;
+    }
+    
+    .requirements-content {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+    
+    .jobs-grid {
+        max-width: 100%;
+    }
+    
+    .jobs-grid .row {
+        margin: 0;
+        justify-content: center;
+    }
+    
+    .job-card {
+        min-height: 350px;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .job-status {
+        position: static;
+        margin-bottom: 1rem;
+        align-self: flex-start;
     }
     
     .cta-actions {
@@ -2764,6 +3275,27 @@ body.dark-theme .feature-content p {
         text-align: center;
         flex-direction: column;
         align-items: center;
+    }
+    
+    .culture-visual {
+        margin-top: 2rem;
+    }
+    
+    .image-container {
+        aspect-ratio: 4/5;
+        max-height: 400px;
+    }
+    
+    .overlay-content i {
+        font-size: 3rem;
+    }
+    
+    .overlay-content span {
+        font-size: 1rem;
+    }
+    
+    .visual-decoration {
+        display: none;
     }
     
     .timeline-item:not(:last-child)::after {
@@ -2828,6 +3360,42 @@ body.dark-theme .feature-content p {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS with custom settings for this page
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out-cubic',
+            once: true,
+            offset: 50,
+            delay: 0
+        });
+    }
+    
+    // Enhanced page entrance animation
+    function initPageEntrance() {
+        // Add staggered entrance animation to main sections
+        const sections = document.querySelectorAll('section');
+        sections.forEach((section, index) => {
+            if (!section.hasAttribute('data-aos')) {
+                section.setAttribute('data-aos', 'fade-up');
+                section.setAttribute('data-aos-delay', (index * 200).toString());
+            }
+        });
+        
+        // Special entrance animation for page header
+        const pageHeader = document.querySelector('.page-header');
+        if (pageHeader) {
+            pageHeader.style.opacity = '0';
+            pageHeader.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                pageHeader.style.transition = 'all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1)';
+                pageHeader.style.opacity = '1';
+                pageHeader.style.transform = 'scale(1)';
+            }, 300);
+        }
+    }
+    
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -2842,7 +3410,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Counter Animation for Header Stats
+    // Enhanced Counter Animation for Header Stats
     function animateCounter(element, target, duration = 2000) {
         let start = 0;
         const increment = target / (duration / 16); // 60fps
@@ -2860,8 +3428,17 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCounter();
     }
     
-    // Intersection Observer for stats animation
-    const statsObserver = new IntersectionObserver((entries) => {
+    // Advanced Intersection Observer for various animations
+    const createObserver = (callback, options = {}) => {
+        return new IntersectionObserver(callback, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px',
+            ...options
+        });
+    };
+    
+    // Stats animation observer
+    const statsObserver = createObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const statNumbers = entry.target.querySelectorAll('.stat-number[data-count]');
@@ -2869,47 +3446,224 @@ document.addEventListener('DOMContentLoaded', function() {
                 statNumbers.forEach((stat, index) => {
                     const targetCount = parseInt(stat.getAttribute('data-count'));
                     
-                    // Delay each counter slightly for staggered effect
                     setTimeout(() => {
                         animateCounter(stat, targetCount, 2500);
-                    }, index * 200);
+                    }, index * 300);
                 });
                 
-                // Unobserve after animation starts
                 statsObserver.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.5
-    });
+    }, { threshold: 0.5 });
     
-    // Observe the header stats
-    const headerStats = document.querySelector('.header-stats');
-    if (headerStats) {
-        statsObserver.observe(headerStats);
-    }
-    
-    // Add animation to timeline on scroll
-    const timelineItems = document.querySelectorAll('.step-item');
-    
-    const timelineObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
+    // Cards hover enhancement observer
+    const cardsObserver = createObserver((entries) => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, index * 200);
+                const cards = entry.target.querySelectorAll('.benefit-card, .job-card, .feature-item');
+                
+                cards.forEach((card, index) => {
+                    card.style.transform = 'translateY(30px)';
+                    card.style.opacity = '0';
+                    card.style.transition = 'all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
+                    
+                    setTimeout(() => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.opacity = '1';
+                    }, index * 150);
+                });
+                
+                cardsObserver.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.1
     });
     
-    timelineItems.forEach(item => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(30px)';
-        item.style.transition = 'all 0.6s ease';
-        timelineObserver.observe(item);
+    // Process steps animation observer
+    const processObserver = createObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const steps = entry.target.querySelectorAll('.step-item');
+                
+                steps.forEach((step, index) => {
+                    step.style.opacity = '0';
+                    step.style.transform = 'translateX(-50px) scale(0.9)';
+                    step.style.transition = 'all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
+                    
+                    setTimeout(() => {
+                        step.style.opacity = '1';
+                        step.style.transform = 'translateX(0) scale(1)';
+                    }, index * 200);
+                });
+                
+                processObserver.unobserve(entry.target);
+            }
+        });
     });
+    
+    // Image animation observer
+    const imageObserver = createObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const images = entry.target.querySelectorAll('img');
+                
+                images.forEach((img, index) => {
+                    img.style.opacity = '0';
+                    img.style.transform = 'scale(1.1)';
+                    img.style.transition = 'all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1)';
+                    img.style.filter = 'blur(10px)';
+                    
+                    setTimeout(() => {
+                        img.style.opacity = '1';
+                        img.style.transform = 'scale(1)';
+                        img.style.filter = 'blur(0)';
+                    }, index * 100);
+                });
+                
+                imageObserver.unobserve(entry.target);
+            }
+        });
+    });
+    
+    // Initialize observers
+    function initObservers() {
+        // Header stats
+        const headerStats = document.querySelector('.header-stats');
+        if (headerStats) {
+            statsObserver.observe(headerStats);
+        }
+        
+        // Card sections
+        const cardSections = document.querySelectorAll('.benefits-section, .jobs-section');
+        cardSections.forEach(section => {
+            cardsObserver.observe(section);
+        });
+        
+        // Process section
+        const processSection = document.querySelector('.recruitment-process .process-steps');
+        if (processSection) {
+            processObserver.observe(processSection);
+        }
+        
+        // Image sections
+        const imageSections = document.querySelectorAll('.culture-visual, .image-container');
+        imageSections.forEach(section => {
+            imageObserver.observe(section);
+        });
+    }
+    
+    // Floating animation for decorative elements
+    function initFloatingAnimations() {
+        const floatingElements = document.querySelectorAll('.decoration-circle, .decoration-dot, .decoration-orb');
+        
+        floatingElements.forEach((element, index) => {
+            element.style.animation = `float 3s ease-in-out infinite`;
+            element.style.animationDelay = `${index * 0.5}s`;
+        });
+    }
+    
+    // Add CSS for floating animation
+    const floatingCSS = `
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) translateX(0px) rotate(0deg); 
+            }
+            25% { 
+                transform: translateY(-20px) translateX(10px) rotate(1deg); 
+            }
+            50% { 
+                transform: translateY(-10px) translateX(-10px) rotate(-1deg); 
+            }
+            75% { 
+                transform: translateY(-15px) translateX(15px) rotate(0.5deg); 
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(139, 0, 0, 0.3); 
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(139, 0, 0, 0.6); 
+            }
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { 
+                box-shadow: 0 0 0 0 rgba(139, 0, 0, 0.7); 
+            }
+            70% { 
+                box-shadow: 0 0 0 10px rgba(139, 0, 0, 0); 
+            }
+        }
+    `;
+    
+    // Add styles to page
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = floatingCSS;
+    document.head.appendChild(styleSheet);
+    
+    // Enhanced hover effects
+    function initEnhancedHovers() {
+        // Benefit cards
+        const benefitCards = document.querySelectorAll('.benefit-card');
+        benefitCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-15px) scale(1.03) rotateY(5deg)';
+                card.style.boxShadow = '0 25px 60px rgba(139, 0, 0, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1) rotateY(0deg)';
+                card.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.1)';
+            });
+        });
+        
+        // Job cards
+        const jobCards = document.querySelectorAll('.job-card');
+        jobCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-12px) scale(1.02)';
+                card.style.boxShadow = '0 30px 70px rgba(139, 0, 0, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+                card.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.1)';
+            });
+        });
+        
+        // Feature items
+        const featureItems = document.querySelectorAll('.feature-item');
+        featureItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-8px) translateX(8px)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0) translateX(0)';
+            });
+        });
+    }
+    
+    // Page visibility animation
+    function initPageVisibility() {
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                // Refresh animations when page becomes visible
+                if (typeof AOS !== 'undefined') {
+                    AOS.refresh();
+                }
+            }
+        });
+    }
+    
+    // Initialize all features
+    setTimeout(() => {
+        initPageEntrance();
+        initObservers();
+        initFloatingAnimations();
+        initEnhancedHovers();
+        initPageVisibility();
+    }, 100);
 });</script>
 @endsection
