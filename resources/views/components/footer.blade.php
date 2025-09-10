@@ -11,6 +11,403 @@ $privacyHref = \Illuminate\Support\Facades\Route::has('privacy') ? route('privac
 <style>
 /* ===== UNIQUE FOOTER COMPONENT STYLING WITH THEME SUPPORT ===== */
 
+/* Advanced Footer Entrance Animations */
+.app-footer-component {
+    opacity: 0;
+    transform: translateY(80px);
+    animation: footerEntranceMain 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s forwards;
+}
+
+@keyframes footerEntranceMain {
+    0% {
+        opacity: 0;
+        transform: translateY(80px) scale(0.95);
+        filter: blur(10px);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateY(20px) scale(0.98);
+        filter: blur(3px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Custom AOS Animations for Footer */
+[data-aos="slide-right"] {
+    transform: translateX(-100px) scaleX(0);
+    transform-origin: left center;
+}
+
+[data-aos="slide-right"].aos-animate {
+    animation: slideRightScale 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slideRightScale {
+    0% {
+        transform: translateX(-100px) scaleX(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(-20px) scaleX(0.8);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateX(0) scaleX(1);
+        opacity: 1;
+    }
+}
+
+[data-aos="slide-up"] {
+    transform: translateY(60px) scale(0.8);
+    opacity: 0;
+}
+
+[data-aos="slide-up"].aos-animate {
+    animation: slideUpScale 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes slideUpScale {
+    0% {
+        transform: translateY(60px) scale(0.8);
+        opacity: 0;
+    }
+    60% {
+        transform: translateY(-10px) scale(1.05);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+[data-aos="flip-up"] {
+    transform: perspective(400px) rotateX(90deg);
+    opacity: 0;
+}
+
+[data-aos="flip-up"].aos-animate {
+    animation: flipUpEntrance 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes flipUpEntrance {
+    0% {
+        transform: perspective(400px) rotateX(90deg);
+        opacity: 0;
+    }
+    40% {
+        transform: perspective(400px) rotateX(-10deg);
+        opacity: 0.7;
+    }
+    70% {
+        transform: perspective(400px) rotateX(10deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: perspective(400px) rotateX(0deg);
+        opacity: 1;
+    }
+}
+
+[data-aos="bounce"] {
+    transform: translateY(-50px);
+    opacity: 0;
+}
+
+[data-aos="bounce"].aos-animate {
+    animation: bounceEntrance 1s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+}
+
+@keyframes bounceEntrance {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    25% {
+        transform: translateY(10px);
+        opacity: 0.8;
+    }
+    40% {
+        transform: translateY(-8px);
+        opacity: 0.9;
+    }
+    65% {
+        transform: translateY(4px);
+        opacity: 0.95;
+    }
+    82% {
+        transform: translateY(-2px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+[data-aos="flip-left"] {
+    transform: perspective(400px) rotateY(-90deg);
+    opacity: 0;
+}
+
+[data-aos="flip-left"].aos-animate {
+    animation: flipLeftEntrance 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes flipLeftEntrance {
+    0% {
+        transform: perspective(400px) rotateY(-90deg);
+        opacity: 0;
+    }
+    40% {
+        transform: perspective(400px) rotateY(10deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: perspective(400px) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+/* Enhanced Floating Elements Animation */
+.footer-comp-floating-shape {
+    opacity: 0;
+    transform: scale(0) rotate(180deg);
+}
+
+.footer-comp-floating-shape[data-aos].aos-animate {
+    animation: floatingShapeEntrance 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes floatingShapeEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(180deg);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.2) rotate(90deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* Enhanced Accent Line Animation */
+.footer-comp-accent[data-aos="slide-right"] {
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+.footer-comp-accent[data-aos="slide-right"].aos-animate {
+    animation: accentLineGrow 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes accentLineGrow {
+    0% {
+        transform: scaleX(0);
+        filter: brightness(0.5);
+    }
+    50% {
+        transform: scaleX(0.7);
+        filter: brightness(1.5);
+    }
+    100% {
+        transform: scaleX(1);
+        filter: brightness(1);
+    }
+}
+
+/* Staggered Team Member Animations */
+.footer-comp-team-member[data-aos="zoom-in"] {
+    transform: scale(0) rotate(180deg);
+    opacity: 0;
+}
+
+.footer-comp-team-member[data-aos="zoom-in"].aos-animate {
+    animation: teamMemberZoom 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes teamMemberZoom {
+    0% {
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(10deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Product Category Slide Animation */
+.footer-comp-product-category[data-aos="slide-right"] {
+    transform: translateX(-100px) skewX(-10deg);
+    opacity: 0;
+}
+
+.footer-comp-product-category[data-aos="slide-right"].aos-animate {
+    animation: productCategorySlide 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes productCategorySlide {
+    0% {
+        transform: translateX(-100px) skewX(-10deg);
+        opacity: 0;
+    }
+    60% {
+        transform: translateX(10px) skewX(2deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(0) skewX(0deg);
+        opacity: 1;
+    }
+}
+
+/* Social Links Flip Animation Enhancement */
+.footer-comp-social-link[data-aos="flip-left"] {
+    transform: perspective(600px) rotateY(-180deg) scale(0.5);
+    opacity: 0;
+}
+
+.footer-comp-social-link[data-aos="flip-left"].aos-animate {
+    animation: socialFlipEnhanced 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes socialFlipEnhanced {
+    0% {
+        transform: perspective(600px) rotateY(-180deg) scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: perspective(600px) rotateY(-20deg) scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: perspective(600px) rotateY(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Contact Item Enhanced Animation */
+.footer-comp-contact-item[data-aos="fade-left"] {
+    transform: translateX(-60px) rotateZ(-5deg);
+    opacity: 0;
+}
+
+.footer-comp-contact-item[data-aos="fade-left"].aos-animate {
+    animation: contactItemSlide 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes contactItemSlide {
+    0% {
+        transform: translateX(-60px) rotateZ(-5deg);
+        opacity: 0;
+    }
+    70% {
+        transform: translateX(5px) rotateZ(1deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(0) rotateZ(0deg);
+        opacity: 1;
+    }
+}
+
+/* Progressive Loading Effect */
+.footer-comp-main {
+    perspective: 1000px;
+}
+
+.footer-comp-company,
+.footer-comp-contact,
+.footer-comp-team,
+.footer-comp-products {
+    opacity: 0;
+    transform: translateY(50px) rotateX(10deg);
+}
+
+.footer-comp-company[data-aos].aos-animate,
+.footer-comp-contact[data-aos].aos-animate,
+.footer-comp-team[data-aos].aos-animate,
+.footer-comp-products[data-aos].aos-animate {
+    animation: sectionReveal 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes sectionReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) rotateX(10deg);
+    }
+    60% {
+        opacity: 0.8;
+        transform: translateY(-5px) rotateX(-2deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg);
+    }
+}
+
+/* Bottom Footer Slide Up Enhanced */
+.footer-comp-bottom[data-aos="slide-up"] {
+    transform: translateY(100px) scale(0.9);
+    opacity: 0;
+}
+
+.footer-comp-bottom[data-aos="slide-up"].aos-animate {
+    animation: bottomFooterSlide 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes bottomFooterSlide {
+    0% {
+        transform: translateY(100px) scale(0.9);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-10px) scale(1.02);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Micro-interactions for Enhanced UX */
+.footer-comp-company-logo[data-aos="zoom-in"] {
+    transform: scale(0) rotate(-360deg);
+    opacity: 0;
+}
+
+.footer-comp-company-logo[data-aos="zoom-in"].aos-animate {
+    animation: logoSpinIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes logoSpinIn {
+    0% {
+        transform: scale(0) rotate(-360deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(-180deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
 /* CSS Custom Properties for Enhanced Theme System */
 :root {
     /* Light Theme Colors - Enhanced */
@@ -996,16 +1393,16 @@ body.dark-theme .footer-comp-social-link:hover img {
 }
 </style>
 
-<footer class="app-footer-component">
+<footer class="app-footer-component" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
   <!-- Floating Elements -->
   <div class="footer-comp-floating-elements">
-    <div class="footer-comp-floating-shape"></div>
-    <div class="footer-comp-floating-shape"></div>
-    <div class="footer-comp-floating-shape"></div>
+    <div class="footer-comp-floating-shape" data-aos="fade-in" data-aos-delay="500" data-aos-duration="800"></div>
+    <div class="footer-comp-floating-shape" data-aos="fade-in" data-aos-delay="700" data-aos-duration="800"></div>
+    <div class="footer-comp-floating-shape" data-aos="fade-in" data-aos-delay="900" data-aos-duration="800"></div>
   </div>
 
   <!-- Footer Accent Line -->
-  <div class="footer-comp-accent"></div>
+  <div class="footer-comp-accent" data-aos="slide-right" data-aos-duration="1200" data-aos-delay="200"></div>
 
   <!-- Main Footer Content -->
   <div class="footer-comp-content">
@@ -1013,20 +1410,20 @@ body.dark-theme .footer-comp-social-link:hover img {
       <div class="footer-comp-main">
         
         <!-- Company Information -->
-        <div class="footer-comp-company">
+        <div class="footer-comp-company" data-aos="fade-right" data-aos-duration="800" data-aos-delay="300">
           <div class="footer-comp-company-header">
-            <img src="{{ asset('img/icon-logo/tali-rejeki.jpg') }}" alt="PT Tali Rejeki" class="footer-comp-company-logo">
+            <img src="{{ asset('img/icon-logo/tali-rejeki.jpg') }}" alt="PT Tali Rejeki" class="footer-comp-company-logo" data-aos="zoom-in" data-aos-delay="500" data-aos-duration="600">
             <div>
-              <h3 class="footer-comp-company-title">PT TALI REJEKI</h3>
-              <p class="footer-comp-company-tagline">Solusi Terpercaya Sejak 2011</p>
+              <h3 class="footer-comp-company-title" data-aos="fade-up" data-aos-delay="600" data-aos-duration="600">PT TALI REJEKI</h3>
+              <p class="footer-comp-company-tagline" data-aos="fade-up" data-aos-delay="700" data-aos-duration="600">Solusi Terpercaya Sejak 2011</p>
             </div>
           </div>
           
-          <p class="footer-comp-company-description">
+          <p class="footer-comp-company-description" data-aos="fade-up" data-aos-delay="800" data-aos-duration="600">
             PT Tali Rejeki adalah perusahaan terpercaya yang telah berpengalaman lebih dari satu dekade dalam menyediakan produk berkualitas tinggi dengan pelayanan profesional untuk memenuhi kebutuhan industri dan konsumen.
           </p>
           
-          <div class="footer-comp-company-address">
+          <div class="footer-comp-company-address" data-aos="slide-up" data-aos-delay="900" data-aos-duration="700">
             <div class="footer-comp-address-title">
               <i class="fas fa-map-marker-alt"></i>
               Alamat Kantor
@@ -1042,17 +1439,17 @@ body.dark-theme .footer-comp-social-link:hover img {
         </div>
 
         <!-- Contact Information -->
-        <div class="footer-comp-contact">
-          <h4 class="footer-comp-section-title">Informasi Kontak</h4>
+        <div class="footer-comp-contact" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+          <h4 class="footer-comp-section-title" data-aos="fade-down" data-aos-delay="500" data-aos-duration="600">Informasi Kontak</h4>
           
-          <div class="footer-comp-contact-info">
+          <div class="footer-comp-contact-info" data-aos="slide-up" data-aos-delay="600" data-aos-duration="700">
             <div class="footer-comp-contact-group">
               <div class="footer-comp-contact-group-title">Telepon Kantor</div>
-              <div class="footer-comp-contact-item">
+              <div class="footer-comp-contact-item" data-aos="fade-left" data-aos-delay="700" data-aos-duration="500">
                 <i class="fas fa-phone"></i>
                 <a href="tel:02129470622">021-29470622</a>
               </div>
-              <div class="footer-comp-contact-item">
+              <div class="footer-comp-contact-item" data-aos="fade-left" data-aos-delay="750" data-aos-duration="500">
                 <i class="fas fa-phone"></i>
                 <a href="tel:02122889956">021-22889956</a>
               </div>
@@ -1060,18 +1457,18 @@ body.dark-theme .footer-comp-social-link:hover img {
             
             <div class="footer-comp-contact-group">
               <div class="footer-comp-contact-group-title">Fax & Email</div>
-              <div class="footer-comp-contact-item">
+              <div class="footer-comp-contact-item" data-aos="fade-left" data-aos-delay="800" data-aos-duration="500">
                 <i class="fas fa-fax"></i>
                 <span>021-29470622</span>
               </div>
-              <div class="footer-comp-contact-item">
+              <div class="footer-comp-contact-item" data-aos="fade-left" data-aos-delay="850" data-aos-duration="500">
                 <i class="fas fa-envelope"></i>
                 <a href="mailto:talirejeki@gmail.com">talirejeki@gmail.com</a>
               </div>
             </div>
           </div>
           
-          <div class="footer-comp-operating-hours">
+          <div class="footer-comp-operating-hours" data-aos="flip-up" data-aos-delay="900" data-aos-duration="700">
             <div class="footer-comp-contact-group-title" style="margin-bottom: 0.75rem;">Jam Operasional</div>
             <div class="footer-comp-hours-item">
               <span class="footer-comp-day">Senin - Jumat</span>
@@ -1085,11 +1482,11 @@ body.dark-theme .footer-comp-social-link:hover img {
         </div>
 
         <!-- Marketing Team -->
-        <div class="footer-comp-team">
-          <h4 class="footer-comp-section-title">Tim Marketing</h4>
+        <div class="footer-comp-team" data-aos="fade-left" data-aos-duration="800" data-aos-delay="500">
+          <h4 class="footer-comp-section-title" data-aos="fade-down" data-aos-delay="600" data-aos-duration="600">Tim Marketing</h4>
           
           <div class="footer-comp-team-grid">
-            <div class="footer-comp-team-member">
+            <div class="footer-comp-team-member" data-aos="zoom-in" data-aos-delay="700" data-aos-duration="600">
               <div class="footer-comp-member-name">Yovien Agustina</div>
               <div class="footer-comp-member-contact">Marketing Manager</div>
               <a href="https://wa.me/6281385231149" target="_blank" class="footer-comp-whatsapp-btn">
@@ -1098,7 +1495,7 @@ body.dark-theme .footer-comp-social-link:hover img {
               </a>
             </div>
             
-            <div class="footer-comp-team-member">
+            <div class="footer-comp-team-member" data-aos="zoom-in" data-aos-delay="750" data-aos-duration="600">
               <div class="footer-comp-member-name">Siti</div>
               <div class="footer-comp-member-contact">Marketing Executive</div>
               <a href="https://wa.me/6281382523722" target="_blank" class="footer-comp-whatsapp-btn">
@@ -1107,7 +1504,7 @@ body.dark-theme .footer-comp-social-link:hover img {
               </a>
             </div>
             
-            <div class="footer-comp-team-member">
+            <div class="footer-comp-team-member" data-aos="zoom-in" data-aos-delay="800" data-aos-duration="600">
               <div class="footer-comp-member-name">Kurnia</div>
               <div class="footer-comp-member-contact">Marketing Specialist</div>
               <a href="https://wa.me/6281384808218" target="_blank" class="footer-comp-whatsapp-btn">
@@ -1117,7 +1514,7 @@ body.dark-theme .footer-comp-social-link:hover img {
               <small class="footer-comp-wa-only-text">(WA Only)</small>
             </div>
             
-            <div class="footer-comp-team-member">
+            <div class="footer-comp-team-member" data-aos="zoom-in" data-aos-delay="850" data-aos-duration="600">
               <div class="footer-comp-member-name">Sari</div>
               <div class="footer-comp-member-contact">Marketing Consultant</div>
               <a href="https://wa.me/6281316826959" target="_blank" class="footer-comp-whatsapp-btn">
@@ -1126,7 +1523,7 @@ body.dark-theme .footer-comp-social-link:hover img {
               </a>
             </div>
             
-            <div class="footer-comp-team-member">
+            <div class="footer-comp-team-member" data-aos="zoom-in" data-aos-delay="900" data-aos-duration="600">
               <div class="footer-comp-member-name">Edy Purwanto</div>
               <div class="footer-comp-member-contact">Senior Marketing</div>
               <a href="https://wa.me/6281514515990" target="_blank" class="footer-comp-whatsapp-btn">
@@ -1138,13 +1535,13 @@ body.dark-theme .footer-comp-social-link:hover img {
         </div>
 
         <!-- Product Categories -->
-        <div class="footer-comp-products">
-          <h4 class="footer-comp-section-title">Produk Kami</h4>
+        <div class="footer-comp-products" data-aos="fade-down" data-aos-duration="800" data-aos-delay="600">
+          <h4 class="footer-comp-section-title" data-aos="fade-down" data-aos-delay="700" data-aos-duration="600">Produk Kami</h4>
           
           <div class="footer-comp-products-grid">
             @if($footerCategories->count() > 0)
-              @foreach($footerCategories as $category)
-                <div class="footer-comp-product-category">
+              @foreach($footerCategories as $index => $category)
+                <div class="footer-comp-product-category" data-aos="slide-right" data-aos-delay="{{ 800 + ($index * 100) }}" data-aos-duration="500">
                   <div class="footer-comp-category-name">
                     <a href="{{ route('products.category', $category->slug) }}" class="footer-comp-category-link">
                       {{ $category->name }}
@@ -1153,7 +1550,7 @@ body.dark-theme .footer-comp-social-link:hover img {
                 </div>
               @endforeach
             @else
-              <div class="footer-comp-product-category">
+              <div class="footer-comp-product-category" data-aos="slide-right" data-aos-delay="800" data-aos-duration="500">
                 <div class="footer-comp-category-name">
                   <a href="{{ route('products.index') }}" class="footer-comp-category-link">
                     Semua Produk
@@ -1169,51 +1566,51 @@ body.dark-theme .footer-comp-social-link:hover img {
       </div>
 
       <!-- Social Media Section -->
-      <div class="footer-comp-social-section">
-        <h4 class="footer-comp-social-title">Ikuti Kami</h4>
+      <div class="footer-comp-social-section" data-aos="fade-up" data-aos-delay="1000" data-aos-duration="800">
+        <h4 class="footer-comp-social-title" data-aos="bounce" data-aos-delay="1100" data-aos-duration="600">Ikuti Kami</h4>
         <div class="footer-comp-social-links">
           <!-- WhatsApp -->
-          <a href="https://wa.me/6281382523722" target="_blank" class="footer-comp-social-link whatsapp" title="WhatsApp">
+          <a href="https://wa.me/6281382523722" target="_blank" class="footer-comp-social-link whatsapp" title="WhatsApp" data-aos="flip-left" data-aos-delay="1200" data-aos-duration="500">
             <i class="fab fa-whatsapp"></i>
           </a>
           
           <!-- Email -->
-          <a href="mailto:talirejeki@gmail.com" class="footer-comp-social-link email" title="Email">
+          <a href="mailto:talirejeki@gmail.com" class="footer-comp-social-link email" title="Email" data-aos="flip-left" data-aos-delay="1250" data-aos-duration="500">
             <i class="fas fa-envelope"></i>
           </a>
           
           <!-- Phone -->
-          <a href="tel:02129470622" class="footer-comp-social-link phone" title="Telepon">
+          <a href="tel:02129470622" class="footer-comp-social-link phone" title="Telepon" data-aos="flip-left" data-aos-delay="1300" data-aos-duration="500">
             <i class="fas fa-phone"></i>
           </a>
           
           <!-- Facebook -->
-          <a href="https://facebook.com/PTTaliRejeki" target="_blank" class="footer-comp-social-link facebook" title="Facebook">
+          <a href="https://facebook.com/PTTaliRejeki" target="_blank" class="footer-comp-social-link facebook" title="Facebook" data-aos="flip-left" data-aos-delay="1350" data-aos-duration="500">
             <i class="fab fa-facebook-f"></i>
           </a>
           
           <!-- Instagram -->
-          <a href="https://instagram.com/PTTaliRejeki" target="_blank" class="footer-comp-social-link instagram" title="Instagram">
+          <a href="https://instagram.com/PTTaliRejeki" target="_blank" class="footer-comp-social-link instagram" title="Instagram" data-aos="flip-left" data-aos-delay="1400" data-aos-duration="500">
             <i class="fab fa-instagram"></i>
           </a>
           
           <!-- Tokopedia -->
-          <a href="https://www.tokopedia.com/talirejeki" target="_blank" class="footer-comp-social-link tokopedia" title="Tokopedia">
+          <a href="https://www.tokopedia.com/talirejeki" target="_blank" class="footer-comp-social-link tokopedia" title="Tokopedia" data-aos="flip-left" data-aos-delay="1450" data-aos-duration="500">
             <img src="https://cdn.brandfetch.io/idoruRsDhk/theme/dark/symbol.svg?c=1bxid64Mup7aczewSAYMX&t=1668515567929" alt="Tokopedia" style="width: 24px; height: 24px;">
           </a>
           
           <!-- Shopee -->
-          <a href="https://shopee.co.id/pttalirejeki" target="_blank" class="footer-comp-social-link shopee" title="Shopee">
+          <a href="https://shopee.co.id/pttalirejeki" target="_blank" class="footer-comp-social-link shopee" title="Shopee" data-aos="flip-left" data-aos-delay="1500" data-aos-duration="500">
             <img src="https://img.icons8.com/color/48/shopee.png" alt="Shopee" style="width: 20px; height: 20px;">
           </a>
           
           <!-- TikTok -->
-          <a href="https://www.tiktok.com/@pt.tali.rejeki" target="_blank" class="footer-comp-social-link tiktok" title="TikTok">
+          <a href="https://www.tiktok.com/@pt.tali.rejeki" target="_blank" class="footer-comp-social-link tiktok" title="TikTok" data-aos="flip-left" data-aos-delay="1550" data-aos-duration="500">
             <i class="fab fa-tiktok"></i>
           </a>
           
           <!-- YouTube -->
-          <a href="https://www.youtube.com/@pttalirejeki1408" target="_blank" class="footer-comp-social-link youtube" title="YouTube">
+          <a href="https://www.youtube.com/@pttalirejeki1408" target="_blank" class="footer-comp-social-link youtube" title="YouTube" data-aos="flip-left" data-aos-delay="1600" data-aos-duration="500">
             <i class="fab fa-youtube"></i>
           </a>
         </div>

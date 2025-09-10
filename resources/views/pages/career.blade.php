@@ -143,7 +143,7 @@
         </div>
         
         <div class="row g-4 stagger-children" data-aos="fade-up" data-aos-delay="500">
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-12 col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="benefit-card premium-card">
                     <div class="card-decoration">
                         <div class="decoration-orb"></div>
@@ -167,7 +167,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-12 col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="benefit-card health-card">
                     <div class="card-decoration">
                         <div class="decoration-orb"></div>
@@ -187,7 +187,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="col-12 col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="benefit-card vacation-card">
                     <div class="card-decoration">
                         <div class="decoration-orb"></div>
@@ -207,7 +207,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="col-12 col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
                 <div class="benefit-card training-card">
                     <div class="card-decoration">
                         <div class="decoration-orb"></div>
@@ -227,7 +227,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="col-12 col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
                 <div class="benefit-card bonus-card">
                     <div class="card-decoration">
                         <div class="decoration-orb"></div>
@@ -247,7 +247,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="col-12 col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
                 <div class="benefit-card flexibility-card">
                     <div class="card-decoration">
                         <div class="decoration-orb"></div>
@@ -288,7 +288,7 @@
         <div class="jobs-grid">
             <div class="row g-4 justify-content-center">
                 @foreach($jobs as $index => $job)
-                <div class="col-12 col-md-6 col-lg-4 mb-4 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                <div class="col-12 col-sm-6 col-lg-4 col-xl-4 mb-4 d-flex justify-content-center" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
                     <div class="job-card h-100 w-100">
                         <div class="job-status">
                             <span class="status-badge status-active">
@@ -559,6 +559,60 @@
     }
 }
 
+/* Enhanced Overflow Prevention and Performance */
+html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw;
+    position: relative;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Container and Layout Fixes */
+.container {
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+}
+
+.row > * {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top: var(--bs-gutter-y);
+}
+
+/* Section Spacing */
+section {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+/* Enhanced Page Header Responsiveness */
+.page-header {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+    position: relative;
+}
+
 /* Enhanced Modern Career Page with Elegant Design */
 :root {
     --career-primary: #8B0000;
@@ -599,6 +653,8 @@ body.dark-theme {
     height: auto;
     display: flex;
     align-items: center;
+    width: 100%;
+    max-width: 100vw;
 }
 
 .page-header-bg {
@@ -645,9 +701,9 @@ body.dark-theme {
 
 @keyframes headerFloat {
     0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(20px, -20px) rotate(0.5deg); }
-    50% { transform: translate(-15px, 15px) rotate(-0.5deg); }
-    75% { transform: translate(25px, -10px) rotate(0.3deg); }
+    25% { transform: translate(10px, -10px) rotate(0.3deg); }
+    50% { transform: translate(-8px, 8px) rotate(-0.3deg); }
+    75% { transform: translate(12px, -5px) rotate(0.2deg); }
 }
 
 .header-decoration {
@@ -658,6 +714,7 @@ body.dark-theme {
     height: 100%;
     overflow: hidden;
     z-index: 3;
+    pointer-events: none;
 }
 
 .decoration-circle {
@@ -666,18 +723,54 @@ body.dark-theme {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
     backdrop-filter: blur(10px);
     animation: circleFloat 20s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.decoration-circle-1 {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    right: 15%;
+}
+
+.decoration-circle-2 {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    left: 10%;
+}
+
+.decoration-circle-3 {
+    width: 100px;
+    height: 100px;
+    top: 80%;
+    right: 20%;
 }
 
 
 @keyframes circleFloat {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, -30px) scale(1.1); }
-    66% { transform: translate(-20px, 20px) scale(0.9); }
+    33% { transform: translate(15px, -15px) scale(1.05); }
+    66% { transform: translate(-10px, 10px) scale(0.95); }
 }
 
 .header-content {
     position: relative;
     z-index: 4;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Ensure containers don't overflow */
+.container {
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
 }
 
 .header-badge {
@@ -1375,21 +1468,67 @@ body.dark-theme .job-footer {
     margin-top: auto;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Enhanced Responsive Design */
+
+/* Large Tablets and Small Desktops */
+@media (max-width: 1200px) {
+    .page-header {
+        min-height: 75vh;
+        padding: 60px 0 70px;
+    }
+    
     .page-title {
-        font-size: 2.5rem;
+        font-size: 3rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
     }
     
     .header-stats {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
+        gap: 1.5rem;
     }
     
     .stat-item {
-        padding: 1rem 1.5rem;
-        min-width: 200px;
+        padding: 1.2rem 1.8rem;
+    }
+    
+    .jobs-grid {
+        max-width: 1000px;
+    }
+    
+    .job-card {
+        max-width: 350px;
+        min-height: 420px;
+    }
+    
+    .jobs-grid [class*="col-"] {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+    .page-header {
+        min-height: 70vh;
+        padding: 50px 0 60px;
+    }
+    
+    .page-title {
+        font-size: 2.8rem;
+    }
+    
+    .header-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.2rem;
+    }
+    
+    .stat-item {
+        flex: 1;
+        min-width: 180px;
+        max-width: 220px;
     }
     
     .section-title {
@@ -1397,67 +1536,676 @@ body.dark-theme .job-footer {
     }
     
     .feature-item {
+        padding: 1.8rem;
+    }
+    
+    .benefit-card {
+        padding: 2.2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .job-card {
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+        min-height: 400px;
+        padding: 1.8rem;
+    }
+    
+    .jobs-grid [class*="col-"] {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .job-meta {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+    
+    .job-title {
+        font-size: 1.2rem;
+        line-height: 1.3;
+    }
+    
+    .job-description {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .job-requirements {
+        padding: 1rem;
+    }
+    
+    .requirements-content,
+    .requirements-list li {
+        font-size: 0.85rem;
+    }
+    
+    .recruitment-process {
+        padding: 100px 0;
+    }
+    
+    .process-steps {
+        gap: 1rem;
+        padding: 2.5rem 20px;
+    }
+    
+    .step-item:not(:last-child)::after {
+        width: 1rem;
+        right: -0.5rem;
+    }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+    
+    .title-highlight {
+        font-size: 0.75em;
+        margin-top: 0.3rem;
+    }
+    
+    .page-description {
+        font-size: 1.1rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .header-stats {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        margin-top: 2rem;
+    }
+    
+    .stat-item {
+        padding: 1rem 1.5rem;
+        min-width: 200px;
+        max-width: 280px;
+        width: 100%;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-description {
+        font-size: 1rem;
+    }
+    
+    /* Mobile overflow fixes */
+    .page-header {
+        padding: 40px 0 50px;
+        min-height: 65vh;
+    }
+    
+    .decoration-circle-1 {
+        width: 120px;
+        height: 120px;
+        top: 15%;
+        right: 5%;
+    }
+    
+    .decoration-circle-2 {
+        width: 100px;
+        height: 100px;
+        top: 65%;
+        left: 5%;
+    }
+    
+    .decoration-circle-3 {
+        width: 80px;
+        height: 80px;
+        top: 85%;
+        right: 10%;
+    }
+    
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .feature-item {
         text-align: center;
         flex-direction: column;
         align-items: center;
         padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-icon {
+        margin-bottom: 1rem;
     }
     
     .benefit-card {
-        padding: 2rem;
+        padding: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .job-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        max-width: 100%;
+        min-height: 380px;
+    }
+    
+    .jobs-grid {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .jobs-grid .row {
+        margin-left: -8px;
+        margin-right: -8px;
+        justify-content: center;
+    }
+    
+    .jobs-grid [class*="col-"] {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .job-meta {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: flex-start;
+    }
+    
+    .job-footer {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .job-actions {
+        justify-content: center;
+        gap: 0.8rem;
+    }
+    
+    .job-actions .btn {
+        flex: 1;
+        min-width: 120px;
+    }
+    
+    .cta-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .cta-actions .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+    
+    .culture-visual {
+        margin-top: 2rem;
+    }
+    
+    .image-container {
+        max-height: 400px;
+    }
+    
+    .visual-decoration {
+        display: none;
+    }
+    
+    .process-steps {
+        gap: 0.8rem;
+        padding: 2rem 15px;
+    }
+    
+    .step-item:not(:last-child)::after {
+        width: 0.8rem;
+        right: -0.4rem;
+        top: 50px;
+        height: 2px;
+    }
+    
+    .step-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.4rem;
+    }
+    
+    .step-item h4 {
+        font-size: 1rem;
+    }
+    
+    .step-item p {
+        font-size: 0.85rem;
     }
     
     .company-culture,
-    .benefits-section {
+    .benefits-section,
+    .jobs-section {
         padding: 80px 0;
+    }
+    
+    .recruitment-process,
+    .cta-section {
+        padding: 70px 0;
     }
 }
 
+/* Mobile Portrait */
 @media (max-width: 480px) {
     .page-title {
         font-size: 2rem;
+        line-height: 1.1;
     }
     
     .title-highlight {
         font-size: 1.5rem;
+        margin-top: 0.2rem;
+    }
+    
+    .page-description {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .header-badge {
+        padding: 10px 20px;
+        font-size: 12px;
+        margin-bottom: 1.5rem;
     }
     
     .header-stats {
         gap: 0.8rem;
+        margin-top: 1.5rem;
     }
     
     .stat-item {
         padding: 0.8rem 1rem;
         min-width: 150px;
+        max-width: 200px;
     }
     
     .stat-number {
         font-size: 1.5rem;
     }
     
-    .feature-item {
-        padding: 1.2rem;
+    .stat-label {
+        font-size: 0.8rem;
     }
     
-    .feature-icon {
-        width: 60px;
-        height: 60px;
+    .section-title {
         font-size: 1.5rem;
     }
     
+    .section-description {
+        font-size: 0.95rem;
+    }
+    
+    .section-badge {
+        padding: 10px 20px;
+        font-size: 11px;
+    }
+    
+    .feature-item {
+        padding: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .feature-content h4 {
+        font-size: 1rem;
+    }
+    
+    .feature-content p {
+        font-size: 0.85rem;
+    }
+    
     .benefit-card {
-        padding: 1.5rem;
+        padding: 1.2rem;
+        margin-bottom: 1rem;
     }
     
     .benefit-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 1.8rem;
+        width: 60px;
+        height: 60px;
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+    
+    .benefit-title {
+        font-size: 1.1rem;
+    }
+    
+    .benefit-description {
+        font-size: 0.85rem;
+    }
+    
+    .job-card {
+        padding: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .job-title {
+        font-size: 1.1rem;
+    }
+    
+    .job-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .job-type {
+        font-size: 10px;
+        padding: 0.2rem 0.5rem;
+    }
+    
+    .job-location,
+    .job-department {
+        font-size: 11px;
+    }
+    
+    .job-description {
+        font-size: 0.85rem;
+    }
+    
+    .job-requirements {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .requirements-label {
+        font-size: 0.85rem;
+    }
+    
+    .requirements-content,
+    .requirements-list li {
+        font-size: 0.8rem;
+    }
+    
+    .job-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .job-actions .btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 11px;
+    }
+    
+    .job-posted {
+        font-size: 11px;
+        padding: 0.3rem 0.6rem;
+    }
+    
+    .cta-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .cta-title {
+        font-size: 1.4rem;
+    }
+    
+    .cta-description {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .process-steps {
+        gap: 0.5rem;
+        padding: 1.5rem 10px;
+    }
+    
+    .step-item {
+        padding-top: 0.5rem;
+    }
+    
+    .step-item:not(:last-child)::after {
+        width: 0.5rem;
+        right: -0.25rem;
+        top: 40px;
+        height: 2px;
+    }
+    
+    .step-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+        margin-bottom: 0.6rem;
+    }
+    
+    .step-item h4 {
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .step-item p {
+        font-size: 0.7rem;
+        line-height: 1.2;
     }
     
     .company-culture,
-    .benefits-section {
+    .benefits-section,
+    .jobs-section {
         padding: 60px 0;
+    }
+    
+    .recruitment-process,
+    .cta-section {
+        padding: 50px 0;
+    }
+    
+    .no-jobs {
+        padding: 3rem 1rem;
+    }
+    
+    .no-jobs-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .no-jobs h3 {
+        font-size: 1.3rem;
+    }
+    
+    .no-jobs p {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Ultra Small Mobile (320px and below) */
+@media (max-width: 320px) {
+    .container {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .page-header {
+        padding: 25px 0 35px;
+        min-height: 55vh;
+    }
+    
+    .page-title {
+        font-size: 1.4rem;
+        line-height: 1.1;
+    }
+    
+    .title-highlight {
+        font-size: 1rem;
+    }
+    
+    .page-description {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .header-badge {
+        padding: 6px 12px;
+        font-size: 10px;
+        margin-bottom: 1rem;
+    }
+    
+    .stat-item {
+        padding: 0.5rem 0.6rem;
+        min-width: 120px;
+    }
+    
+    .stat-number {
+        font-size: 1rem;
+    }
+    
+    .stat-label {
+        font-size: 0.7rem;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .section-badge {
+        padding: 8px 16px;
+        font-size: 10px;
+    }
+    
+    .feature-item,
+    .benefit-card,
+    .job-card {
+        padding: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .benefit-icon,
+    .feature-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .benefit-title,
+    .feature-content h4 {
+        font-size: 0.9rem;
+    }
+    
+    .benefit-description,
+    .feature-content p {
+        font-size: 0.75rem;
+        line-height: 1.3;
+    }
+    
+    .job-title {
+        font-size: 1rem;
+    }
+    
+    .job-description {
+        font-size: 0.75rem;
+    }
+    
+    .job-actions .btn {
+        padding: 8px 12px;
+        font-size: 10px;
+    }
+    
+    .step-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .step-item h4 {
+        font-size: 0.7rem;
+    }
+    
+    .step-item p {
+        font-size: 0.6rem;
+    }
+    
+    .cta-title {
+        font-size: 1.2rem;
+    }
+    
+    .cta-description {
+        font-size: 0.8rem;
+    }
+    
+    .cta-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .decoration-circle-1,
+    .decoration-circle-2,
+    .decoration-circle-3 {
+        display: none;
+    }
+}
+
+/* Responsive Bootstrap Grid Overrides */
+@media (max-width: 575.98px) {
+    .col-sm-6 {
+        width: 100%;
+        flex: 0 0 auto;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .col-sm-6 {
+        width: 50%;
+        flex: 0 0 auto;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .col-md-6 {
+        width: 50%;
+        flex: 0 0 auto;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .col-lg-4 {
+        width: 33.333333%;
+        flex: 0 0 auto;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-xl-4 {
+        width: 33.333333%;
+        flex: 0 0 auto;
+    }
+}
+
+/* Enhanced Grid Spacing */
+.g-4 {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .g-4 {
+        --bs-gutter-x: 1rem;
+        --bs-gutter-y: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .g-4 {
+        --bs-gutter-x: 0.75rem;
+        --bs-gutter-y: 0.75rem;
     }
 }
 
@@ -1658,29 +2406,34 @@ body.dark-theme .job-footer {
     z-index: 2;
 }
 
-/* Jobs Section */
+/* Jobs Section Enhanced Responsive */
 .jobs-section {
     padding: 100px 0;
     background: transparent;
     position: relative;
+    overflow: hidden;
 }
 
 .jobs-grid {
     margin-bottom: 3rem;
     position: relative;
     z-index: 1;
-    max-width: 1200px;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .jobs-grid .row {
     justify-content: center;
+    margin-left: -12px;
+    margin-right: -12px;
 }
 
 .jobs-grid [class*="col-"] {
     display: flex;
     justify-content: center;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
 .job-card {
@@ -1695,8 +2448,9 @@ body.dark-theme .job-footer {
     height: 100%;
     display: flex;
     flex-direction: column;
-    max-width: 380px;
+    max-width: 400px;
     width: 100%;
+    min-height: 450px;
 }
 
 .job-card::before {
@@ -2663,20 +3417,121 @@ body.dark-theme .job-footer {
     }
 }
 
-/* Smooth animations and transitions */
-* {
+/* Performance Optimizations */
+.page-header-bg,
+.page-header-overlay,
+.header-decoration,
+.decoration-circle {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Floating Elements Containment */
+.header-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.decoration-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+    backdrop-filter: blur(10px);
+    animation: circleFloat 20s ease-in-out infinite;
+    pointer-events: none;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.decoration-circle-1 {
+    width: min(200px, 15vw);
+    height: min(200px, 15vw);
+    top: 10%;
+    right: max(5%, 10px);
+}
+
+.decoration-circle-2 {
+    width: min(150px, 12vw);
+    height: min(150px, 12vw);
+    top: 60%;
+    left: max(5%, 10px);
+}
+
+.decoration-circle-3 {
+    width: min(100px, 8vw);
+    height: min(100px, 8vw);
+    top: 80%;
+    right: max(10%, 15px);
+}
+
+/* Text Wrapping and Overflow Prevention */
+.job-title,
+.benefit-title,
+.feature-content h4,
+.step-item h4 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.2;
+}
+
+.job-description,
+.benefit-description,
+.feature-content p,
+.step-item p,
+.requirements-content {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    text-align: justify;
+}
+
+/* Image Responsiveness */
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Table Responsiveness (if any) */
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+table td, table th {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Form Elements Responsiveness */
+input, textarea, select {
+    max-width: 100%;
     box-sizing: border-box;
 }
 
-.section-header {
-    margin-bottom: 3rem;
-}
-
-/* Print styles */
+/* Print Styles */
 @media print {
     .cta-section,
     .page-header::before,
-    .benefit-card::before {
+    .benefit-card::before,
+    .decoration-circle,
+    .header-decoration,
+    .visual-decoration {
         display: none !important;
     }
     
@@ -2684,15 +3539,106 @@ body.dark-theme .job-footer {
         background: white !important;
         color: black !important;
         box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    .page-header {
+        background: white !important;
+        color: black !important;
+        min-height: auto;
+        padding: 20px 0;
+    }
+    
+    .job-card,
+    .benefit-card,
+    .feature-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        border: 1px solid #ccc !important;
+        margin-bottom: 20px;
+        padding: 15px;
     }
 }
 
-/* Reduced motion */
+/* Accessibility Improvements */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --career-text-primary: #f7fafc;
+        --career-text-secondary: #a0aec0;
+        --career-bg-primary: #1a202c;
+        --career-bg-secondary: #2d3748;
+        --career-bg-tertiary: #4a5568;
+        --career-border: #4a5568;
+        --career-shadow: rgba(0, 0, 0, 0.3);
+        --career-shadow-lg: rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* Focus Management */
+*:focus {
+    outline: 2px solid var(--career-primary);
+    outline-offset: 2px;
+}
+
+.btn:focus,
+.job-title a:focus {
+    outline: 2px solid var(--career-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.1);
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .job-card,
+    .benefit-card,
+    .feature-item {
+        border: 2px solid var(--career-text-primary);
+    }
+    
+    .btn-primary,
+    .btn-outline-primary {
+        border-width: 2px;
+    }
+}
+
+/* Screen Reader Only Content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Section header styling */
+.section-header {
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+    .section-header {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-header {
+        margin-bottom: 1.5rem;
     }
 }
 
