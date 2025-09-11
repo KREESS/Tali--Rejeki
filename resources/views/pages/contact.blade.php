@@ -20,10 +20,15 @@
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
     font-size: 0.875rem;
-    z-index: 1;
+    z-index: 100 !important;
     text-decoration: none !important;
-    cursor: pointer;
-    pointer-events: all;
+    cursor: pointer !important;
+    pointer-events: all !important;
+    display: inline-block;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+    touch-action: manipulation;
 }
 
 .hero-btn-primary:hover, .hero-btn-secondary:hover {
@@ -41,8 +46,8 @@
     background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
     transform: translateX(-100%);
     transition: transform 0.6s ease;
-    z-index: -1;
-    pointer-events: none;
+    z-index: -1 !important;
+    pointer-events: none !important;
 }
 
 .hero-btn-primary:hover .btn-shine,
@@ -134,12 +139,22 @@
 }
 
 /* Button Click Fix */
+.hero-actions {
+    position: relative;
+    z-index: 100;
+}
+
 .hero-actions a {
     position: relative;
-    z-index: 10;
+    z-index: 101 !important;
     cursor: pointer !important;
     pointer-events: all !important;
     text-decoration: none !important;
+    display: inline-block;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
 }
 
 .hero-actions a:hover {
@@ -147,7 +162,7 @@
 }
 
 .hero-actions a * {
-    pointer-events: none;
+    pointer-events: none !important;
 }
 
 .hero-actions a .btn-shine {
@@ -159,7 +174,7 @@
 .hero-btn-secondary {
     display: inline-block;
     position: relative;
-    z-index: 5;
+    z-index: 102 !important;
     cursor: pointer !important;
     pointer-events: all !important;
     touch-action: manipulation;
@@ -170,7 +185,27 @@
 
 .hero-btn-primary:active,
 .hero-btn-secondary:active {
-    transform: scale(0.98);
+    transform: scale(0.98) !important;
+}
+
+/* Fix overlay z-index conflicts */
+.hero-section::before,
+.hero-section::after {
+    z-index: 1;
+}
+
+.hero-bg-pattern {
+    z-index: 2;
+}
+
+.floating-shapes {
+    z-index: 3;
+    pointer-events: none;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 10;
 }
 </style>
 @endpush
@@ -272,18 +307,24 @@
                         Kami siap melayani dengan sepenuh hati dan profesionalisme tinggi.
                     </p>
                     <div class="hero-actions d-flex flex-wrap gap-2" data-aos="fade-up" data-aos-delay="700">
-                        <a href="#contact-info" class="btn hero-btn-primary btn-md px-4 py-2" onclick="scrollToContact(event)">
+                        <a href="#contact-info" 
+                           class="btn hero-btn-primary btn-md px-4 py-2" 
+                           onclick="return scrollToContact(event)"
+                           role="button"
+                           tabindex="0">
                             <i class="fas fa-info-circle me-2"></i>Info Kontak
                             <div class="btn-shine"></div>
                         </a>
-                        <a href="https://wa.me/6281382523722?text=Halo,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" target="_blank" rel="noopener" class="btn hero-btn-secondary btn-md px-4 py-2" onclick="trackWhatsAppClick(event)">
+                        <a href="https://wa.me/6281382523722?text=Halo,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="btn hero-btn-secondary btn-md px-4 py-2" 
+                           onclick="return trackWhatsAppClick(event)"
+                           role="button"
+                           tabindex="0">
                             <i class="fab fa-whatsapp me-2"></i>Chat WhatsApp
                             <div class="btn-shine"></div>
                         </a>
-                        <button class="btn hero-btn-primary btn-md px-4 py-2" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-                            <i class="fas fa-moon theme-icon me-2"></i>Mode
-                            <div class="btn-shine"></div>
-                        </button>
                     </div>
                     
                     <!-- Floating Stats -->
@@ -601,7 +642,14 @@
                         </div>
                         <h5 class="action-title fw-bold mb-3" data-aos="fade-up" data-aos-delay="600">WhatsApp</h5>
                         <p class="action-description mb-4" data-aos="fade-up" data-aos-delay="700">Chat langsung dengan tim marketing kami</p>
-                        <a href="https://wa.me/6281382523722?text=Halo,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" target="_blank" rel="noopener" class="btn action-btn whatsapp-btn px-4 py-2" data-aos="fade-up" data-aos-delay="800">
+                        <a href="https://wa.me/6281382523722?text=Halo,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="btn action-btn whatsapp-btn px-4 py-2" 
+                           data-aos="fade-up" 
+                           data-aos-delay="800"
+                           role="button"
+                           tabindex="0">
                             <i class="fab fa-whatsapp me-2"></i>Chat Siti
                         </a>
                         <div class="action-stats mt-3" data-aos="fade-up" data-aos-delay="900">
@@ -1116,6 +1164,17 @@ h1, h2, h3, h4, h5, h6, p, span, div {
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
     font-size: 1rem;
+}
+
+/* Enhanced Button Styles and Click Fix */
+.button-clicked {
+    animation: buttonClick 0.2s ease !important;
+}
+
+@keyframes buttonClick {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
 }
 
 /* Hero Buttons */
@@ -1728,6 +1787,13 @@ h1, h2, h3, h4, h5, h6, p, span, div {
     height: 200%;
     background: radial-gradient(circle, rgba(139, 0, 0, 0.05) 0%, transparent 70%);
     animation: patternRotate 10s linear infinite;
+    pointer-events: none !important;
+    z-index: 1;
+}
+
+.action-content {
+    position: relative;
+    z-index: 10;
 }
 
 @keyframes patternRotate {
@@ -1818,10 +1884,18 @@ h1, h2, h3, h4, h5, h6, p, span, div {
     border-radius: 20px;
     padding: 0.5rem 1rem;
     font-weight: 600;
-    text-decoration: none;
+    text-decoration: none !important;
     transition: all 0.3s ease;
     display: inline-block;
     font-size: 0.85rem;
+    cursor: pointer !important;
+    pointer-events: all !important;
+    position: relative;
+    z-index: 10;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
 }
 
 .directions-btn { 
@@ -3296,42 +3370,69 @@ class PerformanceManager {
 
 // Button Click Functions
 function scrollToContact(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    const contactSection = document.getElementById('contact-info');
-    if (contactSection) {
-        contactSection.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
+    try {
+        event.preventDefault();
+        event.stopPropagation();
         
-        // Add visual feedback
-        const button = event.currentTarget;
-        if (button) {
-            button.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                button.style.transform = '';
-            }, 150);
+        const contactSection = document.getElementById('contact-info');
+        if (contactSection) {
+            // Smooth scroll to section
+            contactSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+                inline: 'nearest'
+            });
+            
+            // Add visual feedback
+            const button = event.currentTarget;
+            if (button) {
+                button.classList.add('button-clicked');
+                button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    button.style.transform = '';
+                    button.classList.remove('button-clicked');
+                }, 200);
+            }
+            
+            // Show feedback notification
+            showNotification('Menuju ke informasi kontak...', 'info');
+        } else {
+            console.warn('Contact section not found');
+            showNotification('Bagian kontak tidak ditemukan', 'warning');
         }
+    } catch (error) {
+        console.error('Error in scrollToContact:', error);
+        showNotification('Terjadi kesalahan saat menuju kontak', 'error');
     }
     return false;
 }
 
 function trackWhatsAppClick(event) {
-    // Add analytics tracking if needed
-    console.log('WhatsApp button clicked');
-    
-    // Add visual feedback
-    if (event && event.currentTarget) {
-        event.currentTarget.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            event.currentTarget.style.transform = '';
-        }, 150);
+    try {
+        // Add analytics tracking if needed
+        console.log('WhatsApp button clicked');
+        
+        // Add visual feedback
+        if (event && event.currentTarget) {
+            const button = event.currentTarget;
+            button.classList.add('button-clicked');
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = '';
+                button.classList.remove('button-clicked');
+            }, 200);
+        }
+        
+        // Show feedback notification
+        showNotification('Membuka WhatsApp...', 'success');
+        
+        // Let the default action proceed (opening WhatsApp link)
+        return true;
+    } catch (error) {
+        console.error('Error in trackWhatsAppClick:', error);
+        // Still allow the link to work
+        return true;
     }
-    
-    // Let the default action proceed (opening WhatsApp link)
-    return true;
 }
 
 // Theme toggle function
@@ -3440,6 +3541,13 @@ function showNotification(message, type = 'info') {
 
 // Initialize all managers when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Contact page loaded - initializing...');
+    
+    // Debug: Check if buttons exist
+    const heroButtons = document.querySelectorAll('.hero-btn-primary, .hero-btn-secondary');
+    const actionButtons = document.querySelectorAll('.action-btn');
+    console.log(`Found ${heroButtons.length} hero buttons and ${actionButtons.length} action buttons`);
+    
     // Initialize AOS Animation Library
     if (typeof AOS !== 'undefined') {
         AOS.init({
@@ -3533,6 +3641,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
+    });
+    
+    // Enhanced button click handling
+    document.querySelectorAll('.hero-btn-primary, .hero-btn-secondary, .action-btn').forEach(button => {
+        // Remove any existing event listeners
+        button.style.pointerEvents = 'all';
+        button.style.cursor = 'pointer';
+        button.style.zIndex = '100';
+        
+        // Add multiple event types for better compatibility
+        ['click', 'touchend'].forEach(eventType => {
+            button.addEventListener(eventType, function(e) {
+                // Ensure the button is clickable
+                if (e.type === 'touchend') {
+                    e.preventDefault();
+                }
+                
+                // Add visual feedback
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+                
+                // For debugging
+                console.log(`Button clicked: ${this.textContent.trim()}`);
+            }, { passive: false });
+        });
+    });
+    
+    // Fix any overlay issues that might block clicks
+    document.querySelectorAll('.hero-bg-pattern, .floating-shapes, .action-bg-pattern').forEach(overlay => {
+        overlay.style.pointerEvents = 'none';
+        overlay.style.zIndex = '1';
+    });
+    
+    // Ensure all interactive elements are properly layered
+    document.querySelectorAll('.hero-actions, .action-content').forEach(container => {
+        container.style.position = 'relative';
+        container.style.zIndex = '100';
     });
     
     // Add loading complete class
