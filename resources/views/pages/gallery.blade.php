@@ -5,7 +5,7 @@
 @section('content')
 <!-- Page Header with Enhanced Design -->
 <section class="page-header page-entrance" data-aos="fade-in" data-aos-duration="1500">
-    <div class="page-header-bg" style="background-image: url('{{ asset('img/career/carir.jpg') }}');"></div>
+    <div class="page-header-bg" style="background-image: url('{{ asset('img/galeri-proyek/118.png') }}');"></div>
     <div class="page-header-overlay"></div>
     <div class="header-decoration">
         <div class="decoration-circle decoration-circle-1"></div>
@@ -17,29 +17,55 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                     <div class="header-badge" data-aos="fade-up" data-aos-delay="200">
-                        <i class="fas fa-images"></i>
-                        <span>Portfolio</span>
+                        <i class="fas fa-camera-retro"></i>
+                        <span>SHOWCASE</span>
                     </div>
                     <h1 class="page-title" data-aos="fade-up" data-aos-delay="400">
-                        <span class="title-main">Galeri</span>
-                        <span class="title-highlight">Proyek Kami</span>
+                        <span class="title-main">Galeri Proyek</span>
+                        <span class="title-highlight">Spektakuler</span>
                     </h1>
                     <p class="page-description" data-aos="fade-up" data-aos-delay="600">
-                        Eksplorasi portofolio proyek insulasi industri kami dengan kualitas tinggi, 
-                        eksekusi rapi, dan hasil yang dapat diandalkan untuk berbagai kebutuhan industri.
+                        Jelajahi koleksi visual proyek-proyek insulasi industri terdepan yang telah kami wujudkan. 
+                        Setiap gambar menceritakan komitmen kami terhadap inovasi, presisi, dan keunggulan dalam setiap detail pekerjaan.
                     </p>
+                    <div class="hero-highlights" data-aos="fade-up" data-aos-delay="700">
+                        <div class="highlight-item">
+                            <i class="fas fa-award"></i>
+                            <span>Kualitas Premium</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-tools"></i>
+                            <span>Teknologi Canggih</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Standar Internasional</span>
+                        </div>
+                    </div>
                     <div class="header-stats" data-aos="fade-up" data-aos-delay="800">
                         <div class="stat-item">
-                            <span class="stat-number counter-animate" data-count="500">0</span>
-                            <span class="stat-label">Proyek Selesai</span>
+                            <div class="stat-number-row">
+                                <span class="stat-number counter-animate" data-count="500">0</span><span class="stat-plus">+</span>
+                            </div>
+                            <div class="stat-label-row">
+                                <span class="stat-label">Proyek Selesai</span>
+                            </div>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number counter-animate" data-count="200">0</span>
-                            <span class="stat-label">Klien Puas</span>
+                            <div class="stat-number-row">
+                                <span class="stat-number counter-animate" data-count="200">0</span><span class="stat-plus">+</span>
+                            </div>
+                            <div class="stat-label-row">
+                                <span class="stat-label">Klien Puas</span>
+                            </div>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number counter-animate" data-count="14">0</span>
-                            <span class="stat-label">Tahun Pengalaman</span>
+                            <div class="stat-number-row">
+                                <span class="stat-number counter-animate" data-count="14">0</span><span class="stat-plus">+</span>
+                            </div>
+                            <div class="stat-label-row">
+                                <span class="stat-label">Tahun Pengalaman</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -64,94 +90,98 @@
         </div>
 
         @if($galleries->count() > 0)
-            <div class="gallery-grid">
-                <div class="row">
-                    @foreach($galleries as $index => $gallery)
-                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ 100 * ($index % 3) }}">
-                        <div class="gallery-card">
-                            <div class="gallery-image-container">
-                                @php $images = $gallery->images; @endphp
-                                @if($images->count() > 0)
-                                    <div class="gallery-slider" data-gallery-id="{{ $gallery->id }}">
-                                        <div class="slider-wrapper">
-                                            <div class="slider-main">
-                                                @foreach($images as $idx => $img)
-                                                    <div class="slide {{ $idx == 0 ? 'active' : '' }}">
-                                                        <img src="{{ asset($img->image_url) }}" alt="{{ $gallery->title }}" class="gallery-image" loading="lazy">
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                            
-                                            @if($images->count() > 1)
-                                                <!-- Navigation Arrows -->
-                                                <button class="slider-nav prev-btn" onclick="changeSlide({{ $gallery->id }}, -1)" aria-label="Previous image">
-                                                    <i class="fas fa-chevron-left"></i>
-                                                </button>
-                                                <button class="slider-nav next-btn" onclick="changeSlide({{ $gallery->id }}, 1)" aria-label="Next image">
-                                                    <i class="fas fa-chevron-right"></i>
-                                                </button>
-                                                
-                                                <!-- Dot Indicators -->
-                                                <div class="slider-indicators">
+            <div class="gallery-showcase">
+                @foreach($galleries as $index => $gallery)
+                    @php $images = $gallery->images; @endphp
+                    <div class="showcase-item {{ $index % 2 == 0 ? 'left-image' : 'right-image' }}" data-aos="fade-up" data-aos-delay="100">
+                        <div class="row align-items-center g-4">
+                            <!-- Image Column -->
+                            <div class="col-lg-6 {{ $index % 2 == 0 ? 'order-1' : 'order-2' }}">
+                                <div class="showcase-image-container">
+                                    @if($images->count() > 0)
+                                        <div class="showcase-slider" data-gallery-id="{{ $gallery->id }}">
+                                            <div class="slider-wrapper">
+                                                <div class="slider-main">
                                                     @foreach($images as $idx => $img)
-                                                        <button class="indicator-dot {{ $idx == 0 ? 'active' : '' }}" onclick="goToSlide({{ $gallery->id }}, {{ $idx }})" aria-label="Go to slide {{ $idx + 1 }}"></button>
+                                                        <div class="slide {{ $idx == 0 ? 'active' : '' }}">
+                                                            <img src="{{ asset($img->image_url) }}" alt="{{ $gallery->title }}" class="showcase-image" loading="lazy">
+                                                        </div>
                                                     @endforeach
                                                 </div>
                                                 
-                                                <!-- Image Counter -->
-                                                <div class="image-counter">
-                                                    <span class="current-slide">1</span> / <span class="total-slides">{{ $images->count() }}</span>
-                                                </div>
-                                            @endif
+                                                @if($images->count() > 1)
+                                                    <!-- Navigation Arrows -->
+                                                    <button class="slider-nav prev-btn" onclick="changeSlide({{ $gallery->id }}, -1)" aria-label="Previous image">
+                                                        <i class="fas fa-chevron-left"></i>
+                                                    </button>
+                                                    <button class="slider-nav next-btn" onclick="changeSlide({{ $gallery->id }}, 1)" aria-label="Next image">
+                                                        <i class="fas fa-chevron-right"></i>
+                                                    </button>
+                                                    
+                                                    <!-- Dot Indicators -->
+                                                    <div class="slider-indicators">
+                                                        @foreach($images as $idx => $img)
+                                                            <button class="indicator-dot {{ $idx == 0 ? 'active' : '' }}" onclick="goToSlide({{ $gallery->id }}, {{ $idx }})" aria-label="Go to slide {{ $idx + 1 }}"></button>
+                                                        @endforeach
+                                                    </div>
+                                                    
+                                                    <!-- Image Counter -->
+                                                    <div class="image-counter">
+                                                        <span class="current-slide">1</span> / <span class="total-slides">{{ $images->count() }}</span>
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                @else
-                                    <div class="no-image-placeholder">
-                                        <i class="fas fa-image"></i>
-                                        <span>Tidak ada gambar</span>
-                                    </div>
-                                @endif
-                                
-                                <!-- Gallery Overlay -->
-                                <div class="gallery-overlay">
-                                    <div class="overlay-content">
-                                        <button class="gallery-view-btn" onclick="openGalleryLightbox({{ $gallery->id }}, '{{ $gallery->title }}', {{ json_encode($images->pluck('image_url')) }})">
-                                            <i class="fas fa-eye"></i>
-                                            <span>Lihat Detail</span>
-                                        </button>
+                                    @else
+                                        <div class="no-image-placeholder">
+                                            <i class="fas fa-image"></i>
+                                            <span>Tidak ada gambar</span>
+                                        </div>
+                                    @endif
+                                    
+                                    <!-- Gallery Overlay -->
+                                    <div class="gallery-overlay">
+                                        <div class="overlay-content">
+                                            <button class="gallery-view-btn" onclick="openGalleryLightbox({{ $gallery->id }}, '{{ $gallery->title }}', {{ json_encode($images->pluck('image_url')) }})">
+                                                <i class="fas fa-eye"></i>
+                                                <span>Lihat Detail</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- Gallery Info -->
-                            <div class="gallery-info">
-                                <div class="gallery-meta">
-                                    <span class="category-badge">
-                                        <i class="fas fa-tag"></i>
-                                        {{ ucfirst(str_replace('-', ' ', $gallery->category ?? 'General')) }}
-                                    </span>
-                                    <span class="date-badge">
-                                        <i class="fas fa-calendar-alt"></i>
-                                        {{ $gallery->created_at->format('M Y') }}
-                                    </span>
-                                </div>
-                                <h3 class="gallery-title">{{ $gallery->title }}</h3>
-                                <p class="gallery-description">{{ Str::limit($gallery->description, 100) }}</p>
-                                <div class="gallery-stats">
-                                    <div class="stat-item">
-                                        <i class="fas fa-images"></i>
-                                        <span>{{ $images->count() }} Foto</span>
+                            <!-- Content Column -->
+                            <div class="col-lg-6 {{ $index % 2 == 0 ? 'order-2' : 'order-1' }}">
+                                <div class="showcase-content">
+                                    <div class="showcase-meta">
+                                        <span class="date-badge">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            {{ $gallery->created_at->format('M Y') }}
+                                        </span>
                                     </div>
-                                    <div class="stat-item">
-                                        <i class="fas fa-clock"></i>
-                                        <span>{{ $gallery->created_at->diffForHumans() }}</span>
+                                    <h3 class="showcase-title">{{ $gallery->title }}</h3>
+                                    <p class="showcase-description">{{ $gallery->description }}</p>
+                                    
+                                    <div class="showcase-features">
+                                        <div class="feature-item">
+                                            <i class="fas fa-images"></i>
+                                            <span>{{ $images->count() }} Foto Proyek</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>{{ $gallery->created_at->diffForHumans() }}</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-check-circle"></i>
+                                            <span>Proyek Selesai</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @endforeach
-                </div>
+                @endforeach
             </div>
             
             <!-- Pagination -->
@@ -193,7 +223,7 @@
                     <i class="fas fa-project-diagram"></i>
                 </div>
                 <div class="stat-content">
-                    <span class="stat-number counter-animate" data-count="500">0</span>
+                    <span class="stat-number counter-animate" data-count="500">0</span><span class="stat-plus">+</span>
                     <span class="stat-label">Proyek Selesai</span>
                     <span class="stat-description">Dalam berbagai skala industri</span>
                 </div>
@@ -203,7 +233,7 @@
                     <i class="fas fa-handshake"></i>
                 </div>
                 <div class="stat-content">
-                    <span class="stat-number counter-animate" data-count="200">0</span>
+                    <span class="stat-number counter-animate" data-count="200">0</span><span class="stat-plus">+</span>
                     <span class="stat-label">Klien Puas</span>
                     <span class="stat-description">Tingkat kepuasan 98%</span>
                 </div>
@@ -213,7 +243,7 @@
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
                 <div class="stat-content">
-                    <span class="stat-number counter-animate" data-count="50">0</span>
+                    <span class="stat-number counter-animate" data-count="50">0</span><span class="stat-plus">+</span>
                     <span class="stat-label">Kota Terjangkau</span>
                     <span class="stat-description">Di seluruh Indonesia</span>
                 </div>
@@ -223,7 +253,7 @@
                     <i class="fas fa-award"></i>
                 </div>
                 <div class="stat-content">
-                    <span class="stat-number counter-animate" data-count="14">0</span>
+                    <span class="stat-number counter-animate" data-count="14">0</span><span class="stat-plus">+</span>
                     <span class="stat-label">Tahun Pengalaman</span>
                     <span class="stat-description">Expertise terpercaya</span>
                 </div>
@@ -242,16 +272,6 @@
             </div>
             <h2 class="animate-on-scroll animate-stagger-2">Siap Memulai Proyek Anda?</h2>
             <p class="animate-on-scroll animate-stagger-3">Konsultasikan kebutuhan insulasi industri Anda dengan tim ahli kami. Dapatkan solusi terbaik dan penawaran khusus untuk proyek Anda.</p>
-            <div class="cta-actions animate-on-scroll animate-stagger-4">
-                <a href="{{ route('contact') }}" class="btn btn-primary">
-                    <i class="fas fa-phone"></i>
-                    <span>Konsultasi Gratis</span>
-                </a>
-                <a href="{{ route('products') }}" class="btn btn-outline">
-                    <i class="fas fa-cubes"></i>
-                    <span>Lihat Produk</span>
-                </a>
-            </div>
             <div class="cta-features animate-on-scroll animate-stagger-5">
                 <div class="feature-item">
                     <i class="fas fa-check-circle"></i>
@@ -265,6 +285,7 @@
                     <i class="fas fa-check-circle"></i>
                     <span>Garansi Kualitas</span>
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -402,7 +423,7 @@ body.dark-theme {
 /* Enhanced Page Header */
 .page-header {
     color: white;
-    padding: 70px 0 80px;
+    padding: 20px 0 80px;
     position: relative;
     overflow: hidden;
     min-height: 80vh;
@@ -411,6 +432,7 @@ body.dark-theme {
     align-items: center;
     width: 100%;
     max-width: 100vw;
+    margin-top: 0;
 }
 
 .page-header-bg {
@@ -540,10 +562,9 @@ body.dark-theme {
 
 .title-main {
     display: block;
-    background: linear-gradient(135deg, #ffffff, #f0f8ff, #ffffff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #000000;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.5);
+    font-weight: 900;
 }
 
 .title-highlight {
@@ -558,11 +579,12 @@ body.dark-theme {
 
 .page-description {
     font-size: 1.2rem;
-    opacity: 0.95;
+    color: #000000;
     max-width: 700px;
     margin: 0 auto 3rem;
     line-height: 1.7;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+    font-weight: 600;
 }
 
 .header-stats {
@@ -591,11 +613,17 @@ body.dark-theme {
 .stat-number {
     font-size: 2rem;
     font-weight: 900;
-    display: block;
-    background: linear-gradient(135deg, var(--gallery-gold), #FFF8DC);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    display: inline-block;
+    color: #000000;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.stat-plus {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #000000;
+    margin-left: 2px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .stat-label {
@@ -603,6 +631,69 @@ body.dark-theme {
     font-weight: 600;
     opacity: 0.9;
     margin-top: 0.5rem;
+}
+
+/* Stats 2-Row Layout */
+.stat-number-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    line-height: 1;
+}
+
+.stat-number-row .stat-number {
+    margin-left: 0;
+    line-height: 1;
+}
+
+.stat-label-row {
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.stat-label-row .stat-label {
+    margin-top: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+/* Hero Highlights */
+.hero-highlights {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #000000;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.highlight-item:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.highlight-item i {
+    color: var(--gallery-gold);
+    font-size: 1.1rem;
+    text-shadow: none;
 }
 
 /* Enhanced Section Badge */
@@ -671,7 +762,6 @@ body.dark-theme {
 /* Gallery Section */
 .gallery-section {
     padding: 100px 0;
-    background: var(--gallery-bg-secondary);
     position: relative;
 }
 
@@ -692,7 +782,121 @@ body.dark-theme {
     z-index: 2;
 }
 
-/* Gallery Grid */
+/* Gallery Showcase - Alternating Layout */
+.gallery-showcase {
+    margin-top: 4rem;
+}
+
+.showcase-item {
+    margin-bottom: 6rem;
+    position: relative;
+}
+
+.showcase-item:last-child {
+    margin-bottom: 0;
+}
+
+.showcase-image-container {
+    position: relative;
+    border-radius: var(--gallery-radius-lg);
+    overflow: hidden;
+    box-shadow: 0 20px 60px var(--gallery-shadow-lg);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    aspect-ratio: 9/16;
+    max-height: 750px;
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.showcase-item:hover .showcase-image-container {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 80px var(--gallery-shadow-lg);
+}
+
+.showcase-slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.showcase-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s ease;
+}
+
+.showcase-item:hover .showcase-image {
+    transform: scale(1.05);
+}
+
+.showcase-content {
+    padding: 2rem 0;
+}
+
+.left-image .showcase-content {
+    padding-left: 2rem;
+}
+
+.right-image .showcase-content {
+    padding-right: 2rem;
+}
+
+.showcase-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.showcase-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--gallery-text-primary);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.showcase-description {
+    font-size: 1.1rem;
+    color: var(--gallery-text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.showcase-features {
+    margin-bottom: 2.5rem;
+}
+
+.showcase-features .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: var(--gallery-text-secondary);
+}
+
+.showcase-features .feature-item i {
+    color: var(--gallery-primary);
+    font-size: 1.1rem;
+    width: 20px;
+}
+
+.showcase-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.showcase-actions .btn {
+    padding: 0.875rem 1.75rem;
+    font-weight: 600;
+}
+
+/* Gallery Grid - Legacy support */
 .gallery-grid {
     margin-top: 4rem;
 }
@@ -779,79 +983,82 @@ body.dark-theme {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     color: white;
     border: none;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
     z-index: 10;
-    opacity: 0;
+    opacity: 0.8;
 }
 
-.gallery-image-container:hover .slider-nav {
+.showcase-image-container:hover .slider-nav {
     opacity: 1;
 }
 
 .prev-btn {
-    left: 0.75rem;
+    left: 1rem;
 }
 
 .next-btn {
-    right: 0.75rem;
+    right: 1rem;
 }
 
 .slider-nav:hover {
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.95);
     transform: translateY(-50%) scale(1.1);
 }
 
 /* Slider Indicators */
 .slider-indicators {
     position: absolute;
-    bottom: 0.75rem;
+    bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 0.4rem;
+    gap: 0.5rem;
     z-index: 10;
 }
 
 .indicator-dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     border: 2px solid white;
     background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
+    opacity: 0.7;
 }
 
 .indicator-dot.active {
     background: white;
     transform: scale(1.2);
+    opacity: 1;
 }
 
 /* Image Counter */
 .image-counter {
     position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    background: rgba(0, 0, 0, 0.7);
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     color: white;
-    padding: 0.4rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
     font-weight: 600;
     z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Gallery Overlay */
@@ -1266,12 +1473,44 @@ body.dark-theme {
         gap: 1rem;
         align-items: center;
     }
+    
+    /* Showcase tablet adjustments */
+    .showcase-image-container {
+        max-height: 450px;
+        max-width: 320px;
+    }
+    
+    .showcase-title {
+        font-size: 2rem;
+    }
+    
+    .left-image .showcase-content {
+        padding-left: 1rem;
+    }
+    
+    .right-image .showcase-content {
+        padding-right: 1rem;
+    }
+    
+    .showcase-image-container {
+        aspect-ratio: 4/3;
+        max-height: 400px;
+    }
+    
+    .hero-highlights {
+        gap: 1rem;
+    }
+    
+    .highlight-item {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 768px) {
     .page-header {
         min-height: 60vh;
-        padding: 50px 0 60px;
+        padding: 100px 0 60px;
     }
     
     .page-title {
@@ -1286,6 +1525,105 @@ body.dark-theme {
         font-size: 2rem;
     }
     
+    /* Showcase mobile adjustments */
+    .showcase-item {
+        margin-bottom: 4rem;
+    }
+    
+    .showcase-image-container {
+        aspect-ratio: 9/16;
+        max-height: 400px;
+        max-width: 250px;
+        margin: 0 auto 2rem auto;
+    }
+    
+    .left-image .showcase-content,
+    .right-image .showcase-content {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .showcase-title {
+        font-size: 1.75rem;
+    }
+    
+    .showcase-description {
+        font-size: 1rem;
+    }
+    
+    .hero-highlights {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .highlight-item {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.8rem;
+    }
+    
+    .slider-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .prev-btn {
+        left: 0.75rem;
+    }
+    
+    .next-btn {
+        right: 0.75rem;
+    }
+    
+    .indicator-dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .image-counter {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    /* Showcase responsive */
+    .showcase-item {
+        margin-bottom: 4rem;
+    }
+    
+    .showcase-content {
+        padding: 2rem 0 0 0 !important;
+    }
+    
+    .left-image .showcase-content,
+    .right-image .showcase-content {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    .showcase-title {
+        font-size: 1.75rem;
+    }
+    
+    .showcase-description {
+        font-size: 1rem;
+    }
+    
+    .showcase-image-container {
+        aspect-ratio: 16/12;
+        margin-bottom: 1.5rem;
+    }
+    
+    .showcase-actions {
+        flex-direction: column;
+    }
+    
+    .showcase-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Legacy gallery grid responsive */
     .gallery-grid .col-lg-4,
     .gallery-grid .col-md-6 {
         flex: 0 0 100%;
@@ -1428,7 +1766,7 @@ button:focus,
 .hero-background {
     position: absolute;
     inset: 0;
-    background-image: url('{{ asset("img/career/carir.jpg") }}');
+    background-image: url('{{ asset("img/galeri-proyek/118.png") }}');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -2016,17 +2354,40 @@ button:focus,
     transition: all 0.3s ease;
 }
 
+.stat-card .stat-icon i {
+    color: #000000;
+}
+
+body.dark-theme .stat-card .stat-icon i {
+    color: #ffffff;
+}
+
 .stat-card:hover .stat-icon {
     transform: scale(1.1) rotate(5deg);
 }
 
 .stat-content .stat-number {
-    display: block;
+    display: inline-block;
     font-size: 3rem;
     font-weight: 900;
-    color: var(--text-primary);
+    color: #000000;
     margin-bottom: 0.5rem;
     line-height: 1;
+}
+
+body.dark-theme .stat-content .stat-number {
+    color: #ffffff;
+}
+
+.stat-content .stat-plus {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #000000;
+    margin-left: 2px;
+}
+
+body.dark-theme .stat-content .stat-plus {
+    color: #ffffff;
 }
 
 .stat-content .stat-label {
@@ -2050,26 +2411,31 @@ button:focus,
     padding: 8rem 0;
     position: relative;
     overflow: hidden;
-    color: white;
+    color: var(--gallery-text-primary);
 }
 
 .cta-background {
     position: absolute;
     inset: 0;
-    background-image: url('{{ asset("img/kontak/108.png") }}');
+    background-image: url('{{ asset("img/galeri-proyek/2.jpg") }}');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     filter: blur(10px);
     z-index: 0;
+    opacity: 0.3;
 }
 
 .cta-background::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(15, 23, 42, 0.4);
+    opacity: 0.8;
     z-index: 1;
+}
+
+body.dark-theme .cta-background::before {
+    opacity: 0.9;
 }
 
 .cta-content {
@@ -2105,13 +2471,14 @@ button:focus,
     font-weight: 800;
     margin-bottom: 1.5rem;
     line-height: 1.2;
+    color: var(--gallery-text-primary);
 }
 
 .cta-content p {
     font-size: 1.25rem;
-    opacity: 0.9;
     margin-bottom: 3rem;
     line-height: 1.6;
+    color: var(--gallery-text-secondary);
 }
 
 .cta-actions {
@@ -2162,28 +2529,29 @@ button:focus,
 }
 
 .btn-primary {
-    background: white;
-    color: var(--brand-primary);
-    border-color: white;
+    background: var(--gallery-primary);
+    color: white;
+    border-color: var(--gallery-primary);
 }
 
 .btn-primary:hover {
-    background: transparent;
+    background: var(--gallery-secondary);
     color: white;
-    border-color: white;
+    border-color: var(--gallery-secondary);
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 25px rgba(139, 0, 0, 0.3);
 }
 
 .btn-outline {
     background: transparent;
-    color: white;
-    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--gallery-primary);
+    border-color: var(--gallery-primary);
 }
 
 .btn-outline:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: white;
+    background: var(--gallery-primary);
+    color: white;
+    border-color: var(--gallery-primary);
     transform: translateY(-2px);
 }
 
@@ -2745,10 +3113,207 @@ button:focus,
     .hero-overlay {
     }
 }
+
+/* =================================
+   MODERN ENTRANCE ANIMATIONS
+   ================================= */
+@keyframes slideInFromBottom {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInScale {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes rotateIn {
+    0% {
+        transform: rotate(-10deg) scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Animation Classes */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-stagger-1 { animation-delay: 0.1s; }
+.animate-stagger-2 { animation-delay: 0.2s; }
+.animate-stagger-3 { animation-delay: 0.3s; }
+.animate-stagger-4 { animation-delay: 0.4s; }
+.animate-stagger-5 { animation-delay: 0.5s; }
+
+/* Initial Animation States - Ensure proper starting position */
+.header-badge,
+.page-title,
+.page-description,
+.header-stats,
+.hero-highlights {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Hero Animation Classes */
+.hero-animate-badge {
+    animation: slideInFromBottom 1s ease-out 0.3s both;
+}
+
+.hero-animate-title {
+    animation: slideInFromBottom 1s ease-out 0.5s both;
+}
+
+.hero-animate-description {
+    animation: slideInFromBottom 1s ease-out 0.7s both;
+}
+
+.hero-animate-stats {
+    animation: fadeInScale 1s ease-out 0.9s both;
+}
+
+.hero-animate-highlights {
+    animation: slideInFromBottom 1s ease-out 1.1s both;
+}
+
+/* Showcase Animation Classes */
+.showcase-animate-left {
+    animation: slideInFromLeft 1s ease-out both;
+}
+
+.showcase-animate-right {
+    animation: slideInFromRight 1s ease-out both;
+}
+
+.showcase-animate-image {
+    animation: rotateIn 1s ease-out 0.3s both;
+}
+
+.showcase-animate-content {
+    animation: slideInFromBottom 1s ease-out 0.5s both;
+}
+
+/* Mobile Animation Optimizations */
+@media (max-width: 768px) {
+    .hero-animate-badge,
+    .hero-animate-title,
+    .hero-animate-description,
+    .hero-animate-stats,
+    .hero-animate-highlights {
+        animation-duration: 0.6s;
+    }
+    
+    .showcase-animate-left,
+    .showcase-animate-right,
+    .showcase-animate-image,
+    .showcase-animate-content {
+        animation-duration: 0.6s;
+    }
+    
+    .animate-on-scroll {
+        transition-duration: 0.6s;
+    }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .hero-animate-badge,
+    .hero-animate-title,
+    .hero-animate-description,
+    .hero-animate-stats,
+    .hero-animate-highlights,
+    .showcase-animate-left,
+    .showcase-animate-right,
+    .showcase-animate-image,
+    .showcase-animate-content,
+    .animate-on-scroll {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // =================================
+    // FORCE INITIAL ANIMATION STATE
+    // =================================
+    
+    // Reset scroll position and ensure animations work from any position
+    function forceAnimationReset() {
+        // Temporarily disable AOS to prevent conflicts
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+        }
+        
+        // Force all animated elements to initial state
+        const animatedElements = document.querySelectorAll('[data-aos], .animate-on-scroll, .showcase-item');
+        animatedElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+        });
+        
+        // Trigger animations after short delay
+        setTimeout(() => {
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
+            }
+            animatedElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = '';
+                    element.style.transform = '';
+                }, index * 100);
+            });
+        }, 100);
+    }
+    
     // =================================
     // THEME MANAGEMENT & DETECTION
     // =================================
@@ -2946,72 +3511,84 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Enhanced change slide function
     window.changeSlide = function(galleryId, direction) {
-        const slider = sliders[galleryId];
-        if (!slider || slider.isAnimating) return;
+        const sliderContainer = document.querySelector(`[data-gallery-id="${galleryId}"]`);
+        if (!sliderContainer) return;
         
-        slider.isAnimating = true;
-        const currentSlide = slider.slides[slider.currentSlide];
+        const slides = sliderContainer.querySelectorAll('.slide');
+        const indicators = sliderContainer.querySelectorAll('.indicator-dot');
+        const counter = sliderContainer.querySelector('.current-slide');
         
-        // Update slide index
-        slider.currentSlide += direction;
+        if (slides.length <= 1) return;
         
-        if (slider.currentSlide >= slider.totalSlides) {
-            slider.currentSlide = 0;
-        } else if (slider.currentSlide < 0) {
-            slider.currentSlide = slider.totalSlides - 1;
+        // Find current active slide
+        let currentIndex = 0;
+        slides.forEach((slide, index) => {
+            if (slide.classList.contains('active')) {
+                currentIndex = index;
+            }
+        });
+        
+        // Calculate next index
+        let nextIndex = currentIndex + direction;
+        if (nextIndex >= slides.length) {
+            nextIndex = 0;
+        } else if (nextIndex < 0) {
+            nextIndex = slides.length - 1;
         }
         
-        const nextSlide = slider.slides[slider.currentSlide];
+        // Update slides
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active', 'prev');
+            if (index === nextIndex) {
+                slide.classList.add('active');
+            } else if (index === currentIndex) {
+                slide.classList.add('prev');
+            }
+        });
         
-        // Animate slide transition
-        if (direction > 0) {
-            nextSlide.style.transform = 'translateX(100%)';
-            nextSlide.style.opacity = '1';
-            
-            setTimeout(() => {
-                currentSlide.style.transform = 'translateX(-100%)';
-                nextSlide.style.transform = 'translateX(0)';
-            }, 50);
-        } else {
-            nextSlide.style.transform = 'translateX(-100%)';
-            nextSlide.style.opacity = '1';
-            
-            setTimeout(() => {
-                currentSlide.style.transform = 'translateX(100%)';
-                nextSlide.style.transform = 'translateX(0)';
-            }, 50);
+        // Update indicators
+        if (indicators.length > 0) {
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === nextIndex);
+            });
         }
         
-        setTimeout(() => {
-            updateSlider(galleryId);
-            slider.isAnimating = false;
-        }, 600);
+        // Update counter
+        if (counter) {
+            counter.textContent = nextIndex + 1;
+        }
     };
     
     // Enhanced go to specific slide
     window.goToSlide = function(galleryId, slideIndex) {
-        const slider = sliders[galleryId];
-        if (!slider || slider.isAnimating || slideIndex === slider.currentSlide) return;
+        const sliderContainer = document.querySelector(`[data-gallery-id="${galleryId}"]`);
+        if (!sliderContainer) return;
         
-        const direction = slideIndex > slider.currentSlide ? 1 : -1;
-        slider.currentSlide = slideIndex;
+        const slides = sliderContainer.querySelectorAll('.slide');
+        const indicators = sliderContainer.querySelectorAll('.indicator-dot');
+        const counter = sliderContainer.querySelector('.current-slide');
         
-        // Add smooth transition effect
-        const targetSlide = slider.slides[slideIndex];
-        targetSlide.style.transform = `translateX(${direction > 0 ? '100%' : '-100%'})`;
-        targetSlide.style.opacity = '1';
+        if (slides.length <= 1 || slideIndex < 0 || slideIndex >= slides.length) return;
         
-        setTimeout(() => {
-            slider.slides.forEach((slide, index) => {
-                if (index === slideIndex) {
-                    slide.style.transform = 'translateX(0)';
-                    slide.style.opacity = '1';
-                } else {
-                    slide.style.opacity = '0';
-                }
+        // Update slides
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active', 'prev');
+            if (index === slideIndex) {
+                slide.classList.add('active');
+            }
+        });
+        
+        // Update indicators
+        if (indicators.length > 0) {
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === slideIndex);
             });
-            updateSlider(galleryId);
-        }, 50);
+        }
+        
+        // Update counter
+        if (counter) {
+            counter.textContent = slideIndex + 1;
+        }
     };
     
     // Enhanced update slider function
@@ -3460,14 +4037,150 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // =================================
+    // MODERN ENTRANCE ANIMATIONS
+    // =================================
+    
+    // Initialize animation observer
+    function initModernAnimations() {
+        // Add animation classes to hero elements
+        const heroBadge = document.querySelector('.hero-badge');
+        const heroTitle = document.querySelector('.hero-title');
+        const heroDescription = document.querySelector('.hero-description');
+        const heroStats = document.querySelector('.header-stats');
+        const heroHighlights = document.querySelector('.hero-highlights');
+        
+        if (heroBadge) heroBadge.classList.add('hero-animate-badge');
+        if (heroTitle) heroTitle.classList.add('hero-animate-title');
+        if (heroDescription) heroDescription.classList.add('hero-animate-description');
+        if (heroStats) heroStats.classList.add('hero-animate-stats');
+        if (heroHighlights) heroHighlights.classList.add('hero-animate-highlights');
+        
+        // Setup intersection observer for showcase items
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    
+                    // Animate showcase items based on their position
+                    if (element.classList.contains('left-image')) {
+                        element.classList.add('showcase-animate-left');
+                        
+                        // Animate image and content with delay
+                        setTimeout(() => {
+                            const image = element.querySelector('.showcase-image-container');
+                            const content = element.querySelector('.showcase-content');
+                            if (image) image.classList.add('showcase-animate-image');
+                            if (content) content.classList.add('showcase-animate-content');
+                        }, 200);
+                        
+                    } else if (element.classList.contains('right-image')) {
+                        element.classList.add('showcase-animate-right');
+                        
+                        // Animate image and content with delay
+                        setTimeout(() => {
+                            const image = element.querySelector('.showcase-image-container');
+                            const content = element.querySelector('.showcase-content');
+                            if (image) image.classList.add('showcase-animate-image');
+                            if (content) content.classList.add('showcase-animate-content');
+                        }, 200);
+                    }
+                    
+                    // Add general scroll animation
+                    element.classList.add('animate-on-scroll', 'visible');
+                    
+                    // Stop observing this element
+                    animationObserver.unobserve(element);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all showcase items
+        document.querySelectorAll('.showcase-item').forEach(item => {
+            animationObserver.observe(item);
+        });
+        
+        // Add stagger animation to highlight items
+        document.querySelectorAll('.highlight-item').forEach((item, index) => {
+            item.classList.add(`animate-stagger-${Math.min(index + 1, 5)}`);
+        });
+        
+        // Add stagger animation to stats
+        document.querySelectorAll('.stat-item').forEach((item, index) => {
+            item.classList.add(`animate-stagger-${Math.min(index + 1, 3)}`);
+        });
+    }
+    
+    // =================================
     // INITIALIZATION COMPLETE
     // =================================
     console.log('Gallery page initialized successfully with enhanced animations and dark/light theme support');
+    
+    // Force animation reset for consistent behavior
+    forceAnimationReset();
+    
+    // Initialize modern entrance animations
+    initModernAnimations();
+    
+    // Additional animation triggers for edge cases
+    setTimeout(() => {
+        // Force trigger hero animations if they haven't started
+        const heroBadge = document.querySelector('.header-badge');
+        const heroTitle = document.querySelector('.page-title'); 
+        const heroDesc = document.querySelector('.page-description');
+        const heroStats = document.querySelector('.header-stats');
+        const heroHighlights = document.querySelector('.hero-highlights');
+        
+        if (heroBadge && !heroBadge.classList.contains('hero-animate-badge')) {
+            heroBadge.classList.add('hero-animate-badge');
+        }
+        if (heroTitle && !heroTitle.classList.contains('hero-animate-title')) {
+            heroTitle.classList.add('hero-animate-title');
+        }
+        if (heroDesc && !heroDesc.classList.contains('hero-animate-description')) {
+            heroDesc.classList.add('hero-animate-description');
+        }
+        if (heroStats && !heroStats.classList.contains('hero-animate-stats')) {
+            heroStats.classList.add('hero-animate-stats');
+        }
+        if (heroHighlights && !heroHighlights.classList.contains('hero-animate-highlights')) {
+            heroHighlights.classList.add('hero-animate-highlights');
+        }
+    }, 500);
     
     // Dispatch custom event for other scripts
     document.dispatchEvent(new CustomEvent('galleryReady', {
         detail: { timestamp: Date.now() }
     }));
+});
+
+// Additional window load listener for edge cases
+window.addEventListener('load', function() {
+    // Force refresh animations after everything is loaded
+    setTimeout(() => {
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+        }
+        
+        // Ensure all hero elements have animations
+        const heroElements = [
+            { element: document.querySelector('.header-badge'), class: 'hero-animate-badge' },
+            { element: document.querySelector('.page-title'), class: 'hero-animate-title' },
+            { element: document.querySelector('.page-description'), class: 'hero-animate-description' },
+            { element: document.querySelector('.header-stats'), class: 'hero-animate-stats' },
+            { element: document.querySelector('.hero-highlights'), class: 'hero-animate-highlights' }
+        ];
+        
+        heroElements.forEach(({ element, class: className }) => {
+            if (element && !element.classList.contains(className)) {
+                element.classList.add(className);
+            }
+        });
+    }, 200);
 });
 </script>
 @endsection
