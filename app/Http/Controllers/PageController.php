@@ -175,26 +175,18 @@ class PageController extends Controller
      */
     public function catalog(Request $request)
     {
-        $query = CatalogItem::query();
+        $query = CatalogItem::query()
+            ->with(['primaryImage', 'images', 'primaryFile']); // <— penting
 
-        // Search functionality
-        if ($request->has('search') && !empty($request->search)) {
+        if ($request->filled('search')) {
             $searchTerm = $request->search;
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('title', 'like', "%{$searchTerm}%")
                     ->orWhere('description', 'like', "%{$searchTerm}%");
             });
         }
-
-        // Category filter
-        if ($request->has('category') && !empty($request->category)) {
-            $query->where('category', $request->category);
-        }
-
-        // Type filter
-        if ($request->has('type') && !empty($request->type)) {
-            $query->where('type', $request->type);
-        }
+        if ($request->filled('category')) $query->where('category', $request->category);
+        if ($request->filled('type'))     $query->where('type', $request->type);
 
         $catalogItems = $query->latest()->paginate(12);
 
@@ -204,23 +196,37 @@ class PageController extends Controller
         ]);
     }
 
+
     /**
      * Display single catalog detail.
      */
     public function catalogDetail($slug)
     {
-        $catalogItem = CatalogItem::where('slug', $slug)->firstOrFail();
+        $catalogItem = CatalogItem::with(['images' => function ($q) {
+            $q->orderByDesc('is_primary')->orderBy('sort_order')->orderBy('id');
+        }, 'files' => function ($q) {
+            $q->orderByRaw("
+                CASE
+                    WHEN LOWER(file_url) LIKE '%.pdf' THEN 0
+                    WHEN LOWER(file_url) REGEXP '\\\\.(docx?|rtf)$' THEN 1
+                    ELSE 2
+                END
+            ")->orderByDesc('id');
+        }])
+            ->where('slug', $slug)
+            ->firstOrFail();
 
-        // Get related catalog items
-        $relatedItems = CatalogItem::where('category', $catalogItem->category)
+        $relatedItems = CatalogItem::with(['primaryImage'])
+            ->where('category', $catalogItem->category)
             ->where('id', '!=', $catalogItem->id)
+            ->latest()
             ->take(4)
             ->get();
 
         return view('pages.catalog-detail', [
-            'title' => $catalogItem->title,
-            'catalogItem' => $catalogItem,
-            'relatedItems' => $relatedItems
+            'title'        => $catalogItem->title,
+            'catalogItem'  => $catalogItem,
+            'relatedItems' => $relatedItems,
         ]);
     }
 

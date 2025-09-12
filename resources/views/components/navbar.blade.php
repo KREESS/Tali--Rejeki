@@ -70,7 +70,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('catalog') }}" class="nav-link {{ request()->routeIs('catalog*') ? 'active' : '' }}" data-translate="nav-catalog">
+                    <a href="{{ route('catalog1-page') }}" class="nav-link {{ request()->routeIs('catalog1-page*') ? 'active' : '' }}" data-translate="nav-catalog">
                         <i class="fas fa-book"></i>
                         <span>Katalog Produk</span>
                     </a>

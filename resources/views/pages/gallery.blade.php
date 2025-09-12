@@ -2022,17 +2022,28 @@ button:focus,
     width: 100%;
     height: 100%;
     opacity: 0;
-    transform: translateX(100%);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(30px) scale(0.95) rotateY(5deg);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: blur(1px) brightness(0.8);
+    z-index: 1;
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 .slide.active {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) scale(1) rotateY(0deg);
+    filter: blur(0) brightness(1);
+    z-index: 3;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .slide.prev {
-    transform: translateX(-100%);
+    opacity: 0.3;
+    transform: translateX(-30px) scale(0.95) rotateY(-5deg);
+    filter: blur(1px) brightness(0.8);
+    z-index: 2;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .slider-image {
