@@ -18,14 +18,12 @@
         <div class="floating-shape shape-5"></div>
     </div>
     
-    <!-- Animated Background Pattern -->
-    <div class="hero-pattern"></div>
 
     <div class="container">
         <div class="row align-items-start justify-content-center text-center">
             <div class="col-xl-9 col-lg-10 hero-content" data-aos="fade-up">
                 <span class="hero-kicker">
-                    <i class="fas fa-sparkles me-2"></i>
+                    <i class="fas fa-folder-open me-2"></i>
                     Koleksi Digital
                 </span>
                 <h1 class="hero-title">
@@ -68,27 +66,62 @@
 <!-- ===== SCROLL PROGRESS BAR ===== -->
 <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
 
-<!-- ===== STATS RIBBON ===== -->
-<section class="stats-ribbon" aria-label="Statistic highlights">
+<!-- ===== ENHANCED INFO BANNER ===== -->
+<section class="info-banner" aria-label="Platform highlights">
     <div class="container">
-        <div class="stats-grid" data-aos="fade-up">
-            <div class="stat">
-                <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
-                <div><div class="stat-label">Total Katalog</div><div class="stat-value">{{ number_format($catalogItems->total()) }}</div></div>
+        <div class="info-content" data-aos="fade-up">
+            <div class="info-main">
+                <div class="info-header">
+                    <h2 class="info-title">Platform Katalog Digital Terlengkap</h2>
+                    <p class="info-subtitle">Akses ribuan dokumen teknis insulasi industri dalam satu platform terintegrasi</p>
+                </div>
+                
+                <div class="info-stats">
+                    <div class="info-stat-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-number">{{ number_format($catalogItems->total()) }}+</div>
+                        <div class="stat-desc">Dokumen Katalog<br><span class="stat-note">Terus bertambah setiap minggu</span></div>
+                        <div class="stat-icon-bg"><i class="fas fa-file-alt"></i></div>
+                    </div>
+                    
+                    <div class="info-stat-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-desc">Akses Tanpa Batas<br><span class="stat-note">Download kapan saja</span></div>
+                        <div class="stat-icon-bg"><i class="fas fa-clock"></i></div>
+                    </div>
+                    
+                    <div class="info-stat-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-desc">Dokumen Terverifikasi<br><span class="stat-note">Langsung dari manufaktur</span></div>
+                        <div class="stat-icon-bg"><i class="fas fa-certificate"></i></div>
+                    </div>
+                    
+                    <div class="info-stat-item" data-aos="fade-up" data-aos-delay="400">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-desc">Brand Terpercaya<br><span class="stat-note">Partner resmi global</span></div>
+                        <div class="stat-icon-bg"><i class="fas fa-handshake"></i></div>
+                    </div>
+                    
+                    <div class="info-stat-item" data-aos="fade-up" data-aos-delay="500">
+                        <div class="stat-number">GRATIS</div>
+                        <div class="stat-desc">Tanpa Biaya Tersembunyi<br><span class="stat-note">Download semua dokumen gratis</span></div>
+                        <div class="stat-icon-bg"><i class="fas fa-gift"></i></div>
+                    </div>
+                </div>
             </div>
-            @isset($categories)
-            <div class="stat">
-                <div class="stat-icon"><i class="fas fa-tags"></i></div>
-                <div><div class="stat-label">Kategori</div><div class="stat-value">{{ count($categories) }}</div></div>
-            </div>
-            @endisset
-            <div class="stat">
-                <div class="stat-icon"><i class="fas fa-download"></i></div>
-                <div><div class="stat-label">Total Unduhan</div><div class="stat-value">{{ isset($totalDownloads) ? number_format($totalDownloads) : number_format(($catalogItems->sum('download_count') ?? 0)) }}</div></div>
-            </div>
-            <div class="stat">
-                <div class="stat-icon"><i class="fas fa-shield"></i></div>
-                <div><div class="stat-label">Keaslian Dokumen</div><div class="stat-value">Diverifikasi</div></div>
+            
+            <div class="info-features" data-aos="fade-up" data-aos-delay="600">
+                <div class="feature-item">
+                    <i class="fas fa-cloud-download-alt"></i>
+                    <span>Download Batch untuk Multiple Files</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Update Berkala & Notifikasi Otomatis</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-headset"></i>
+                    <span>Support 24/7 dari Tim Ahli</span>
+                </div>
             </div>
         </div>
     </div>
@@ -702,13 +735,13 @@ body {
 /* ========= ENHANCED HERO SECTION ========= */
 .hero-full {
   position: relative;
-  min-height: 85vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-inverse);
   overflow: hidden;
-  padding: 10px 0 40px;
+  padding: 80px 0 40px 0;
 }
 
 .hero-bg {
@@ -732,7 +765,7 @@ body {
   text-align: center;
   max-width: 900px;
   animation: heroFadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  margin-top: 0; /* dulu terlalu besar → diperkecil */
+  margin-top: -40px;
 }
 
 /* kalau jarak besarnya datang dari h1/h2 pertama, nolkan margin atasnya */
@@ -742,18 +775,30 @@ body {
 
 
 .hero-kicker {
-  display: inline-block;
-  padding: 10px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
   border-radius: 50px;
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 1px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: var(--backdrop-blur);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
   margin-bottom: 16px;
   text-transform: uppercase;
   animation: float 3s ease-in-out infinite;
+  color: var(--text-inverse);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero-kicker i {
+  font-size: 16px;
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
 }
 
 .hero-title {
@@ -846,8 +891,8 @@ body {
 .floating-shape {
   position: absolute;
   border-radius: 50%;
-  background: var(--brand-gradient);
-  opacity: 0.1;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0.6;
   animation: floatingMove 20s linear infinite;
 }
 
@@ -876,8 +921,8 @@ body {
   left: 80%;
   animation-duration: 35s;
   animation-delay: -10s;
-  border-radius: 20px;
-  background: linear-gradient(45deg, var(--brand-primary), var(--brand-accent));
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .floating-shape.shape-4 {
@@ -887,8 +932,8 @@ body {
   left: 20%;
   animation-duration: 28s;
   animation-delay: -15s;
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  border-radius: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .floating-shape.shape-5 {
@@ -898,17 +943,9 @@ body {
   right: 30%;
   animation-duration: 22s;
   animation-delay: -8s;
-  background: radial-gradient(circle, var(--brand-accent), transparent);
+  background: rgba(255, 255, 255, 0.12);
 }
 
-.hero-pattern {
-  position: absolute;
-  inset: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="2" fill="rgba(255,255,255,0.05)"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="50" cy="20" r="1.5" fill="rgba(255,255,255,0.04)"/></svg>') repeat;
-  animation: patternMove 40s linear infinite;
-  z-index: 2;
-  opacity: 0.6;
-}
 
 .scroll-indicator {
   position: absolute;
@@ -1338,101 +1375,190 @@ body {
   }
 }
 
-/* ========= ENHANCED STATS RIBBON ========= */
-.stats-ribbon {
+/* ========= ENHANCED INFO BANNER ========= */
+.info-banner {
   position: relative;
   z-index: 10;
-  margin-top: 60px;
-  padding: 40px 0 60px 0;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.stat {
-  background: var(--surface);
-  border: 1px solid var(--border-light);
-  border-radius: 20px;
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  backdrop-filter: var(--backdrop-blur);
-  box-shadow: var(--shadow-lg);
-  position: relative;
+  margin-top: 20px;
+  padding: 50px 0 60px 0;
   overflow: hidden;
 }
 
-.stat::before {
+
+.info-content {
+  position: relative;
+  z-index: 5;
+}
+
+.info-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.info-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #1e293b, #8b0000);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.info-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.info-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+.info-stat-item {
+  position: relative;
+  text-align: center;
+  padding: 32px 20px;
+  background: var(--surface);
+  border-radius: 24px;
+  border: 1px solid var(--border-light);
+  backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.info-stat-item::before {
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
-  width: 100%;
-  height: 2px;
-  background: var(--brand-gradient);
-  transition: left 0.6s ease;
-}
-
-.stat:hover::before {
   left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #8b0000, #dc2626, #f59e0b);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
 }
 
-.stat:hover {
+.info-stat-item:hover::before {
+  transform: translateX(0);
+}
+
+.info-stat-item:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-xl), var(--shadow-brand);
+  background: var(--surface-elevated);
   border-color: var(--brand-primary);
 }
 
-.stat-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 16px;
+.stat-number {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 900;
+  color: #8b0000;
+  margin-bottom: 8px;
+  line-height: 1;
+  text-shadow: 0 2px 4px rgba(139, 0, 0, 0.1);
+}
+
+.stat-desc {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.stat-note {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-icon-bg {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--brand-gradient);
-  color: var(--text-inverse);
-  font-size: 24px;
-  flex-shrink: 0;
-  box-shadow: var(--shadow-brand);
+  opacity: 0.8;
   transition: all 0.3s ease;
+  border: 1px solid var(--border-light);
 }
 
-.stat:hover .stat-icon {
-  transform: scale(1.1) rotate(5deg);
+.stat-icon-bg i {
+  font-size: 18px;
+  color: #8b0000;
 }
 
-.stat-content {
-  flex: 1;
+.info-stat-item:hover .stat-icon-bg {
+  opacity: 1;
+  transform: scale(1.1);
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
 }
 
-.stat-label {
-  font-size: 14px;
-  color: var(--text-muted);
+.info-stat-item:hover .stat-icon-bg i {
+  color: var(--text-inverse);
+}
+
+.info-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  color: var(--text-secondary);
 }
 
-.stat-value {
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--text-primary);
-  line-height: 1;
+.feature-item:hover {
+  background: var(--surface);
+  transform: translateX(4px);
+  border-color: var(--brand-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-item i {
+  font-size: 20px;
+  color: #8b0000;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.feature-item span {
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 /* ========= ENHANCED CARD COMPONENTS ========= */
 .featured-cats {
   padding: 60px 0;
-  background: var(--bg-secondary);
 }
 
 .section-head {
@@ -1553,7 +1679,6 @@ body {
 /* Brands Marquee Enhancement */
 .brands-marquee {
   padding: 40px 0;
-  background: var(--bg-primary);
 }
 
 .marquee {
@@ -1614,7 +1739,6 @@ body {
 /* ========= ENHANCED TOP DOWNLOADS ========= */
 .top-downloads {
   padding: 80px 0;
-  background: var(--bg-primary);
 }
 
 .td-grid {
@@ -1802,7 +1926,6 @@ body {
 /* ========= ENHANCED CATALOG LIST ========= */
 .catalog-list-section {
   padding: 80px 0;
-  background: var(--bg-secondary);
 }
 
 .results-info {
@@ -2180,7 +2303,6 @@ body {
 /* ========= ENHANCED STANDARDS SECTION ========= */
 .standards-section {
   padding: 80px 0;
-  background: var(--bg-primary);
 }
 
 .std-grid {
@@ -2256,7 +2378,6 @@ body {
 /* ========= ENHANCED FAQ SECTION ========= */
 .faq-section {
   padding: 80px 0;
-  background: var(--bg-secondary);
 }
 
 .faq-list {
@@ -2399,7 +2520,6 @@ body {
 /* ========= ENHANCED NEWSLETTER ========= */
 .newsletter {
   padding: 60px 0;
-  background: var(--bg-primary);
 }
 
 .newsletter-inner {
@@ -2459,7 +2579,6 @@ body {
 /* ========= ENHANCED MINI CTA ========= */
 .mini-cta {
   padding: 60px 0;
-  background: var(--bg-secondary);
 }
 
 .mini-cta-inner {
@@ -2797,13 +2916,25 @@ body {
 
 @media (max-width: 992px) {
   .hero-full {
-    min-height: 80vh;
-    padding: 100px 0 60px;
+    min-height: 85vh;
+    padding: 60px 0 40px 0;
   }
   
-  .stats-grid {
+  .info-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .info-features {
     grid-template-columns: 1fr;
-    gap: 16px;
+  }
+  
+  .info-header {
+    margin-bottom: 40px;
+  }
+  
+  .hero-content {
+    margin-top: -20px;
   }
   
   .td-grid {
@@ -2887,17 +3018,40 @@ body {
   }
   
   .hero-full {
-    min-height: 70vh;
-    padding: 80px 0 40px;
+    min-height: 80vh;
+    padding: 50px 0 30px 0;
   }
   
-  .stats-ribbon {
-    margin-top: -60px;
-    padding: 0 0 30px;
+  .info-banner {
+    margin-top: -100px;
+    padding: 50px 0 40px;
   }
   
-  .stat {
-    padding: 20px;
+  .info-stats {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  
+  .info-stat-item {
+    padding: 24px 16px;
+  }
+  
+  .info-title {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+  }
+  
+  .info-features {
+    margin-top: 30px;
+    gap: 12px;
+  }
+  
+  .feature-item {
+    padding: 16px 20px;
+  }
+  
+  .hero-content {
+    margin-top: -10px;
   }
   
   .featured-cats,
