@@ -42,6 +42,8 @@ Route::get('/products/category/{slug}', [PageController::class, 'productsByCateg
 Route::get('/product/{slug}', [PageController::class, 'productDetail'])->name('product.detail');
 Route::get('/catalog-page', [PageController::class, 'catalog'])->name('catalog1-page');
 Route::get('/catalog-page/{slug}', [PageController::class, 'catalogDetail'])->name('catalog1-page.detail');
+Route::get('/catalog/{id}/download', [PageController::class, 'catalogDownload'])->name('catalog.download');
+Route::get('/catalog/{id}/preview', [PageController::class, 'catalogPreview'])->name('catalog.preview');
 Route::get('/gallery', [PageController::class, 'gallery'])->name('gallery');
 Route::get('/gallery/{slug}', [PageController::class, 'galleryDetail'])->name('gallery.detail');
 Route::get('/career', [PageController::class, 'career'])->name('career');

@@ -524,4 +524,102 @@ class PageController extends Controller
             'galleries' => $galleries
         ]);
     }
+
+    /**
+     * Download catalog file.
+     */
+    public function catalogDownload($id)
+    {
+        $catalogItem = CatalogItem::with('files')->findOrFail($id);
+        
+        // Get primary file (preferably PDF)
+        $primaryFile = $catalogItem->files->sortBy(function($f){
+            $ext = strtolower(pathinfo($f->file_url ?? '', PATHINFO_EXTENSION));
+            return $ext === 'pdf' ? 0 : 1;
+        })->first();
+        
+        if (!$primaryFile || !$primaryFile->file_url) {
+            return redirect()->back()->with('error', 'File tidak tersedia untuk diunduh.');
+        }
+        
+        // Get file path - files are stored in public/catalog/files/
+        $filePath = $primaryFile->file_url;
+        
+        // Handle different path formats
+        if (\Illuminate\Support\Str::startsWith($filePath, 'public/')) {
+            // If path starts with 'public/', use it directly from public folder
+            $relativePath = substr($filePath, 7); // Remove 'public/'
+            $fullPath = public_path($relativePath);
+        } elseif (\Illuminate\Support\Str::startsWith($filePath, 'catalog/files/')) {
+            // If path starts with 'catalog/files/', it's relative to public
+            $fullPath = public_path($filePath);
+        } else {
+            // Assume it's just the filename in catalog/files/
+            $fullPath = public_path('catalog/files/' . basename($filePath));
+        }
+        
+        // Check if file exists
+        if (!file_exists($fullPath)) {
+            return redirect()->back()->with('error', 'File tidak ditemukan di: ' . $fullPath);
+        }
+        
+        // Get file extension for proper filename
+        $ext = pathinfo($filePath, PATHINFO_EXTENSION);
+        $filename = $catalogItem->title . '.' . $ext;
+        
+        // Increment download count (optional)
+        if (property_exists($catalogItem, 'download_count')) {
+            $catalogItem->increment('download_count');
+        }
+        
+        return response()->download($fullPath, $filename);
+    }
+
+    /**
+     * Preview catalog file.
+     */
+    public function catalogPreview($id)
+    {
+        $catalogItem = CatalogItem::with('files')->findOrFail($id);
+        
+        // Get primary file (preferably PDF)
+        $primaryFile = $catalogItem->files->sortBy(function($f){
+            $ext = strtolower(pathinfo($f->file_url ?? '', PATHINFO_EXTENSION));
+            return $ext === 'pdf' ? 0 : 1;
+        })->first();
+        
+        if (!$primaryFile || !$primaryFile->file_url) {
+            return redirect()->back()->with('error', 'File tidak tersedia untuk preview.');
+        }
+        
+        // Get file path - files are stored in public/catalog/files/
+        $filePath = $primaryFile->file_url;
+        
+        // Handle different path formats
+        if (\Illuminate\Support\Str::startsWith($filePath, 'public/')) {
+            // If path starts with 'public/', use it directly from public folder
+            $relativePath = substr($filePath, 7); // Remove 'public/'
+            $fullPath = public_path($relativePath);
+        } elseif (\Illuminate\Support\Str::startsWith($filePath, 'catalog/files/')) {
+            // If path starts with 'catalog/files/', it's relative to public
+            $fullPath = public_path($filePath);
+        } else {
+            // Assume it's just the filename in catalog/files/
+            $fullPath = public_path('catalog/files/' . basename($filePath));
+        }
+        
+        // Check if file exists
+        if (!file_exists($fullPath)) {
+            return redirect()->back()->with('error', 'File tidak ditemukan di: ' . $fullPath);
+        }
+        
+        // Get MIME type
+        $mimeType = mime_content_type($fullPath);
+        
+        // Return file response for preview
+        return response()->file($fullPath, [
+            'Content-Type' => $mimeType,
+            'Content-Disposition' => 'inline; filename="' . basename($filePath) . '"'
+        ]);
+    }
 }
