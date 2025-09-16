@@ -258,9 +258,9 @@
             $fileSize = $primaryFile->size ?? ($item->file_size ?? null);
 
             $sliderId = 'thumb-slider-'.$item->id;
-            @endphp
+          @endphp
 
-            <article class="catalog-row" data-aos="fade-up" data-aos-delay="{{ ($index%6)*50 }}">
+          <article class="catalog-row" data-aos="fade-up" data-aos-delay="{{ ($index%6)*50 }}">
 
             {{-- ==== THUMB SLIDER ==== --}}
             <figure class="thumb-wrap thumb-has-slider" data-slider-id="{{ $sliderId }}">
@@ -286,8 +286,7 @@
               <button class="thumb-nav prev" type="button" aria-label="Sebelumnya" data-dir="-1"><i class="fas fa-chevron-left"></i></button>
               <button class="thumb-nav next" type="button" aria-label="Berikutnya" data-dir="1"><i class="fas fa-chevron-right"></i></button>
               <div class="thumb-dots" role="tablist" aria-label="Navigasi gambar"></div>
-
-              {{-- Removed thumb-mask-link to eliminate hover cursor interference --}}
+              {{-- (pastikan tidak ada overlay lain yang menutupi tombol di bawah) --}}
             </figure>
 
             <div class="content">
@@ -301,34 +300,34 @@
                 </div>
               </div>
 
-              <h3 class="title"><a href="{{ route('catalog1-page.detail', $item->slug) }}">{{ $item->title }}</a></h3>
+              <h3 class="title">{{ $item->name }}</h3>
               <p class="desc line-clamp-3">{{ \Illuminate\Support\Str::limit($item->description, 220) }}</p>
 
+              {{-- ===== CTA TANPA JS (langsung aksi) ===== --}}
               <div class="cta-enhanced">
                 @if($fileUrl)
                   <div class="primary-actions">
-                    <a href="{{ route('catalog.download', $item->id) }}" 
-                       class="btn btn-download" 
-                       onclick="trackDownload({{ $item->id }}); return true;" 
-                       target="_self"
-                       rel="noopener">
-                      <i class="fas fa-file-arrow-down"></i>
-                      <span class="btn-text">
-                        <span class="btn-main">Unduh Dokumen</span>
-                        <span class="btn-sub">Format: {{ strtoupper($ext ?? 'FILE') }}</span>
-                      </span>
-                    </a>
-                    <a href="{{ route('catalog.preview', $item->id) }}" 
-                       class="btn btn-preview" 
-                       target="_blank" 
-                       rel="noopener"
-                       onclick="trackPreview({{ $item->id }}); return true;">
-                      <i class="fas fa-file-pdf"></i>
-                      <span class="btn-text">
-                        <span class="btn-main">{{ ($ext === 'pdf') ? 'Lihat PDF' : 'Buka Dokumen' }}</span>
-                        <span class="btn-sub">Pratinjau di tab baru</span>
-                      </span>
-                    </a>
+                    {{-- Tombol Unduh: GET ke route download --}}
+                    <form action="{{ route('catalog.download', $item->id) }}" method="GET" class="inline-form" style="display:inline">
+                      <button type="submit" class="btn btn-download" aria-label="Unduh {{ $item->title }}">
+                        <i class="fas fa-file-arrow-down"></i>
+                        <span class="btn-text">
+                          <span class="btn-main">Unduh Dokumen</span>
+                          <span class="btn-sub">Format: {{ strtoupper($ext ?? 'FILE') }}</span>
+                        </span>
+                      </button>
+                    </form>
+
+                    {{-- Tombol Preview: buka tab baru --}}
+                    <form action="{{ route('catalog.preview', $item->id) }}" method="GET" class="inline-form" style="display:inline" target="_blank" rel="noopener">
+                      <button type="submit" class="btn btn-preview" aria-label="Pratinjau {{ $item->title }}">
+                        <i class="fas fa-file-pdf"></i>
+                        <span class="btn-text">
+                          <span class="btn-main">{{ ($ext === 'pdf') ? 'Lihat PDF' : 'Buka Dokumen' }}</span>
+                          <span class="btn-sub">Pratinjau di tab baru</span>
+                        </span>
+                      </button>
+                    </form>
                   </div>
                 @else
                   <div class="primary-actions">
@@ -341,14 +340,13 @@
                     </button>
                   </div>
                 @endif
-
               </div>
-              
+
               {{-- Hidden data for modal --}}
               <script type="application/json" id="catalog-data-{{ $item->id }}">
                 {
                   "id": {{ $item->id }},
-                  "title": "{{ addslashes($item->title) }}",
+                  "name": "{{ addslashes($item->name) }}",
                   "description": "{{ addslashes($item->description ?? '') }}",
                   "category": "{{ ucfirst(str_replace('-', ' ', $item->category ?? 'General')) }}",
                   "created_at": "{{ $item->created_at->format('d M Y') }}",
@@ -391,6 +389,7 @@
     @endif
   </div>
 </section>
+
 
 <!-- ===== MODERN DETAIL MODAL ===== -->
 <div id="detailModal" class="detail-modal" aria-hidden="true">
@@ -3457,25 +3456,6 @@ body.dark-theme .stat-number {
   min-width: 140px;
 }
 
-.btn-download::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.btn-download:hover::before {
-  opacity: 1;
-}
-
-.btn-download:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(22, 163, 74, 0.4);
-  color: white;
-  text-decoration: none;
-}
 
 /* Preview button */
 .btn-preview {
@@ -4994,499 +4974,8 @@ body.dark-theme .gallery-main {
     min-height: 250px;
   }
 }
+
 </style>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    // ========= ENHANCED PARALLAX & ANIMATIONS =========
-    
-    // Smooth parallax for hero background
-    const heroEl = document.querySelector('.hero-full');
-    const bgEl = document.querySelector('.hero-bg');
-    let ticking = false;
-    
-    const updateParallax = () => {
-        if (!bgEl || !heroEl) return;
-        const rect = heroEl.getBoundingClientRect();
-        const speed = 0.15;
-        const yPos = -(rect.top * speed);
-        bgEl.style.transform = `scale(1.1) translateY(${yPos}px)`;
-        ticking = false;
-    };
-    
-    const requestParallax = () => {
-        if (!ticking) {
-            requestAnimationFrame(updateParallax);
-            ticking = true;
-        }
-    };
-    
-    window.addEventListener('scroll', requestParallax, { passive: true });
-    
-    // Enhanced scroll progress with smooth animation
-    const progressBar = document.querySelector('.scroll-progress__bar');
-    let progressTicking = false;
-    
-    const updateProgress = () => {
-        if (!progressBar) return;
-        const winHeight = window.innerHeight;
-        const docHeight = document.documentElement.scrollHeight - winHeight;
-        const scrolled = window.pageYOffset;
-        const progress = (scrolled / docHeight) * 100;
-        
-        progressBar.style.width = Math.min(progress, 100) + '%';
-        progressTicking = false;
-    };
-    
-    const requestProgress = () => {
-        if (!progressTicking) {
-            requestAnimationFrame(updateProgress);
-            progressTicking = true;
-        }
-    };
-    
-    window.addEventListener('scroll', requestProgress, { passive: true });
-    updateProgress();
-    
-    // ========= INTERSECTION OBSERVER ANIMATIONS =========
-    
-    // Enhanced AOS-like animation system
-    const animationObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const delay = entry.target.dataset.aosDelay || 0;
-                setTimeout(() => {
-                    entry.target.classList.add('aos-animate');
-                }, parseInt(delay));
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -10% 0px'
-    });
-    
-    // Observe elements with aos attributes
-    document.querySelectorAll('[data-aos]').forEach(el => {
-        el.classList.add('aos-element');
-        animationObserver.observe(el);
-    });
-    
-    // ========= ENHANCED SMOOTH SCROLLING =========
-    
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerOffset = 80;
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // ========= ENHANCED IMAGE LOADING =========
-    
-    // Advanced skeleton removal with fade effect
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.complete && img.naturalHeight !== 0) {
-                    removeSkeleton(img);
-                } else {
-                    img.addEventListener('load', () => removeSkeleton(img));
-                    img.addEventListener('error', () => removeSkeleton(img));
-                }
-            }
-        });
-    });
-    
-    const removeSkeleton = (img) => {
-        img.style.transition = 'opacity 0.3s ease';
-        img.classList.remove('skeleton');
-        img.style.opacity = '1';
-    };
-    
-    document.querySelectorAll('img.skeleton').forEach(img => {
-        imageObserver.observe(img);
-    });
-    
-    // ========= ENHANCED BACK TO TOP =========
-    
-    const backToTop = document.querySelector('.back-to-top');
-    let backToTopTicking = false;
-    
-    const updateBackToTop = () => {
-        if (!backToTop) return;
-        const scrolled = window.pageYOffset;
-        const threshold = window.innerHeight * 0.5;
-        
-        if (scrolled > threshold) {
-            backToTop.classList.add('show');
-        } else {
-            backToTop.classList.remove('show');
-        }
-        backToTopTicking = false;
-    };
-    
-    const requestBackToTop = () => {
-        if (!backToTopTicking) {
-            requestAnimationFrame(updateBackToTop);
-            backToTopTicking = true;
-        }
-    };
-    
-    window.addEventListener('scroll', requestBackToTop, { passive: true });
-    
-    if (backToTop) {
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-    
-    // ========= ENHANCED VIEW TOGGLE =========
-    
-    const catalogList = document.querySelector('.catalog-list');
-    const viewButtons = document.querySelectorAll('[data-view]');
-    
-    viewButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const view = btn.dataset.view;
-            
-            // Update active button
-            viewButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            // Update catalog view with animation
-            if (catalogList) {
-                catalogList.style.opacity = '0.5';
-                catalogList.style.transform = 'translateY(10px)';
-                
-                setTimeout(() => {
-                    catalogList.setAttribute('data-view', view);
-                    catalogList.style.opacity = '1';
-                    catalogList.style.transform = 'translateY(0)';
-                }, 150);
-            }
-        });
-    });
-    
-    // ========= ENHANCED FAVORITES SYSTEM =========
-    
-    const FAVS_KEY = 'catalog_favorites';
-    const getFavorites = () => JSON.parse(localStorage.getItem(FAVS_KEY) || '[]');
-    const setFavorites = (favs) => localStorage.setItem(FAVS_KEY, JSON.stringify(favs));
-    
-    const updateFavoriteButton = (btn, isFavorited) => {
-        btn.classList.toggle('active', isFavorited);
-        btn.style.transform = isFavorited ? 'scale(1.2)' : 'scale(1)';
-        
-        // Add ripple effect
-        if (isFavorited) {
-            btn.style.animation = 'heartBeat 0.6s ease';
-            setTimeout(() => btn.style.animation = '', 600);
-        }
-    };
-    
-    document.querySelectorAll('.btn-like').forEach(btn => {
-        const itemId = btn.dataset.id;
-        const favorites = getFavorites();
-        updateFavoriteButton(btn, favorites.includes(itemId));
-        
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const currentFavs = getFavorites();
-            const index = currentFavs.indexOf(itemId);
-            
-            if (index > -1) {
-                currentFavs.splice(index, 1);
-                updateFavoriteButton(btn, false);
-            } else {
-                currentFavs.push(itemId);
-                updateFavoriteButton(btn, true);
-            }
-            
-            setFavorites(currentFavs);
-        });
-    });
-    
-    // ========= ENHANCED COMPARE SYSTEM =========
-    
-    const COMPARE_KEY = 'catalog_compare';
-    const MAX_COMPARE = 4;
-    const getCompareItems = () => JSON.parse(localStorage.getItem(COMPARE_KEY) || '[]');
-    const setCompareItems = (items) => localStorage.setItem(COMPARE_KEY, JSON.stringify(items));
-    
-    const compareBar = document.querySelector('.compare-bar');
-    const compareList = document.querySelector('.compare-list');
-    const compareView = document.querySelector('.btn-compare-view');
-    const compareClear = document.querySelector('.btn-compare-clear');
-    
-    const renderCompareBar = () => {
-        const items = getCompareItems();
-        
-        if (!compareList || !compareBar) return;
-        
-        compareList.innerHTML = items.map(id => `
-            <div class="compare-pill">
-                <span>Item #${id}</span>
-                <button class="btn-remove" data-id="${id}" style="background:none;border:none;color:inherit;margin-left:8px;">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `).join('');
-        
-        // Show/hide compare bar with animation
-        if (items.length > 0) {
-            compareBar.classList.add('show');
-        } else {
-            compareBar.classList.remove('show');
-        }
-        
-        // Update view button
-        if (compareView) {
-            compareView.textContent = `Compare (${items.length})`;
-            compareView.disabled = items.length < 2;
-        }
-        
-        // Add remove listeners
-        compareList.querySelectorAll('.btn-remove').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const id = btn.dataset.id;
-                const currentItems = getCompareItems().filter(item => item !== id);
-                setCompareItems(currentItems);
-                renderCompareBar();
-            });
-        });
-    };
-    
-    // Compare button handlers
-    document.querySelectorAll('.btn-compare').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const itemId = btn.dataset.id;
-            const currentItems = getCompareItems();
-            
-            if (currentItems.includes(itemId)) {
-                // Remove from compare
-                const filtered = currentItems.filter(id => id !== itemId);
-                setCompareItems(filtered);
-                btn.classList.remove('active');
-            } else if (currentItems.length < MAX_COMPARE) {
-                // Add to compare
-                currentItems.push(itemId);
-                setCompareItems(currentItems);
-                btn.classList.add('active');
-                
-                // Show success feedback
-                btn.style.animation = 'pulse 0.4s ease';
-                setTimeout(() => btn.style.animation = '', 400);
-            } else {
-                // Show error feedback
-                alert(`Maximum ${MAX_COMPARE} items can be compared at once.`);
-            }
-            
-            renderCompareBar();
-        });
-    });
-    
-    // Compare bar actions
-    if (compareClear) {
-        compareClear.addEventListener('click', () => {
-            setCompareItems([]);
-            document.querySelectorAll('.btn-compare').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            renderCompareBar();
-        });
-    }
-    
-    if (compareView) {
-        compareView.addEventListener('click', () => {
-            const items = getCompareItems();
-            if (items.length >= 2) {
-                // You can redirect to a compare page or show a modal
-                console.log('Comparing items:', items);
-                alert('Compare functionality - redirect to compare page or show modal');
-            }
-        });
-    }
-    
-    // Initialize compare bar
-    renderCompareBar();
-    
-    // ========= CARD HOVER EFFECTS =========
-    
-    // Add magnetic hover effect to cards
-    document.querySelectorAll('.catalog-row, .td-card, .cat-card, .std-card').forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = '';
-        });
-    });
-    
-    // ========= DOWNLOAD TRACKING =========
-    
-    document.querySelectorAll('a[download], a[href*="/storage/"]').forEach(link => {
-        link.addEventListener('click', function() {
-            // Add download animation
-            const btn = this;
-            const originalText = btn.innerHTML;
-            
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Downloading...';
-            btn.style.pointerEvents = 'none';
-            
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-check me-2"></i>Downloaded!';
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.style.pointerEvents = '';
-                }, 2000);
-            }, 1000);
-            
-            // Track download (you can send this to analytics)
-            console.log('Download initiated:', this.getAttribute('href'));
-        });
-    });
-    
-    // ========= NEWSLETTER FORM =========
-    
-    const newsletterForm = document.querySelector('.nl-form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = this.querySelector('input[type="email"]').value;
-            const btn = this.querySelector('button');
-            const originalText = btn.innerHTML;
-            
-            // Show loading state
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Subscribing...';
-            btn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-                btn.innerHTML = '<i class="fas fa-check me-2"></i>Subscribed!';
-                this.querySelector('input').value = '';
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
-                }, 3000);
-            }, 1500);
-        });
-    }
-});
-
-// ========= CSS ANIMATIONS =========
-const style = document.createElement('style');
-style.textContent = `
-    /* AOS Animation System */
-    .aos-element {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    
-    .aos-element.aos-animate {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    /* Heart beat animation */
-    @keyframes heartBeat {
-        0%, 100% { transform: scale(1); }
-        25% { transform: scale(1.3); }
-        50% { transform: scale(1.1); }
-        75% { transform: scale(1.2); }
-    }
-    
-    /* Pulse animation */
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
-    
-    /* Fade in animation */
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    
-    /* Button hover ripple effect */
-    .btn {
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .btn::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
-    }
-    
-    .btn:active::after {
-        width: 300px;
-        height: 300px;
-    }
-    
-    /* Enhanced card transitions */
-    .catalog-row,
-    .td-card,
-    .cat-card,
-    .std-card {
-        will-change: transform, box-shadow;
-    }
-    
-    /* Loading states */
-    .loading {
-        position: relative;
-        pointer-events: none;
-    }
-    
-    .loading::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: rgba(255, 255, 255, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-    }
-    
-    /* Smooth view transitions */
-    .catalog-list {
-        transition: all 0.3s ease;
-    }
-`;
-document.head.appendChild(style);
-</script>
 
 
 {{-- ====== SLIDER CSS MINIMAL (aman tumpang tindih dengan style lama) ====== --}}
@@ -5555,359 +5044,605 @@ document.head.appendChild(style);
   .catalog-list-section .title{ font-size: 1.45rem; }
   .catalog-list-section .content{ gap: 12px; }
   .catalog-list-section .topline{ gap: 12px; }
+
+  /* Elemen dekoratif jangan nangkep klik */
+.catalog-row::before,
+.td-card::before,
+.cat-card::before,
+.std-card::before,
+.results-card::after {
+  pointer-events: none !important;
+}
+
+/* Pastikan CTA & tombol di dalam form benar-benar klikable */
+.catalog-row .cta-enhanced,
+.catalog-row .cta-enhanced .btn,
+.catalog-row form.inline-form button {
+  pointer-events: auto;
+  position: relative;
+  z-index: 50;
+}
+
 </style>
 
-{{-- ====== SLIDER JS (tanpa dependensi) ====== --}}
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.thumb-has-slider').forEach((wrap) => {
-      const viewport = wrap.querySelector('.thumb-viewport');
-      const slides = Array.from(viewport.querySelectorAll('.slide'));
-      const prevBtn = wrap.querySelector('.thumb-nav.prev');
-      const nextBtn = wrap.querySelector('.thumb-nav.next');
-      const dotsWrap = wrap.querySelector('.thumb-dots');
+/* =========================
+   FULL JS + STYLE INJECTION
+   (judul/title dibesarkan & dibagusin, anti ketimpa)
+   ========================= */
+document.addEventListener('DOMContentLoaded', () => {
+  // ========= ENHANCED PARALLAX & ANIMATIONS =========
+  const heroEl = document.querySelector('.hero-full');
+  const bgEl = document.querySelector('.hero-bg');
+  let ticking = false;
 
-      const total = slides.length;
-      let idx = slides.findIndex(s => s.classList.contains('is-active'));
-      if (idx < 0) idx = 0;
+  const updateParallax = () => {
+    if (!bgEl || !heroEl) return;
+    const rect = heroEl.getBoundingClientRect();
+    const speed = 0.15;
+    const yPos = -(rect.top * speed);
+    bgEl.style.transform = `scale(1.1) translateY(${yPos}px)`;
+    ticking = false;
+  };
+  const requestParallax = () => { if (!ticking) { requestAnimationFrame(updateParallax); ticking = true; } };
+  window.addEventListener('scroll', requestParallax, { passive: true });
 
-      // Hide nav & dots jika <= 1
-      if (total <= 1) {
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
-        dotsWrap.style.display = 'none';
-      } else {
-        // Build dots
-        dotsWrap.innerHTML = '';
-        for (let i=0; i<total; i++) {
-          const b = document.createElement('button');
-          b.type = 'button';
-          b.setAttribute('aria-label', 'Ke slide ' + (i+1));
-          if (i === idx) b.setAttribute('aria-current', 'true');
-          b.addEventListener('click', (e) => { e.stopPropagation(); go(i); });
-          dotsWrap.appendChild(b);
-        }
+  // ========= SCROLL PROGRESS =========
+  const progressBar = document.querySelector('.scroll-progress__bar');
+  let progressTicking = false;
+  const updateProgress = () => {
+    if (!progressBar) return;
+    const winHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight - winHeight;
+    const scrolled = window.pageYOffset;
+    const progress = (scrolled / docHeight) * 100;
+    progressBar.style.width = Math.min(progress, 100) + '%';
+    progressTicking = false;
+  };
+  const requestProgress = () => { if (!progressTicking) { requestAnimationFrame(updateProgress); progressTicking = true; } };
+  window.addEventListener('scroll', requestProgress, { passive: true });
+  updateProgress();
+
+  // ========= AOS-LIKE =========
+  const animationObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = entry.target.dataset.aosDelay || 0;
+        setTimeout(() => entry.target.classList.add('aos-animate'), parseInt(delay));
       }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('[data-aos]').forEach(el => {
+    el.classList.add('aos-element');
+    animationObserver.observe(el);
+  });
 
-      function update() {
-        slides.forEach((s, i) => {
-          if (i === idx) s.classList.add('is-active'); else s.classList.remove('is-active');
-        });
-        if (total > 1) {
-          dotsWrap.querySelectorAll('button').forEach((d, i) => {
-            if (i === idx) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
-          });
-        }
-      }
-
-      function go(next) {
-        idx = (next + total) % total;
-        update();
-      }
-
-      prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); go(idx - 1); });
-      nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); go(idx + 1); });
-
-      // swipe (mobile)
-      let sx = 0, dx = 0;
-      viewport.addEventListener('touchstart', (e)=>{ sx = e.touches[0].clientX; dx = 0; }, {passive:true});
-      viewport.addEventListener('touchmove',  (e)=>{ dx = e.touches[0].clientX - sx; }, {passive:true});
-      viewport.addEventListener('touchend',   ()=>{ if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1)); });
-
-      update();
+  // ========= SMOOTH SCROLL (anchor internal) =========
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const headerOffset = 80;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     });
   });
-</script>
-<script>
-// Modal functionality
-let currentModalData = null;
 
-function openDetailModal(itemId) {
-  const dataElement = document.getElementById(`catalog-data-${itemId}`);
-  if (!dataElement) {
-    console.error('Data element not found for item:', itemId);
-    return;
-  }
-  
-  try {
-    currentModalData = JSON.parse(dataElement.textContent);
-    populateModal(currentModalData);
-    showModal();
-  } catch (error) {
-    console.error('Error parsing catalog data:', error);
-  }
-}
+  // ========= IMAGE SKELETON =========
+  const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const img = entry.target;
+      const removeSkeleton = (i) => {
+        i.style.transition = 'opacity 0.3s ease';
+        i.classList.remove('skeleton');
+        i.style.opacity = '1';
+      };
+      if (img.complete && img.naturalHeight !== 0) {
+        removeSkeleton(img);
+      } else {
+        img.addEventListener('load', () => removeSkeleton(img), { once: true });
+        img.addEventListener('error', () => removeSkeleton(img), { once: true });
+      }
+    });
+  });
+  document.querySelectorAll('img.skeleton').forEach(img => imageObserver.observe(img));
 
-function populateModal(data) {
-  // Set basic info
-  document.getElementById('modalTitle').textContent = data.title;
-  document.getElementById('modalDescription').textContent = data.description || 'Tidak ada deskripsi tersedia.';
-  document.getElementById('modalCategory').textContent = data.category;
-  document.getElementById('modalDate').textContent = data.created_at;
-  
-  // Set file info
-  if (data.file_type) {
-    document.getElementById('modalFileType').innerHTML = `<i class="fas fa-file-${getFileIcon(data.file_type)}"></i> ${data.file_type.toUpperCase()}`;
-  }
-  
-  if (data.file_size) {
-    document.getElementById('modalFileSize').textContent = data.file_size;
-  }
-  
-  // Set main image
-  const mainImage = document.getElementById('modalMainImage');
-  if (data.images && data.images.length > 0) {
-    mainImage.src = data.images[0].url;
-    mainImage.alt = data.images[0].alt;
-    
-    // Populate thumbnails if multiple images
-    if (data.images.length > 1) {
-      populateThumbnails(data.images);
+  // ========= BACK TO TOP =========
+  const backToTop = document.querySelector('.back-to-top');
+  let backToTopTicking = false;
+  const updateBackToTop = () => {
+    if (!backToTop) return;
+    const scrolled = window.pageYOffset;
+    const threshold = window.innerHeight * 0.5;
+    backToTop.classList.toggle('show', scrolled > threshold);
+    backToTopTicking = false;
+  };
+  const requestBackToTop = () => { if (!backToTopTicking) { requestAnimationFrame(updateBackToTop); backToTopTicking = true; } };
+  window.addEventListener('scroll', requestBackToTop, { passive: true });
+  backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ========= VIEW TOGGLE — tombol saja (exclude .catalog-list) =========
+  const catalogList = document.querySelector('.catalog-list');
+  const viewButtons = Array.from(document.querySelectorAll('[data-view]'))
+    .filter(el =>
+      (el.matches('a,button,[role="button"]')) &&
+      !el.classList.contains('catalog-list') &&
+      !el.closest('.catalog-list')
+    );
+  viewButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const view = btn.dataset.view;
+      if (!view || !catalogList) return;
+      viewButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      catalogList.style.opacity = '0.5';
+      catalogList.style.transform = 'translateY(10px)';
+      setTimeout(() => {
+        catalogList.setAttribute('data-view', view);
+        catalogList.style.opacity = '1';
+        catalogList.style.transform = 'translateY(0)';
+      }, 150);
+    });
+  });
+
+  // ========= FAVORITES =========
+  const FAVS_KEY = 'catalog_favorites';
+  const getFavorites = () => JSON.parse(localStorage.getItem(FAVS_KEY) || '[]');
+  const setFavorites = (favs) => localStorage.setItem(FAVS_KEY, JSON.stringify(favs));
+  const updateFavoriteButton = (btn, isFavorited) => {
+    btn.classList.toggle('active', isFavorited);
+    btn.style.transform = isFavorited ? 'scale(1.2)' : 'scale(1)';
+    if (isFavorited) { btn.style.animation = 'heartBeat 0.6s ease'; setTimeout(() => btn.style.animation = '', 600); }
+  };
+  document.querySelectorAll('.btn-like').forEach(btn => {
+    const itemId = btn.dataset.id;
+    updateFavoriteButton(btn, getFavorites().includes(itemId));
+    btn.addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
+      const favs = getFavorites();
+      const i = favs.indexOf(itemId);
+      if (i > -1) { favs.splice(i, 1); updateFavoriteButton(btn, false); }
+      else { favs.push(itemId); updateFavoriteButton(btn, true); }
+      setFavorites(favs);
+    });
+  });
+
+  // ========= COMPARE =========
+  const COMPARE_KEY = 'catalog_compare';
+  const MAX_COMPARE = 4;
+  const getCompareItems = () => JSON.parse(localStorage.getItem(COMPARE_KEY) || '[]');
+  const setCompareItems = (items) => localStorage.setItem(COMPARE_KEY, JSON.stringify(items));
+  const compareBar = document.querySelector('.compare-bar');
+  const compareList = document.querySelector('.compare-list');
+  const compareView = document.querySelector('.btn-compare-view');
+  const compareClear = document.querySelector('.btn-compare-clear');
+
+  const renderCompareBar = () => {
+    const items = getCompareItems();
+    if (!compareList || !compareBar) return;
+    compareList.innerHTML = items.map(id => `
+      <div class="compare-pill">
+        <span>Item #${id}</span>
+        <button class="btn-remove" data-id="${id}" style="background:none;border:none;color:inherit;margin-left:8px;">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>`).join('');
+    compareBar.classList.toggle('show', items.length > 0);
+    if (compareView) {
+      compareView.textContent = `Compare (${items.length})`;
+      compareView.disabled = items.length < 2;
+    }
+    compareList.querySelectorAll('.btn-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        setCompareItems(getCompareItems().filter(item => item !== id));
+        renderCompareBar();
+      });
+    });
+  };
+
+  document.querySelectorAll('.btn-compare').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
+      const itemId = btn.dataset.id;
+      const current = getCompareItems();
+      if (current.includes(itemId)) {
+        setCompareItems(current.filter(id => id !== itemId));
+        btn.classList.remove('active');
+      } else if (current.length < MAX_COMPARE) {
+        current.push(itemId); setCompareItems(current); btn.classList.add('active');
+        btn.style.animation = 'pulse 0.4s ease'; setTimeout(() => btn.style.animation = '', 400);
+      } else {
+        alert(`Maximum ${MAX_COMPARE} items can be compared at once.`);
+      }
+      renderCompareBar();
+    });
+  });
+
+  compareClear?.addEventListener('click', () => {
+    setCompareItems([]); document.querySelectorAll('.btn-compare').forEach(b => b.classList.remove('active')); renderCompareBar();
+  });
+  compareView?.addEventListener('click', () => {
+    const items = getCompareItems();
+    if (items.length >= 2) { console.log('Comparing items:', items); alert('Compare functionality - redirect to compare page or show modal'); }
+  });
+  renderCompareBar();
+
+  // ========= CARD HOVER =========
+  document.querySelectorAll('.catalog-row, .td-card, .cat-card, .std-card').forEach(card => {
+    card.addEventListener('mouseenter', function(){ this.style.transition='all .4s cubic-bezier(.25,.46,.45,.94)'; });
+    card.addEventListener('mouseleave', function(){ this.style.transform=''; });
+  });
+
+  // ========= DOWNLOAD TRACKING (non-blocking) =========
+  document.querySelectorAll('a[download], a[href*="/storage/"]').forEach(link => {
+    link.addEventListener('click', function() {
+      const btn = this;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Downloading...';
+      btn.style.pointerEvents = 'none';
+      setTimeout(() => {
+        btn.innerHTML = '<i class="fas fa-check me-2"></i>Downloaded!';
+        setTimeout(() => { btn.innerHTML = originalText; btn.style.pointerEvents = ''; }, 2000);
+      }, 1000);
+      console.log('Download initiated:', this.getAttribute('href'));
+    });
+  });
+
+  // ========= NEWSLETTER =========
+  const newsletterForm = document.querySelector('.nl-form');
+  newsletterForm?.addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = this.querySelector('button');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Subscribing...';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-check me-2"></i>Subscribed!';
+      this.querySelector('input') && (this.querySelector('input').value = '');
+      setTimeout(() => { btn.innerHTML = originalText; btn.disabled = false; }, 3000);
+    }, 1500);
+  });
+
+  // ========= THUMB SLIDER =========
+  document.querySelectorAll('.thumb-has-slider').forEach((wrap) => {
+    const viewport = wrap.querySelector('.thumb-viewport');
+    const slides = Array.from(viewport.querySelectorAll('.slide'));
+    const prevBtn = wrap.querySelector('.thumb-nav.prev');
+    const nextBtn = wrap.querySelector('.thumb-nav.next');
+    const dotsWrap = wrap.querySelector('.thumb-dots');
+
+    const total = slides.length;
+    let idx = slides.findIndex(s => s.classList.contains('is-active'));
+    if (idx < 0) idx = 0;
+
+    if (total <= 1) {
+      prevBtn && (prevBtn.style.display = 'none');
+      nextBtn && (nextBtn.style.display = 'none');
+      dotsWrap && (dotsWrap.style.display = 'none');
+    } else if (dotsWrap) {
+      dotsWrap.innerHTML = '';
+      for (let i=0; i<total; i++) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Ke slide ' + (i+1));
+        if (i === idx) b.setAttribute('aria-current', 'true');
+        b.addEventListener('click', (e) => { e.stopPropagation(); go(i); });
+        dotsWrap.appendChild(b);
+      }
+    }
+
+    function update() {
+      slides.forEach((s, i) => s.classList.toggle('is-active', i === idx));
+      if (dotsWrap && total > 1) {
+        dotsWrap.querySelectorAll('button').forEach((d, i) =>
+          i === idx ? d.setAttribute('aria-current','true') : d.removeAttribute('aria-current')
+        );
+      }
+    }
+    function go(next) { idx = (next + total) % total; update(); }
+
+    prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); go(idx - 1); });
+    nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); go(idx + 1); });
+
+    // swipe
+    let sx = 0, dx = 0;
+    viewport.addEventListener('touchstart', (e)=>{ sx = e.touches[0].clientX; dx = 0; }, {passive:true});
+    viewport.addEventListener('touchmove',  (e)=>{ dx = e.touches[0].clientX - sx; }, {passive:true});
+    viewport.addEventListener('touchend',   ()=>{ if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1)); });
+
+    update();
+  });
+
+  // ========= MODAL + PREVIEW/DOWNLOAD =========
+  let currentModalData = null;
+  window.openDetailModal = (itemId) => {
+    const dataElement = document.getElementById(`catalog-data-${itemId}`);
+    if (!dataElement) { console.error('Data element not found for item:', itemId); return; }
+    try {
+      currentModalData = JSON.parse(dataElement.textContent);
+      populateModal(currentModalData);
+      showModal();
+    } catch (err) { console.error('Error parsing catalog data:', err); }
+  };
+
+  function populateModal(data) {
+    document.getElementById('modalTitle').textContent = data.title;
+    document.getElementById('modalDescription').textContent = data.description || 'Tidak ada deskripsi tersedia.';
+    document.getElementById('modalCategory').textContent = data.category;
+    document.getElementById('modalDate').textContent = data.created_at;
+
+    if (data.file_type) {
+      document.getElementById('modalFileType').innerHTML = `<i class="fas fa-file-${getFileIcon(data.file_type)}"></i> ${data.file_type.toUpperCase()}`;
+    }
+    if (data.file_size) { document.getElementById('modalFileSize').textContent = data.file_size; }
+
+    const mainImage = document.getElementById('modalMainImage');
+    if (data.images && data.images.length > 0) {
+      mainImage.src = data.images[0].url; mainImage.alt = data.images[0].alt || data.title;
+      if (data.images.length > 1) { populateThumbnails(data.images); } else { document.getElementById('modalThumbs').innerHTML = ''; }
     } else {
+      mainImage.src = '/img/placeholder-catalog.png'; mainImage.alt = 'No image available';
       document.getElementById('modalThumbs').innerHTML = '';
     }
-  } else {
-    // Set placeholder image
-    mainImage.src = '/img/placeholder-catalog.png';
-    mainImage.alt = 'No image available';
-    document.getElementById('modalThumbs').innerHTML = '';
-  }
-  
-  // Set action buttons
-  const downloadBtn = document.getElementById('modalDownloadBtn');
-  const previewBtn = document.getElementById('modalPreviewBtn');
-  
-  if (data.file_url) {
-    downloadBtn.onclick = () => {
-      downloadFile(data.file_url, `${data.title}.${data.file_type}`, data.id);
-    };
-    
-    previewBtn.onclick = () => {
-      previewFile(data.file_url, data.id);
-    };
-    
-    downloadBtn.disabled = false;
-    previewBtn.disabled = false;
-  } else {
-    downloadBtn.disabled = true;
-    previewBtn.disabled = true;
-    downloadBtn.onclick = null;
-    previewBtn.onclick = null;
-  }
-}
 
-function populateThumbnails(images) {
-  const thumbsContainer = document.getElementById('modalThumbs');
-  thumbsContainer.innerHTML = '';
-  
-  images.forEach((image, index) => {
-    const thumbDiv = document.createElement('div');
-    thumbDiv.className = `thumb-item ${index === 0 ? 'active' : ''}`;
-    thumbDiv.innerHTML = `<img src="${image.url}" alt="${image.alt}">`;
-    
-    thumbDiv.onclick = () => {
-      // Update main image
-      document.getElementById('modalMainImage').src = image.url;
-      document.getElementById('modalMainImage').alt = image.alt;
-      
-      // Update active thumb
-      document.querySelectorAll('.thumb-item').forEach(item => item.classList.remove('active'));
-      thumbDiv.classList.add('active');
-    };
-    
-    thumbsContainer.appendChild(thumbDiv);
-  });
-}
-
-function showModal() {
-  const modal = document.getElementById('detailModal');
-  modal.classList.add('active');
-  modal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-  
-  // Focus trap
-  const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-  if (focusableElements.length > 0) {
-    focusableElements[0].focus();
-  }
-}
-
-function closeDetailModal() {
-  const modal = document.getElementById('detailModal');
-  modal.classList.remove('active');
-  modal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-  currentModalData = null;
-}
-
-// File operations
-function downloadFile(url, filename, itemId) {
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  
-  // Track download
-  trackDownload(itemId);
-}
-
-function previewFile(url, itemId) {
-  window.open(url, '_blank', 'noopener,noreferrer');
-  
-  // Track preview
-  trackPreview(itemId);
-}
-
-// Tracking functions
-function trackDownload(itemId) {
-  console.log('Tracking download for item:', itemId);
-  
-  // Send tracking request to backend
-  fetch('/catalog/track-download', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-    },
-    body: JSON.stringify({ item_id: itemId, action: 'download' })
-  })
-  .then(response => {
-    if (!response.ok) {
-      console.warn('Failed to track download');
-    }
-  })
-  .catch(error => {
-    console.warn('Error tracking download:', error);
-  });
-}
-
-function trackPreview(itemId) {
-  console.log('Tracking preview for item:', itemId);
-  
-  // Send tracking request to backend
-  fetch('/catalog/track-preview', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
-    },
-    body: JSON.stringify({ item_id: itemId, action: 'preview' })
-  })
-  .then(response => {
-    if (!response.ok) {
-      console.warn('Failed to track preview');
-    }
-  })
-  .catch(error => {
-    console.warn('Error tracking preview:', error);
-  });
-}
-
-// Utility functions
-function getFileIcon(fileType) {
-  const iconMap = {
-    'pdf': 'pdf',
-    'doc': 'word',
-    'docx': 'word',
-    'xls': 'excel',
-    'xlsx': 'excel',
-    'ppt': 'powerpoint',
-    'pptx': 'powerpoint'
-  };
-  return iconMap[fileType.toLowerCase()] || 'file';
-}
-
-// Event listeners
-document.addEventListener('DOMContentLoaded', function() {
-  // Close modal on escape key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && document.getElementById('detailModal').classList.contains('active')) {
-      closeDetailModal();
-    }
-  });
-  
-  // Initialize thumbnail sliders
-  initializeThumbnailSliders();
-});
-
-// Thumbnail slider functionality
-function initializeThumbnailSliders() {
-  document.querySelectorAll('.thumb-has-slider').forEach(slider => {
-    const sliderId = slider.dataset.sliderId;
-    const slides = slider.querySelectorAll('.slide');
-    const dots = slider.querySelector('.thumb-dots');
-    const prevBtn = slider.querySelector('.thumb-nav.prev');
-    const nextBtn = slider.querySelector('.thumb-nav.next');
-    
-    if (slides.length <= 1) {
-      // Hide navigation if only one slide
-      if (prevBtn) prevBtn.style.display = 'none';
-      if (nextBtn) nextBtn.style.display = 'none';
-      if (dots) dots.style.display = 'none';
-      return;
+    const downloadBtn = document.getElementById('modalDownloadBtn');
+    const previewBtn  = document.getElementById('modalPreviewBtn');
+    if (data.file_url) {
+      downloadBtn.onclick = () => downloadFile(data.file_url, `${data.title}.${data.file_type}`, data.id);
+      previewBtn.onclick  = () => previewFile(data.file_url, data.id);
+      downloadBtn.disabled = false; previewBtn.disabled = false;
     } else {
-      // Show navigation for multiple slides
-      if (prevBtn) prevBtn.style.display = 'grid';
-      if (nextBtn) nextBtn.style.display = 'grid';
-      if (dots) dots.style.display = 'flex';
+      downloadBtn.disabled = true; previewBtn.disabled = true;
+      downloadBtn.onclick = null; previewBtn.onclick = null;
     }
-    
-    // Create dots
-    if (dots) {
-      dots.innerHTML = '';
-      
-      // Create container for dots
-      const dotsContainer = document.createElement('div');
-      dotsContainer.className = 'thumb-dots-container';
-      
-      slides.forEach((_, index) => {
-        const dot = document.createElement('button');
-        dot.setAttribute('aria-current', index === 0 ? 'true' : 'false');
-        dot.onclick = () => goToSlide(sliderId, index);
-        dotsContainer.appendChild(dot);
-      });
-      
-      dots.appendChild(dotsContainer);
-    }
-    
-    // Navigation buttons
-    if (prevBtn) {
-      prevBtn.onclick = () => {
-        const current = slider.querySelector('.slide.is-active');
-        const currentIndex = Array.from(slides).indexOf(current);
-        const prevIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
-        goToSlide(sliderId, prevIndex);
-      };
-    }
-    
-    if (nextBtn) {
-      nextBtn.onclick = () => {
-        const current = slider.querySelector('.slide.is-active');
-        const currentIndex = Array.from(slides).indexOf(current);
-        const nextIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
-        goToSlide(sliderId, nextIndex);
-      };
-    }
-  });
-}
+  }
 
-function goToSlide(sliderId, index) {
-  const slider = document.querySelector(`[data-slider-id="${sliderId}"]`);
-  if (!slider) return;
-  
-  const slides = slider.querySelectorAll('.slide');
-  const dots = slider.querySelectorAll('.thumb-dots-container button');
-  
-  slides.forEach((slide, i) => {
-    slide.classList.toggle('is-active', i === index);
+  function populateThumbnails(images) {
+    const thumbsContainer = document.getElementById('modalThumbs');
+    thumbsContainer.innerHTML = '';
+    images.forEach((image, index) => {
+      const thumbDiv = document.createElement('div');
+      thumbDiv.className = `thumb-item ${index === 0 ? 'active' : ''}`;
+      thumbDiv.innerHTML = `<img src="${image.url}" alt="${image.alt || ''}">`;
+      thumbDiv.onclick = () => {
+        const main = document.getElementById('modalMainImage');
+        main.src = image.url; main.alt = image.alt || '';
+        thumbsContainer.querySelectorAll('.thumb-item').forEach(i => i.classList.remove('active'));
+        thumbDiv.classList.add('active');
+      };
+      thumbsContainer.appendChild(thumbDiv);
+    });
+  }
+
+  function showModal() {
+    const modal = document.getElementById('detailModal');
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    focusable.length && focusable[0].focus();
+  }
+  window.closeDetailModal = () => {
+    const modal = document.getElementById('detailModal');
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    currentModalData = null;
+  };
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.getElementById('detailModal')?.classList.contains('active')) {
+      window.closeDetailModal();
+    }
   });
-  
-  dots.forEach((dot, i) => {
-    dot.setAttribute('aria-current', i === index ? 'true' : 'false');
-  });
-}
+
+  function downloadFile(url, filename, itemId) {
+    const link = document.createElement('a');
+    link.href = url; link.download = filename;
+    document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    trackAction(itemId, 'download');
+  }
+  function previewFile(url, itemId) {
+    window.open(url, '_blank', 'noopener,noreferrer');
+    trackAction(itemId, 'preview');
+  }
+  function trackAction(itemId, action) {
+    fetch(`/catalog/track-${action}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+      },
+      body: JSON.stringify({ item_id: itemId, action })
+    }).then(r => { if (!r.ok) console.warn(`Failed to track ${action}`); })
+      .catch(err => console.warn(`Error tracking ${action}:`, err));
+  }
+  function getFileIcon(fileType) {
+    const iconMap = { pdf:'pdf', doc:'word', docx:'word', xls:'excel', xlsx:'excel', ppt:'powerpoint', pptx:'powerpoint' };
+    return iconMap[(fileType||'').toLowerCase()] || 'file';
+  }
+}); // end DOMContentLoaded
+
+
+/* ========= STYLE INJECTION (TERAKHIR) =========
+   - Hapus style lama biar nggak dobel
+   - Spesifisitas tinggi + !important di title & anchor
+   - Fallback inline kalau masih ketiban
+   - Auto re-apply saat DOM berubah (ajax/pagination)
+*/
+(function injectTitleStylesAtEnd(){
+  // 1) bersihkan style lama
+  document.querySelectorAll(
+    'style#catalog-style-bundle, style#catalog-title-style, style#catalog-title-style-v2, style[data-style-block="catalog-title"]'
+  ).forEach(n => n.remove());
+
+  function px(n){ return Number.parseFloat(String(n||'').replace('px','')) || 0; }
+
+  // 2) sisipkan style baru dengan spesifisitas tinggi
+  function doInject(){
+    const style = document.createElement('style');
+    style.id = 'catalog-style-bundle';
+    style.setAttribute('data-style-block', 'catalog-title');
+    style.textContent = `
+      /* util kecil yang sudah ada */
+      .aos-element{opacity:0; transform:translateY(30px); transition:all .8s cubic-bezier(.25,.46,.45,.94)}
+      .aos-element.aos-animate{opacity:1; transform:translateY(0)}
+      @keyframes heartBeat{0%,100%{transform:scale(1)}25%{transform:scale(1.3)}50%{transform:scale(1.1)}75%{transform:scale(1.2)}}
+      @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+
+      /* jangan tangkap klik */
+      .catalog-row::before, .td-card::before, .cat-card::before, .std-card::before, .results-card::after { pointer-events:none !important; }
+      .catalog-row .cta-enhanced, .catalog-row .cta-enhanced .btn, .catalog-row form.inline-form button { pointer-events:auto; position:relative; z-index:50; }
+
+      /* layout kecil */
+      .catalog-list-section .container{max-width:1320px; padding-inline:12px;}
+      @media (min-width:1536px){ .catalog-list-section .container{ max-width:1440px } }
+      .catalog-list-section .content{ gap:12px; }
+      .catalog-list-section .topline{ gap:12px; }
+
+      /* ===== TITLE UPGRADE (super spesifik + !important) ===== */
+      .catalog-list-section article.catalog-row .content > .title,
+      .catalog-list-section article.catalog-row h3.title,
+      .catalog-list-section .catalog-row .content .title{
+        --title-size: clamp(1.8rem, 1.15vw + 1.25rem, 2.7rem);
+        font-size: var(--title-size) !important;
+        font-weight: 800 !important;
+        line-height: 1.15 !important;
+        letter-spacing: -0.015em !important;
+        margin: 4px 0 12px !important;
+        color: var(--title-color, #0f172a) !important;
+        text-wrap: balance;
+        overflow-wrap: anywhere;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Paksa <a> di dalam title mewarisi font h3 */
+      .catalog-list-section article.catalog-row .content > .title > a,
+      .catalog-list-section article.catalog-row h3.title > a,
+      .catalog-list-section .catalog-row .content .title > a{
+        font: inherit !important;              /* font-size + weight + family + line-height */
+        letter-spacing: inherit !important;    /* shorthand font tidak cover letter-spacing */
+        color: inherit !important;
+        text-decoration: none !important;
+        display: inline;
+        position: relative;
+        transition: color .25s ease, transform .18s ease;
+      }
+
+      /* underline anim */
+      .catalog-list-section article.catalog-row .content > .title > a::after,
+      .catalog-list-section article.catalog-row h3.title > a::after,
+      .catalog-list-section .catalog-row .content .title > a::after{
+        content: "";
+        position: absolute;
+        left: 0; bottom: -2px;
+        width: 100%; height: 3px;
+        background: linear-gradient(120deg, var(--brand,#7c3aed), var(--brand-3,#22d3ee));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .25s ease;
+        border-radius: 3px;
+      }
+      .catalog-list-section article.catalog-row .content > .title > a:hover::after,
+      .catalog-list-section article.catalog-row h3.title > a:hover::after,
+      .catalog-list-section .catalog-row .content .title > a:hover::after{
+        transform: scaleX(1);
+      }
+      .catalog-list-section article.catalog-row .content > .title > a:hover,
+      .catalog-list-section article.catalog-row h3.title > a:hover,
+      .catalog-list-section .catalog-row .content .title > a:hover{
+        color: var(--brand,#7c3aed) !important;
+        transform: translateY(-1px);
+      }
+
+      /* clamp 2 baris di layar >= md */
+      @media (min-width:768px){
+        .catalog-list-section article.catalog-row .content > .title,
+        .catalog-list-section article.catalog-row h3.title,
+        .catalog-list-section .catalog-row .content .title{
+          display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+      }
+      /* ukuran title di mobile */
+      @media (max-width:767.98px){
+        .catalog-list-section article.catalog-row .content > .title,
+        .catalog-list-section article.catalog-row h3.title,
+        .catalog-list-section .catalog-row .content .title{
+          --title-size: clamp(1.55rem, 2.8vw + 1rem, 2.25rem) !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // 3) Fallback inline: kalau <a> masih lebih kecil dari h3, samakan via inline + !important
+    function fixInline(root=document){
+      root.querySelectorAll(
+        '.catalog-list-section article.catalog-row .content > .title, \
+         .catalog-list-section article.catalog-row h3.title, \
+         .catalog-list-section .catalog-row .content .title'
+      ).forEach(h3 => {
+        const a = h3.querySelector(':scope > a'); // hanya a langsung di dalam h3
+        if (!a) return;
+        const csH = getComputedStyle(h3);
+        const csA = getComputedStyle(a);
+
+        // kalau anchor lebih kecil/lebih ringan -> paksa inline
+        if (px(csA.fontSize) + 0.1 < px(csH.fontSize) || px(csA.lineHeight) + 0.1 < px(csH.lineHeight) || csA.fontWeight !== csH.fontWeight) {
+          a.style.setProperty('font-size', csH.fontSize, 'important');
+          a.style.setProperty('line-height', csH.lineHeight, 'important');
+          a.style.setProperty('font-weight', csH.fontWeight, 'important');
+          a.style.setProperty('letter-spacing', csH.letterSpacing || '-0.015em', 'important');
+          a.style.setProperty('color', 'inherit', 'important');
+          a.style.setProperty('text-decoration', 'none', 'important');
+        }
+
+        // kalau h3 sendiri masih kekecilan (< 22px), paksa inline di h3 juga
+        if (px(csH.fontSize) < 22) {
+          h3.style.setProperty('font-size', 'clamp(1.8rem, 1.15vw + 1.25rem, 2.7rem)', 'important');
+          h3.style.setProperty('font-weight', '800', 'important');
+          h3.style.setProperty('line-height', '1.15', 'important');
+          h3.style.setProperty('letter-spacing', '-0.015em', 'important');
+          h3.style.setProperty('margin', '4px 0 12px', 'important');
+          h3.style.setProperty('color', 'var(--title-color, #0f172a)', 'important');
+        }
+      });
+    }
+
+    // jalankan setelah frame render
+    requestAnimationFrame(() => fixInline());
+
+    // 4) re-apply saat DOM berubah (pagination / ajax)
+    const host = document.querySelector('.catalog-list-section') || document.body;
+    if ('MutationObserver' in window) {
+      const mo = new MutationObserver(muts => {
+        for (const m of muts) {
+          if (m.type === 'childList' && (m.addedNodes?.length || m.removedNodes?.length)) {
+            fixInline(host);
+            break;
+          }
+          if (m.type === 'attributes' && (m.target?.matches?.('.catalog-list, .catalog-row, .title, .title > a'))) {
+            fixInline(host);
+            break;
+          }
+        }
+      });
+      mo.observe(host, { childList: true, subtree: true, attributes: true, attributeFilter: ['class','style','data-view'] });
+    }
+
+    // 5) juga saat window selesai load (untuk stylesheet late-load)
+    window.addEventListener('load', () => { fixInline(); });
+  }
+
+  if (document.readyState === 'complete') doInject();
+  else window.addEventListener('load', doInject);
+})();
 </script>
+
 
 @endsection
