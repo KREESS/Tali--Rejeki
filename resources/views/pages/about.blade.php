@@ -3,56 +3,6 @@
 @section('title', $title)
 
 @section('content')
-<!-- Maps Section -->
-<section class="maps-section">
-    <div class="maps-container">
-        <div id="map" class="company-map"></div>
-        <div class="map-overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="map-info-card" data-aos="fade-right">
-                            <div class="info-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="info-content">
-                                <h3 class="info-title">Lokasi Kantor Pusat</h3>
-                                <div class="location-details">
-                                    <div class="detail-item">
-                                        <i class="fas fa-building"></i>
-                                        <span>PT. Tali Rejeki Indonesia</span>
-                                    </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <span>Jakarta Timur, DKI Jakarta, Indonesia</span>
-                                    </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-phone"></i>
-                                        <span>+62 21 8888-9999</span>
-                                    </div>
-                                    <div class="detail-item">
-                                        <i class="fas fa-envelope"></i>
-                                        <span>info@talirejeki.co.id</span>
-                                    </div>
-                                </div>
-                                <div class="info-actions">
-                                    <a href="https://maps.google.com/?q=-6.165231512543112,106.99002695730464" target="_blank" class="btn btn-directions">
-                                        <i class="fas fa-directions"></i>
-                                        Petunjuk Arah
-                                    </a>
-                                    <a href="{{ route('contact') }}" class="btn btn-contact">
-                                        <i class="fas fa-phone"></i>
-                                        Hubungi Kami
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <!-- Hero Section -->
 <section class="about-hero">
     <div class="hero-bg">
