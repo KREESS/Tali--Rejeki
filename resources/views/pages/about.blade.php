@@ -27,15 +27,15 @@
                     </p>
                     <div class="hero-stats">
                         <div class="stat-item">
-                            <span class="stat-number">12+</span>
+                            <span class="stat-number" data-target="14">0</span>
                             <span class="stat-label">Tahun</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">500+</span>
+                            <span class="stat-number" data-target="500">0</span>
                             <span class="stat-label">Proyek</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">200+</span>
+                            <span class="stat-number" data-target="200">0</span>
                             <span class="stat-label">Klien</span>
                         </div>
                     </div>
@@ -393,135 +393,8 @@
 </section>
 
 <style>
-/* Maps Section */
-.maps-section {
-    position: relative;
-    height: 70vh;
-    min-height: 500px;
-    overflow: hidden;
-}
 
-.maps-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
 
-#map {
-    width: 100%;
-    height: 100%;
-    filter: grayscale(0.3) contrast(1.1);
-}
-
-.map-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(124, 20, 21, 0.85) 0%, rgba(0, 0, 0, 0.3) 100%);
-    display: flex;
-    align-items: center;
-    z-index: 10;
-}
-
-.map-info-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-radius: 25px;
-    padding: 2.5rem;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    max-width: 500px;
-}
-
-.info-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #7c1415, #dc2626);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 15px 35px rgba(124, 20, 21, 0.3);
-}
-
-.info-title {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: #1f2937;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, #7c1415, #dc2626);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.location-details {
-    margin-bottom: 2rem;
-}
-
-.detail-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    color: #374151;
-}
-
-.detail-item i {
-    width: 20px;
-    color: #7c1415;
-    font-size: 1.1rem;
-}
-
-.info-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.btn-directions,
-.btn-contact {
-    padding: 12px 20px;
-    border-radius: 12px;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-directions {
-    background: linear-gradient(135deg, #7c1415, #dc2626);
-    color: white;
-    box-shadow: 0 8px 25px rgba(124, 20, 21, 0.3);
-}
-
-.btn-directions:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(124, 20, 21, 0.4);
-    color: white;
-}
-
-.btn-contact {
-    background: rgba(124, 20, 21, 0.1);
-    color: #7c1415;
-    border: 2px solid #7c1415;
-}
-
-.btn-contact:hover {
-    background: #7c1415;
-    color: white;
-    transform: translateY(-3px);
-}
 
 /* Enhanced Hero Section */
 .about-hero {
@@ -538,7 +411,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #7c1415 0%, #b71c1c 50%, #dc2626 100%);
+    background-image: url('img/about/7.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(5px);
+    transform: scale(1.06);
     z-index: -2;
 }
 
@@ -690,39 +568,9 @@
     }
 }
 
-/* Enhanced Section Styling */
-.section-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #7c1415, #dc2626);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    box-shadow: 0 8px 25px rgba(124, 20, 21, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
 
-.section-title {
-    font-size: 2.75rem;
-    font-weight: 800;
-    color: #1f2937;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #1f2937, #374151);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 
-.section-description {
-    font-size: 1.15rem;
-    color: #6b7280;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-}
+
 
 /* Enhanced Company Overview */
 .company-overview {
@@ -1207,6 +1055,23 @@
         padding: 2rem;
     }
 }
+
+/* plus sebagai superscript visual, tidak ikut teks */
+.stat-number {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+}
+
+.stat-number::after {
+  content: '+';
+  position: relative;
+  top: -0.4em;          /* naikkan sedikit (atur selera) */
+  font-size: 0.6em;     /* lebih kecil dari angka */
+  margin-left: 2px;
+  font-weight: inherit; /* konsisten dengan angka */
+}
+
 </style>
 
 <script>
@@ -1568,6 +1433,72 @@ window.initMap = function() {
     }
 };
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const counters = document.querySelectorAll(".stat-number");
+
+  // durasi adaptif: pelan tapi tetap responsif
+  const getDuration = (target) => {
+    const base = 2200;     // ms minimal (lebih pelan dari sebelumnya)
+    const perUnit = 5;     // tambahan durasi per angka target
+    const max = 5000;      // batasi agar tidak terlalu lama
+    return Math.min(base + target * perUnit, max);
+  };
+
+  const animateCount = (el, { duration = 3000, delay = 0 } = {}) => {
+    const target = +el.getAttribute("data-target");
+    const start = 0;
+    const startTime = performance.now();
+
+    const tick = (now) => {
+      // terapkan delay kecil untuk stagger
+      if (now < startTime + delay) {
+        requestAnimationFrame(tick);
+        return;
+      }
+
+      const elapsed = now - (startTime + delay);
+      const progress = Math.min(elapsed / duration, 1);
+
+      // easing out cubic agar akhirannya smooth
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      const value = Math.floor(start + (target - start) * eased);
+      el.textContent = value;
+
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = target; // pastikan di angka akhir
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  // jalankan saat section terlihat
+  const section = document.querySelector(".about-hero");
+  if (!section) return;
+
+  const io = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          counters.forEach((el, idx) => {
+            const target = +el.getAttribute("data-target");
+            animateCount(el, {
+              duration: getDuration(target), // lebih lama
+              delay: idx * 150               // stagger 150ms antar item
+            });
+          });
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  io.observe(section);
+});
+</script>
+
 
 <!-- Add Google Maps API (replace YOUR_API_KEY with actual API key) -->
 <script async defer 
