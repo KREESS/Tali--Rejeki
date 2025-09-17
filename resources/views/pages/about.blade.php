@@ -43,11 +43,6 @@
             </div>
         </div>
     </div>
-    <div class="scroll-indicator">
-        <div class="scroll-arrow">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </div>
 </section>
 
 <!-- Company Overview Section -->
@@ -252,7 +247,7 @@
                     <div class="stat-icon">
                         <i class="fas fa-calendar-alt"></i>
                     </div>
-                    <div class="stat-number" data-count="12">0</div>
+                    <div class="stat-number" data-count="12">14 +</div>
                     <div class="stat-label">Tahun Pengalaman</div>
                 </div>
             </div>
@@ -262,7 +257,7 @@
                     <div class="stat-icon">
                         <i class="fas fa-handshake"></i>
                     </div>
-                    <div class="stat-number" data-count="500">0</div>
+                    <div class="stat-number" data-count="500">500 +</div>
                     <div class="stat-label">Proyek Selesai</div>
                 </div>
             </div>
@@ -272,7 +267,7 @@
                     <div class="stat-icon">
                         <i class="fas fa-users"></i>
                     </div>
-                    <div class="stat-number" data-count="200">0</div>
+                    <div class="stat-number" data-count="200">200 +</div>
                     <div class="stat-label">Klien Aktif</div>
                 </div>
             </div>
@@ -282,7 +277,7 @@
                     <div class="stat-icon">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-number" data-count="50">50 +</div>
                     <div class="stat-label">Kota Terjangkau</div>
                 </div>
             </div>
