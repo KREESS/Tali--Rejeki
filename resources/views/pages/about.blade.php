@@ -124,7 +124,7 @@
 </section>
 
 <!-- Vision Mission Section -->
-<section class="vision-mission py-5 bg-light">
+<section class="vision-mission py-5">
     <div class="container">
         <div class="section-header text-center mb-5" data-aos="fade-up">
             <div class="section-badge">
@@ -393,6 +393,7 @@
 </section>
 
 <style>
+
 
 
 
@@ -688,7 +689,6 @@
 
 
 
-
 /* Enhanced Company Overview */
     /* ================================
     Company Overview — Luxury Fit Layout
@@ -947,71 +947,6 @@
     .highlight-item, .grid-item img, .grid-item::before{ transition:none !important; }
     .highlight-item:hover, .grid-item:hover img{ transform:none !important; }
     }
-
-    /* =========================================
-    EXPERIENCE BADGE — ANTI "KETIBAN" PATCH
-    (append at end of CSS)
-    ========================================= */
-
-    /* 1) Layering yang tegas */
-    .overview-visual{ position: relative; z-index: 0; }
-    .image-grid{ position: relative; z-index: 0; }
-    .grid-item{ position: relative; z-index: 0; }               /* kartu gambar di bawah badge */
-    .grid-item::before{ z-index: 1; }                           /* overlay tipis di atas gambar */
-    .experience-badge{ position: absolute; z-index: 5; }        /* badge selalu paling atas */
-
-    /* 2) Ruang ekstra di bawah area visual supaya badge tidak tabrakan */
-    @media (min-width: 1400px){
-    .overview-visual{ padding-bottom: clamp(88px, 7vw, 128px); }
-    }
-    @media (min-width: 1200px) and (max-width: 1399.98px){
-    .overview-visual{ padding-bottom: clamp(76px, 6vw, 110px); }
-    }
-    @media (min-width: 992px) and (max-width: 1199.98px){
-    .overview-visual{ padding-bottom: clamp(64px, 5.5vw, 96px); } /* sebelumnya 40px → dinaikkan */
-    }
-    @media (max-width: 991.98px){
-    .overview-visual{ padding-bottom: clamp(56px, 6vw, 84px); }
-    }
-
-    /* 3) Fine-tune posisi badge (lebih elegan per breakpoint) */
-    @media (min-width: 1200px){
-    .experience-badge{
-        right: clamp(18px, 2.2vw, 36px);
-        bottom: clamp(-40px, -4vw, -24px); /* keluar sedikit ke bawah utk efek “melayang” */
-        min-width: 200px;
-    }
-    }
-    @media (min-width: 992px) and (max-width: 1199.98px){
-    .experience-badge{
-        right: 20px;
-        bottom: -26px;     /* sedikit turunkan agar tidak menyentuh grid */
-        min-width: 190px;
-    }
-    }
-
-    /* 4) Switch ke static lebih awal jika layar makin sempit/pendek */
-    @media (max-width: 880px),
-        (max-height: 680px) and (orientation: landscape){
-    .experience-badge{
-        position: static;           /* tidak absolute lagi → pasti tidak ketiban */
-        margin: 14px auto 0;        /* center di bawah grid */
-        display: inline-block;
-    }
-    }
-
-    /* 5) Netralisir efek transform pada gambar yang kadang bikin layer “di atas” badge */
-    .grid-item img{
-    transform: translateZ(0) scale(1.02);  /* tetap ada efek, tapi aman untuk stacking */
-    will-change: transform;
-    }
-    @media (hover: none){
-    .grid-item img{ transform: none; }     /* di device touch, tidak perlu layer ekstra */
-    }
-
-    /* 6) Jaga gambar tetap mengisi kartu penuh walau ada .img-fluid Bootstrap */
-    .image-grid .grid-item img{ height: 100% !important; }
-
 /* Enhanced Company Overview */
 
 
@@ -1019,8 +954,6 @@
 
 /* Enhanced Vision Mission Cards */
     .vision-mission {
-        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-        position: relative;
     }
 
     .vision-mission::before {
@@ -1204,536 +1137,177 @@
 
 
 
-
 /* Enhanced Statistics Section */
-.bg-gradient {
-    background: linear-gradient(135deg, #7c1415 0%, #dc2626 100%);
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
+    .bg-gradient {
+        background: linear-gradient(135deg, #7c1415 0%, #dc2626 100%);
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
 
-.bg-gradient::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-    background-size: 100px 100px, 150px 150px;
-    animation: float 15s ease-in-out infinite;
-}
+    .bg-gradient::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+            radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+        background-size: 100px 100px, 150px 150px;
+        animation: float 15s ease-in-out infinite;
+    }
 
-.statistics {
-    padding: 100px 0;
-}
+    .statistics {
+        padding: 100px 0;
+    }
 
-.stat-item {
-    text-align: center;
-    padding: 2rem;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-}
-
-.stat-item:hover {
-    transform: translateY(-10px);
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.stat-icon {
-    width: 90px;
-    height: 90px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.25rem;
-    margin: 0 auto 1.5rem;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.stat-number {
-    display: block;
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: #fbbf24;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
-}
-
-.stat-label {
-    font-size: 1.25rem;
-    font-weight: 600;
-    opacity: 0.9;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .maps-section {
-        height: 60vh;
-        min-height: 400px;
-    }
-    
-    .map-info-card {
-        padding: 2rem;
-        margin: 1rem;
-    }
-    
-    .info-actions {
-        flex-direction: column;
-    }
-    
-    .hero-title {
-        font-size: 3rem;
-    }
-    
-    .hero-stats {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .section-title {
-        font-size: 2.25rem;
-    }
-    
-    .image-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: 250px 120px 120px;
-        height: auto;
-    }
-    
-    .main-image {
-        grid-row: 1;
-    }
-    
-    .experience-badge {
-        position: static;
-        margin-top: 2rem;
-    }
-    
-    .highlight-item {
+    .stat-item {
         text-align: center;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .stat-number {
-        font-size: 3rem;
-    }
-    
-    .hero-stats .stat-number {
-        font-size: 2rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .map-info-card {
-        padding: 1.5rem;
-    }
-    
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .vision-card,
-    .mission-card,
-    .value-card {
         padding: 2rem;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
     }
-}
 
-/* plus sebagai superscript visual, tidak ikut teks */
-.stat-number {
-  position: relative;
-  display: inline-block;
-  line-height: 1;
-}
+    .stat-item:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.15);
+    }
 
-.stat-number::after {
-  content: '+';
-  position: relative;
-  top: -0.4em;          /* naikkan sedikit (atur selera) */
-  font-size: 0.6em;     /* lebih kecil dari angka */
-  margin-left: 2px;
-  font-weight: inherit; /* konsisten dengan angka */
-}
+    .stat-icon {
+        width: 90px;
+        height: 90px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.25rem;
+        margin: 0 auto 1.5rem;
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-number {
+        display: block;
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: #fbbf24;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+    }
+
+    .stat-label {
+        font-size: 1.25rem;
+        font-weight: 600;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .maps-section {
+            height: 60vh;
+            min-height: 400px;
+        }
+        
+        .map-info-card {
+            padding: 2rem;
+            margin: 1rem;
+        }
+        
+        .info-actions {
+            flex-direction: column;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+        }
+        
+        .hero-stats {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 2.25rem;
+        }
+        
+        .image-grid {
+            grid-template-columns: 1fr;
+            grid-template-rows: 250px 120px 120px;
+            height: auto;
+        }
+        
+        .main-image {
+            grid-row: 1;
+        }
+        
+        .experience-badge {
+            position: static;
+            margin-top: 2rem;
+        }
+        
+        .highlight-item {
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+        }
+        
+        .hero-stats .stat-number {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .map-info-card {
+            padding: 1.5rem;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+        }
+        
+        .vision-card,
+        .mission-card,
+        .value-card {
+            padding: 2rem;
+        }
+    }
+
+    /* plus sebagai superscript visual, tidak ikut teks */
+    .stat-number {
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    }
+
+    .stat-number::after {
+    content: '+';
+    position: relative;
+    top: -0.4em;          /* naikkan sedikit (atur selera) */
+    font-size: 0.6em;     /* lebih kecil dari angka */
+    margin-left: 2px;
+    font-weight: inherit; /* konsisten dengan angka */
+    }
+/* Enhanced Statistics Section */
 
 </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Google Maps
-    function initMap() {
-        const companyLocation = { lat: -6.165231512543112, lng: 106.99002695730464 };
-        
-        const map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 15,
-            center: companyLocation,
-            styles: [
-                {
-                    "featureType": "all",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                            "weight": "2.00"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "all",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                        {
-                            "color": "#9c9c9c"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "all",
-                    "elementType": "labels.text",
-                    "stylers": [
-                        {
-                            "visibility": "on"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "landscape",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "color": "#f2f2f2"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "landscape",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                            "color": "#ffffff"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "landscape.man_made",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                            "color": "#ffffff"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "poi",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "saturation": -100
-                        },
-                        {
-                            "lightness": 45
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                            "color": "#eeeeee"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#7b7b7b"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                        {
-                            "color": "#ffffff"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.highway",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "simplified"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "road.arterial",
-                    "elementType": "labels.icon",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "transit",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "visibility": "off"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "all",
-                    "stylers": [
-                        {
-                            "color": "#46bcec"
-                        },
-                        {
-                            "visibility": "on"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                            "color": "#c8d7d4"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                            "color": "#070707"
-                        }
-                    ]
-                },
-                {
-                    "featureType": "water",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                        {
-                            "color": "#ffffff"
-                        }
-                    ]
-                }
-            ],
-            mapTypeControl: false,
-            streetViewControl: false,
-            fullscreenControl: true,
-            zoomControl: true,
-            scrollwheel: false
-        });
-
-        // Custom marker
-        const marker = new google.maps.Marker({
-            position: companyLocation,
-            map: map,
-            title: 'PT. Tali Rejeki Indonesia',
-            icon: {
-                url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
-                    <svg width="40" height="50" viewBox="0 0 40 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 0C9 0 0 9 0 20C0 35 20 50 20 50C20 50 40 35 40 20C40 9 31 0 20 0Z" fill="#7c1415"/>
-                        <circle cx="20" cy="20" r="8" fill="white"/>
-                    </svg>
-                `),
-                scaledSize: new google.maps.Size(40, 50),
-                anchor: new google.maps.Point(20, 50)
-            },
-            animation: google.maps.Animation.DROP
-        });
-
-        // Info window
-        const infoWindow = new google.maps.InfoWindow({
-            content: `
-                <div style="padding: 10px; font-family: Arial, sans-serif;">
-                    <h3 style="margin: 0 0 10px 0; color: #7c1415;">PT. Tali Rejeki Indonesia</h3>
-                    <p style="margin: 0; color: #666;">Distributor Insulasi Industri Terpercaya</p>
-                    <p style="margin: 5px 0 0 0; color: #666;">Jakarta Timur, DKI Jakarta</p>
-                </div>
-            `
-        });
-
-        marker.addListener('click', function() {
-            infoWindow.open(map, marker);
-        });
-    }
-
-    // Load Google Maps API
-    if (typeof google === 'undefined') {
-        const script = document.createElement('script');
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap';
-        script.async = true;
-        script.defer = true;
-        document.head.appendChild(script);
-        window.initMap = initMap;
-    } else {
-        initMap();
-    }
-
-    // Counter Animation
-    const counters = document.querySelectorAll('.stat-number');
-    
-    const animateCounters = () => {
-        counters.forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-count'));
-            const increment = target / 200;
-            let current = 0;
-            
-            const updateCounter = () => {
-                if (current < target) {
-                    current += increment;
-                    counter.textContent = Math.ceil(current);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    counter.textContent = target + (target < 100 ? '+' : '');
-                }
-            };
-            
-            updateCounter();
-        });
-    };
-    
-    // Hero stats animation
-    const heroStats = document.querySelectorAll('.hero-stats .stat-number');
-    const animateHeroStats = () => {
-        heroStats.forEach(stat => {
-            const target = parseInt(stat.textContent.replace('+', ''));
-            let current = 0;
-            const increment = target / 100;
-            
-            const updateStat = () => {
-                if (current < target) {
-                    current += increment;
-                    stat.textContent = Math.ceil(current) + '+';
-                    requestAnimationFrame(updateStat);
-                } else {
-                    stat.textContent = target + '+';
-                }
-            };
-            
-            updateStat();
-        });
-    };
-    
-    // Trigger animations when elements are visible
-    const statsSection = document.querySelector('.statistics');
-    if (statsSection) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.5
-        });
-        
-        observer.observe(statsSection);
-    }
-    
-    // Animate hero stats on load
-    setTimeout(animateHeroStats, 1000);
-    
-    // Smooth scroll for scroll indicator
-    const scrollIndicator = document.querySelector('.scroll-indicator');
-    if (scrollIndicator) {
-        scrollIndicator.addEventListener('click', function() {
-            const companyOverview = document.querySelector('.company-overview');
-            if (companyOverview) {
-                companyOverview.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    }
-
-    // Parallax effect for hero particles
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const particles = document.querySelector('.hero-particles');
-        if (particles) {
-            particles.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-    });
-
-    // Add floating animation to cards
-    const cards = document.querySelectorAll('.value-card, .vision-card, .mission-card, .team-card');
-    cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-    });
-
-    // Add hover sound effect (optional)
-    const hoverElements = document.querySelectorAll('.btn-directions, .btn-contact, .value-card, .team-card');
-    hoverElements.forEach(element => {
-        element.addEventListener('mouseenter', function() {
-            // Add subtle scale animation
-            this.style.transform = 'scale(1.02)';
-        });
-        
-        element.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-        });
-    });
-});
-
-// Fallback map initialization for when Google Maps API is not available
-window.initMap = function() {
-    const mapElement = document.getElementById('map');
-    if (mapElement) {
-        mapElement.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: center; height: 100%; background: #f8f9fa; color: #666;">
-                <div style="text-align: center;">
-                    <i class="fas fa-map-marker-alt" style="font-size: 3rem; margin-bottom: 1rem; color: #7c1415;"></i>
-                    <h3>Lokasi Kantor Pusat</h3>
-                    <p>Jakarta Timur, DKI Jakarta, Indonesia</p>
-                    <a href="https://maps.google.com/?q=-6.165231512543112,106.99002695730464" target="_blank" 
-                       style="background: #7c1415; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none;">
-                        Buka di Google Maps
-                    </a>
-                </div>
-            </div>
-        `;
-    }
-};
-</script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const counters = document.querySelectorAll(".stat-number");
