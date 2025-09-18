@@ -38,8 +38,10 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 // ==================== PUBLIC PAGES ====================
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/products', [PageController::class, 'products'])->name('products');
-Route::get('/products/category/{slug}', [PageController::class, 'productsByCategory'])->name('products.category');
-Route::get('/product/{slug}', [PageController::class, 'productDetail'])->name('product.detail');
+Route::get('/products/{category:slug}', [PageController::class, 'productsByCategory'])->name('products.category');
+Route::get('/products/{category:slug}/{subcategory:slug}', [PageController::class, 'subcategory'])->name('products.subcategory');
+Route::get('/products/{category:slug}/{subcategory:slug}/{product:slug}', [PageController::class, 'show'])->name('product.detail');
+
 Route::get('/catalog-page', [PageController::class, 'catalog'])->name('catalog1-page');
 Route::get('/catalog-page/{slug}', [PageController::class, 'catalogDetail'])->name('catalog1-page.detail');
 Route::get('/catalog/{id}/download', [PageController::class, 'catalogDownload'])->name('catalog.download');

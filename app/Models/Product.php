@@ -71,4 +71,33 @@ class Product extends Model
     {
         return $this->subcategory ? $this->subcategory->category_id : null;
     }
+
+    // app/Models/Product.php
+    public function scopeSearch($q, $term)
+    {
+        if (!$term) return $q;
+        return $q->where(function ($qq) use ($term) {
+            $qq->where('name', 'like', "%{$term}%")
+                ->orWhere('meta_description', 'like', "%{$term}%")
+                ->orWhere('attr1', 'like', "%{$term}%")
+                ->orWhere('attr2', 'like', "%{$term}%");
+        });
+    }
+
+    public function scopePriceBetween($q, $min, $max)
+    {
+        if ($min !== null && $min !== '') $q->where('price', '>=', (float)$min);
+        if ($max !== null && $max !== '') $q->where('price', '<=', (float)$max);
+        return $q;
+    }
+
+    public function scopeSortBy($q, $sort)
+    {
+        return match ($sort) {
+            'name'       => $q->orderBy('name'),
+            'price_low'  => $q->orderBy('price'),
+            'price_high' => $q->orderByDesc('price'),
+            default      => $q->latest('id'), // newest
+        };
+    }
 }

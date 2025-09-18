@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\subcategory;
 use App\Models\Product;
 use App\Models\Gallery;
 use App\Models\Job;
@@ -170,6 +171,47 @@ class PageController extends Controller
         ]);
     }
 
+    /**
+     * Display single product detail.
+     */
+    public function subcategory(Request $r, Category $category, Subcategory $subcategory)
+    {
+        abort_unless($subcategory->category_id === $category->id, 404);
+
+        $products = Product::query()
+            ->where('subcategory_id', $subcategory->id)
+            ->with([
+                'subcategory.category',
+                'images' => fn($q) => $q->orderBy('sort_order'),
+                'primaryImage'
+            ])
+            ->search($r->search)
+            ->priceBetween($r->min_price, $r->max_price)
+            ->sortBy($r->sort)
+            ->paginate(12)
+            ->withQueryString();
+
+        return view('catalog.subcategory', [
+            'title'       => $subcategory->name,
+            'category'    => $category,
+            'subcategory' => $subcategory,
+            'products'    => $products,
+        ]);
+    }
+
+    public function show(Product $product)
+    {
+        $product->load([
+            'subcategory.category',
+            'images' => fn($q) => $q->orderBy('sort_order'),
+            'primaryImage'
+        ]);
+
+        return view('catalog.show', [
+            'title'   => $product->name,
+            'product' => $product
+        ]);
+    }
     /**
      * Display the catalog page.
      */
@@ -531,20 +573,20 @@ class PageController extends Controller
     public function catalogDownload($id)
     {
         $catalogItem = CatalogItem::with('files')->findOrFail($id);
-        
+
         // Get primary file (preferably PDF)
-        $primaryFile = $catalogItem->files->sortBy(function($f){
+        $primaryFile = $catalogItem->files->sortBy(function ($f) {
             $ext = strtolower(pathinfo($f->file_url ?? '', PATHINFO_EXTENSION));
             return $ext === 'pdf' ? 0 : 1;
         })->first();
-        
+
         if (!$primaryFile || !$primaryFile->file_url) {
             return redirect()->back()->with('error', 'File tidak tersedia untuk diunduh.');
         }
-        
+
         // Get file path - files are stored in public/catalog/files/
         $filePath = $primaryFile->file_url;
-        
+
         // Handle different path formats
         if (\Illuminate\Support\Str::startsWith($filePath, 'public/')) {
             // If path starts with 'public/', use it directly from public folder
@@ -557,21 +599,21 @@ class PageController extends Controller
             // Assume it's just the filename in catalog/files/
             $fullPath = public_path('catalog/files/' . basename($filePath));
         }
-        
+
         // Check if file exists
         if (!file_exists($fullPath)) {
             return redirect()->back()->with('error', 'File tidak ditemukan di: ' . $fullPath);
         }
-        
+
         // Get file extension for proper filename
         $ext = pathinfo($filePath, PATHINFO_EXTENSION);
         $filename = $catalogItem->title . '.' . $ext;
-        
+
         // Increment download count (optional)
         if (property_exists($catalogItem, 'download_count')) {
             $catalogItem->increment('download_count');
         }
-        
+
         return response()->download($fullPath, $filename);
     }
 
@@ -581,20 +623,20 @@ class PageController extends Controller
     public function catalogPreview($id)
     {
         $catalogItem = CatalogItem::with('files')->findOrFail($id);
-        
+
         // Get primary file (preferably PDF)
-        $primaryFile = $catalogItem->files->sortBy(function($f){
+        $primaryFile = $catalogItem->files->sortBy(function ($f) {
             $ext = strtolower(pathinfo($f->file_url ?? '', PATHINFO_EXTENSION));
             return $ext === 'pdf' ? 0 : 1;
         })->first();
-        
+
         if (!$primaryFile || !$primaryFile->file_url) {
             return redirect()->back()->with('error', 'File tidak tersedia untuk preview.');
         }
-        
+
         // Get file path - files are stored in public/catalog/files/
         $filePath = $primaryFile->file_url;
-        
+
         // Handle different path formats
         if (\Illuminate\Support\Str::startsWith($filePath, 'public/')) {
             // If path starts with 'public/', use it directly from public folder
@@ -607,15 +649,15 @@ class PageController extends Controller
             // Assume it's just the filename in catalog/files/
             $fullPath = public_path('catalog/files/' . basename($filePath));
         }
-        
+
         // Check if file exists
         if (!file_exists($fullPath)) {
             return redirect()->back()->with('error', 'File tidak ditemukan di: ' . $fullPath);
         }
-        
+
         // Get MIME type
         $mimeType = mime_content_type($fullPath);
-        
+
         // Return file response for preview
         return response()->file($fullPath, [
             'Content-Type' => $mimeType,
