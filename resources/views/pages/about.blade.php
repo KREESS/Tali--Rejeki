@@ -1998,6 +1998,51 @@
     color: var(--ls-text-muted); margin: 0; line-height: 1.7; font-size: 1rem;
     }
 
+    /* =======================================================
+    LEADERSHIP FIX — lock card = white & leader-name color
+    Paste AFTER your current leadership-section CSS
+    ======================================================= */
+
+    /* 1) Paksa permukaan kartu selalu putih (light & dark) */
+    .leadership-section{
+    --ls-card-bg: #ffffff;                    /* always white */
+    --ls-card-border: rgba(17,24,39,.08);     /* border halus */
+    /* kalau mau lebih “tegas”, bisa naikin jadi .12 */
+    }
+
+    /* Dark mode: tetap putih + border sedikit lebih kontras */
+    :where(html, body)[data-bs-theme="dark"] .leadership-section,
+    :where(html, body)[data-theme="dark"] .leadership-section,
+    :where(html, body).dark .leadership-section{
+    --ls-card-bg: #ffffff;                    /* keep white */
+    --ls-card-border: rgba(17,24,39,.14);     /* sedikit lebih kuat di dark */
+    --ls-text-muted: #6b7280;                 /* muted sama seperti light */
+    /* overlay, gradient dsb tetap mengikuti token yang lain */
+    }
+
+    /* Pastikan implementasi card mengambil var di atas */
+    .leadership-section .leader-card{
+    background: var(--ls-card-bg) !important; /* jaga-jaga override lain */
+    border-color: var(--ls-card-border);
+    }
+
+    /* 2) Lock warna NAMA supaya tidak berubah di dark/light */
+    .leadership-section .leader-card .leader-content .leader-name{
+    color: #1f2937;                           /* slate-800 */
+    }
+
+    /* Redundansi spesifik di dark mode (kalau ada global force) */
+    :where(html, body)[data-bs-theme="dark"] .leadership-section .leader-card .leader-content .leader-name,
+    :where(html, body)[data-theme="dark"] .leadership-section .leader-card .leader-content .leader-name,
+    :where(html, body).dark .leadership-section .leader-card .leader-content .leader-name{
+    color: #1f2937;                           /* tetap sama di dark */
+    }
+
+    /* (Opsional) Kalau mau posisi jabatan juga stabil kontras di putih */
+    .leadership-section .leader-card .leader-content .leader-position{
+    /* sudah gradient brand, aman di white card */
+    }
+
     /* Responsive */
     @media (max-width: 575.98px){
     .leadership-section .leader-card{ border-radius: 18px; }
