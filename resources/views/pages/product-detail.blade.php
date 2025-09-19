@@ -74,7 +74,6 @@
     // Dokumen (fleksibel beberapa properti umum)
     $docs = collect($product->documents ?? $product->files ?? $product->attachments ?? [])
         ->map(function($d){
-            // dukung bentuk array/obj sederhana: ['name'=>'','url'=>''] atau object ->name, ->url
             $name = is_array($d) ? ($d['name'] ?? $d['filename'] ?? basename($d['url'] ?? 'Dokumen')) : ($d->name ?? $d->filename ?? basename($d->url ?? 'Dokumen'));
             $url  = is_array($d) ? ($d['url'] ?? null) : ($d->url ?? null);
             return $url ? ['name'=>$name, 'url'=>$url] : null;
@@ -90,34 +89,25 @@
     ]);
 @endphp
 
-<section class="page-header">
-    <div class="header-layer"></div>
+{{-- =========================
+     HEADER SEDERHANA
+     ========================= --}}
+<section class="simple-header">
     <div class="container">
-        <!-- Breadcrumbs -->
-        <div class="row">
-            <div class="col-12">
-                <nav class="breadcrumb-nav" aria-label="breadcrumb" data-aos="fade-up">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Beranda</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('products') }}">Produk</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('products.category', $catSlug) }}">{{ $catName }}</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('products.subcategory', ['category'=>$catSlug,'subcategory'=>$subSlug]) }}">{{ $subName }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ $titleTxt }}</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
+        <!-- Breadcrumbs (hanya Beranda / Produk) -->
+        <nav class="breadcrumb-nav" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url('/') }}">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('products') }}">Produk</a></li>
+            </ol>
+        </nav>
 
-        <!-- Title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="header-content" data-aos="fade-up" data-aos-delay="50">
-                    <h1 class="page-title">{{ $titleTxt }}</h1>
-                    @if($shortDesc)
-                        <p class="page-description">{{ Str::limit($shortDesc, 160) }}</p>
-                    @endif
-                </div>
-            </div>
+        <!-- Title + Short Description -->
+        <div class="simple-head">
+            <h1 class="page-title">{{ $titleTxt }}</h1>
+            @if($shortDesc)
+                <p class="page-description">{{ Str::limit($shortDesc, 160) }}</p>
+            @endif
         </div>
     </div>
 </section>
@@ -154,7 +144,7 @@
             <!-- INFO -->
             <div class="col-lg-6">
                 <div class="info-card glass" data-aos="fade-left">
-                    {{-- Kategori breadcrumb kecil --}}
+                    {{-- Kategori breadcrumb kecil (tetap informatif) --}}
                     <div class="mini-category">
                         <a href="{{ route('products.category', $catSlug) }}">{{ $catName }}</a>
                         <span class="sep">/</span>
@@ -215,7 +205,7 @@
                         </a>
                     </div>
 
-                    {{-- Keunggulan ringkas (opsional) --}}
+                    {{-- Ringkas --}}
                     @if($shortDesc)
                         <div class="shortdesc">
                             {!! nl2br(e(Str::limit($shortDesc, 300))) !!}
@@ -341,10 +331,6 @@
         </div>
         @endif
     </div>
-
-    <button class="back-to-top" aria-label="Kembali ke atas">
-        <i class="fas fa-arrow-up"></i>
-    </button>
 </section>
 
 <style>
@@ -389,26 +375,14 @@ body[data-theme="light"]{
 body{ background:var(--page); color:var(--ink); transition: background-color .25s ease, color .25s ease; }
 
 /* =========================================
-   HEADER (reuse dari list)
+   SIMPLE HEADER (tanpa hero)
    ========================================= */
-.page-header{
-  position:relative; color:#fff; padding: 86px 0 48px; overflow:hidden;
-  background:
-    radial-gradient(1200px 300px at -10% -10%, rgba(255,255,255,.12), transparent 60%),
-    radial-gradient(800px 300px at 120% 10%, rgba(255,255,255,.06), transparent 60%),
-    linear-gradient(135deg, var(--brand-1), var(--brand-3) 55%, var(--brand-2));
-}
-.page-header .header-layer{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,.35), transparent 60%); }
-.header-content{ position:relative; z-index:2; text-align:center; }
-.page-title{ font-size: clamp(2rem, 1.3rem + 2vw, 2.6rem); font-weight:900; letter-spacing:-.02em; margin-bottom:.35rem; }
-.page-description{ max-width:70ch; margin:0 auto; }
-
-/* Breadcrumbs */
-.breadcrumb-nav{ position:relative; z-index:2; margin-bottom: 10px; }
-.breadcrumb{ background:transparent; margin:0; padding:0; }
-.breadcrumb .breadcrumb-item a{ color:#fde68a; text-decoration:none; }
-.breadcrumb .breadcrumb-item.active{ color:#fff; opacity:.9; }
-.breadcrumb .breadcrumb-item + .breadcrumb-item::before{ color:#fff; opacity:.6; }
+.simple-header{ padding: 18px 0 10px; background: transparent; color: var(--ink); }
+.breadcrumb{ background:transparent; margin:0 0 6px; padding:0; }
+.breadcrumb .breadcrumb-item a{ color: var(--brand-1); text-decoration:none; font-weight:800; }
+.breadcrumb .breadcrumb-item + .breadcrumb-item::before{ color: var(--muted); }
+.page-title{ font-size: clamp(1.6rem, 1.2rem + 1vw, 2.2rem); font-weight:900; letter-spacing:-.02em; margin: 0 0 .25rem; }
+.page-description{ margin:0; color: var(--muted); }
 
 /* =========================================
    DETAIL LAYOUT
@@ -494,13 +468,8 @@ html.dark .shortdesc{ color: var(--ink); }
 .product-card.mini .product-price .price{ color:var(--brand-1); font-weight:900; }
 .product-card.mini .product-actions .btn{ width:100%; }
 
-.back-to-top{
-  position: fixed; right: 18px; bottom: 18px; border: none; border-radius: 999px; width: 44px; height: 44px;
-  display:flex; align-items:center; justify-content:center; cursor:pointer; z-index: 40;
-  background: linear-gradient(135deg, var(--brand-1), var(--brand-2)); color:#fff;
-  box-shadow: 0 10px 22px rgba(220,38,38,.28); opacity: 0; transform: translateY(8px); pointer-events: none; transition: .25s;
-}
-.back-to-top.show{ opacity:1; transform: translateY(0); pointer-events:auto; }
+/* ==== Khusus permintaan: brand teks hitam ==== */
+.brand-badge, .brand-badge * { color:#000 !important; }
 
 /* Responsive */
 @media (max-width: 992px){
@@ -511,9 +480,6 @@ html.dark .shortdesc{ color: var(--ink); }
   .cta-row{ flex-direction:column; }
   .products-grid.related-grid{ grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); }
 }
-
-/* ==== Khusus permintaan: brand teks hitam ==== */
-.brand-badge, .brand-badge * { color:#000 !important; }
 </style>
 
 <script>
@@ -554,7 +520,6 @@ document.addEventListener('DOMContentLoaded', function () {
       b.classList.add('active');
       const target = document.querySelector(b.dataset.target);
       if (target) target.classList.add('active');
-      // scroll anchor if docs tab clicked via CTA
       if (b.dataset.target === '#tab-docs') {
         document.getElementById('tab-docs').scrollIntoView({behavior:'smooth', block:'start'});
       }
@@ -569,13 +534,6 @@ document.addEventListener('DOMContentLoaded', function () {
       document.querySelector('.tab-btn[data-target="#tab-docs"]').click();
     });
   }
-
-  // back-to-top
-  const btt = document.querySelector('.back-to-top');
-  const onScroll = ()=>{ if (window.scrollY > 350) btt.classList.add('show'); else btt.classList.remove('show'); };
-  window.addEventListener('scroll', onScroll);
-  btt.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
-  onScroll();
 });
 </script>
 @endsection
