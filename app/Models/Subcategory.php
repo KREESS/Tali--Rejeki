@@ -17,4 +17,10 @@ class Subcategory extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    // app/Models/Category.php (juga di Subcategory.php & Product.php)
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }

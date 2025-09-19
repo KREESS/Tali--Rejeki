@@ -100,4 +100,10 @@ class Product extends Model
             default      => $q->latest('id'), // newest
         };
     }
+
+    // app/Models/Category.php (juga di Subcategory.php & Product.php)
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }

@@ -4,51 +4,48 @@
 
 @section('content')
 @php
-    /**
-     * Normalisasi path gambar ke public/img/products/...
-     * Menangani absolute URL, "img/...", "products/...", "product_images/...", "storage/...", atau nama file saja.
-     */
+    // ---- Helpers
     $imgPublic = function($path){
         if (!$path) return null;
         $normalized = ltrim($path, '/');
-
-        if (\Illuminate\Support\Str::startsWith($normalized, ['http://','https://'])) {
-            return $normalized;
-        }
-        if (\Illuminate\Support\Str::startsWith($normalized, 'img/')) {
-            return asset($normalized);
-        }
-        if (\Illuminate\Support\Str::startsWith($normalized, 'products/')) {
-            return asset(\Illuminate\Support\Str::replaceFirst('products/', 'img/products/', $normalized));
-        }
-        if (\Illuminate\Support\Str::startsWith($normalized, 'product_images/')) {
-            return asset(\Illuminate\Support\Str::replaceFirst('product_images/', 'img/products/', $normalized));
-        }
-        if (\Illuminate\Support\Str::startsWith($normalized, 'public/product_images/')) {
-            return asset(\Illuminate\Support\Str::replaceFirst('public/product_images/', 'img/products/', $normalized));
-        }
-        if (\Illuminate\Support\Str::startsWith($normalized, 'storage/')) {
-            return asset('img/products/'.basename($normalized));
-        }
+        if (\Illuminate\Support\Str::startsWith($normalized, ['http://','https://'])) return $normalized;
+        if (\Illuminate\Support\Str::startsWith($normalized, 'img/')) return asset($normalized);
+        if (\Illuminate\Support\Str::startsWith($normalized, 'products/')) return asset(\Illuminate\Support\Str::replaceFirst('products/', 'img/products/', $normalized));
+        if (\Illuminate\Support\Str::startsWith($normalized, 'product_images/')) return asset(\Illuminate\Support\Str::replaceFirst('product_images/', 'img/products/', $normalized));
+        if (\Illuminate\Support\Str::startsWith($normalized, 'public/product_images/')) return asset(\Illuminate\Support\Str::replaceFirst('public/product_images/', 'img/products/', $normalized));
+        if (\Illuminate\Support\Str::startsWith($normalized, 'storage/')) return asset('img/products/'.basename($normalized));
         return asset('img/products/'.$normalized);
     };
 
-    // Ringkasan untuk chips
-    $selectedCategory = optional(collect($categories)->firstWhere('slug', request('category')));
-    $selectedSub = request('subcategory') ? (isset($subcategories)
-        ? collect($subcategories)->firstWhere('slug', request('subcategory'))
-        : (collect($categories)->flatMap(fn($c) => $c->subcategories ?? collect()))->firstWhere('slug', request('subcategory'))) : null;
+    $formatPrice = function($amount, $currency='IDR'){
+        if (is_null($amount) || $amount==='') return null;
+        $amount = (float)$amount;
+        if (strtoupper($currency) === 'IDR') {
+            return 'Rp '.number_format($amount, 0, ',', '.');
+        }
+        // fallback: tampilkan 2 desimal utk non-IDR
+        return strtoupper($currency).' '.number_format($amount, 2, '.', ',');
+    };
 
-    // Deskripsi hero: ambil dari categories.meta_description; fallback
+    /** ==== DETEKSI slug dari route ATAU query ==== */
+    $paramCategory = isset($category) ? $category->slug : request('category');
+    $paramSub      = isset($subcategory) ? $subcategory->slug : request('subcategory');
+
+    // Ringkasan untuk chips
+    $selectedCategory = optional(collect($categories)->firstWhere('slug', $paramCategory));
+    $selectedSub = $paramSub ? (
+        isset($subcategories)
+        ? collect($subcategories)->firstWhere('slug', $paramSub)
+        : (collect($categories)->flatMap(fn($c) => $c->subcategories ?? collect()))->firstWhere('slug', $paramSub)
+    ) : null;
+
+    // Deskripsi hero
     $heroDescription = trim((string)($selectedCategory->meta_description ?? ''));
     if ($heroDescription === '') {
         $heroDescription = 'Temukan produk insulasi industri berkualitas tinggi untuk berbagai kebutuhan aplikasi Anda';
     }
 @endphp
 
-<!-- =========================================
-     PAGE HEADER
-     ========================================= -->
 <section class="page-header">
     <div class="header-layer"></div>
     <div class="container">
@@ -60,11 +57,11 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ url('/') }}">Beranda</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('products') }}">Produk</a></li>
-                        @if(request('category'))
-                            <li class="breadcrumb-item active" aria-current="page">{{ $selectedCategory->name ?? request('category') }}</li>
+                        @if($paramCategory)
+                            <li class="breadcrumb-item active" aria-current="page">{{ $selectedCategory->name ?? $paramCategory }}</li>
                         @endif
-                        @if(request('subcategory'))
-                            <li class="breadcrumb-item active" aria-current="page">{{ $selectedSub->name ?? request('subcategory') }}</li>
+                        @if($paramSub)
+                            <li class="breadcrumb-item active" aria-current="page">{{ $selectedSub->name ?? $paramSub }}</li>
                         @endif
                     </ol>
                 </nav>
@@ -76,9 +73,7 @@
             <div class="col-12">
                 <div class="header-content" data-aos="fade-up" data-aos-delay="50">
                     <h1 class="page-title">{{ $title }}</h1>
-                    <p class="page-description">
-                        {{ $heroDescription }}
-                    </p>
+                    <p class="page-description">{{ $heroDescription }}</p>
 
                     <!-- Search Bar -->
                     <div class="search-section">
@@ -86,15 +81,11 @@
                             <div class="search-input-group">
                                 <div class="search-input">
                                     <i class="fas fa-search"></i>
-                                    <input type="text"
-                                           name="search"
-                                           placeholder="Cari produk, subkategori, kata kunci..."
-                                           value="{{ request('search') }}"
-                                           class="form-control">
+                                    <input type="text" name="search" placeholder="Cari produk, SKU, brand, kata kunci..."
+                                           value="{{ request('search') }}" class="form-control">
                                 </div>
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-search"></i>
-                                    Cari
+                                    <i class="fas fa-search"></i> Cari
                                 </button>
                             </div>
                         </form>
@@ -108,11 +99,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="filter-chipbar" data-aos="fade-up" data-aos-delay="100">
-                    @if(request('category'))
-                        <span class="chip"><i class="fas fa-folder-open"></i> Kategori: {{ $selectedCategory->name ?? request('category') }}</span>
+                    @if($paramCategory)
+                        <span class="chip"><i class="fas fa-folder-open"></i> Kategori: {{ $selectedCategory->name ?? $paramCategory }}</span>
                     @endif
-                    @if(request('subcategory'))
-                        <span class="chip"><i class="fas fa-layer-group"></i> Subkategori: {{ $selectedSub->name ?? request('subcategory') }}</span>
+                    @if($paramSub)
+                        <span class="chip"><i class="fas fa-layer-group"></i> Subkategori: {{ $selectedSub->name ?? $paramSub }}</span>
                     @endif
                     @if(request('search'))
                         <span class="chip"><i class="fas fa-magnifying-glass"></i> Cari: {{ request('search') }}</span>
@@ -125,7 +116,7 @@
                         </span>
                     @endif
 
-                    @if(request()->hasAny(['category','subcategory','search','min_price','max_price','sort']))
+                    @if($paramCategory || $paramSub || request('search') || request('min_price') || request('max_price') || request('sort'))
                         <a class="chip reset" href="{{ route('products') }}">
                             <i class="fas fa-xmark"></i> Reset
                         </a>
@@ -136,13 +127,10 @@
     </div>
 </section>
 
-<!-- =========================================
-     CONTENT: SIDEBAR + GRID
-     ========================================= -->
 <section class="products-section py-5">
     <div class="container">
         <div class="row">
-            <!-- ========== Sidebar Filters ========== -->
+            <!-- Sidebar -->
             <div class="col-lg-3">
                 <aside class="filters-sidebar glass" data-aos="fade-right">
                     <div class="filter-section">
@@ -150,38 +138,38 @@
 
                         <!-- Category Chips -->
                         <div class="category-chip-scroll" role="tablist" aria-label="Filter kategori cepat">
-                            <a class="c-chip {{ !request('category') ? 'active' : '' }}" href="{{ route('products') }}">
+                            <a class="c-chip {{ !$paramCategory ? 'active' : '' }}" href="{{ route('products') }}">
                                 Semua
                             </a>
                             @foreach($categories as $cat)
-                                <a class="c-chip {{ request('category')===$cat->slug ? 'active' : '' }}"
-                                   href="{{ route('products', ['category' => $cat->slug]) }}">
+                                <a class="c-chip {{ $paramCategory===$cat->slug ? 'active' : '' }}"
+                                   href="{{ route('products.category', $cat->slug) }}">
                                    {{ $cat->name }}
                                 </a>
                             @endforeach
                         </div>
 
-                        <!-- Category Radios -->
+                        <!-- Category Radios (tetap query ke /products) -->
                         <div class="filter-group mt-3">
                             <h4 class="filter-label">Kategori</h4>
                             <div class="filter-options">
                                 <div class="filter-option">
                                     <input type="radio" id="all-categories" name="category" value=""
-                                           {{ !request('category') ? 'checked' : '' }} onchange="filterProducts()">
+                                           {{ !$paramCategory ? 'checked' : '' }} onchange="filterProducts()">
                                     <label for="all-categories">Semua Kategori</label>
                                 </div>
                                 @foreach($categories as $category)
                                 <div class="filter-option">
                                     <input type="radio" id="category-{{ $category->id }}" name="category" value="{{ $category->slug }}"
-                                           {{ request('category') === $category->slug ? 'checked' : '' }} onchange="filterProducts()">
+                                           {{ $paramCategory === $category->slug ? 'checked' : '' }} onchange="filterProducts()">
                                     <label for="category-{{ $category->id }}">{{ $category->name }}</label>
                                 </div>
                                 @endforeach
                             </div>
                         </div>
 
-                        <!-- Price Range (aktif hanya saat sudah pilih subkategori) -->
-                        <div class="filter-group" @if(!request('subcategory')) style="opacity:.5; pointer-events:none;" @endif>
+                        <!-- Price Range (aktif jika sudah pilih subkategori) -->
+                        <div class="filter-group" @if(!$paramSub) style="opacity:.5; pointer-events:none;" @endif>
                             <h4 class="filter-label">Rentang Harga</h4>
                             <div class="price-range">
                                 <div class="price-input">
@@ -213,7 +201,6 @@
                         </div>
                     </div>
 
-                    <!-- Info Box -->
                     <div class="info-box">
                         <i class="fas fa-lightbulb"></i>
                         <div>
@@ -224,20 +211,21 @@
                 </aside>
             </div>
 
-            <!-- ========== Content Area ========== -->
+            <!-- Content -->
             <div class="col-lg-9">
                 @php
-                    // Kumpulkan subcategories
+                    // Kumpulkan subcategories dari semua kategori
                     $subs = isset($subcategories)
                         ? $subcategories
                         : collect($categories)->flatMap(fn($c) => $c->subcategories ?? collect());
 
                     // Filter subcategories sesuai kategori terpilih
-                    if (request('category')) {
-                        $subs = $subs->filter(fn($s) => optional($s->category)->slug === request('category'));
+                    if ($paramCategory) {
+                        $subs = $subs->filter(fn($s) => optional($s->category)->slug === $paramCategory);
                     }
 
-                    $isSubMode = request()->filled('subcategory'); // ada subcategory -> tampil produk
+                    // Mode produk aktif jika ada slug subcategory (route atau query)
+                    $isSubMode = !empty($paramSub);
                 @endphp
 
                 <!-- Toolbar -->
@@ -247,9 +235,9 @@
                             <span class="results-count">
                                 Menampilkan {{ $subs->count() }} subkategori
                             </span>
-                            @if(request('category'))
+                            @if($paramCategory)
                             <span class="category-info">
-                                dalam kategori "<strong>{{ $selectedCategory->name ?? request('category') }}</strong>"
+                                dalam kategori "<strong>{{ $selectedCategory->name ?? $paramCategory }}</strong>"
                             </span>
                             @endif
                         @else
@@ -322,7 +310,7 @@
                     @endif
                 </div>
 
-                <!-- Grid: Subcategories OR Products -->
+                <!-- Grid -->
                 <div class="products-container">
                     @if(!$isSubMode)
                         {{-- ===== SUBCATEGORY GRID ===== --}}
@@ -335,8 +323,8 @@
                                     ?? null;
                                 $thumb = $imgPublic($rawThumb);
 
-                                $subUrl = route('products', [
-                                    'category'    => optional($sub->category)->slug,
+                                $subUrl = route('products.subcategory', [
+                                    'category'    => optional($sub->category)->slug ?? $paramCategory,
                                     'subcategory' => $sub->slug
                                 ]);
 
@@ -359,8 +347,7 @@
                                         <div class="product-overlay">
                                             <div class="overlay-actions">
                                                 <a href="{{ $subUrl }}" class="btn btn-primary btn-sm">
-                                                    <i class="fas fa-eye"></i>
-                                                    Lihat Produk
+                                                    <i class="fas fa-eye"></i> Lihat Produk
                                                 </a>
                                             </div>
                                         </div>
@@ -368,8 +355,8 @@
 
                                     <div class="product-content">
                                         <div class="product-category">
-                                            <a href="{{ route('products', ['category' => optional($sub->category)->slug]) }}">
-                                                {{ optional($sub->category)->name ?? 'Kategori' }}
+                                            <a href="{{ route('products.category', optional($sub->category)->slug ?? $paramCategory) }}">
+                                                {{ optional($sub->category)->name ?? ($selectedCategory->name ?? 'Kategori') }}
                                             </a>
                                         </div>
 
@@ -406,12 +393,10 @@
                                     <p>Silakan pilih kategori lain atau lihat semua produk.</p>
                                     <div class="no-products-actions">
                                         <a href="{{ route('products') }}" class="btn btn-primary">
-                                            <i class="fas fa-arrow-left"></i>
-                                            Lihat Semua
+                                            <i class="fas fa-arrow-left"></i> Lihat Semua
                                         </a>
                                         <a href="{{ route('contact') }}" class="btn btn-outline-primary">
-                                            <i class="fas fa-phone"></i>
-                                            Hubungi Kami
+                                            <i class="fas fa-phone"></i> Hubungi Kami
                                         </a>
                                     </div>
                                 </div>
@@ -423,8 +408,11 @@
                         <div class="products-grid" id="products-grid">
                             @foreach($products as $index => $product)
                             @php
-                                $catSlug = optional($product->category)->slug ?? 'kategori';
+                                $catSlug = optional(optional($product->subcategory)->category)->slug
+                                           ?? optional($product->category)->slug
+                                           ?? 'kategori';
                                 $subSlug = optional($product->subcategory)->slug ?? 'umum';
+
                                 $detailUrl = route('product.detail', [
                                     'category'    => $catSlug,
                                     'subcategory' => $subSlug,
@@ -433,7 +421,29 @@
 
                                 $rawImg = data_get($product, 'images.0.image_path');
                                 $imgUrl = $imgPublic($rawImg);
+
+                                // BRANDS → array atau string dipisah koma/titik-koma/pipa
+                                $brandList = [];
+                                if (is_array($product->brands)) {
+                                    $brandList = array_filter(array_map('trim', $product->brands));
+                                } elseif (!empty($product->brands)) {
+                                    $brandList = array_filter(array_map('trim', preg_split('/[;,|]/', $product->brands)));
+                                }
+
+                                // Ambil 4 attr terisi pertama
+                                $attrs = collect(range(1,10))
+                                    ->map(fn($i) => $product->{'attr'.$i} ?? null)
+                                    ->filter()
+                                    ->take(4);
+
+                                // Harga + currency
+                                $price      = $product->price;
+                                $priceStrike= $product->price_strike;
+                                $currency   = $product->currency ?: 'IDR';
+                                $priceStr   = $formatPrice($price, $currency);
+                                $strikeStr  = $formatPrice($priceStrike, $currency);
                             @endphp
+
                             <div class="product-item" data-aos="fade-up" data-aos-delay="{{ $index * 70 }}">
                                 <div class="product-card shine">
                                     <div class="product-image">
@@ -450,24 +460,24 @@
                                         <div class="product-overlay">
                                             <div class="overlay-actions">
                                                 <a href="{{ $detailUrl }}" class="btn btn-primary btn-sm">
-                                                    <i class="fas fa-eye"></i>
-                                                    Lihat Detail
+                                                    <i class="fas fa-eye"></i> Lihat Detail
                                                 </a>
                                             </div>
                                         </div>
 
                                         @if(!empty($product->is_featured))
                                         <div class="product-badge featured" title="Featured">
-                                            <i class="fas fa-star"></i>
-                                            Featured
+                                            <i class="fas fa-star"></i> Featured
                                         </div>
                                         @endif
                                     </div>
 
                                     <div class="product-content">
                                         <div class="product-category">
-                                            <a href="{{ route('products', ['category' => optional($product->category)->slug]) }}">
-                                                {{ $product->category->name ?? 'Uncategorized' }}
+                                            <a href="{{ route('products.category', $catSlug) }}">
+                                                {{ optional(optional($product->subcategory)->category)->name
+                                                   ?? optional($product->category)->name
+                                                   ?? 'Uncategorized' }}
                                             </a>
                                         </div>
 
@@ -475,38 +485,63 @@
                                             <a href="{{ $detailUrl }}">{{ $product->name }}</a>
                                         </h3>
 
-                                        <p class="product-description">
-                                            {{ Str::limit($product->description, 120) }}
-                                        </p>
-
-                                        <div class="product-meta">
-                                            @if($product->specifications)
-                                            <div class="product-specs">
-                                                <small class="text-muted">
-                                                    <i class="fas fa-cog"></i>
-                                                    {{ Str::limit($product->specifications, 80) }}
-                                                </small>
-                                            </div>
+                                        {{-- META RINGKAS --}}
+                                        <div class="small text-muted mb-1 sku-line">
+                                            @if($product->sku)
+                                                <span class="me-2"><i class="fas fa-barcode"></i> SKU: {{ $product->sku }}</span>
                                             @endif
+                                            @if(count($brandList))
+                                                <span><i class="fas fa-tags"></i>
+                                                    @foreach(array_slice($brandList,0,3) as $b)
+                                                        <span class="badge rounded-pill bg-light text-dark border">{{ $b }}</span>
+                                                    @endforeach
+                                                    @if(count($brandList) > 3)
+                                                        <span class="badge rounded-pill bg-light text-dark border">+{{ count($brandList)-3 }}</span>
+                                                    @endif
+                                                </span>
+                                            @endif
+                                        </div>
 
-                                            @if($product->price)
-                                            <div class="product-price">
-                                                <span class="price">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
-                                                @if($product->price_unit)
-                                                <span class="price-unit">/ {{ $product->price_unit }}</span>
+                                        {{-- DESKRIPSI SINGKAT --}}
+                                        @php
+                                            $desc = $product->meta_description ?: ($product->attr1 ?? $product->attr2 ?? '');
+                                        @endphp
+                                        @if($desc)
+                                            <p class="product-description">{{ Str::limit($desc, 120) }}</p>
+                                        @endif
+
+                                        {{-- ATTRIBUTES QUICK CHIPS --}}
+                                        @if($attrs->count())
+                                        <div class="mb-2" style="display:flex;gap:.35rem;flex-wrap:wrap;">
+                                            @foreach($attrs as $a)
+                                                <span class="badge rounded-pill" style="background:var(--soft);border:1px solid var(--line);">
+                                                    {{ Str::limit($a, 24) }}
+                                                </span>
+                                            @endforeach
+                                        </div>
+                                        @endif
+
+                                        {{-- HARGA --}}
+                                        <div class="product-price force-white">
+                                            @if($priceStr)
+                                                <span class="price">{{ $priceStr }}</span>
+                                                @if($priceStrike && $priceStrike > $price)
+                                                    <del class="ms-2">{{ $strikeStr }}</del>
                                                 @endif
-                                            </div>
+                                                @if(strtoupper($currency) !== 'IDR')
+                                                    <small class="ms-1">({{ strtoupper($currency) }})</small>
+                                                @endif
+                                            @else
+                                                <span class="text-muted">Harga: Hubungi kami</span>
                                             @endif
                                         </div>
 
                                         <div class="product-actions">
                                             <a href="{{ $detailUrl }}" class="btn btn-outline-primary btn-sm flex-fill">
-                                                <i class="fas fa-info-circle"></i>
-                                                Detail Produk
+                                                <i class="fas fa-info-circle"></i> Detail Produk
                                             </a>
                                             <a href="{{ route('contact') }}?product={{ $product->slug }}" class="btn btn-primary btn-sm flex-fill">
-                                                <i class="fas fa-phone"></i>
-                                                Hubungi
+                                                <i class="fas fa-phone"></i> Hubungi
                                             </a>
                                         </div>
                                     </div>
@@ -528,13 +563,17 @@
                                 <h3>Produk tidak ditemukan</h3>
                                 <p>Coba ubah filter atau pilih subkategori lain.</p>
                                 <div class="no-products-actions">
-                                    <a href="{{ route('products', ['category' => request('category')]) }}" class="btn btn-primary">
-                                        <i class="fas fa-arrow-left"></i>
-                                        Kembali ke Subkategori
-                                    </a>
+                                    @if($paramCategory)
+                                        <a href="{{ route('products.category', $paramCategory) }}" class="btn btn-primary">
+                                            <i class="fas fa-arrow-left"></i> Kembali ke Subkategori
+                                        </a>
+                                    @else
+                                        <a href="{{ route('products') }}" class="btn btn-primary">
+                                            <i class="fas fa-arrow-left"></i> Lihat Semua
+                                        </a>
+                                    @endif
                                     <a href="{{ route('contact') }}" class="btn btn-outline-primary">
-                                        <i class="fas fa-phone"></i>
-                                        Hubungi Kami
+                                        <i class="fas fa-phone"></i> Hubungi Kami
                                     </a>
                                 </div>
                             </div>
@@ -546,7 +585,6 @@
         </div>
     </div>
 
-    <!-- Back to top -->
     <button class="back-to-top" aria-label="Kembali ke atas">
         <i class="fas fa-arrow-up"></i>
     </button>
@@ -964,6 +1002,43 @@ html.dark .pagination .page-link{ background: var(--soft-2); color: var(--ink); 
 @media (max-width: 480px){
   .product-actions{ flex-direction: column; }
 }
+
+/* =====================================================
+   Visibility fixes (requested): force white for SKU, prices, and Tips
+   ===================================================== */
+
+/* SKU line (including icons & any nested spans) */
+.product-content .small.text-muted,
+.product-content .small.text-muted * {
+  color: #ffffff !important;
+}
+
+/* Prices (main, strike, and any muted small note) */
+.product-price.force-white .price,
+.product-price.force-white del,
+.product-price.force-white .text-muted,
+.product-price.force-white small {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Tips box text */
+.info-box,
+.info-box *,
+.info-box strong,
+.info-box .small {
+  color: #ffffff !important;
+}
+
+/* Keep the lightbulb icon accent color */
+.info-box i { color: #f59e0b !important; }
+
+/* === Brand text: force black, tanpa mengganggu SKU/harga === */
+.product-content .sku-line .badge,
+.product-content .sku-line .badge * {
+  color: #000 !important;
+}
+
 </style>
 
 <!-- =========================================

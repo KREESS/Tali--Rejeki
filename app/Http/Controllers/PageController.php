@@ -61,42 +61,45 @@ class PageController extends Controller
     }
 
     /**
-     * Display the products page.
+     * /products  (semua produk + filter query)
      */
     public function products(Request $request)
     {
         $query = Product::with(['subcategory.category', 'images']);
 
-        // Search functionality
-        if ($request->has('search') && !empty($request->search)) {
-            $searchTerm = $request->search;
-            $query->where(function ($q) use ($searchTerm) {
-                $q->where('name', 'like', "%{$searchTerm}%")
-                    ->orWhere('meta_description', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr1', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr2', 'like', "%{$searchTerm}%");
+        // Search
+        if ($request->filled('search')) {
+            $s = $request->search;
+            $query->where(function ($q) use ($s) {
+                $q->where('name', 'like', "%{$s}%")
+                    ->orWhere('meta_description', 'like', "%{$s}%")
+                    ->orWhere('sku', 'like', "%{$s}%")
+                    ->orWhere('brands', 'like', "%{$s}%")
+                    ->orWhere('attr1', 'like', "%{$s}%")
+                    ->orWhere('attr2', 'like', "%{$s}%")
+                    ->orWhere('attr3', 'like', "%{$s}%")
+                    ->orWhere('attr4', 'like', "%{$s}%")
+                    ->orWhere('attr5', 'like', "%{$s}%")
+                    ->orWhere('attr6', 'like', "%{$s}%")
+                    ->orWhere('attr7', 'like', "%{$s}%")
+                    ->orWhere('attr8', 'like', "%{$s}%")
+                    ->orWhere('attr9', 'like', "%{$s}%")
+                    ->orWhere('attr10', 'like', "%{$s}%");
             });
         }
 
-        // Category filter - now filtering by subcategory's category
-        if ($request->has('category') && !empty($request->category)) {
-            $query->whereHas('subcategory.category', function ($q) use ($request) {
-                $q->where('slug', $request->category);
-            });
+        // Filter category via query (?category=slug)
+        if ($request->filled('category')) {
+            $slug = $request->category;
+            $query->whereHas('subcategory.category', fn($q) => $q->where('slug', $slug));
         }
 
-        // Price range filter
-        if ($request->has('min_price') && !empty($request->min_price)) {
-            $query->where('price', '>=', $request->min_price);
-        }
+        // Price
+        if ($request->filled('min_price')) $query->where('price', '>=', $request->min_price);
+        if ($request->filled('max_price')) $query->where('price', '<=', $request->max_price);
 
-        if ($request->has('max_price') && !empty($request->max_price)) {
-            $query->where('price', '<=', $request->max_price);
-        }
-
-        // Sorting
-        $sortBy = $request->get('sort', 'newest');
-        switch ($sortBy) {
+        // Sort
+        switch ($request->get('sort', 'newest')) {
             case 'price_low':
                 $query->orderBy('price', 'asc');
                 break;
@@ -106,112 +109,153 @@ class PageController extends Controller
             case 'name':
                 $query->orderBy('name', 'asc');
                 break;
-            case 'newest':
             default:
                 $query->latest();
                 break;
         }
 
-        $products = $query->paginate(12);
-        $categories = Category::all();
+        $products   = $query->paginate(12)->withQueryString();
+        $categories = Category::with(['subcategories' => fn($q) => $q->withCount('products')])->get();
 
         return view('pages.products', [
-            'title' => 'Produk Insulasi Industri',
-            'products' => $products,
-            'categories' => $categories,
+            'title'           => 'Produk Insulasi Industri',
+            'products'        => $products,
+            'categories'      => $categories,
             'currentCategory' => $request->category,
-            'searchTerm' => $request->search
+            'searchTerm'      => $request->search,
         ]);
     }
 
     /**
-     * Display products by category.
+     * /products/{category}
      */
-    public function productsByCategory($slug)
+    public function productsByCategory(Request $request, $slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
 
-        $products = Product::with(['subcategory.category', 'images'])
-            ->whereHas('subcategory', function ($query) use ($category) {
-                $query->where('category_id', $category->id);
-            })
-            ->paginate(12);
+        $query = Product::with(['subcategory.category', 'images'])
+            ->whereHas('subcategory', fn($q) => $q->where('category_id', $category->id));
+
+        // Optional filter di level kategori
+        if ($request->filled('search')) {
+            $s = $request->search;
+            $query->where(function ($q) use ($s) {
+                $q->where('name', 'like', "%{$s}%")
+                    ->orWhere('meta_description', 'like', "%{$s}%")
+                    ->orWhere('sku', 'like', "%{$s}%")
+                    ->orWhere('brands', 'like', "%{$s}%")
+                    ->orWhere('attr1', 'like', "%{$s}%")
+                    ->orWhere('attr2', 'like', "%{$s}%")
+                    ->orWhere('attr3', 'like', "%{$s}%");
+            });
+        }
+        if ($request->filled('min_price')) $query->where('price', '>=', $request->min_price);
+        if ($request->filled('max_price')) $query->where('price', '<=', $request->max_price);
+
+        switch ($request->get('sort', 'newest')) {
+            case 'price_low':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_high':
+                $query->orderBy('price', 'desc');
+                break;
+            case 'name':
+                $query->orderBy('name', 'asc');
+                break;
+            default:
+                $query->latest();
+                break;
+        }
+
+        $products   = $query->paginate(12)->withQueryString();
+        $categories = Category::with(['subcategories' => fn($q) => $q->withCount('products')])->get();
 
         return view('pages.products', [
-            'title' => 'Produk ' . $category->name,
-            'products' => $products,
-            'categories' => Category::all(),
+            'title'           => 'Produk ' . $category->name,
+            'products'        => $products,
+            'categories'      => $categories,
             'currentCategory' => $slug,
-            'category' => $category
+            'category'        => $category,
+            'searchTerm'      => $request->search,
         ]);
     }
 
     /**
-     * Display single product detail.
+     * /products/{category}/{subcategory}
      */
-    public function productDetail($slug)
-    {
-        $product = Product::with(['subcategory.category', 'images'])
-            ->where('slug', $slug)
-            ->firstOrFail();
-
-        // Get related products from same category (through subcategory)
-        $relatedProducts = Product::with(['subcategory.category', 'images'])
-            ->whereHas('subcategory', function ($query) use ($product) {
-                $query->where('category_id', $product->subcategory->category_id);
-            })
-            ->where('id', '!=', $product->id)
-            ->take(4)
-            ->get();
-
-        return view('pages.product-detail', [
-            'title' => $product->name,
-            'product' => $product,
-            'relatedProducts' => $relatedProducts
-        ]);
-    }
-
-    /**
-     * Display single product detail.
-     */
-    public function subcategory(Request $r, Category $category, Subcategory $subcategory)
+    public function subcategory(Request $request, Category $category, Subcategory $subcategory)
     {
         abort_unless($subcategory->category_id === $category->id, 404);
 
-        $products = Product::query()
-            ->where('subcategory_id', $subcategory->id)
-            ->with([
-                'subcategory.category',
-                'images' => fn($q) => $q->orderBy('sort_order'),
-                'primaryImage'
-            ])
-            ->search($r->search)
-            ->priceBetween($r->min_price, $r->max_price)
-            ->sortBy($r->sort)
-            ->paginate(12)
-            ->withQueryString();
+        $query = Product::with(['subcategory.category', 'images'])
+            ->where('subcategory_id', $subcategory->id);
 
-        return view('catalog.subcategory', [
-            'title'       => $subcategory->name,
-            'category'    => $category,
-            'subcategory' => $subcategory,
-            'products'    => $products,
+        if ($request->filled('search')) {
+            $s = $request->search;
+            $query->where(function ($q) use ($s) {
+                $q->where('name', 'like', "%{$s}%")
+                    ->orWhere('meta_description', 'like', "%{$s}%")
+                    ->orWhere('sku', 'like', "%{$s}%")
+                    ->orWhere('brands', 'like', "%{$s}%")
+                    ->orWhere('attr1', 'like', "%{$s}%")
+                    ->orWhere('attr2', 'like', "%{$s}%");
+            });
+        }
+        if ($request->filled('min_price')) $query->where('price', '>=', $request->min_price);
+        if ($request->filled('max_price')) $query->where('price', '<=', $request->max_price);
+
+        switch ($request->get('sort', 'newest')) {
+            case 'price_low':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_high':
+                $query->orderBy('price', 'desc');
+                break;
+            case 'name':
+                $query->orderBy('name', 'asc');
+                break;
+            default:
+                $query->latest();
+                break;
+        }
+
+        $products   = $query->paginate(12)->withQueryString();
+        $categories = Category::with(['subcategories' => fn($q) => $q->withCount('products')])->get();
+
+        return view('pages.products', [
+            'title'           => $subcategory->name,
+            'products'        => $products,
+            'categories'      => $categories,
+            'currentCategory' => $category->slug,
+            'category'        => $category,
+            'subcategory'     => $subcategory,
+            'searchTerm'      => $request->search,
         ]);
     }
 
-    public function show(Product $product)
+    /**
+     * /products/{category}/{subcategory}/{product}
+     */
+    public function show(Category $category, Subcategory $subcategory, Product $product)
     {
+        abort_unless(
+            $product->subcategory_id === $subcategory->id &&
+                $subcategory->category_id === $category->id,
+            404
+        );
+
         $product->load([
             'subcategory.category',
             'images' => fn($q) => $q->orderBy('sort_order'),
             'primaryImage'
         ]);
 
-        return view('catalog.show', [
+        return view('pages.product-detail', [
             'title'   => $product->name,
             'product' => $product
         ]);
     }
+
     /**
      * Display the catalog page.
      */
