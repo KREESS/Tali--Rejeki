@@ -39,7 +39,7 @@
         ? collect($subcategories)->firstWhere('slug', request('subcategory'))
         : (collect($categories)->flatMap(fn($c) => $c->subcategories ?? collect()))->firstWhere('slug', request('subcategory'))) : null;
 
-    // Deskripsi hero: ambil dari categories.meta_description kalau ada; fallback teks default
+    // Deskripsi hero: ambil dari categories.meta_description; fallback
     $heroDescription = trim((string)($selectedCategory->meta_description ?? ''));
     if ($heroDescription === '') {
         $heroDescription = 'Temukan produk insulasi industri berkualitas tinggi untuk berbagai kebutuhan aplikasi Anda';
@@ -546,64 +546,95 @@
         </div>
     </div>
 
-    <!-- Back to top -->
-    <button class="back-to-top" aria-label="Kembali ke atas">
-        <i class="fas fa-arrow-up"></i>
-    </button>
 </section>
 
 <!-- =========================================
      STYLES (Grouped per section)
      ========================================= -->
 <style>
-/* ===========================
-   0) THEME TOKENS
-   =========================== */
-:root{
+/* =====================================================
+   0) THEME TOKENS + GLOBAL (robust dark/light handling)
+   ===================================================== */
+:root,
+html[data-theme="light"],
+html[data-bs-theme="light"],
+body[data-theme="light"]{
   --brand-1:#7c1415; --brand-2:#dc2626; --brand-3:#b71c1c;
   --accent:#fbbf24;
 
-  --ink:#111827;    /* text utama (light) */
-  --ink-2:#1f2937;  /* text sekunder (light) */
-  --muted:#6b7280;  /* muted (light) */
-  --muted-2:#9ca3af;
+  --ink:#111827; --ink-2:#1f2937;
+  --muted:#6b7280; --muted-2:#9ca3af;
 
-  --line:#e5e7eb;   /* border (light) */
-  --line-2:#eef2f7;
+  --line:#e5e7eb; --line-2:#eef2f7;
 
-  --card:#ffffff;   /* surface card (light) */
-  --soft:#f8fafc;   /* surface lembut (light) */
-  --soft-2:#f1f5f9;
+  --page:#f6f7fb;         /* background halaman (light) */
+  --card:#ffffff;         /* surface card (light) */
+  --soft:#f8fafc;         /* surface lembut (light) */
+  --soft-2:#f1f5f9;       /* surface lembut 2 (light) */
+  --glass: rgba(255,255,255,.7);
+  --scrim: rgba(0,0,0,.06);
 
-  --glass: rgba(255,255,255,.7); /* glass light */
-  --scrim: rgba(0,0,0,.08);
+  --skeleton-1:#f1f5f9;
+  --skeleton-2:#e5e7eb;
 
   --shadow-1: 0 8px 24px rgba(0,0,0,.08);
   --shadow-2: 0 18px 44px rgba(124,20,21,.14);
 }
 
-/* ==== DARK MODE OVERRIDES ====
-   Wajib: tidak ada surface putih di dark mode */
-body.dark, [data-theme="dark"]{
+/* DARK MODE OVERRIDES — no white surfaces */
+:root.dark,
+html.dark,
+body.dark,
+[data-theme="dark"],
+html[data-theme="dark"],
+html[data-bs-theme="dark"],
+body[data-bs-theme="dark"]{
   --ink:#e5e7eb; --ink-2:#f8fafc;
   --muted:#cbd5e1; --muted-2:#94a3b8;
 
   --line:#334155; --line-2:#1f2937;
 
-  --card:#0b0f14; /* dark card */
-  --soft:#0f172a; /* dark soft */
-  --soft-2:#111827;
-
-  --glass: rgba(15,23,42,.65); /* glass dark */
+  --page:#070b10;         /* background halaman (dark) */
+  --card:#0b0f14;         /* card benar2 gelap */
+  --soft:#0f172a;         /* soft surface (dark) */
+  --soft-2:#111827;       /* soft surface 2 (dark) */
+  --glass: rgba(15,23,42,.65);
   --scrim: rgba(255,255,255,.04);
+
+  --skeleton-1:#0f172a;
+  --skeleton-2:#0b1220;
 
   --shadow-1: 0 8px 24px rgba(0,0,0,.55);
   --shadow-2: 0 18px 44px rgba(0,0,0,.6);
 }
 
-/* ===========================
+/* Optional: fallback ke OS theme jika tidak set class/attr */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]):not(.light):not([data-bs-theme="light"]){
+    --ink:#e5e7eb; --ink-2:#f8fafc;
+    --muted:#cbd5e1; --muted-2:#94a3b8;
+    --line:#334155; --line-2:#1f2937;
+    --page:#070b10; --card:#0b0f14; --soft:#0f172a; --soft-2:#111827;
+    --glass: rgba(15,23,42,.65); --scrim: rgba(255,255,255,.04);
+    --skeleton-1:#0f172a; --skeleton-2:#0b1220;
+    --shadow-1: 0 8px 24px rgba(0,0,0,.55); --shadow-2: 0 18px 44px rgba(0,0,0,.6);
+  }
+}
+
+/* Global base — supaya container & body ikut berubah */
+body{
+  background: var(--page);
+  color: var(--ink);
+  transition: background-color .25s ease, color .25s ease;
+}
+.container{ /* transparan (ikut body) */ background: transparent; }
+
+/* Utility */
+.border-token{ border-color: var(--line)!important; }
+
+/* =========================================
    1) PAGE HEADER
-   =========================== */
+   ========================================= */
 .page-header{
   position:relative; color:#fff; padding: 86px 0 48px; overflow:hidden;
   background:
@@ -632,40 +663,56 @@ body.dark, [data-theme="dark"]{
 .search-input i{ position:absolute; left:16px; top:50%; transform:translateY(-50%); color:#9ca3af; z-index:3; }
 .search-input .form-control{
   padding-left: 46px; height: 52px; border-radius: 14px; border: 1px solid rgba(255,255,255,.35);
-  font-size:16px; background: rgba(255,255,255,.96); color:#111827;
+  font-size:16px; background: rgba(255,255,255,.96); color:#111827; transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
+html.dark .search-input .form-control,
 body.dark .search-input .form-control,
-[data-theme="dark"] .search-input .form-control{
+[data-theme="dark"] .search-input .form-control,
+html[data-bs-theme="dark"] .search-input .form-control{
   background: rgba(17,24,39,.88); color: var(--ink); border-color: rgba(255,255,255,.15);
 }
 .search-input .form-control:focus{ background:#fff; outline:none; box-shadow:0 0 0 .2rem rgba(220,38,38,.25); }
-body.dark .search-input .form-control:focus{ background:#0b0f14; }
+html.dark .search-input .form-control:focus,
+body.dark .search-input .form-control:focus,
+[data-theme="dark"] .search-input .form-control:focus,
+html[data-bs-theme="dark"] .search-input .form-control:focus{
+  background:#0b0f14;
+}
 
-/* ===========================
+/* =========================================
    2) CHIP BAR
-   =========================== */
+   ========================================= */
 .filter-chipbar{ margin-top: 12px; display:flex; flex-wrap:wrap; gap:.5rem; }
 .filter-chipbar .chip{
   background: rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.35); color:#fff;
   padding:.42rem .7rem; border-radius: 999px; font-weight:700; font-size:.9rem; display:inline-flex; align-items:center; gap:.4rem;
   backdrop-filter: blur(6px);
 }
-body.dark .filter-chipbar .chip{
-  background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.15);
+html.dark .filter-chipbar .chip,
+body.dark .filter-chipbar .chip,
+[data-theme="dark"] .filter-chipbar .chip,
+html[data-bs-theme="dark"] .filter-chipbar .chip{
+  background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.18);
 }
 .filter-chipbar .chip i{ opacity:.9; }
 .filter-chipbar .chip.reset{ background:#fff; color:var(--brand-1); border-color:transparent; text-decoration:none; }
-body.dark .filter-chipbar .chip.reset{ background:#e11d48; color:#fff; }
+html.dark .filter-chipbar .chip.reset,
+body.dark .filter-chipbar .chip.reset,
+[data-theme="dark"] .filter-chipbar .chip.reset,
+html[data-bs-theme="dark"] .filter-chipbar .chip.reset{
+  background:#e11d48; color:#fff;
+}
 
-/* ===========================
+/* =========================================
    3) SIDEBAR (GLASS)
-   =========================== */
+   ========================================= */
 .glass{
   background: var(--glass);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: var(--shadow-1);
-  border: 1px solid rgba(255,255,255,.2);
+  border: 1px solid rgba(255,255,255,.18);
+  transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
 .filters-sidebar{ border-radius:16px; padding: 1.2rem 1.2rem 1.4rem; position: sticky; top: 90px; }
 .filter-title{ font-size:1.2rem; font-weight:800; color:var(--ink); margin-bottom:.75rem; padding-bottom:.6rem; border-bottom:2px solid var(--line); }
@@ -683,12 +730,14 @@ body.dark .filter-chipbar .chip.reset{ background:#e11d48; color:#fff; }
   white-space:nowrap; text-decoration:none; font-weight:800; font-size:.85rem;
   border-radius:999px; padding:.38rem .7rem; border:1px dashed var(--line); color:var(--ink);
   background:linear-gradient(135deg, rgba(124,20,21,.06), rgba(220,38,38,.06));
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
 }
+.c-chip:hover{ transform: translateY(-1px); }
 .c-chip.active{
   border-style:solid; border-color: var(--brand-1); color:#fff;
   background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
 }
-body.dark .c-chip{
+html.dark .c-chip, body.dark .c-chip, [data-theme="dark"] .c-chip, html[data-bs-theme="dark"] .c-chip{
   border-color: var(--line); background: rgba(255,255,255,.05); color: var(--ink);
 }
 
@@ -702,7 +751,9 @@ body.dark .c-chip{
   border-radius:12px; color:var(--ink); text-decoration:none; font-size:.95rem; transition:.25s
 }
 .quick-link:hover{ transform: translateX(4px); background: linear-gradient(135deg, rgba(124,20,21,.1), rgba(220,38,38,.12)); }
-body.dark .quick-link{ background: var(--soft-2); }
+html.dark .quick-link, body.dark .quick-link, [data-theme="dark"] .quick-link, html[data-bs-theme="dark"] .quick-link{
+  background: var(--soft-2); color: var(--ink);
+}
 
 /* Tips box */
 .info-box{
@@ -712,13 +763,13 @@ body.dark .quick-link{ background: var(--soft-2); }
 }
 .info-box i{ color: #f59e0b; margin-top:.15rem; }
 
-/* ===========================
+/* =========================================
    4) TOOLBAR + STATS
-   =========================== */
+   ========================================= */
 .products-toolbar{
   display:flex; justify-content:space-between; align-items:center;
   padding: .9rem 1rem; border-radius:14px; margin-bottom: .9rem;
-  background: var(--glass); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.2);
+  background: var(--glass); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.18);
 }
 .toolbar-left{ display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
 .results-count{ font-weight:900; color:var(--ink); }
@@ -726,9 +777,13 @@ body.dark .quick-link{ background: var(--soft-2); }
 .toolbar-right{ display:flex; align-items:center; gap:.6rem; }
 .sort-dropdown select{
   border-radius:12px; border:1px solid var(--line); padding:.5rem .8rem; font-size:.92rem; background:var(--card); color:var(--ink);
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
-body.dark .sort-dropdown select{ background: var(--soft-2); }
+html.dark .sort-dropdown select, body.dark .sort-dropdown select, [data-theme="dark"] .sort-dropdown select, html[data-bs-theme="dark"] .sort-dropdown select{
+  background: var(--soft-2); color: var(--ink); border-color: var(--line);
+}
 .view-toggle{ display:flex; background:var(--soft); border-radius:12px; overflow:hidden; }
+html.dark .view-toggle, body.dark .view-toggle, [data-theme="dark"] .view-toggle, html[data-bs-theme="dark"] .view-toggle{ background: var(--soft-2); }
 .view-btn{ padding:.5rem .8rem; border:none; background:transparent; color:#6b7280; cursor:pointer; transition:.22s }
 .view-btn.active,.view-btn:hover{ background: var(--brand-1); color:#fff; }
 
@@ -737,14 +792,15 @@ body.dark .sort-dropdown select{ background: var(--soft-2); }
 .stat{
   flex:0 1 auto; display:flex; gap:.6rem; align-items:center; padding:.6rem .8rem; border-radius:12px;
   background: var(--card); border:1px solid var(--line); box-shadow: var(--shadow-1);
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
 .stat i{ font-size:1.1rem; color: var(--brand-2); }
 .stat-title{ font-size:.82rem; color:var(--muted); }
 .stat-value{ font-weight:900; color:var(--ink); margin-top:-2px }
 
-/* ===========================
+/* =========================================
    5) GRID & CARDS
-   =========================== */
+   ========================================= */
 .products-grid{
   display:grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.15rem; margin-bottom: 1.6rem;
 }
@@ -753,6 +809,7 @@ body.dark .sort-dropdown select{ background: var(--soft-2); }
 .product-card{
   background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
   display:flex; flex-direction:column; height:100%; transition:.28s; box-shadow: var(--shadow-1); position:relative;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease, transform .2s ease;
 }
 .product-card:hover{ transform: translateY(-6px); box-shadow: var(--shadow-2); border-color: rgba(124,20,21,.22); }
 .product-card.shine::after{
@@ -766,16 +823,17 @@ body.dark .sort-dropdown select{ background: var(--soft-2); }
 .product-image{
   position:relative; aspect-ratio: 4/3; background: var(--soft); border-bottom: 1px solid var(--line-2);
   display:grid; place-items:center; overflow:hidden; height:auto;
+  transition: background-color .25s ease, border-color .25s ease;
 }
 .product-image img{
   width:100%; height:100%; object-fit: contain; object-position:center; padding: 12px; transition: filter .25s, transform .25s;
 }
 .product-card:hover .product-image img{ transform: translateY(-1px) scale(1.01); filter: drop-shadow(0 6px 14px rgba(0,0,0,.08)); }
 
-/* shimmer skeleton */
+/* shimmer skeleton mengikuti tema */
 .img-skeleton{
   position:absolute; inset:0; background:
-    linear-gradient(90deg, var(--soft) 0%, var(--soft-2) 50%, var(--soft) 100%);
+    linear-gradient(90deg, var(--skeleton-1) 0%, var(--skeleton-2) 50%, var(--skeleton-1) 100%);
   animation: shimmer 1.4s infinite; opacity:1; transition: opacity .3s;
 }
 @keyframes shimmer{
@@ -829,15 +887,18 @@ body.dark .sort-dropdown select{ background: var(--soft-2); }
 .products-grid.list-view .product-content{ padding: 1rem 1.15rem; flex:1; }
 
 /* Empty state */
-.no-products{ text-align:center; padding: 3rem 1.5rem; background: var(--card); border:1px dashed var(--line); border-radius:16px; }
+.no-products{
+  text-align:center; padding: 3rem 1.5rem; background: var(--card); border:1px dashed var(--line); border-radius:16px;
+  transition: background-color .25s ease, border-color .25s ease, color .25s ease;
+}
 .no-products-icon{
   width:100px; height:100px; background: var(--soft); border-radius: 50%;
   display:flex; align-items:center; justify-content:center; font-size: 2rem; color:#9ca3af; margin: 0 auto 1rem;
 }
 
-/* ===========================
+/* =========================================
    6) BUTTONS & PAGINATION
-   =========================== */
+   ========================================= */
 .page-header .btn, .products-section .btn{ font-weight:800; letter-spacing:.2px; border-width:0; transition:.18s ease; }
 
 /* Solid primary */
@@ -862,7 +923,12 @@ body.dark .sort-dropdown select{ background: var(--soft-2); }
 .page-header .btn-outline-primary:hover, .products-section .btn-outline-primary:hover{
   transform: translateY(-2px); background: rgba(124,20,21,.06);
 }
-body.dark .products-section .btn-outline-primary{ color:#fff; }
+html.dark .products-section .btn-outline-primary,
+body.dark .products-section .btn-outline-primary,
+[data-theme="dark"] .products-section .btn-outline-primary,
+html[data-bs-theme="dark"] .products-section .btn-outline-primary{
+  color:#fff;
+}
 
 /* Pagination */
 .pagination-wrapper{ display:flex; justify-content:center; margin-top: 1.2rem; }
@@ -870,14 +936,15 @@ body.dark .products-section .btn-outline-primary{ color:#fff; }
   background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
   border-color: var(--brand-1);
 }
-.pagination .page-link{ color: var(--brand-1); background: var(--card); border-color: var(--line); }
+.pagination .page-link{ color: var(--brand-1); background: var(--card); border-color: var(--line); transition: background-color .2s ease, color .2s ease, border-color .2s ease; }
 .pagination .page-link:hover{ color:#fff; background: var(--brand-1); border-color: var(--brand-1); }
-body.dark .pagination .page-link{ background: var(--soft-2); color: var(--ink); border-color: var(--line); }
+html.dark .pagination .page-link, body.dark .pagination .page-link, [data-theme="dark"] .pagination .page-link, html[data-bs-theme="dark"] .pagination .page-link{
+  background: var(--soft-2); color: var(--ink); border-color: var(--line);
+}
 
-/* ===========================
+/* =========================================
    7) MISC & RESPONSIVE
-   =========================== */
-/* Back to top */
+   ========================================= */
 .back-to-top{
   position: fixed; right: 18px; bottom: 18px; border: none; border-radius: 999px; width: 44px; height: 44px;
   display:flex; align-items:center; justify-content:center; cursor:pointer; z-index: 40;
@@ -929,7 +996,7 @@ function filterProducts() {
     form.appendChild(input);
   }
 
-  // reset subcategory supaya balik ke grid subkategori ketika pindah kategori
+  // reset subcategory saat pindah kategori
   const subParam = new URLSearchParams(window.location.search).get('subcategory');
   if (subParam) {
     const input = document.createElement('input');
@@ -937,7 +1004,7 @@ function filterProducts() {
     form.appendChild(input);
   }
 
-  // keep price & sort (berguna saat mode produk)
+  // keep price & sort (mode produk)
   ['min_price','max_price','sort'].forEach(k=>{
     const v = new URLSearchParams(window.location.search).get(k);
     if(v){
