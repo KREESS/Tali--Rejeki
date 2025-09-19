@@ -146,7 +146,14 @@ class PageController extends Controller
                     ->orWhere('brands', 'like', "%{$s}%")
                     ->orWhere('attr1', 'like', "%{$s}%")
                     ->orWhere('attr2', 'like', "%{$s}%")
-                    ->orWhere('attr3', 'like', "%{$s}%");
+                    ->orWhere('attr3', 'like', "%{$s}%")
+                    ->orWhere('attr4', 'like', "%{$s}%")
+                    ->orWhere('attr5', 'like', "%{$s}%")
+                    ->orWhere('attr6', 'like', "%{$s}%")
+                    ->orWhere('attr7', 'like', "%{$s}%")
+                    ->orWhere('attr8', 'like', "%{$s}%")
+                    ->orWhere('attr9', 'like', "%{$s}%")
+                    ->orWhere('attr10', 'like', "%{$s}%");
             });
         }
         if ($request->filled('min_price')) $query->where('price', '>=', $request->min_price);
@@ -198,7 +205,15 @@ class PageController extends Controller
                     ->orWhere('sku', 'like', "%{$s}%")
                     ->orWhere('brands', 'like', "%{$s}%")
                     ->orWhere('attr1', 'like', "%{$s}%")
-                    ->orWhere('attr2', 'like', "%{$s}%");
+                    ->orWhere('attr2', 'like', "%{$s}%")
+                    ->orWhere('attr3', 'like', "%{$s}%")
+                    ->orWhere('attr4', 'like', "%{$s}%")
+                    ->orWhere('attr5', 'like', "%{$s}%")
+                    ->orWhere('attr6', 'like', "%{$s}%")
+                    ->orWhere('attr7', 'like', "%{$s}%")
+                    ->orWhere('attr8', 'like', "%{$s}%")
+                    ->orWhere('attr9', 'like', "%{$s}%")
+                    ->orWhere('attr10', 'like', "%{$s}%");
             });
         }
         if ($request->filled('min_price')) $query->where('price', '>=', $request->min_price);
@@ -578,7 +593,15 @@ class PageController extends Controller
                 $q->where('name', 'like', "%{$searchTerm}%")
                     ->orWhere('meta_description', 'like', "%{$searchTerm}%")
                     ->orWhere('attr1', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr2', 'like', "%{$searchTerm}%");
+                    ->orWhere('attr2', 'like', "%{$searchTerm}%")
+                    ->orWhere('attr3', 'like', "%{$searchTerm}%")
+                    ->orWhere('attr4', 'like', "%{$searchTerm}%")
+                    ->orWhere('attr5', 'like', "%{$searchTerm}%")
+                    ->orWhere('attr6', 'like', "%{$searchTerm}%")
+                    ->orWhere('attr7', 'like', "%{$searchTerm}%")
+                    ->orWhere('attr8', 'like', "%{$searchTerm}%")
+                    ->orWhere('attr9', 'like', "%{$searchTerm}%")
+                    ->orWhere('attr10', 'like', "%{$searchTerm}%");
             })
             ->take(5)
             ->get();
