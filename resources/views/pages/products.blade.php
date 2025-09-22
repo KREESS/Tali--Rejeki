@@ -351,7 +351,7 @@
                                             @endforeach
                                         </div>
                                         @endif
-
+    
                                         {{-- HARGA DIHILANGKAN SESUAI PERMINTAAN --}}
                                         <div class="product-actions">
                                             <a href="{{ $detailUrl }}" class="btn btn-outline-primary btn-sm flex-fill">
