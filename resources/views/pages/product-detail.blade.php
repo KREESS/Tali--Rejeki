@@ -496,7 +496,7 @@ body{ background:var(--page); color:var(--ink); transition: background-color .25
 .strip-nav .nav-btn.mini{
   position: static; transform:none; width:36px; height:36px; border-radius:10px;
   background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.25);
-  display:inline-grid; /* 1 line */
+  display:inline-grid;
 }
 .strip-nav .nav-btn.mini[disabled]{ opacity:.45; cursor:not-allowed; }
 .strip-nav .nav-btn.mini:hover:not([disabled]){ background: rgba(255,255,255,.16); transform:none; }
@@ -506,10 +506,10 @@ body{ background:var(--page); color:var(--ink); transition: background-color .25
   display:grid; grid-auto-flow: column; grid-auto-columns: minmax(240px, 1fr);
   gap:.9rem; padding:14px 16px 18px;
   overflow:auto; scroll-snap-type:x mandatory;
-  scrollbar-width: none;           /* Firefox */
-  -ms-overflow-style: none;        /* IE/Edge legacy */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-.strip-grid::-webkit-scrollbar{ display:none; } /* WebKit */
+.strip-grid::-webkit-scrollbar{ display:none; }
 
 .strip-grid .product-card.strip{
   scroll-snap-align:start; display:flex; flex-direction:column; gap:.6rem; min-width:240px;
@@ -595,7 +595,7 @@ body{ background:var(--page); color:var(--ink); transition: background-color .25
    IMAGE LIGHTBOX (overlay) — FIX utama agar popup muncul
    ===================================================== */
 .image-lightbox{
-  position: fixed; inset: 0; z-index: 100001; /* di atas modal lain */
+  position: fixed; inset: 0; z-index: 100001;
   display: grid; place-items: center;
   background: rgba(0,0,0,.8);
   padding: 24px;

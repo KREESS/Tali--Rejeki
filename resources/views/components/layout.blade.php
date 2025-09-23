@@ -143,6 +143,7 @@
     <!-- Footer -->
     @include('components.footer')
     @include('components.back-to-top')
+    @include('components.whatsapp')
 
     @stack('scripts')
     
