@@ -253,23 +253,62 @@ class PageController extends Controller
      */
     public function show(Category $category, Subcategory $subcategory, Product $product)
     {
+        // Validasi URL hierarchy -> product -> subcategory -> category
         abort_unless(
             $product->subcategory_id === $subcategory->id &&
                 $subcategory->category_id === $category->id,
             404
         );
 
+        // Preload relasi untuk performa & akses di Blade
         $product->load([
             'subcategory.category',
             'images' => fn($q) => $q->orderBy('sort_order'),
-            'primaryImage'
+            'primaryImage',
         ]);
 
+        // --- Produk Terkait (biarkan seperti sebelumnya)
+        $relatedSub = Product::query()
+            ->where('id', '!=', $product->id)
+            ->where('subcategory_id', $subcategory->id)
+            ->with([
+                'subcategory.category',
+                'images' => fn($q) => $q->orderBy('sort_order'),
+            ])
+            ->orderByDesc('updated_at')
+            ->limit(12)
+            ->get();
+
+        $relatedCat = Product::query()
+            ->where('id', '!=', $product->id)
+            ->whereHas('subcategory', fn($q) => $q->where('category_id', $category->id))
+            ->with([
+                'subcategory.category',
+                'images' => fn($q) => $q->orderBy('sort_order'),
+            ])
+            ->orderByDesc('updated_at')
+            ->limit(12)
+            ->get();
+
+        $relatedProducts = $relatedSub->isNotEmpty() ? $relatedSub : $relatedCat;
+
+        // --- Produk Lainnya: AMBIL SEMUA PRODUK (tanpa pengecualian, tanpa filter subkategori/kategori)
+        $moreProducts = Product::query()
+            ->with([
+                'subcategory.category',
+                'images' => fn($q) => $q->orderBy('sort_order'),
+            ])
+            ->orderByDesc('updated_at')
+            ->get(); // semua produk
+
         return view('pages.product-detail', [
-            'title'   => $product->name,
-            'product' => $product
+            'title'           => $product->name,
+            'product'         => $product,
+            'relatedProducts' => $relatedProducts, // untuk section "Produk Terkait"
+            'moreProducts'    => $moreProducts,    // untuk strip "Produk Lainnya" (semua produk)
         ]);
     }
+
 
     /**
      * Display the catalog page.
