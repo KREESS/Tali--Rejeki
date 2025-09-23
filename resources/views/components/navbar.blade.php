@@ -44,7 +44,6 @@
                         @if(isset($categories) && $categories->count() > 0)
                             @foreach($categories as $category)
                                 <a href="{{ route('products.category', $category->slug) }}" class="dropdown-item">
-                                    <i class="fas fa-cube"></i>
                                     <span class="item-title">{{ $category->name }}</span>
                                 </a>
                             @endforeach
