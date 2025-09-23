@@ -385,14 +385,14 @@
 <script>
 // Category data for info display
 const categoryData = {
-    @foreach($categories as $category)
-    '{{ $category->id }}': {
-        name: '{{ $category->name }}',
-        slug: '{{ $category->slug }}',
-        subcategories_count: {{ $category->subcategories()->count() }},
-        created_at: '{{ $category->created_at->format("d M Y") }}'
-    },
-    @endforeach
+@foreach ($categories as $category)
+  '{{ $category->id }}': {
+    name: @json($category->name),
+    slug: @json($category->slug),
+    subcategories_count: {{ $category->subcategories_count ?? $category->subcategories()->count() }},
+    created_at: @json(optional($category->created_at)->format('d M Y') ?? '-')
+  }@if(!$loop->last),@endif
+@endforeach
 };
 
 // Character counters
