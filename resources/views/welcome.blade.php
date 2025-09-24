@@ -3,7 +3,7 @@
 @section('title', 'Distributor Insulasi Industri Terpercaya')
 
 @section('content')
-<!-- Hero Section (Improved) -->
+<!-- Hero Section (Improved, 5 slides + fixed button focus ring) -->
 <section class="hero-section" aria-label="Tali Rejeki Hero">
   <!-- Background asli (TIDAK DIUBAH) -->
   <div class="hero-bg">
@@ -16,11 +16,10 @@
   </div>
 
   <!-- Slider wrapper -->
-  <!-- data-interval = waktu tampil sebelum mulai animasi keluar (auto) -->
   <div class="hero-slider" data-autoplay="true" data-interval="5600" aria-roledescription="carousel" aria-live="polite">
     <!-- Slide 1 -->
     <article id="slide-1" class="hero-slide is-active" data-index="0" data-align="left" data-ken="right"
-             aria-roledescription="slide" aria-label="1 dari 3"
+             aria-roledescription="slide" aria-label="1 dari 5"
              style="--slide-bg: url('{{ asset("img/hero/3.png") }}');">
       <div class="slide-bg" aria-hidden="true"></div>
       <div class="slide-scrim" aria-hidden="true"></div>
@@ -29,14 +28,14 @@
         <div class="hero-content anim-in">
           <div class="hero-badge hc hc-1">
             <i class="fas fa-award" aria-hidden="true"></i>
-            <span data-translate="hero-badge">Distributor Terpercaya Sejak 2011</span>
+            <span>Distributor Terpercaya Sejak 2011</span>
           </div>
           <h1 class="hero-title hc hc-2">
             <span class="highlight">Tali Rejeki</span>
-            <span class="subtitle" data-translate="hero-title-line1">Distributor Insulasi Industri</span>
+            <span class="subtitle">Spesialis Insulasi Industri & HVAC</span>
           </h1>
-          <p class="hero-description hc hc-3" data-translate="hero-description">
-            Glasswool • Rockwool • Nitrile Rubber • Aksesoris HVAC terlengkap di Indonesia.
+          <p class="hero-description hc hc-3">
+            Stok resmi Glasswool, Rockwool, Nitrile Rubber & aksesoris HVAC. Harga kompetitif, pengiriman cepat, garansi keaslian.
           </p>
           <div class="hero-actions hc hc-4">
             <a href="#products" class="btn btn-primary"><i class="fas fa-cubes"></i> Lihat Produk</a>
@@ -48,7 +47,7 @@
 
     <!-- Slide 2 -->
     <article id="slide-2" class="hero-slide" data-index="1" data-align="center" data-ken="left"
-             aria-roledescription="slide" aria-label="2 dari 3"
+             aria-roledescription="slide" aria-label="2 dari 5"
              style="--slide-bg: url('{{ asset("img/hero/158.png") }}');">
       <div class="slide-bg" aria-hidden="true"></div>
       <div class="slide-scrim" aria-hidden="true"></div>
@@ -64,7 +63,7 @@
             <span class="subtitle">Efisien & Tahan Lama</span>
           </h2>
           <p class="hero-description hc hc-3">
-            Kurangi kehilangan panas, tingkatkan efisiensi energi & kenyamanan akustik.
+            Kurangi beban energi dan tingkatkan kenyamanan akustik. Tersedia aneka densitas & ketebalan sesuai standar proyek.
           </p>
           <div class="hero-actions hc hc-4">
             <a href="#products" class="btn btn-primary"><i class="fas fa-cubes"></i> Lihat Produk</a>
@@ -76,8 +75,8 @@
 
     <!-- Slide 3 -->
     <article id="slide-3" class="hero-slide" data-index="2" data-align="right" data-ken="up"
-             aria-roledescription="slide" aria-label="3 dari 3"
-             style="--slide-bg: url('{{ asset("img/hero/7.jpg") }}');">
+             aria-roledescription="slide" aria-label="3 dari 5"
+             style="--slide-bg: url('{{ asset("img/hero/8.jpg") }}');">
       <div class="slide-bg" aria-hidden="true"></div>
       <div class="slide-scrim" aria-hidden="true"></div>
 
@@ -85,14 +84,14 @@
         <div class="hero-content">
           <div class="hero-badge hc hc-1">
             <i class="fas fa-tools" aria-hidden="true"></i>
-            <span>Nitrile Rubber & Aksesoris HVAC</span>
+            <span>Nitrile Rubber & Aksesoris</span>
           </div>
           <h2 class="hero-title hc hc-2">
             <span class="highlight">Solusi HVAC</span>
             <span class="subtitle">Lengkap & Siap Kirim</span>
           </h2>
           <p class="hero-description hc hc-3">
-            Pipa insulasi, ducting, adhesive, dan aksesoris pendukung — pengiriman cepat ke 50+ kota.
+            Pipa insulasi, ducting, adhesive, aluminium foil & aksesoris—anti-kondensasi, rapi, dan mudah instalasi.
           </p>
           <div class="hero-actions hc hc-4">
             <a href="#products" class="btn btn-primary"><i class="fas fa-cubes"></i> Lihat Katalog</a>
@@ -102,7 +101,63 @@
       </div>
     </article>
 
-    <!-- Navigation (pojok kanan bawah) -->
+    <!-- Slide 4 -->
+    <article id="slide-4" class="hero-slide" data-index="3" data-align="left" data-ken="down"
+             aria-roledescription="slide" aria-label="4 dari 5"
+             style="--slide-bg: url('{{ asset("img/hero/9.jpg") }}');">
+      <div class="slide-bg" aria-hidden="true"></div>
+      <div class="slide-scrim" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge hc hc-1">
+            <i class="fas fa-warehouse" aria-hidden="true"></i>
+            <span>Ready Stock Nasional</span>
+          </div>
+          <h2 class="hero-title hc hc-2">
+            <span class="highlight">Pengiriman Cepat</span>
+            <span class="subtitle">Ke 50+ Kota</span>
+          </h2>
+          <p class="hero-description hc hc-3">
+            Gudang Bekasi. Kirim harian—lebih hemat waktu & biaya untuk proyek industri maupun komersial.
+          </p>
+          <div class="hero-actions hc hc-4">
+            <a href="#contact" class="btn btn-primary"><i class="fas fa-shipping-fast"></i> Cek Ketersediaan</a>
+            <a href="#products" class="btn btn-outline"><i class="fas fa-cubes"></i> Lihat Produk</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Slide 5 -->
+    <article id="slide-5" class="hero-slide" data-index="4" data-align="center" data-ken="right"
+             aria-roledescription="slide" aria-label="5 dari 5"
+             style="--slide-bg: url('{{ asset("img/hero/7.jpg") }}');">
+      <div class="slide-bg" aria-hidden="true"></div>
+      <div class="slide-scrim" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge hc hc-1">
+            <i class="fas fa-headset" aria-hidden="true"></i>
+            <span>Dukungan Teknis</span>
+          </div>
+          <h2 class="hero-title hc hc-2">
+            <span class="highlight">Konsultasi Proyek</span>
+            <span class="subtitle">Gratis & Profesional</span>
+          </h2>
+          <p class="hero-description hc hc-3">
+            Tim teknis membantu pemilihan material & estimasi kebutuhan. Dapatkan spesifikasi yang tepat sejak awal.
+          </p>
+          <div class="hero-actions hc hc-4">
+            <a href="#contact" class="btn btn-primary"><i class="fas fa-comments"></i> Konsultasi Sekarang</a>
+            <a href="#products" class="btn btn-outline"><i class="fas fa-cubes"></i> Telusuri Katalog</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Navigation -->
     <div class="hero-nav">
       <button class="hero-prev" aria-label="Slide sebelumnya" title="Sebelumnya" type="button">
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -112,11 +167,13 @@
       </button>
     </div>
 
-    <!-- Dots -->
+    <!-- Dots (5 buah) -->
     <div class="hero-dots" role="tablist" aria-label="Navigasi slide">
       <button class="dot is-active" role="tab" aria-selected="true" aria-controls="slide-1" title="Slide 1"></button>
       <button class="dot" role="tab" aria-selected="false" aria-controls="slide-2" title="Slide 2"></button>
       <button class="dot" role="tab" aria-selected="false" aria-controls="slide-3" title="Slide 3"></button>
+      <button class="dot" role="tab" aria-selected="false" aria-controls="slide-4" title="Slide 4"></button>
+      <button class="dot" role="tab" aria-selected="false" aria-controls="slide-5" title="Slide 5"></button>
     </div>
   </div>
 </section>
@@ -484,162 +541,178 @@
 /* main Section */
 
 /* Hero Section */
-    :root{
-    /* timing & easing */
-    --slide-fade-dur: 1600ms;             /* crossfade antar slide (gambar & slide) */
-    --img-zoom-dur:   14000ms;            /* ken-burns baru: lebih lambat & halus */
-    --img-fade-dur:   1100ms;             /* tambahan fade bg */
+  /* ===== HERO SECTION ===== */
+  :root{
+    --slide-fade-dur: 1600ms;
+    --img-zoom-dur:   14000ms;
+    --img-fade-dur:   1100ms;
     --text-in-dur:     880ms;
     --text-out-dur:    560ms;
     --stagger-step:    140ms;
     --ease-out: cubic-bezier(.17,.84,.44,1);
     --ease-in:  cubic-bezier(.64,0,.35,1);
-    --ease-ken: cubic-bezier(.22,.61,.36,1); /* ease yang halus dan mewah */
-    }
+    --ease-ken: cubic-bezier(.22,.61,.36,1);
+  }
 
-    /* =========================
-    HERO SECTION (FULL BG SLIDER)
-    ========================= */
+  .hero-section{
+    position:relative;min-height:100vh;min-height:80svh;overflow:hidden;display:block;isolation:isolate;
+    /* ring khusus hero supaya outline tidak biru */
+    --ring-hero:#ffd93d;
+    --ring-hero-soft: rgba(255,217,61,.65);
+  }
 
-    .hero-section{position:relative;min-height:100vh;min-height:80svh;overflow:hidden;display:block;isolation:isolate;}
+  /* BG asli — TIDAK diubah */
+  .hero-bg{position:absolute;inset:0;background:url('{{ asset("img/bg/bg-texture.webp") }}');background-size:cover;background-position:center;background-attachment:fixed;background-repeat:no-repeat;z-index:-3;transition:all .3s ease;}
+  body.light-theme .hero-bg{background:url('{{ asset("img/bg/bg-texture-white.webp") }}') center/cover fixed no-repeat;}
+  body.dark-theme  .hero-bg{background:url('{{ asset("img/bg/bg-texture.webp") }}') center/cover fixed no-repeat;}
+  .hero-overlay{position:absolute;inset:0;background:transparent;z-index:-1;}
+  .hero-particles{position:absolute;inset:0;z-index:-2;}
+  .hero-particles .particle{position:absolute;background:rgba(255,255,255,.1);border-radius:50%;animation:heroFloat 8s ease-in-out infinite;}
+  .hero-particles .particle:nth-child(1){width:20px;height:20px;left:10%;top:20%;animation-delay:0s;}
+  .hero-particles .particle:nth-child(2){width:15px;height:15px;left:80%;top:60%;animation-delay:2s;}
+  .hero-particles .particle:nth-child(3){width:25px;height:25px;left:60%;top:30%;animation-delay:4s;}
+  .hero-particles .particle:nth-child(4){width:12px;height:12px;left:30%;top:70%;animation-delay:1s;}
+  .hero-particles .particle:nth-child(6){width:14px;height:14px;left:5%;top:80%;animation-delay:2.5s;}
+  .hero-particles .particle:nth-child(7){width:22px;height:22px;left:75%;top:15%;animation-delay:3.5s;}
+  .hero-particles .particle:nth-child(8){width:16px;height:16px;left:40%;top:85%;animation-delay:4.5s;}
+  .hero-particles .particle:nth-child(9){width:13px;height:13px;left:90%;top:40%;animation-delay:5s;}
+  .hero-particles .particle:nth-child(10){width:19px;height:19px;left:15%;top:10%;animation-delay:6s;}
+  @keyframes heroFloat{0%,100%{transform:translateY(0) rotate(0);opacity:.3;}50%{transform:translateY(-20px) rotate(180deg);opacity:.8;}}
 
-    /* BG asli — TIDAK diubah */
-    .hero-bg{position:absolute;inset:0;background:url('{{ asset("img/bg/bg-texture.webp") }}');background-size:cover;background-position:center;background-attachment:fixed;background-repeat:no-repeat;z-index:-3;transition:all .3s ease;}
-    body.light-theme .hero-bg{background:url('{{ asset("img/bg/bg-texture-white.webp") }}');background-size:cover;background-position:center;background-attachment:fixed;background-repeat:no-repeat;}
-    body.dark-theme .hero-bg{background:url('{{ asset("img/bg/bg-texture.webp") }}');background-size:cover;background-position:center;background-attachment:fixed;background-repeat:no-repeat;}
-    .hero-overlay{position:absolute;inset:0;background:transparent;z-index:-1;}
-    .hero-particles{position:absolute;inset:0;z-index:-2;}
-    .hero-particles .particle{position:absolute;background:rgba(255,255,255,.1);border-radius:50%;animation:heroFloat 8s ease-in-out infinite;}
-    .hero-particles .particle:nth-child(1){width:20px;height:20px;left:10%;top:20%;animation-delay:0s;}
-    .hero-particles .particle:nth-child(2){width:15px;height:15px;left:80%;top:60%;animation-delay:2s;}
-    .hero-particles .particle:nth-child(3){width:25px;height:25px;left:60%;top:30%;animation-delay:4s;}
-    .hero-particles .particle:nth-child(4){width:12px;height:12px;left:30%;top:70%;animation-delay:1s;}
-    .hero-particles .particle:nth-child(6){width:14px;height:14px;left:5%;top:80%;animation-delay:2.5s;}
-    .hero-particles .particle:nth-child(7){width:22px;height:22px;left:75%;top:15%;animation-delay:3.5s;}
-    .hero-particles .particle:nth-child(8){width:16px;height:16px;left:40%;top:85%;animation-delay:4.5s;}
-    .hero-particles .particle:nth-child(9){width:13px;height:13px;left:90%;top:40%;animation-delay:5s;}
-    .hero-particles .particle:nth-child(10){width:19px;height:19px;left:15%;top:10%;animation-delay:6s;}
-    @keyframes heroFloat{0%,100%{transform:translateY(0) rotate(0);opacity:.3;}50%{transform:translateY(-20px) rotate(180deg);opacity:.8;}}
-
-    /* Slider core */
-    .hero-slider{position:relative;width:100%;height:min(100vh,90svh);}
-    .hero-slide{
+  /* Slider core */
+  .hero-slider{position:relative;width:100%;height:min(100vh,90svh);}
+  .hero-slide{
     position:absolute;inset:0;display:grid;place-items:stretch;
     opacity:0;pointer-events:none;transform:translateX(1.6%);
-    transition:
-        opacity var(--slide-fade-dur) var(--ease-out),
-        transform var(--slide-fade-dur) var(--ease-out);
+    transition: opacity var(--slide-fade-dur) var(--ease-out), transform var(--slide-fade-dur) var(--ease-out);
     z-index:0;
-    }
-    .hero-slide.is-active{opacity:1;pointer-events:auto;transform:translateX(0);z-index:1;}
+  }
+  .hero-slide.is-active{opacity:1;pointer-events:auto;transform:translateX(0);z-index:1;}
 
-    /* Fullscreen slide background + ken burns + fade halus */
-    .slide-bg{
+  /* Fullscreen slide background + ken burns */
+  .slide-bg{
     position:absolute;inset:0;background-image:var(--slide-bg);background-size:cover;background-position:center;
     transform:scale(1.04) translateY(-1vh);
     opacity:.94;filter:saturate(.96) contrast(.98);
     transition: opacity var(--img-fade-dur) var(--ease-out), filter 1200ms var(--ease-ken);
     z-index:-1;will-change:transform,opacity,filter;
-    }
-    /* animasi ken-burns baru (arah bervariasi per slide) */
-    .hero-slide[data-ken="right"].is-active .slide-bg{animation:ken-pan-right var(--img-zoom-dur) var(--ease-ken) both;}
-    .hero-slide[data-ken="left"].is-active  .slide-bg{animation:ken-pan-left  var(--img-zoom-dur) var(--ease-ken) both;}
-    .hero-slide[data-ken="up"].is-active    .slide-bg{animation:ken-pan-up    var(--img-zoom-dur) var(--ease-ken) both;}
-    .hero-slide[data-ken="down"].is-active  .slide-bg{animation:ken-pan-down  var(--img-zoom-dur) var(--ease-ken) both;}
+  }
+  .hero-slide[data-ken="right"].is-active .slide-bg{animation:ken-pan-right var(--img-zoom-dur) var(--ease-ken) both;}
+  .hero-slide[data-ken="left"].is-active  .slide-bg{animation:ken-pan-left  var(--img-zoom-dur) var(--ease-ken) both;}
+  .hero-slide[data-ken="up"].is-active    .slide-bg{animation:ken-pan-up    var(--img-zoom-dur) var(--ease-ken) both;}
+  .hero-slide[data-ken="down"].is-active  .slide-bg{animation:ken-pan-down  var(--img-zoom-dur) var(--ease-ken) both;}
+  @keyframes ken-pan-right{0%{transform:scale(1.04) translateX(-1.8%) translateY(-1vh)}100%{transform:scale(1.12) translateX(2.2%) translateY(-1vh)}}
+  @keyframes ken-pan-left {0%{transform:scale(1.04) translateX( 1.8%) translateY(-1vh)}100%{transform:scale(1.12) translateX(-2.2%) translateY(-1vh)}}
+  @keyframes ken-pan-up   {0%{transform:scale(1.04) translateY( 1.4vh)}100%{transform:scale(1.12) translateY(-2.0vh)}}
+  @keyframes ken-pan-down {0%{transform:scale(1.04) translateY(-1.4vh)}100%{transform:scale(1.12) translateY( 2.0vh)}}
 
-    @keyframes ken-pan-right{0%{transform:scale(1.04) translateX(-1.8%) translateY(-1vh)}100%{transform:scale(1.12) translateX(2.2%) translateY(-1vh)}}
-    @keyframes ken-pan-left {0%{transform:scale(1.04) translateX( 1.8%) translateY(-1vh)}100%{transform:scale(1.12) translateX(-2.2%) translateY(-1vh)}}
-    @keyframes ken-pan-up   {0%{transform:scale(1.04) translateY( 1.4vh)}100%{transform:scale(1.12) translateY(-2.0vh)}}
-    @keyframes ken-pan-down {0%{transform:scale(1.04) translateY(-1.4vh)}100%{transform:scale(1.12) translateY( 2.0vh)}}
-
-    /* scrim/vignette lebih mewah */
-    .slide-scrim{position:absolute;inset:0;background:
+  .slide-scrim{position:absolute;inset:0;background:
     radial-gradient(1200px 600px at 68% 32%, rgba(0,0,0,.20), transparent 62%),
     linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.55));
-    z-index:0;opacity:.98;}
+    z-index:0;opacity:.98;
+  }
 
-    /* Layout konten adaptif: kiri / tengah / kanan */
-    .hero-inner{
+  /* Layout konten */
+  .hero-inner{
     position:relative; z-index:1;
-    min-height:100svh; display:grid;
-    /* kalau ingin nempel dari atas, ubah center -> start */
-    align-items:start;               
-    justify-items:start;
-
+    min-height:100svh; display:grid; align-items:start; justify-items:start;
     padding-inline: clamp(16px,3.5vw,64px);
-    padding-top:    clamp(60px,102vh,160px);  /* <= JARAK ATAS */
-    padding-bottom: clamp(24px,6vh,96px);   /* opsional */
-    }
-    .hero-slide[data-align="left"]  .hero-inner{justify-items:start;}
-    .hero-slide[data-align="center"].is-active .hero-inner{justify-items:center;}
-    .hero-slide[data-align="right"].is-active  .hero-inner{justify-items:end;}
+    padding-top:    clamp(60px,102vh,160px);
+    padding-bottom: clamp(24px,6vh,96px);
+  }
+  .hero-slide[data-align="left"]  .hero-inner{justify-items:start;}
+  .hero-slide[data-align="center"].is-active .hero-inner{justify-items:center;}
+  .hero-slide[data-align="right"].is-active  .hero-inner{justify-items:end;}
 
-    .hero-content{color:#fff;max-width:min(960px,90vw);text-align:left;background:transparent;border:none;box-shadow:none;backdrop-filter:none;padding:0;margin:0;}
-    .hero-slide[data-align="center"] .hero-content{text-align:center;}
-    .hero-slide[data-align="right"]  .hero-content{text-align:right;}
-    .hero-slide[data-align="center"] .hero-content{text-align:center;}
-    .hero-slide[data-align="right"]  .hero-content{text-align:right;}
+  .hero-content{color:#fff;max-width:min(960px,90vw);text-align:left;background:transparent;border:none;box-shadow:none;padding:0;margin:0;}
+  .hero-slide[data-align="center"] .hero-content{text-align:center;}
+  .hero-slide[data-align="right"]  .hero-content{text-align:right;}
 
-    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:transparent;border:none;border-radius:0;padding:0;font-size:14px;font-weight:800;margin-bottom:12px;backdrop-filter:none;text-transform:uppercase;letter-spacing:.08em;opacity:.9;} 
-    .hero-title{margin:0 0 10px;line-height:1.1;display:grid;gap:6px;}
-    .hero-title .highlight{font-size:clamp(30px,5.4vw,62px);font-weight:900;background:linear-gradient(135deg,#ff6b6b,#ffd93d);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.2px;}
-    .hero-title .subtitle{font-size:clamp(16px,2.2vw,26px);font-weight:700;opacity:.98;}
-    .hero-description{margin:12px 0 20px;font-size:clamp(14px,1.6vw,18px);line-height:1.7;opacity:.96;max-width:72ch;}
-    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-start;}
-    .hero-slide[data-align="center"] .hero-actions{justify-content:center;}
-    .hero-slide[data-align="right"]  .hero-actions{justify-content:flex-end;}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:transparent;border:none;border-radius:0;padding:0;font-size:14px;font-weight:800;margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em;opacity:.9;} 
+  .hero-title{margin:0 0 10px;line-height:1.1;display:grid;gap:6px;}
+  .hero-title .highlight{font-size:clamp(30px,5.4vw,62px);font-weight:900;background:linear-gradient(135deg,#ff6b6b,#ffd93d);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.2px;}
+  .hero-title .subtitle{font-size:clamp(16px,2.2vw,26px);font-weight:700;opacity:.98;}
+  .hero-description{margin:12px 0 20px;font-size:clamp(14px,1.6vw,18px);line-height:1.7;opacity:.96;max-width:72ch;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-start;}
+  .hero-slide[data-align="center"] .hero-actions{justify-content:center;}
+  .hero-slide[data-align="right"]  .hero-actions{justify-content:flex-end;}
 
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:14px;font-weight:800;text-decoration:none;border:2px solid transparent;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;}
-    .btn-primary{background:linear-gradient(135deg,#ff6b6b,#ffd93d);color:#222;box-shadow:0 10px 30px rgba(255,107,107,.32);} 
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(255,107,107,.42);} 
-    .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.6);} 
-    .btn-outline:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.85);transform:translateY(-2px);} 
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:14px;font-weight:800;
+    text-decoration:none;border:2px solid transparent;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+    outline:none; -webkit-tap-highlight-color: transparent;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,#ff6b6b,#ffd93d);color:#222;
+    box-shadow:0 10px 30px rgba(255,107,107,.32);
+  }
+  .btn-primary:hover{
+    transform:translateY(-2px);box-shadow:0 14px 36px rgba(255,107,107,.42);
+  }
+  .btn-outline{
+    background:transparent;color:#fff;border-color:rgba(255,255,255,.6);
+  }
+  .btn-outline:hover{
+    background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.85);transform:translateY(-2px);
+  }
 
-    /* NAV: pojok kanan bawah */
-    .hero-nav{position:absolute;right:22px;bottom:22px;display:flex;gap:10px;z-index:2;}
-    .hero-prev,.hero-next{border:none;background:rgba(0,0,0,.28);color:#fff;width:44px;height:44px;border-radius:999px;display:grid;place-items:center;backdrop-filter:blur(4px);transition:.2s ease;cursor:pointer;}
-    .hero-prev:hover,.hero-next:hover{background:rgba(0,0,0,.45);transform:translateY(-1px);} 
-    .hero-prev:focus-visible,.hero-next:focus-visible{outline:2px solid #ffd93d;outline-offset:2px;}
+  /* ✅ Hilangkan outline biru & ganti custom ring kuning */
+  .btn:focus,
+  .btn:focus-visible{
+    outline:none !important;
+    box-shadow:0 0 0 3px var(--ring-hero-soft), 0 10px 28px rgba(0,0,0,.25);
+  }
+  .btn-primary:focus-visible{
+    box-shadow:0 0 0 3px var(--ring-hero), 0 12px 34px rgba(255,107,107,.40);
+  }
+  .btn-outline:focus-visible{
+    border-color:rgba(255,255,255,.9);
+    box-shadow:0 0 0 3px var(--ring-hero-soft);
+  }
 
-    /* Dots */
-    .hero-dots{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;display:flex;gap:8px;z-index:2;}
-    .hero-dots .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.45);border:none;cursor:pointer;transition:.2s ease;padding:0;}
-    .hero-dots .dot.is-active{width:26px;border-radius:8px;background:#ffd93d;}
-    .hero-dots .dot:focus-visible{outline:2px solid #ffd93d;outline-offset:2px;}
+  /* NAV: pojok kanan bawah */
+  .hero-nav{position:absolute;right:22px;bottom:22px;display:flex;gap:10px;z-index:2;}
+  .hero-prev,.hero-next{
+    border:none;background:rgba(0,0,0,.28);color:#fff;width:44px;height:44px;border-radius:999px;display:grid;place-items:center;backdrop-filter:blur(4px);transition:.2s ease;cursor:pointer;outline:none;
+  }
+  .hero-prev:hover,.hero-next:hover{background:rgba(0,0,0,.45);transform:translateY(-1px);} 
+  .hero-prev:focus-visible,.hero-next:focus-visible{
+    outline:none; box-shadow:0 0 0 3px var(--ring-hero);
+  }
 
-    /* ========== TEKS ANIMASI (IN/OUT + STAGGER) ========== */
-    .hc{will-change:transform,opacity;}
-    @keyframes inUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes outDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(14px)}}
+  /* Dots */
+  .hero-dots{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;display:flex;gap:8px;z-index:2;}
+  .hero-dots .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.45);border:none;cursor:pointer;transition:.2s ease;padding:0;}
+  .hero-dots .dot.is-active{width:26px;border-radius:8px;background:#ffd93d;}
+  .hero-dots .dot:focus-visible{outline:none; box-shadow:0 0 0 3px var(--ring-hero);}
 
-    /* masuk: 1->2->3->4 */
-    .hero-content.anim-in .hc-1{animation:inUp var(--text-in-dur) var(--ease-out) both;animation-delay:calc(0 * var(--stagger-step));}
-    .hero-content.anim-in .hc-2{animation:inUp var(--text-in-dur) var(--ease-out) both;animation-delay:calc(1 * var(--stagger-step));}
-    .hero-content.anim-in .hc-3{animation:inUp var(--text-in-dur) var(--ease-out) both;animation-delay:calc(2 * var(--stagger-step));}
-    .hero-content.anim-in .hc-4{animation:inUp var(--text-in-dur) var(--ease-out) both;animation-delay:calc(3 * var(--stagger-step));}
+  /* TEKS ANIMASI */
+  .hc{will-change:transform,opacity;}
+  @keyframes inUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes outDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(14px)}}
+  .hero-content.anim-in .hc-1{animation:inUp var(--text-in-dur) var(--ease-out) both;animation-delay:calc(0 * var(--stagger-step));}
+  .hero-content.anim-in .hc-2{animation:inUp var(--text-in-dur) var(--ease-out) both;animation-delay:calc(1 * var(--stagger-step));}
+  .hero-content.anim-in .hc-3{animation:inUp var(--text-in-dur) var(--ease-out) both;animation-delay:calc(2 * var(--stagger-step));}
+  .hero-content.anim-in .hc-4{animation:inUp var(--text-in-dur) var(--ease-out) both;animation-delay:calc(3 * var(--stagger-step));}
+  .hero-content.anim-out .hc-4{animation:outDown var(--text-out-dur) var(--ease-in) both;animation-delay:calc(0 * var(--stagger-step));}
+  .hero-content.anim-out .hc-3{animation:outDown var(--text-out-dur) var(--ease-in) both;animation-delay:calc(1 * var(--stagger-step));}
+  .hero-content.anim-out .hc-2{animation:outDown var(--text-out-dur) var(--ease-in) both;animation-delay:calc(2 * var(--stagger-step));}
+  .hero-content.anim-out .hc-1{animation:outDown var(--text-out-dur) var(--ease-in) both;animation-delay:calc(3 * var(--stagger-step));}
 
-    /* keluar: 4->3->2->1 (dipakai saat auto) */
-    .hero-content.anim-out .hc-4{animation:outDown var(--text-out-dur) var(--ease-in) both;animation-delay:calc(0 * var(--stagger-step));}
-    .hero-content.anim-out .hc-3{animation:outDown var(--text-out-dur) var(--ease-in) both;animation-delay:calc(1 * var(--stagger-step));}
-    .hero-content.anim-out .hc-2{animation:outDown var(--text-out-dur) var(--ease-in) both;animation-delay:calc(2 * var(--stagger-step));}
-    .hero-content.anim-out .hc-1{animation:outDown var(--text-out-dur) var(--ease-in) both;animation-delay:calc(3 * var(--stagger-step));}
-
-    /* hide cepat teks (untuk manual skip) */
-    .hero-content.quick-hide{opacity:0;transition:opacity 220ms ease;}
-
-    /* Mobile tweaks */
-    @media (max-width: 992px){
+  /* Mobile tweaks */
+  @media (max-width: 992px){
     .hero-inner{padding-block:clamp(24px,8vh,80px);} 
-    }
+  }
 
-    /* iOS bg-attachment fix */
-    @supports (-webkit-touch-callout: none){.hero-bg{background-attachment:scroll;}}
+  /* iOS bg-attachment fix */
+  @supports (-webkit-touch-callout: none){.hero-bg{background-attachment:scroll;}}
 
-    /* Reduce motion */
-    @media (prefers-reduced-motion: reduce){
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce){
     *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
     .slide-bg{transform:none !important;}
-    }
+  }
 /* Hero Section */
 
 
@@ -1266,173 +1339,119 @@
   });
 </script>
 <script>
-  // =========================
-  // HERO SLIDER LOGIC (improved)
-  // - AUTO: teks OUT dulu → crossfade → teks IN
-  // - MANUAL next/prev/dot: LANGSUNG crossfade (skip OUT), teks IN slide baru
-  // - Tambahan: pause ketika tab tidak aktif (visibilitychange)
-  // =========================
-  (function () {
-    const slider = document.querySelector('.hero-slider');
-    if (!slider) return;
+/* ===== HERO SLIDER: Autoplay tetap jalan saat scroll (rAF + deadline) ===== */
+(function(){
+  const slider = document.querySelector('.hero-slider');
+  if (!slider) return;
 
-    const slides = Array.from(slider.querySelectorAll('.hero-slide'));
-    const prevBtn  = slider.querySelector('.hero-prev');
-    const nextBtn  = slider.querySelector('.hero-next');
-    const dots     = Array.from(slider.querySelectorAll('.hero-dots .dot'));
+  const slides = Array.from(slider.querySelectorAll('.hero-slide'));
+  const dots   = Array.from(slider.querySelectorAll('.hero-dots .dot'));
+  const prevBtn = slider.querySelector('.hero-prev');
+  const nextBtn = slider.querySelector('.hero-next');
 
-    // sinkron dengan CSS
-    const STAGGER_STEP  = 140;
-    const TEXT_IN       = 880;
-    const TEXT_OUT      = 560;
-    const SLIDE_FADE    = 1600;
-    const OUT_TOTAL     = TEXT_OUT + (STAGGER_STEP * 3);
-    const AUTOPLAY_VIEW = parseInt(slider.getAttribute('data-interval') || '5600', 10);
+  const AUTOPLAY = (slider.getAttribute('data-autoplay') || 'true') === 'true';
+  const INTERVAL = parseInt(slider.getAttribute('data-interval') || '5600', 10);
 
-    let index = 0;
-    let schedule = null;
-    let isAnimating = false;
-    const autoplay = slider.getAttribute('data-autoplay') === 'true';
+  // Durasi sinkron dengan CSS
+  const STAGGER_STEP = 140;
+  const TEXT_IN  = 880;
+  const TEXT_OUT = 560;
+  const OUT_TOTAL = TEXT_OUT + (STAGGER_STEP * 3);
+  const SLIDE_FADE = 1600;
 
-    function updateDots(i){
-      dots.forEach((d, di) => {
-        d.classList.toggle('is-active', di === i);
-        d.setAttribute('aria-selected', di === i ? 'true' : 'false');
-      });
-    }
+  let index = Math.max(0, slides.findIndex(s => s.classList.contains('is-active')));
+  if (index < 0) index = 0;
 
-    function showImmediately(i){
-      index = (i + slides.length) % slides.length;
-      slides.forEach((s, si) => s.classList.toggle('is-active', si === index));
-      const activeContent = slides[index].querySelector('.hero-content');
-      activeContent.classList.remove('anim-out','quick-hide');
-      void activeContent.offsetWidth;
-      activeContent.classList.add('anim-in');
-      updateDots(index);
-    }
+  let isAnimating = false;
+  let rafId = null;
+  let deadline = performance.now() + INTERVAL;
 
-    function goToAuto(nextIndex, onDone){
-      if (isAnimating) return;
-      nextIndex = (nextIndex + slides.length) % slides.length;
-      if (nextIndex === index){ onDone && onDone(); return; }
-      isAnimating = true;
+  function updateAria(){
+    slides.forEach((s,i)=>{
+      const active = i === index;
+      s.setAttribute('aria-hidden', active ? 'false' : 'true');
+    });
+    dots.forEach((d,i)=>{
+      const active = i === index;
+      d.classList.toggle('is-active', active);
+      d.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  }
 
-      const current = slides[index];
-      const next    = slides[nextIndex];
-      const currC   = current.querySelector('.hero-content');
-      const nextC   = next.querySelector('.hero-content');
+  function goTo(nextIndex, mode /* 'auto' | 'manual' */){
+    if (isAnimating) return;
+    nextIndex = (nextIndex + slides.length) % slides.length;
+    if (nextIndex === index) { deadline = performance.now() + INTERVAL; return; }
 
-      // teks keluar (stagger)
-      currC.classList.remove('anim-in','quick-hide');
-      void currC.offsetWidth;
-      currC.classList.add('anim-out');
+    const current = slides[index];
+    const next    = slides[nextIndex];
+    const currC   = current.querySelector('.hero-content');
+    const nextC   = next.querySelector('.hero-content');
+
+    isAnimating = true;
+
+    if (mode === 'auto') {
+      currC?.classList.remove('anim-in','quick-hide');
+      void currC?.offsetWidth;
+      currC?.classList.add('anim-out');
 
       setTimeout(() => {
-        // crossfade slide
         current.classList.remove('is-active');
         next.classList.add('is-active');
 
-        // teks masuk slide baru
-        nextC.classList.remove('anim-out','quick-hide');
-        void nextC.offsetWidth;
-        nextC.classList.add('anim-in');
+        nextC?.classList.remove('anim-out','quick-hide');
+        void nextC?.offsetWidth;
+        nextC?.classList.add('anim-in');
 
-        updateDots(nextIndex);
         index = nextIndex;
+        updateAria();
 
-        setTimeout(() => {
-          isAnimating = false;
-          onDone && onDone();
-        }, Math.max(SLIDE_FADE, TEXT_IN + (STAGGER_STEP * 3)));
+        setTimeout(() => { isAnimating = false; }, Math.max(SLIDE_FADE, TEXT_IN + (STAGGER_STEP * 3)));
       }, OUT_TOTAL);
-    }
+    } else {
+      currC?.classList.remove('anim-in','anim-out');
+      currC?.classList.add('quick-hide');
 
-    function goToManual(nextIndex, onDone){
-      if (isAnimating) return;
-      nextIndex = (nextIndex + slides.length) % slides.length;
-      if (nextIndex === index){ onDone && onDone(); return; }
-      isAnimating = true;
+      next.classList.add('is-active');
+      requestAnimationFrame(()=> current.classList.remove('is-active'));
 
-      const current = slides[index];
-      const next    = slides[nextIndex];
-      const currC   = current.querySelector('.hero-content');
-      const nextC   = next.querySelector('.hero-content');
+      nextC?.classList.remove('anim-out','quick-hide');
+      void nextC?.offsetWidth;
+      nextC?.classList.add('anim-in');
 
-      // skip OUT: sembunyikan teks lama cepat (biar rapi)
-      currC.classList.remove('anim-in','anim-out');
-      currC.classList.add('quick-hide');
-
-      // langsung crossfade slide
-      next.classList.add('is-active');       // fade-in
-      // biarkan current fade-out via remove setelah rAF utk overlap halus
-      requestAnimationFrame(() => {
-        current.classList.remove('is-active');
-      });
-
-      // teks baru: anim-in
-      nextC.classList.remove('anim-out','quick-hide');
-      void nextC.offsetWidth;
-      nextC.classList.add('anim-in');
-
-      updateDots(nextIndex);
       index = nextIndex;
+      updateAria();
 
-      // lock sebentar selama crossfade agar spamming tidak glitch
-      setTimeout(() => {
-        isAnimating = false;
-        onDone && onDone();
-      }, SLIDE_FADE * 0.9);
+      setTimeout(()=>{ isAnimating = false; }, SLIDE_FADE * 0.9);
     }
 
-    // Autoplay pakai chain timeout (display → transisi → schedule lagi)
-    function startAutoplay(){
-      if (!autoplay) return;
-      stopAutoplay();
-      schedule = setTimeout(function tick(){
-        goToAuto(index + 1, () => {
-          schedule = setTimeout(tick, AUTOPLAY_VIEW);
-        });
-      }, AUTOPLAY_VIEW);
+    deadline = performance.now() + INTERVAL;
+  }
+
+  function nextSlide(mode='auto'){ goTo(index+1, mode); }
+  function prevSlide(mode='manual'){ goTo(index-1, mode); }
+
+  function tick(now){
+    if (AUTOPLAY && !isAnimating && now >= deadline) {
+      nextSlide('auto');
     }
-    function stopAutoplay(){ if (schedule) clearTimeout(schedule); schedule = null; }
+    rafId = requestAnimationFrame(tick);
+  }
 
-    // Events
-    nextBtn.addEventListener('click', () => { stopAutoplay(); goToManual(index + 1, startAutoplay); });
-    prevBtn.addEventListener('click', () => { stopAutoplay(); goToManual(index - 1, startAutoplay); });
-    dots.forEach((dot, di) => dot.addEventListener('click', () => { stopAutoplay(); goToManual(di, startAutoplay); }));
+  nextBtn?.addEventListener('click', ()=> { nextSlide('manual'); });
+  prevBtn?.addEventListener('click', ()=> { prevSlide('manual'); });
+  dots.forEach((dot,i)=> dot.addEventListener('click', ()=> goTo(i,'manual')));
 
-    // Keyboard
-    slider.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { stopAutoplay(); goToManual(index + 1, startAutoplay); }
-      if (e.key === 'ArrowLeft')  { stopAutoplay(); goToManual(index - 1, startAutoplay); }
-    });
+  document.addEventListener('visibilitychange', ()=>{
+    if (document.visibilityState === 'visible') {
+      deadline = performance.now() + INTERVAL;
+    }
+  });
 
-    // Hover/focus
-    slider.addEventListener('mouseenter', stopAutoplay);
-    slider.addEventListener('mouseleave', startAutoplay);
-    slider.addEventListener('focusin', stopAutoplay);
-    slider.addEventListener('focusout', startAutoplay);
-
-    // Touch swipe
-    let touchStartX = 0, touchDeltaX = 0;
-    slider.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; touchDeltaX = 0; stopAutoplay(); }, {passive:true});
-    slider.addEventListener('touchmove',  (e) => { touchDeltaX = e.touches[0].clientX - touchStartX; }, {passive:true});
-    slider.addEventListener('touchend',   () => {
-      const threshold = 50;
-      if (touchDeltaX > threshold) goToManual(index - 1, startAutoplay);
-      else if (touchDeltaX < -threshold) goToManual(index + 1, startAutoplay);
-      else startAutoplay();
-    });
-
-    // Pause ketika tab tidak aktif → lanjut lagi saat aktif
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) stopAutoplay(); else startAutoplay();
-    });
-
-    // Start
-    showImmediately(0);
-    startAutoplay();
-  })();
+  updateAria();
+  cancelAnimationFrame(rafId);
+  rafId = requestAnimationFrame(tick);
+})();
 </script>
 
 @endsection
