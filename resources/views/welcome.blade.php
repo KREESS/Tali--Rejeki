@@ -123,7 +123,7 @@
 
 
 
-<!-- Products Section (6 items, square images, no bg, no cards) -->
+<!-- Products Section (6 items, square images, flip on hover) -->
 <section id="products" class="products-section">
   <div class="container">
     <div class="section-header">
@@ -142,10 +142,12 @@
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item">
           <a class="pi-thumb" href="{{ url('/products/rockwool') }}" aria-label="Detail ROCKWOOL">
-            <picture>
-              <source srcset="{{ asset('img/landing/1.png') }}" type="image/webp">
-              <img src="{{ asset('img/landing/1.png') }}" alt="ROCKWOOL" loading="lazy" decoding="async">
-            </picture>
+            <div class="pi-flip">
+              <!-- Gambar depan -->
+              <img class="face front" src="{{ asset('img/landing/1.png') }}" alt="ROCKWOOL" loading="lazy" decoding="async">
+              <!-- Gambar belakang (hover) -->
+              <img class="face back"  src="{{ asset('img/landing/2.png') }}" alt="ROCKWOOL - detail" loading="lazy" decoding="async">
+            </div>
           </a>
           <h3 class="pi-title">ROCKWOOL</h3>
           <p class="pi-desc">Serat batu dengan ketahanan api tinggi dan performa akustik yang baik.</p>
@@ -162,10 +164,10 @@
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item">
           <a class="pi-thumb" href="{{ url('/products/glasswool') }}" aria-label="Detail GLASSWOOL">
-            <picture>
-              <source srcset="{{ asset('img/products/glasswool.webp') }}" type="image/webp">
-              <img src="{{ asset('img/products/glasswool.jpg') }}" alt="GLASSWOOL" loading="lazy" decoding="async">
-            </picture>
+            <div class="pi-flip">
+              <img class="face front" src="{{ asset('img/products/glasswool.jpg') }}" alt="GLASSWOOL" loading="lazy" decoding="async">
+              <img class="face back"  src="{{ asset('img/products/glasswool-2.jpg') }}" alt="GLASSWOOL - detail" loading="lazy" decoding="async">
+            </div>
           </a>
           <h3 class="pi-title">GLASSWOOL</h3>
           <p class="pi-desc">Serat kaca ringan untuk insulasi termal & akustik, mudah diaplikasi.</p>
@@ -182,10 +184,10 @@
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item">
           <a class="pi-thumb" href="{{ url('/products/calcium-silicate') }}" aria-label="Detail CALCIUM SILICATE">
-            <picture>
-              <source srcset="{{ asset('img/products/calcium-silicate.webp') }}" type="image/webp">
-              <img src="{{ asset('img/products/calcium-silicate.jpg') }}" alt="CALCIUM SILICATE" loading="lazy" decoding="async">
-            </picture>
+            <div class="pi-flip">
+              <img class="face front" src="{{ asset('img/products/calcium-silicate.jpg') }}" alt="CALCIUM SILICATE" loading="lazy" decoding="async">
+              <img class="face back"  src="{{ asset('img/products/calcium-silicate-2.jpg') }}" alt="CALCIUM SILICATE - detail" loading="lazy" decoding="async">
+            </div>
           </a>
           <h3 class="pi-title">CALCIUM SILICATE</h3>
           <p class="pi-desc">Papan/blok isolasi rigid untuk suhu tinggi dengan kekuatan tekan baik.</p>
@@ -202,10 +204,10 @@
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item">
           <a class="pi-thumb" href="{{ url('/products/ceramic-fiber') }}" aria-label="Detail CERAMIC FIBER">
-            <picture>
-              <source srcset="{{ asset('img/products/ceramic-fiber.webp') }}" type="image/webp">
-              <img src="{{ asset('img/products/ceramic-fiber.jpg') }}" alt="CERAMIC FIBER" loading="lazy" decoding="async">
-            </picture>
+            <div class="pi-flip">
+              <img class="face front" src="{{ asset('img/products/ceramic-fiber.jpg') }}" alt="CERAMIC FIBER" loading="lazy" decoding="async">
+              <img class="face back"  src="{{ asset('img/products/ceramic-fiber-2.jpg') }}" alt="CERAMIC FIBER - detail" loading="lazy" decoding="async">
+            </div>
           </a>
           <h3 class="pi-title">CERAMIC FIBER</h3>
           <p class="pi-desc">Blanket/board tahan temperatur sangat tinggi, ringan dan efisien.</p>
@@ -222,10 +224,10 @@
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item">
           <a class="pi-thumb" href="{{ url('/products/armaflex') }}" aria-label="Detail ARMAFLEX">
-            <picture>
-              <source srcset="{{ asset('img/products/armaflex.webp') }}" type="image/webp">
-              <img src="{{ asset('img/products/armaflex.jpg') }}" alt="ARMAFLEX" loading="lazy" decoding="async">
-            </picture>
+            <div class="pi-flip">
+              <img class="face front" src="{{ asset('img/products/armaflex.jpg') }}" alt="ARMAFLEX" loading="lazy" decoding="async">
+              <img class="face back"  src="{{ asset('img/products/armaflex-2.jpg') }}" alt="ARMAFLEX - detail" loading="lazy" decoding="async">
+            </div>
           </a>
           <h3 class="pi-title">ARMAFLEX</h3>
           <p class="pi-desc">Elastomeric foam untuk pipa AC & chiller dengan penghalang uap efektif.</p>
@@ -242,10 +244,10 @@
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item">
           <a class="pi-thumb" href="{{ url('/products/polyurethane') }}" aria-label="Detail POLYURETHANE">
-            <picture>
-              <source srcset="{{ asset('img/products/polyurethane.webp') }}" type="image/webp">
-              <img src="{{ asset('img/products/polyurethane.jpg') }}" alt="POLYURETHANE" loading="lazy" decoding="async">
-            </picture>
+            <div class="pi-flip">
+              <img class="face front" src="{{ asset('img/products/polyurethane.jpg') }}" alt="POLYURETHANE" loading="lazy" decoding="async">
+              <img class="face back"  src="{{ asset('img/products/polyurethane-2.jpg') }}" alt="POLYURETHANE - detail" loading="lazy" decoding="async">
+            </div>
           </a>
           <h3 class="pi-title">POLYURETHANE</h3>
           <p class="pi-desc">PU/PIR foam untuk panel & pipa—insulasi termal sangat efisien.</p>
@@ -637,115 +639,99 @@
 
 
 /* Products Section */
-    /* ===== Products (square images), Light & Dark aware ===== */
-    .products-section{
-    padding: 72px 0 64px;
-    /* tokens */
-    --ink:#0f172a;
-    --muted:#64748b;
-    --brand:#7c1415;
-    --brand-2:#b71c1c;
-    --border:rgba(2,6,23,.08);
-    --hover:rgba(124,20,21,.06);
-    --ring: rgba(183,28,28,.18);
-    background: transparent;
-    color: var(--ink);
-    }
-    body.dark-theme .products-section{
-    --ink:#e5e7eb;
-    --muted:#94a3b8;
-    --border:rgba(255,255,255,.12);
-    --hover:rgba(183,28,28,.12);
-    --ring: rgba(239,68,68,.22);
-    }
+/* ===== Products (square images), Light & Dark aware ===== */
+.products-section{
+  padding:72px 0 64px;
+  /* tokens */
+  --ink:#0f172a;
+  --muted:#64748b;
+  --brand:#7c1415;
+  --brand-2:#b71c1c;
+  --border:rgba(2,6,23,.08);
+  --hover:rgba(124,20,21,.06);
+  --ring:rgba(183,28,28,.18);
+  background:transparent; color:var(--ink);
+}
+body.dark-theme .products-section{
+  --ink:#e5e7eb; --muted:#94a3b8;
+  --border:rgba(255,255,255,.12);
+  --hover:rgba(183,28,28,.12);
+  --ring:rgba(239,68,68,.22);
+}
 
-    /* Header */
-    .products-section .section-header{ text-align:center; margin-bottom: 28px; }
-    .products-section .section-badge{
-    display:inline-flex; align-items:center; gap:.5rem;
-    font-weight:900; letter-spacing:.02em; color: var(--brand);
-    padding: .25rem .6rem; border-radius: 999px;
-    border:1px solid var(--border); background: transparent;
-    }
-    .products-section .section-title{
-    margin: 10px 0 6px; font-weight:900; letter-spacing:-.01em;
-    font-size: clamp(1.5rem, 1.1rem + 1vw, 2rem);
-    }
-    .products-section .section-description{ color: var(--muted); max-width: 680px; margin: 0 auto; }
+/* Header */
+.products-section .section-header{ text-align:center; margin-bottom:28px; }
+.products-section .section-badge{
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-weight:900; letter-spacing:.02em; color:var(--brand);
+  padding:.25rem .6rem; border-radius:999px;
+  border:1px solid var(--border); background:transparent;
+}
+.products-section .section-title{
+  margin:10px 0 6px; font-weight:900; letter-spacing:-.01em;
+  font-size:clamp(1.5rem,1.1rem + 1vw,2rem);
+}
+.products-section .section-description{
+  color:var(--muted); max-width:680px; margin:0 auto;
+}
 
-    /* Grid & Item */
-    .product-grid{ row-gap: 18px; }
-    .product-item{
-    display:flex; flex-direction:column; height:100%;
-    padding: 14px 2px 2px; /* gambar dominan, konten ringkas */
-    border:1px solid var(--border);
-    border-radius: 14px;
-    background: transparent;
-    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
-    position: relative;
-    }
-    .product-item:hover{
-    transform: translateY(-4px);
-    border-color: color-mix(in srgb, var(--brand) 26%, transparent);
-    background: var(--hover);
-    box-shadow: 0 14px 34px rgba(0,0,0,.08), 0 0 0 3px var(--ring);
-    }
+/* Grid & Item */
+.product-grid{ row-gap:18px; }
+.product-item{
+  display:flex; flex-direction:column; height:100%;
+  padding:14px 2px 2px; /* gambar dominan, konten ringkas */
+  border:1px solid var(--border);
+  border-radius:14px; background:transparent;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+  position:relative;
+}
+.product-item:hover{
+  transform:translateY(-4px);
+  border-color:color-mix(in srgb, var(--brand) 26%, transparent);
+  background:var(--hover);
+  box-shadow:0 14px 34px rgba(0,0,0,.08), 0 0 0 3px var(--ring);
+}
 
-    /* Square thumbnail (kotak) */
-    .pi-thumb{
-    display:block; width:100%;
-    padding: 0 12px; /* inner padding untuk radius rapi */
-    }
-    .pi-thumb picture, .pi-thumb img{
-    display:block; width:100%;
-    height:auto;
-    }
-    .pi-thumb picture{
-    position:relative; width:100%;
-    aspect-ratio: 1 / 1;
-    border-radius: 12px;
-    overflow:hidden;
-    border: 1px solid var(--border);
-    background: radial-gradient(120% 120% at 30% 20%, rgba(0,0,0,.04), transparent);
-    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-    .pi-thumb img{
-    position:absolute; inset:0;
-    width:100%; height:100%;
-    object-fit: cover; /* isi penuh kotak */
-    }
-    .product-item:hover .pi-thumb picture{
-    transform: translateY(-2px);
-    border-color: color-mix(in srgb, var(--brand) 22%, transparent);
-    box-shadow: 0 10px 24px rgba(0,0,0,.12);
-    }
+/* Square thumbnail + FLIP */
+.pi-thumb{ display:block; width:100%; padding:0 12px; perspective:1000px; }
+.pi-flip{
+  position:relative; width:100%; aspect-ratio:1/1; border-radius:12px; overflow:hidden;
+  border:1px solid var(--border);
+  background:radial-gradient(120% 120% at 30% 20%, rgba(0,0,0,.04), transparent);
+  transform-style:preserve-3d; transition:transform .5s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.product-item:hover .pi-flip{
+  transform:rotateY(180deg);
+  border-color:color-mix(in srgb, var(--brand) 22%, transparent);
+  box-shadow:0 10px 24px rgba(0,0,0,.12);
+}
+.pi-flip .face{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover;
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;
+}
+.pi-flip .back{ transform:rotateY(180deg); }
 
-    /* Texts */
-    .pi-title{ font-weight: 900; margin: 12px 14px 6px; letter-spacing:.01em; }
-    .pi-desc{
-    color: var(--muted); margin: 0 14px 10px; line-height: 1.55;
-    min-height: 44px;
-    }
-    .pi-features{ list-style:none; padding:0 14px; margin: 0 0 14px; }
-    .pi-features li{
-    display:flex; align-items:center; gap:.5rem; color: var(--ink);
-    opacity:.9; margin: 6px 0; font-size: .95rem;
-    }
-    .pi-features .fa-check{ color: #10b981; font-size:.9rem; }
+/* Texts */
+.pi-title{ font-weight:900; margin:12px 14px 6px; letter-spacing:.01em; }
+.pi-desc{ color:var(--muted); margin:0 14px 10px; line-height:1.55; min-height:44px; }
+.pi-features{ list-style:none; padding:0 14px; margin:0 0 14px; }
+.pi-features li{ display:flex; align-items:center; gap:.5rem; color:var(--ink); opacity:.9; margin:6px 0; font-size:.95rem; }
+.pi-features .fa-check{ color:#10b981; font-size:.9rem; }
 
-    /* Link */
-    .pi-link{
-    margin: 0 14px 14px;
-    display:inline-flex; align-items:center; gap:.5rem;
-    font-weight:800; color: var(--brand); text-decoration:none;
-    padding: 8px 10px; border-radius: 10px; transition: gap .18s ease, background .18s ease, color .18s ease;
-    }
-    .pi-link:hover{ gap:.75rem; background: color-mix(in srgb, var(--brand) 9%, transparent); color: var(--brand-2); }
+/* Link */
+.pi-link{
+  margin:0 14px 14px;
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-weight:800; color:var(--brand); text-decoration:none;
+  padding:8px 10px; border-radius:10px; transition:gap .18s ease, background .18s ease, color .18s ease;
+}
+.pi-link:hover{ gap:.75rem; background:color-mix(in srgb, var(--brand) 9%, transparent); color:var(--brand-2); }
 
-    /* Small tweak */
-    @media (max-width: 575.98px){
-    .product-item{ padding:12px 2px 2px; }
-    }
+/* Small tweak */
+@media (max-width:575.98px){
+  .product-item{ padding:12px 2px 2px; }
+}
 /* Products Section */
 
 
