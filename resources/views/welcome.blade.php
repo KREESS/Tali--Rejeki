@@ -1178,147 +1178,184 @@
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Intersection Observer for animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+  document.addEventListener('DOMContentLoaded', function() {
+      // Intersection Observer for animations
+      const observerOptions = {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+      };
 
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
+      const observer = new IntersectionObserver(function(entries) {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.style.opacity = '1';
+                  entry.target.style.transform = 'translateY(0)';
+              }
+          });
+      }, observerOptions);
 
-    // Observe elements for animation
-    const animateElements = document.querySelectorAll('.product-card, .service-item, .grid-item');
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.6s ease';
-        observer.observe(el);
-    });
+      // Observe elements for animation
+      const animateElements = document.querySelectorAll('.product-card, .service-item, .grid-item');
+      animateElements.forEach(el => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(30px)';
+          el.style.transition = 'all 0.6s ease';
+          observer.observe(el);
+      });
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+              e.preventDefault();
+              const target = document.querySelector(this.getAttribute('href'));
+              if (target) {
+                  target.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'start'
+                  });
+              }
+          });
+      });
 
-    // Counter animation
-    function animateCounter(element, target) {
-        let current = 0;
-        const increment = target / 100;
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            element.textContent = Math.floor(current) + '+';
-        }, 20);
-    }
+      // Counter animation
+      function animateCounter(element, target) {
+          let current = 0;
+          const increment = target / 100;
+          const timer = setInterval(() => {
+              current += increment;
+              if (current >= target) {
+                  current = target;
+                  clearInterval(timer);
+              }
+              element.textContent = Math.floor(current) + '+';
+          }, 20);
+      }
 
-    // Trigger counter animation when stats come into view
-    const statsObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const numbers = entry.target.querySelectorAll('.stat-number');
-                numbers.forEach(num => {
-                    const target = parseInt(num.textContent);
-                    animateCounter(num, target);
-                });
-                statsObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
+      // Trigger counter animation when stats come into view
+      const statsObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  const numbers = entry.target.querySelectorAll('.stat-number');
+                  numbers.forEach(num => {
+                      const target = parseInt(num.textContent);
+                      animateCounter(num, target);
+                  });
+                  statsObserver.unobserve(entry.target);
+              }
+          });
+      }, { threshold: 0.5 });
 
-    const statsSection = document.querySelector('.hero-stats');
-    if (statsSection) {
-        statsObserver.observe(statsSection);
-    }
-});
+      const statsSection = document.querySelector('.hero-stats');
+      if (statsSection) {
+          statsObserver.observe(statsSection);
+      }
+  });
 </script>
 <script>
-// =========================
-// HERO SLIDER LOGIC (improved)
-// - AUTO: teks OUT dulu → crossfade → teks IN
-// - MANUAL next/prev/dot: LANGSUNG crossfade (skip OUT), teks IN slide baru
-// - Tambahan: pause ketika tab tidak aktif (visibilitychange)
-// =========================
-(function () {
-  const slider = document.querySelector('.hero-slider');
-  if (!slider) return;
+  // =========================
+  // HERO SLIDER LOGIC (improved)
+  // - AUTO: teks OUT dulu → crossfade → teks IN
+  // - MANUAL next/prev/dot: LANGSUNG crossfade (skip OUT), teks IN slide baru
+  // - Tambahan: pause ketika tab tidak aktif (visibilitychange)
+  // =========================
+  (function () {
+    const slider = document.querySelector('.hero-slider');
+    if (!slider) return;
 
-  const slides = Array.from(slider.querySelectorAll('.hero-slide'));
-  const prevBtn  = slider.querySelector('.hero-prev');
-  const nextBtn  = slider.querySelector('.hero-next');
-  const dots     = Array.from(slider.querySelectorAll('.hero-dots .dot'));
+    const slides = Array.from(slider.querySelectorAll('.hero-slide'));
+    const prevBtn  = slider.querySelector('.hero-prev');
+    const nextBtn  = slider.querySelector('.hero-next');
+    const dots     = Array.from(slider.querySelectorAll('.hero-dots .dot'));
 
-  // sinkron dengan CSS
-  const STAGGER_STEP  = 140;
-  const TEXT_IN       = 880;
-  const TEXT_OUT      = 560;
-  const SLIDE_FADE    = 1600;
-  const OUT_TOTAL     = TEXT_OUT + (STAGGER_STEP * 3);
-  const AUTOPLAY_VIEW = parseInt(slider.getAttribute('data-interval') || '5600', 10);
+    // sinkron dengan CSS
+    const STAGGER_STEP  = 140;
+    const TEXT_IN       = 880;
+    const TEXT_OUT      = 560;
+    const SLIDE_FADE    = 1600;
+    const OUT_TOTAL     = TEXT_OUT + (STAGGER_STEP * 3);
+    const AUTOPLAY_VIEW = parseInt(slider.getAttribute('data-interval') || '5600', 10);
 
-  let index = 0;
-  let schedule = null;
-  let isAnimating = false;
-  const autoplay = slider.getAttribute('data-autoplay') === 'true';
+    let index = 0;
+    let schedule = null;
+    let isAnimating = false;
+    const autoplay = slider.getAttribute('data-autoplay') === 'true';
 
-  function updateDots(i){
-    dots.forEach((d, di) => {
-      d.classList.toggle('is-active', di === i);
-      d.setAttribute('aria-selected', di === i ? 'true' : 'false');
-    });
-  }
+    function updateDots(i){
+      dots.forEach((d, di) => {
+        d.classList.toggle('is-active', di === i);
+        d.setAttribute('aria-selected', di === i ? 'true' : 'false');
+      });
+    }
 
-  function showImmediately(i){
-    index = (i + slides.length) % slides.length;
-    slides.forEach((s, si) => s.classList.toggle('is-active', si === index));
-    const activeContent = slides[index].querySelector('.hero-content');
-    activeContent.classList.remove('anim-out','quick-hide');
-    void activeContent.offsetWidth;
-    activeContent.classList.add('anim-in');
-    updateDots(index);
-  }
+    function showImmediately(i){
+      index = (i + slides.length) % slides.length;
+      slides.forEach((s, si) => s.classList.toggle('is-active', si === index));
+      const activeContent = slides[index].querySelector('.hero-content');
+      activeContent.classList.remove('anim-out','quick-hide');
+      void activeContent.offsetWidth;
+      activeContent.classList.add('anim-in');
+      updateDots(index);
+    }
 
-  function goToAuto(nextIndex, onDone){
-    if (isAnimating) return;
-    nextIndex = (nextIndex + slides.length) % slides.length;
-    if (nextIndex === index){ onDone && onDone(); return; }
-    isAnimating = true;
+    function goToAuto(nextIndex, onDone){
+      if (isAnimating) return;
+      nextIndex = (nextIndex + slides.length) % slides.length;
+      if (nextIndex === index){ onDone && onDone(); return; }
+      isAnimating = true;
 
-    const current = slides[index];
-    const next    = slides[nextIndex];
-    const currC   = current.querySelector('.hero-content');
-    const nextC   = next.querySelector('.hero-content');
+      const current = slides[index];
+      const next    = slides[nextIndex];
+      const currC   = current.querySelector('.hero-content');
+      const nextC   = next.querySelector('.hero-content');
 
-    // teks keluar (stagger)
-    currC.classList.remove('anim-in','quick-hide');
-    void currC.offsetWidth;
-    currC.classList.add('anim-out');
+      // teks keluar (stagger)
+      currC.classList.remove('anim-in','quick-hide');
+      void currC.offsetWidth;
+      currC.classList.add('anim-out');
 
-    setTimeout(() => {
-      // crossfade slide
-      current.classList.remove('is-active');
-      next.classList.add('is-active');
+      setTimeout(() => {
+        // crossfade slide
+        current.classList.remove('is-active');
+        next.classList.add('is-active');
 
-      // teks masuk slide baru
+        // teks masuk slide baru
+        nextC.classList.remove('anim-out','quick-hide');
+        void nextC.offsetWidth;
+        nextC.classList.add('anim-in');
+
+        updateDots(nextIndex);
+        index = nextIndex;
+
+        setTimeout(() => {
+          isAnimating = false;
+          onDone && onDone();
+        }, Math.max(SLIDE_FADE, TEXT_IN + (STAGGER_STEP * 3)));
+      }, OUT_TOTAL);
+    }
+
+    function goToManual(nextIndex, onDone){
+      if (isAnimating) return;
+      nextIndex = (nextIndex + slides.length) % slides.length;
+      if (nextIndex === index){ onDone && onDone(); return; }
+      isAnimating = true;
+
+      const current = slides[index];
+      const next    = slides[nextIndex];
+      const currC   = current.querySelector('.hero-content');
+      const nextC   = next.querySelector('.hero-content');
+
+      // skip OUT: sembunyikan teks lama cepat (biar rapi)
+      currC.classList.remove('anim-in','anim-out');
+      currC.classList.add('quick-hide');
+
+      // langsung crossfade slide
+      next.classList.add('is-active');       // fade-in
+      // biarkan current fade-out via remove setelah rAF utk overlap halus
+      requestAnimationFrame(() => {
+        current.classList.remove('is-active');
+      });
+
+      // teks baru: anim-in
       nextC.classList.remove('anim-out','quick-hide');
       void nextC.offsetWidth;
       nextC.classList.add('anim-in');
@@ -1326,99 +1363,62 @@ document.addEventListener('DOMContentLoaded', function() {
       updateDots(nextIndex);
       index = nextIndex;
 
+      // lock sebentar selama crossfade agar spamming tidak glitch
       setTimeout(() => {
         isAnimating = false;
         onDone && onDone();
-      }, Math.max(SLIDE_FADE, TEXT_IN + (STAGGER_STEP * 3)));
-    }, OUT_TOTAL);
-  }
+      }, SLIDE_FADE * 0.9);
+    }
 
-  function goToManual(nextIndex, onDone){
-    if (isAnimating) return;
-    nextIndex = (nextIndex + slides.length) % slides.length;
-    if (nextIndex === index){ onDone && onDone(); return; }
-    isAnimating = true;
+    // Autoplay pakai chain timeout (display → transisi → schedule lagi)
+    function startAutoplay(){
+      if (!autoplay) return;
+      stopAutoplay();
+      schedule = setTimeout(function tick(){
+        goToAuto(index + 1, () => {
+          schedule = setTimeout(tick, AUTOPLAY_VIEW);
+        });
+      }, AUTOPLAY_VIEW);
+    }
+    function stopAutoplay(){ if (schedule) clearTimeout(schedule); schedule = null; }
 
-    const current = slides[index];
-    const next    = slides[nextIndex];
-    const currC   = current.querySelector('.hero-content');
-    const nextC   = next.querySelector('.hero-content');
+    // Events
+    nextBtn.addEventListener('click', () => { stopAutoplay(); goToManual(index + 1, startAutoplay); });
+    prevBtn.addEventListener('click', () => { stopAutoplay(); goToManual(index - 1, startAutoplay); });
+    dots.forEach((dot, di) => dot.addEventListener('click', () => { stopAutoplay(); goToManual(di, startAutoplay); }));
 
-    // skip OUT: sembunyikan teks lama cepat (biar rapi)
-    currC.classList.remove('anim-in','anim-out');
-    currC.classList.add('quick-hide');
-
-    // langsung crossfade slide
-    next.classList.add('is-active');       // fade-in
-    // biarkan current fade-out via remove setelah rAF utk overlap halus
-    requestAnimationFrame(() => {
-      current.classList.remove('is-active');
+    // Keyboard
+    slider.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { stopAutoplay(); goToManual(index + 1, startAutoplay); }
+      if (e.key === 'ArrowLeft')  { stopAutoplay(); goToManual(index - 1, startAutoplay); }
     });
 
-    // teks baru: anim-in
-    nextC.classList.remove('anim-out','quick-hide');
-    void nextC.offsetWidth;
-    nextC.classList.add('anim-in');
+    // Hover/focus
+    slider.addEventListener('mouseenter', stopAutoplay);
+    slider.addEventListener('mouseleave', startAutoplay);
+    slider.addEventListener('focusin', stopAutoplay);
+    slider.addEventListener('focusout', startAutoplay);
 
-    updateDots(nextIndex);
-    index = nextIndex;
+    // Touch swipe
+    let touchStartX = 0, touchDeltaX = 0;
+    slider.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; touchDeltaX = 0; stopAutoplay(); }, {passive:true});
+    slider.addEventListener('touchmove',  (e) => { touchDeltaX = e.touches[0].clientX - touchStartX; }, {passive:true});
+    slider.addEventListener('touchend',   () => {
+      const threshold = 50;
+      if (touchDeltaX > threshold) goToManual(index - 1, startAutoplay);
+      else if (touchDeltaX < -threshold) goToManual(index + 1, startAutoplay);
+      else startAutoplay();
+    });
 
-    // lock sebentar selama crossfade agar spamming tidak glitch
-    setTimeout(() => {
-      isAnimating = false;
-      onDone && onDone();
-    }, SLIDE_FADE * 0.9);
-  }
+    // Pause ketika tab tidak aktif → lanjut lagi saat aktif
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopAutoplay(); else startAutoplay();
+    });
 
-  // Autoplay pakai chain timeout (display → transisi → schedule lagi)
-  function startAutoplay(){
-    if (!autoplay) return;
-    stopAutoplay();
-    schedule = setTimeout(function tick(){
-      goToAuto(index + 1, () => {
-        schedule = setTimeout(tick, AUTOPLAY_VIEW);
-      });
-    }, AUTOPLAY_VIEW);
-  }
-  function stopAutoplay(){ if (schedule) clearTimeout(schedule); schedule = null; }
-
-  // Events
-  nextBtn.addEventListener('click', () => { stopAutoplay(); goToManual(index + 1, startAutoplay); });
-  prevBtn.addEventListener('click', () => { stopAutoplay(); goToManual(index - 1, startAutoplay); });
-  dots.forEach((dot, di) => dot.addEventListener('click', () => { stopAutoplay(); goToManual(di, startAutoplay); }));
-
-  // Keyboard
-  slider.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') { stopAutoplay(); goToManual(index + 1, startAutoplay); }
-    if (e.key === 'ArrowLeft')  { stopAutoplay(); goToManual(index - 1, startAutoplay); }
-  });
-
-  // Hover/focus
-  slider.addEventListener('mouseenter', stopAutoplay);
-  slider.addEventListener('mouseleave', startAutoplay);
-  slider.addEventListener('focusin', stopAutoplay);
-  slider.addEventListener('focusout', startAutoplay);
-
-  // Touch swipe
-  let touchStartX = 0, touchDeltaX = 0;
-  slider.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; touchDeltaX = 0; stopAutoplay(); }, {passive:true});
-  slider.addEventListener('touchmove',  (e) => { touchDeltaX = e.touches[0].clientX - touchStartX; }, {passive:true});
-  slider.addEventListener('touchend',   () => {
-    const threshold = 50;
-    if (touchDeltaX > threshold) goToManual(index - 1, startAutoplay);
-    else if (touchDeltaX < -threshold) goToManual(index + 1, startAutoplay);
-    else startAutoplay();
-  });
-
-  // Pause ketika tab tidak aktif → lanjut lagi saat aktif
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stopAutoplay(); else startAutoplay();
-  });
-
-  // Start
-  showImmediately(0);
-  startAutoplay();
-})();
+    // Start
+    showImmediately(0);
+    startAutoplay();
+  })();
 </script>
 
 @endsection
