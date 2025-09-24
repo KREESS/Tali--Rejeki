@@ -203,9 +203,9 @@
           <a class="pi-thumb" href="{{ url('/products/rockwool') }}" aria-label="Detail ROCKWOOL">
             <div class="pi-stage" aria-hidden="true">
               <!-- front -->
-              <img class="pi-img front" src="{{ asset('img/landing/1.png') }}" alt="" loading="lazy" decoding="async">
+              <img class="pi-img front" src="{{ asset('img/landing/23.png') }}" alt="" loading="lazy" decoding="async">
               <!-- back -->
-              <img class="pi-img back"  src="{{ asset('img/landing/2.png') }}" alt="" loading="lazy" decoding="async">
+              <img class="pi-img back"  src="{{ asset('img/landing/24.png') }}" alt="" loading="lazy" decoding="async">
             </div>
           </a>
           <h3 class="pi-title">ROCKWOOL</h3>
@@ -288,7 +288,7 @@
               <img class="pi-img back"  src="{{ asset('img/products/armaflex-2.jpg') }}" alt="" loading="lazy" decoding="async">
             </div>
           </a>
-          <h3 class="pi-title">ARMAFLEX</h3>
+          <h3 class="pi-title">ARMACEL - ARMAFLEX</h3>
           <p class="pi-desc">Elastomeric foam untuk pipa AC & chiller dengan penghalang uap efektif.</p>
           <ul class="pi-features">
             <li><i class="fas fa-check"></i> Cegah kondensasi</li>
@@ -299,23 +299,29 @@
         </div>
       </div>
 
-      <!-- POLYURETHANE -->
+      <!-- ALUMINIUMSHEET [JACKETING] -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item">
-          <a class="pi-thumb" href="{{ url('/products/polyurethane') }}" aria-label="Detail POLYURETHANE">
+          <a class="pi-thumb" href="{{ url('/products/aluminium-sheet') }}" aria-label="Detail ALUMINIUMSHEET [JACKETING]">
             <div class="pi-stage" aria-hidden="true">
-              <img class="pi-img front" src="{{ asset('img/products/polyurethane.jpg') }}" alt="" loading="lazy" decoding="async">
-              <img class="pi-img back"  src="{{ asset('img/products/polyurethane-2.jpg') }}" alt="" loading="lazy" decoding="async">
+              <img class="pi-img front" src="{{ asset('img/products/aluminium-sheet.jpg') }}" alt="Aluminium Sheet Jacketing" loading="lazy" decoding="async">
+              <img class="pi-img back"  src="{{ asset('img/products/aluminium-sheet-2.jpg') }}" alt="Aluminium Sheet Jacketing Back" loading="lazy" decoding="async">
             </div>
           </a>
-          <h3 class="pi-title">POLYURETHANE</h3>
-          <p class="pi-desc">PU/PIR foam untuk panel & pipa—insulasi termal sangat efisien.</p>
+
+          <h3 class="pi-title">ALUMINIUMSHEET [JACKETING]</h3>
+
+          <p class="pi-desc">Material pelapis (jacketing) untuk melindungi insulasi dari kerusakan luar.</p>
           <ul class="pi-features">
-            <li><i class="fas fa-check"></i> Konduktivitas rendah</li>
-            <li><i class="fas fa-check"></i> Ringan & kuat</li>
-            <li><i class="fas fa-check"></i> Serbaguna</li>
+            <li><i class="fas fa-check"></i> Tahan korosi & cuaca ekstrem</li>
+            <li><i class="fas fa-check"></i> Ringan namun kuat</li>
+            <li><i class="fas fa-check"></i> Memberikan perlindungan ekstra pada insulasi</li>
+            <li><i class="fas fa-check"></i> Umur pakai panjang & perawatan mudah</li>
           </ul>
-          <a href="{{ url('/products/polyurethane') }}" class="pi-link">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+
+          <a href="{{ url('/products/aluminium-sheet') }}" class="pi-link">
+            Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
       </div>
     </div>
