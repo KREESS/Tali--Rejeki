@@ -179,9 +179,6 @@
 </section>
 
 
-
-
-
 <!-- Products Section (6 items, square images, flip on hover - robust) -->
 <section id="products" class="products-section">
   <div class="container">
@@ -336,78 +333,95 @@
 <!-- Services Section -->
 <section class="services-section">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="services-content">
-                    <div class="section-badge">
-                        <i class="fas fa-briefcase"></i>
-                        <span>Layanan Terbaik</span>
-                    </div>
-                    <h2 class="section-title">Solusi Lengkap untuk Kebutuhan Insulasi Anda</h2>
-                    <p class="section-description">
-                        Tidak hanya menyediakan produk berkualitas, kami juga memberikan layanan profesional 
-                        untuk memastikan proyek Anda berjalan dengan sempurna.
-                    </p>
-                    
-                    <div class="service-list">
-                        <div class="service-item">
-                            <div class="service-icon">
-                                <i class="fas fa-hammer"></i>
-                            </div>
-                            <div class="service-content">
-                                <h4>Instalasi Profesional</h4>
-                                <p>Tim ahli berpengalaman untuk pemasangan yang tepat dan aman</p>
-                            </div>
-                        </div>
-                        
-                        <div class="service-item">
-                            <div class="service-icon">
-                                <i class="fas fa-headset"></i>
-                            </div>
-                            <div class="service-content">
-                                <h4>Konsultasi Teknis</h4>
-                                <p>Saran dan rekomendasi produk sesuai kebutuhan spesifik Anda</p>
-                            </div>
-                        </div>
-                        
-                        <div class="service-item">
-                            <div class="service-icon">
-                                <i class="fas fa-shipping-fast"></i>
-                            </div>
-                            <div class="service-content">
-                                <h4>Distribusi Nasional</h4>
-                                <p>Pengiriman ke seluruh Indonesia dengan sistem logistik terpercaya</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="services-header">
+            <div class="section-badge">
+                <i class="fas fa-hand-holding-heart"></i>
+                <span>Tali Rejeki</span>
             </div>
-            
-            <div class="col-lg-6">
-                <div class="services-visual">
-                    <div class="visual-grid">
-                        <div class="grid-item item-1">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Efisiensi Tinggi</span>
-                        </div>
-                        <div class="grid-item item-2">
-                            <i class="fas fa-users"></i>
-                            <span>Tim Profesional</span>
-                        </div>
-                        <div class="grid-item item-3">
-                            <i class="fas fa-clock"></i>
-                            <span>Tepat Waktu</span>
-                        </div>
-                        <div class="grid-item item-4">
-                            <i class="fas fa-medal"></i>
-                            <span>Kualitas Terjamin</span>
-                        </div>
-                    </div>
+            <h2 class="section-title">Solusi Lengkap untuk Semua Kebutuhan Anda</h2>
+            <p class="section-description">
+                Tali Rejeki hadir dengan berbagai layanan profesional dan terpercaya. 
+                Dari konsultasi, distribusi, hingga kualitas terjamin dengan harga yang bersahabat.
+            </p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-hands-helping"></i>
                 </div>
+                <h4>Bimbingan Profesional</h4>
+                <p>Tim ahli siap membantu Anda dengan solusi tepat dan cepat.</p>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h4>Konsultasi & Saran</h4>
+                <p>Dapatkan rekomendasi yang sesuai kebutuhan bisnis dan proyek Anda.</p>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h4>Distribusi Luas</h4>
+                <p>Layanan pengiriman cepat ke seluruh wilayah Indonesia.</p>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h4>Kualitas Terjamin</h4>
+                <p>Setiap layanan dijalankan dengan standar profesional tinggi.</p>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h4>Tepat Waktu</h4>
+                <p>Menjaga jadwal proyek dan layanan agar selalu on-time.</p>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h4>Tim Profesional</h4>
+                <p>Didukung tenaga ahli berpengalaman dan berdedikasi.</p>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <h4>Harga Terjangkau</h4>
+                <p>Menawarkan layanan dengan biaya kompetitif tanpa mengurangi kualitas.</p>
+            </div>
+
+            <div class="service-item">
+                <div class="service-icon">
+                    <i class="fas fa-th-large"></i>
+                </div>
+                <h4>Layanan Lengkap</h4>
+                <p>Satu tempat dengan banyak pilihan layanan sesuai kebutuhan Anda.</p>
             </div>
         </div>
     </div>
 </section>
+
+
+
+
+
+
+
+
+
+
 
 <!-- CTA Section -->
 <section id="contact" class="cta-section">
@@ -743,7 +757,6 @@
   }
 /* Hero Section */
 
-
 /* Products Section */
   /* ===== Products (square images), Light & Dark aware ===== */
   .products-section{
@@ -764,11 +777,19 @@
   /* Header */
   .products-section .section-header{ text-align:center; margin-bottom:28px; }
   .products-section .section-badge{
-    display:inline-flex; align-items:center; gap:.5rem;
-    font-weight:900; letter-spacing:.02em; color:var(--brand);
-    padding:.25rem .6rem; border-radius:999px;
-    border:1px solid var(--border); background:transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--accent, #ffb700);
+      margin-bottom: 12px;
   }
+
+  .section-badge i {
+      font-size: 18px;
+  }
+  
   .products-section .section-title{
     margin:10px 0 6px; font-weight:900; letter-spacing:-.01em;
     font-size:clamp(1.5rem,1.1rem + 1vw,2rem);
@@ -863,203 +884,142 @@
   }
 /* Products Section */
 
-
-
-
-
-
-
-
 /* Services Section */
-    .services-section {
-        padding: 100px 0;
-        background: url('{{ asset("img/bg/bg-texture.webp") }}');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        position: relative;
-        transition: all 0.3s ease;
-    }
+  /* ---------------- Services Section Modern ---------------- */
+  .services-section {
+      padding: 80px 20px;
+      color: var(--text-primary, #111);
+      transition: all 0.3s ease;
+      background: transparent; /* background dihapus */
+  }
 
-    /* Light theme services bg */
-    body.light-theme .services-section {
-        background: url('{{ asset("img/bg/bg-texture-white.webp") }}');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }
+  /* Dark mode */
+  body.dark-theme .services-section {
+      --text-primary: #f5f5f5;
+      --text-secondary: #cfd8dc;
+  }
 
-    /* Dark theme services bg */
-    body.dark-theme .services-section {
-        background: url('{{ asset("img/bg/bg-texture.webp") }}');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }
+  .services-section .container {
+      max-width: 1200px;
+      margin: 0 auto;
+  }
 
-    .services-section .container {
-        position: relative;
-        z-index: 2;
-    }
+  .services-header {
+      text-align: center;
+      margin-bottom: 60px;
+  }
 
-    .service-list {
-        margin-top: 40px;
-    }
+  .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--accent, #ffb700);
+      margin-bottom: 12px;
+  }
 
-    .service-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 20px;
-        margin-bottom: 30px;
-        padding: 30px;
-        background: 
-            linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.95) 0%, 
-                rgba(250, 250, 250, 0.9) 100%
-            );
-        backdrop-filter: blur(15px) saturate(180%);
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 
-            0 10px 25px rgba(0, 0, 0, 0.12),
-            0 4px 10px rgba(124, 20, 21, 0.08),
-            inset 0 1px 0 rgba(255, 255, 255, 0.6);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        position: relative;
-        overflow: hidden;
-    }
+  .section-badge i {
+      font-size: 18px;
+  }
 
-    .service-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, 
-            transparent 0%, 
-            rgba(124, 20, 21, 0.03) 50%, 
-            transparent 100%);
-        transition: left 0.6s ease;
-    }
+  .section-title {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 900;
+      margin-bottom: 16px;
+      color: var(--text-primary, #111);
+  }
 
-    .service-item:hover::before {
-        left: 100%;
-    }
+  .section-description {
+      font-size: clamp(14px, 1.6vw, 18px);
+      color: var(--text-secondary, #555);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+  }
 
-    .service-item:hover {
-        background: 
-            linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.98) 0%, 
-                rgba(252, 252, 252, 0.95) 100%
-            );
-        transform: translateX(15px) translateY(-5px);
-        box-shadow: 
-            0 20px 40px rgba(0, 0, 0, 0.15),
-            0 8px 16px rgba(124, 20, 21, 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.7);
-    }
+  /* Services Grid */
+  .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+  }
 
-    .service-icon {
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #7c1415, #b71c1c);
-        border-radius: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 1.5rem;
-        flex-shrink: 0;
-    }
+  /* Service Item */
+  .service-item {
+      background: var(--card-bg, #fff);
+      color: var(--text-primary, #111);
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+  }
 
-    .service-content h4 {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: #2d3748;
-        margin-bottom: 8px;
-    }
+  body.dark-theme .service-item {
+      --card-bg: #1e1e1e;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  }
 
-    .service-content p {
-        color: #64748b;
-        margin: 0;
-        line-height: 1.6;
-    }
+  .service-item:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+  }
 
-    .services-visual {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+  .service-icon {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: var(--accent, #ffb700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-size: 26px;
+      color: #fff;
+      transition: transform 0.3s ease;
+  }
 
-    .visual-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        max-width: 400px;
-    }
+  .service-item:hover .service-icon {
+      transform: scale(1.1);
+  }
 
-    .grid-item {
-        background: 
-            linear-gradient(135deg, 
-                rgba(255, 255, 255, 0.95) 0%, 
-                rgba(250, 250, 250, 0.9) 100%
-            );
-        backdrop-filter: blur(15px) saturate(180%);
-        border-radius: 20px;
-        padding: 30px 20px;
-        text-align: center;
-        box-shadow: 
-            0 12px 25px rgba(0, 0, 0, 0.1),
-            0 5px 10px rgba(124, 20, 21, 0.05),
-            inset 0 1px 0 rgba(255, 255, 255, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        position: relative;
-        overflow: hidden;
-    }
+  .service-item h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary, #111);
+  }
 
-    .grid-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, 
-            transparent 0%, 
-            rgba(124, 20, 21, 0.03) 50%, 
-            transparent 100%);
-        transition: left 0.6s ease;
-    }
+  .service-item p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-secondary, #555);
+  }
 
-    .grid-item:hover::before {
-        left: 100%;
-    }
+  /* Responsive tweaks */
+  @media (max-width: 768px){
+      .services-section { padding: 60px 15px; }
+      .section-title { font-size: 26px; }
+  }
+/* Services Section */
 
-    .grid-item:hover {
-        transform: translateY(-8px) scale(1.05);
-        box-shadow: 
-            0 20px 40px rgba(0, 0, 0, 0.15),
-            0 8px 16px rgba(124, 20, 21, 0.08),
-            inset 0 1px 0 rgba(255, 255, 255, 0.8);
-        border-color: rgba(255, 255, 255, 0.3);
-    }
 
-    .grid-item i {
-        font-size: 2rem;
-        color: #7c1415;
-        margin-bottom: 15px;
-        display: block;
-    }
 
-    .grid-item span {
-        font-weight: 600;
-        color: #2d3748;
-        font-size: 0.9rem;
-    }
 
-    /* CTA Section */
+
+
+
+
+
+
+
+
+
+
+/* CTA Section */
     .cta-section {
         position: relative;
         padding: 100px 0;
