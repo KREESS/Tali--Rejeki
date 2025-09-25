@@ -20,7 +20,7 @@
     <!-- Slide 1 -->
     <article id="slide-1" class="hero-slide is-active" data-index="0" data-align="left" data-ken="right"
              aria-roledescription="slide" aria-label="1 dari 5"
-             style="--slide-bg: url('{{ asset("img/hero/3.png") }}');">
+             style="--slide-bg: url('{{ asset("img/hero/3.jpg") }}');">
       <div class="slide-bg" aria-hidden="true"></div>
       <div class="slide-scrim" aria-hidden="true"></div>
 
@@ -48,7 +48,7 @@
     <!-- Slide 2 -->
     <article id="slide-2" class="hero-slide" data-index="1" data-align="center" data-ken="left"
              aria-roledescription="slide" aria-label="2 dari 5"
-             style="--slide-bg: url('{{ asset("img/hero/158.png") }}');">
+             style="--slide-bg: url('{{ asset("img/hero/158.jpg") }}');">
       <div class="slide-bg" aria-hidden="true"></div>
       <div class="slide-scrim" aria-hidden="true"></div>
 
@@ -205,7 +205,7 @@
               <!-- front -->
               <img class="pi-img front" src="{{ asset('img/landing/23.png') }}" alt="" loading="lazy" decoding="async">
               <!-- back -->
-              <img class="pi-img back"  src="{{ asset('img/landing/24.png') }}" alt="" loading="lazy" decoding="async">
+              <img class="pi-img back"  src="{{ asset('img/landing/22.png') }}" alt="" loading="lazy" decoding="async">
             </div>
           </a>
           <h3 class="pi-title">ROCKWOOL</h3>
