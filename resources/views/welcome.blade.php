@@ -3,6 +3,7 @@
 @section('title', 'Distributor Insulasi Industri Terpercaya')
 
 @section('content')
+
 <!-- Hero Section (Improved, 5 slides + fixed button focus ring) -->
 <section class="hero-section" aria-label="Tali Rejeki Hero">
   <!-- Background asli (TIDAK DIUBAH) -->
@@ -703,11 +704,6 @@
 </section>
 
 
-
-
-
-
-
 <!-- CTA Section -->
 <section id="contact" class="cta-section">
   <!-- Background -->
@@ -759,13 +755,9 @@
 </section>
 
 
-
-
-
-
-
-
 <style>
+
+
 /* main Section */
 
     /* =========================
@@ -2129,33 +2121,6 @@
 /* ===== CTA Section ===== */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Responsive Design and dark and light text mode */
     @media (max-width: 768px) {
         .hero-title {
@@ -2279,7 +2244,9 @@
     }
 /* Responsive Design and dark and light text mode */
 
+
 </style>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -2355,6 +2322,7 @@
       }
   });
 </script>
+
 
 <script>
   /* ===== HERO SLIDER: Autoplay tetap jalan saat scroll (rAF + deadline) ===== */
@@ -2472,6 +2440,7 @@
   })();
 </script>
 
+
 <script>
   /* ===== Slider Auto Scroll Infinite Loop ===== */
   const track = document.querySelector('.testimoni-track');
@@ -2508,6 +2477,7 @@
   setInterval(slideTestimoni, 3500);
 </script>
 
+
 <script>
   /* ===== Count Up Animation on Scroll ===== */
   const counters = document.querySelectorAll('.count');
@@ -2538,4 +2508,5 @@
     observer.observe(counter);
   });
 </script>
+
 @endsection
