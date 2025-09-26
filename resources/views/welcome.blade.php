@@ -410,7 +410,6 @@
 </section>
 
 
-
 <!-- Our Brands Section -->
 <section id="brands" class="brands-section py-5">
   <div class="container text-center">
@@ -450,9 +449,88 @@
 </section>
 
 
+<!-- ===== Proyek Kami Section ===== -->
+<section class="proyek-section" id="proyek">
+  <div class="section-header">
+    <span class="section-badge"><i class="fas fa-briefcase"></i> Proyek Kami</span>
+    <h2 class="section-title">Proyek yang Sudah Kami Kerjakan</h2>
+    <p class="section-description">Beberapa proyek terbaik kami, menampilkan kualitas tinggi dan hasil memuaskan.</p>
+  </div>
 
+  <div class="proyek-grid">
+    <!-- PT Rainbow Indah Carpet -->
+    <div class="proyek-item">
+      <a href="#" class="proyek-thumb">
+        <img class="front" src="img/proyek/carpet1.jpg" alt="PT Rainbow Indah Carpet">
+        <img class="back" src="img/proyek/carpet2.jpg" alt="PT Rainbow Indah Carpet">
+      </a>
+      <h3 class="proyek-title">PT Rainbow Indah Carpet</h3>
+    </div>
 
+    <!-- Proyek Bambulogy Mansion -->
+    <div class="proyek-item">
+      <a href="#" class="proyek-thumb">
+        <img class="front" src="img/proyek/bambulogy1.jpg" alt="Proyek Bambulogy Mansion">
+        <img class="back" src="img/proyek/bambulogy2.jpg" alt="Proyek Bambulogy Mansion">
+      </a>
+      <h3 class="proyek-title">Proyek Bambulogy Mansion</h3>
+    </div>
 
+    <!-- PT Dohsung Indonesia -->
+    <div class="proyek-item">
+      <a href="#" class="proyek-thumb">
+        <img class="front" src="img/proyek/dongsu1.jpg" alt="PT Dohsung Indonesia">
+        <img class="back" src="img/proyek/dongsu2.jpg" alt="PT Dohsung Indonesia">
+      </a>
+      <h3 class="proyek-title">PT Dohsung Indonesia</h3>
+    </div>
+
+    <!-- PT Nikomas Gemilang -->
+    <div class="proyek-item">
+      <a href="#" class="proyek-thumb">
+        <img class="front" src="img/proyek/nikomas1.jpg" alt="PT Nikomas Gemilang">
+        <img class="back" src="img/proyek/nikomas2.jpg" alt="PT Nikomas Gemilang">
+      </a>
+      <h3 class="proyek-title">PT Nikomas Gemilang</h3>
+    </div>
+
+    <!-- PT Data Centre -->
+    <div class="proyek-item">
+      <a href="#" class="proyek-thumb">
+        <img class="front" src="img/proyek/centre1.jpg" alt="PT Data Centre">
+        <img class="back" src="img/proyek/centre2.jpg" alt="PT Data Centre">
+      </a>
+      <h3 class="proyek-title">PT Data Centre</h3>
+    </div>
+
+    <!-- Proyek Ainul Hayat Sejahtera -->
+    <div class="proyek-item">
+      <a href="#" class="proyek-thumb">
+        <img class="front" src="img/proyek/ainul1.jpg" alt="Proyek Ainul Hayat Sejahtera">
+        <img class="back" src="img/proyek/ainul2.jpg" alt="Proyek Ainul Hayat Sejahtera">
+      </a>
+      <h3 class="proyek-title">Proyek Ainul Hayat Sejahtera</h3>
+    </div>
+
+    <!-- Proyek Peredam Genset -->
+    <div class="proyek-item">
+      <a href="#" class="proyek-thumb">
+        <img class="front" src="img/proyek/genset1.jpg" alt="Proyek Peredam Genset">
+        <img class="back" src="img/proyek/genset2.jpg" alt="Proyek Peredam Genset">
+      </a>
+      <h3 class="proyek-title">Proyek Peredam Genset</h3>
+    </div>
+
+    <!-- Wika Palu PLTU -->
+    <div class="proyek-item">
+      <a href="#" class="proyek-thumb">
+        <img class="front" src="img/proyek/wika1.jpg" alt="Wika Palu PLTU">
+        <img class="back" src="img/proyek/wika2.jpg" alt="Wika Palu PLTU">
+      </a>
+      <h3 class="proyek-title">Wika Palu PLTU</h3>
+    </div>
+  </div>
+</section>
 
 
 
@@ -1067,10 +1145,6 @@
   }
 /* Services Section */
 
-
-
-
-
 /* OUR BRANDS */
   /* === Our Brands Section === */
   .brands-section {
@@ -1164,7 +1238,100 @@
 /* OUR BRANDS */
 
 
+/* ===== Proyek Kami Section ===== */
+/* ===== Proyek Kami Section ===== */
+.proyek-section{
+  padding:100px 40px 80px;
+  --ink:#0f172a; --muted:#64748b;
+  --brand:#7c1415; --brand-2:#b71c1c;
+  --border:rgba(2,6,23,.08); --hover:rgba(124,20,21,.06);
+  --ring:rgba(183,28,28,.18);
+  background:transparent; color:var(--ink);
+}
+body.dark-theme .proyek-section{
+  --ink:#e5e7eb; --muted:#94a3b8;
+  --border:rgba(255,255,255,.12);
+  --hover:rgba(183,28,28,.12);
+  --ring:rgba(239,68,68,.22);
+}
 
+/* Header */
+.proyek-section .section-header{ text-align:center; margin-bottom:50px; }
+.proyek-section .section-badge{
+  display:inline-flex; align-items:center;
+  background:#ffd93d; color:#222;
+  font-weight:600; padding:8px 20px;
+  border-radius:30px; font-size:14px; gap:8px;
+  box-shadow:0 4px 20px rgba(255,217,61,.35);
+}
+.proyek-section .section-title{
+  font-size:clamp(30px,4vw,44px);
+  font-weight:900; margin:18px 0 12px;
+  color:var(--text-primary,#111);
+}
+.proyek-section .section-description{
+  font-size:clamp(14px,1.5vw,18px);
+  color:var(--text-secondary,#555);
+  max-width:750px; margin:0 auto 60px; line-height:1.6;
+}
+
+/* Grid */
+.proyek-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:28px;
+  justify-items:center;
+  padding:0 20px;
+}
+
+/* Item */
+.proyek-item{
+  position:relative; overflow:hidden;
+  border-radius:18px; border:1px solid var(--border);
+  transition: transform .35s ease, box-shadow .35s ease;
+  width:100%;
+}
+.proyek-item:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 48px rgba(0,0,0,.15),0 0 0 3px var(--ring);
+}
+
+/* Thumbnail */
+.proyek-thumb{
+  display:block; position:relative;
+  width:100%; aspect-ratio:1/1; overflow:hidden; border-radius:18px;
+}
+.proyek-thumb img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; border-radius:18px;
+  transition:transform .5s ease, opacity .5s ease;
+  backface-visibility:hidden;
+}
+.proyek-thumb img.front{ opacity:1; z-index:2; }
+.proyek-thumb img.back{ opacity:0; transform:rotateY(90deg); z-index:1; }
+
+.proyek-item:hover .proyek-thumb img.front{
+  transform:rotateY(90deg) scale(1.05); opacity:0;
+}
+.proyek-item:hover .proyek-thumb img.back{
+  transform:rotateY(0deg) scale(1.05); opacity:1;
+}
+
+/* Title */
+.proyek-title{
+  font-weight:900; margin:14px 0 0;
+  text-align:center; font-size:1.15rem; color:var(--ink);
+  transition:color .3s ease;
+}
+.proyek-item:hover .proyek-title{ color:var(--brand-2); }
+
+/* Responsive */
+@media (max-width:1199.98px){ .proyek-grid{ gap:22px; } }
+@media (max-width:899.98px){ .proyek-grid{ gap:18px; } }
+@media (max-width:575.98px){ 
+  .proyek-grid{ gap:14px; padding:0 10px; } 
+  .proyek-title{ font-size:1rem; margin:10px 0 0; } 
+}
 
 
 
