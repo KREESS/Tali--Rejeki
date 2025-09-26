@@ -708,75 +708,62 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- CTA Section -->
 <section id="contact" class="cta-section">
-    <div class="cta-bg">
-        <div class="cta-overlay"></div>
-    </div>
-    
-    <div class="container">
-        <div class="row justify-content-center text-center">
-            <div class="col-lg-8">
-                <div class="cta-content">
-                    <h2 class="cta-title">Siap Memulai Proyek Insulasi Anda?</h2>
-                    <p class="cta-description">
-                        Dapatkan penawaran terbaik dan konsultasi gratis dari tim ahli kami. 
-                        Hubungi sekarang untuk solusi insulasi yang tepat!
-                    </p>
-                    
-                    <div class="cta-actions">
-                        <a href="tel:+62-21-12345678" class="btn btn-primary">
-                            <i class="fas fa-phone"></i>
-                            <span>Hubungi Sekarang</span>
-                        </a>
-                        <a href="https://wa.me/6281234567890" class="btn btn-outline" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                            <span>Chat WhatsApp</span>
-                        </a>
-                    </div>
-                    
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Jakarta, Indonesia</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>info@talirejeki.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-clock"></i>
-                            <span>Senin - Jumat: 08:00 - 17:00 WIB</span>
-                        </div>
-                    </div>
-                </div>
+  <!-- Background -->
+  <div class="cta-bg">
+    <div class="cta-overlay"></div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-10">
+        <div class="cta-content">
+          <h2 class="cta-title">Siap Memulai Proyek Insulasi Anda?</h2>
+          <p class="cta-description">
+            Dapatkan penawaran terbaik dan konsultasi gratis dari tim ahli kami. 
+            Hubungi sekarang untuk solusi insulasi yang tepat!
+          </p>
+
+          <!-- Actions -->
+          <div class="cta-actions">
+            <a href="tel:+62-21-29470622" class="btn btn-primary">
+              <i class="fas fa-phone"></i>
+              <span>Hubungi Sekarang</span>
+            </a>
+            <a href="https://wa.me/6281316826959" class="btn btn-outline" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+              <span>Chat WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Bekasi, Indonesia</span>
             </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>talirejeki@gmail.com</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-clock"></i>
+              <span>Senin - Jumat: 08:00 - 17:00 WIB</span>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
+
+
+
+
+
+
+
 
 <style>
 /* main Section */
@@ -867,6 +854,7 @@
         }
     }
 /* main Section */
+
 
 /* Hero Section */
   /* ================= Hero Section ================= */
@@ -1076,6 +1064,7 @@
     .slide-bg{transform:none !important;}
   }
 /* Hero Section */
+
 
 /* Products Section */
   /* ===== Products (square images), Light & Dark aware ===== */
@@ -1433,6 +1422,7 @@
   }
 /* Services Section */
 
+
 /* OUR BRANDS */
   /* === Our Brands Section === */
   .brands-section {
@@ -1528,178 +1518,441 @@
 
 /* ===== Proyek Kami Section ===== */
   /* ===== Proyek Kami Section ===== */
-  .proyek-section{
-    padding:100px 40px 80px;
-    --ink:#0f172a; --muted:#64748b;
-    --brand:#7c1415; --brand-2:#b71c1c;
-    --border:rgba(2,6,23,.08); --hover:rgba(124,20,21,.06);
-    --ring:rgba(183,28,28,.18);
-    background:transparent; color:var(--ink);
+  .proyek-section {
+    padding: 100px 40px 80px;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --brand: #7c1415;
+    --brand-2: #b71c1c;
+    --border: rgba(2, 6, 23, .08);
+    --hover: rgba(124, 20, 21, .06);
+    --ring: rgba(183, 28, 28, .18);
+    background: transparent;
+    color: var(--ink);
   }
-  body.dark-theme .proyek-section{
-    --ink:#e5e7eb; --muted:#94a3b8;
-    --border:rgba(255,255,255,.12);
-    --hover:rgba(183,28,28,.12);
-    --ring:rgba(239,68,68,.22);
+
+  body.dark-theme .proyek-section {
+    --ink: #e5e7eb;
+    --muted: #94a3b8;
+    --border: rgba(255, 255, 255, .12);
+    --hover: rgba(183, 28, 28, .12);
+    --ring: rgba(239, 68, 68, .22);
   }
 
   /* Header */
-  .proyek-section .section-header{ text-align:center; margin-bottom:50px; }
-  .proyek-section .section-badge{
-    display:inline-flex; align-items:center;
-    background:#ffd93d; color:#222;
-    font-weight:600; padding:8px 20px;
-    border-radius:30px; font-size:14px; gap:8px;
-    box-shadow:0 4px 20px rgba(255,217,61,.35);
+  .proyek-section .section-header {
+    text-align: center;
+    margin-bottom: 50px;
   }
-  .proyek-section .section-title{
-    font-size:clamp(30px,4vw,44px);
-    font-weight:900; margin:18px 0 12px;
-    color:var(--text-primary,#111);
+
+  .proyek-section .section-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #ffd93d;
+    color: #222;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    gap: 8px;
+    box-shadow: 0 4px 20px rgba(255, 217, 61, .35);
   }
-  .proyek-section .section-description{
-    font-size:clamp(14px,1.5vw,18px);
-    color:var(--text-secondary,#555);
-    max-width:750px; margin:0 auto 60px; line-height:1.6;
+
+  .proyek-section .section-title {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 900;
+    margin: 18px 0 12px;
+    color: var(--text-primary, #111);
+  }
+
+  .proyek-section .section-description {
+    font-size: clamp(14px, 1.4vw, 18px);
+    color: var(--text-secondary, #555);
+    max-width: 750px;
+    margin: 0 auto 60px;
+    line-height: 1.6;
   }
 
   /* Grid */
-  .proyek-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:28px;
-    justify-items:center;
-    padding:0 20px;
+  .proyek-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+    justify-items: center;
+    padding: 0 20px;
+    width: 100%;
   }
 
   /* Item */
-  .proyek-item{
-    position:relative; overflow:hidden;
-    border-radius:18px; border:1px solid var(--border);
+  .proyek-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid var(--border);
     transition: transform .35s ease, box-shadow .35s ease;
-    width:100%;
+    width: 100%;
+    max-width: 400px;
   }
-  .proyek-item:hover{
-    transform:translateY(-8px);
-    box-shadow:0 20px 48px rgba(0,0,0,.15),0 0 0 3px var(--ring);
+
+  .proyek-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, .15), 0 0 0 3px var(--ring);
   }
 
   /* Thumbnail */
-  .proyek-thumb{
-    display:block; position:relative;
-    width:100%; aspect-ratio:1/1; overflow:hidden; border-radius:18px;
+  .proyek-thumb {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 18px;
   }
-  .proyek-thumb img{
-    position:absolute; inset:0; width:100%; height:100%;
-    object-fit:cover; border-radius:18px;
-    transition:transform .5s ease, opacity .5s ease;
-    backface-visibility:hidden;
-  }
-  .proyek-thumb img.front{ opacity:1; z-index:2; }
-  .proyek-thumb img.back{ opacity:0; transform:rotateY(90deg); z-index:1; }
 
-  .proyek-item:hover .proyek-thumb img.front{
-    transform:rotateY(90deg) scale(1.05); opacity:0;
+  .proyek-thumb img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+    transition: transform .5s ease, opacity .5s ease;
+    backface-visibility: hidden;
   }
-  .proyek-item:hover .proyek-thumb img.back{
-    transform:rotateY(0deg) scale(1.05); opacity:1;
+
+  .proyek-thumb img.front {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .proyek-thumb img.back {
+    opacity: 0;
+    transform: rotateY(90deg);
+    z-index: 1;
+  }
+
+  .proyek-item:hover .proyek-thumb img.front {
+    transform: rotateY(90deg) scale(1.05);
+    opacity: 0;
+  }
+
+  .proyek-item:hover .proyek-thumb img.back {
+    transform: rotateY(0deg) scale(1.05);
+    opacity: 1;
   }
 
   /* Title */
-  .proyek-title{
-    font-weight:900; margin:14px 0 0;
-    text-align:center; font-size:1.15rem; color:var(--ink);
-    transition:color .3s ease;
+  .proyek-title {
+    font-weight: 900;
+    margin: 14px 0 0;
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--ink);
+    transition: color .3s ease;
   }
-  .proyek-item:hover .proyek-title{ color:var(--brand-2); }
 
-  /* Responsive */
-  @media (max-width:1199.98px){ .proyek-grid{ gap:22px; } }
-  @media (max-width:899.98px){ .proyek-grid{ gap:18px; } }
-  @media (max-width:575.98px){ 
-    .proyek-grid{ gap:14px; padding:0 10px; } 
-    .proyek-title{ font-size:1rem; margin:10px 0 0; } 
+  .proyek-item:hover .proyek-title {
+    color: var(--brand-2);
   }
+
+  /* ===== Responsive ===== */
+
+  /* Laptop Medium */
+  @media (max-width: 1199.98px) {
+    .proyek-section {
+      padding: 80px 30px 60px;
+    }
+    .proyek-grid {
+      gap: 22px;
+    }
+    .proyek-title {
+      font-size: 1.1rem;
+    }
+  }
+
+  /* Tablet Landscape */
+  @media (max-width: 991.98px) {
+    .proyek-section {
+      padding: 70px 25px 50px;
+    }
+    .proyek-section .section-description {
+      margin-bottom: 40px;
+    }
+    .proyek-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .proyek-title {
+      font-size: 1.05rem;
+    }
+  }
+
+  /* Tablet Portrait */
+  @media (max-width: 767.98px) {
+    .proyek-section {
+      padding: 60px 20px 40px;
+    }
+    .proyek-section .section-title {
+      font-size: 1.8rem;
+    }
+    .proyek-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .proyek-title {
+      font-size: 1rem;
+      margin-top: 12px;
+    }
+  }
+
+  /* Smartphone */
+  @media (max-width: 575.98px) {
+    .proyek-section {
+      padding: 50px 16px 35px;
+    }
+    .proyek-section .section-title {
+      font-size: 1.6rem;
+    }
+    .proyek-section .section-description {
+      font-size: 0.9rem;
+      margin-bottom: 30px;
+    }
+    .proyek-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 0 10px;
+    }
+    .proyek-title {
+      font-size: 0.95rem;
+      margin: 10px 0 0;
+    }
+  }
+
+  /* Small Smartphone */
+  @media (max-width: 375px) {
+    .proyek-section {
+      padding: 40px 12px 30px;
+    }
+    .proyek-section .section-title {
+      font-size: 1.4rem;
+    }
+    .proyek-section .section-description {
+      font-size: 0.85rem;
+    }
+    .proyek-title {
+      font-size: 0.9rem;
+    }
+  }
+  /* ===== End Proyek Kami Section ===== */
+
 /* ===== Proyek Kami Section ===== */
 
 
 /* ===== Testimoni Section ===== */
   /* ===== Testimoni Section ===== */
-  .testimoni-section{
-    padding:100px 60px 80px;
-    color:#111;
-    background:transparent;
+  .testimoni-section {
+    padding: 100px 60px 80px;
+    color: #111;
+    background: transparent;
   }
-  body.dark-theme .testimoni-section{
-    color:#e5e7eb;
+
+  body.dark-theme .testimoni-section {
+    color: #e5e7eb;
   }
 
   /* Header */
-  .testimoni-section .section-header{
-    text-align:center; margin-bottom:60px;
+  .testimoni-section .section-header {
+    text-align: center;
+    margin-bottom: 60px;
   }
-  .testimoni-section .section-badge{
-    display:inline-flex; align-items:center;
-    background:#ffd93d; color:#222;
-    font-weight:600; padding:8px 20px;
-    border-radius:30px; font-size:14px; gap:8px;
-    box-shadow:0 4px 20px rgba(255,217,61,.35);
+
+  .testimoni-section .section-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #ffd93d;
+    color: #222;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    gap: 8px;
+    box-shadow: 0 4px 20px rgba(255, 217, 61, .35);
   }
-  .testimoni-section .section-title{
-    font-size:clamp(30px,4vw,44px);
-    font-weight:900; margin:18px 0 12px;
+
+  .testimoni-section .section-title {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 900;
+    margin: 18px 0 12px;
   }
-  .testimoni-section .section-description{
-    font-size:clamp(14px,1.5vw,18px);
-    color:#555; max-width:700px; margin:0 auto 60px;
-    line-height:1.6;
+
+  .testimoni-section .section-description {
+    font-size: clamp(14px, 1.5vw, 18px);
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto 60px;
+    line-height: 1.6;
   }
 
   /* Slider */
-  .testimoni-slider{
-    overflow:hidden; padding:10px 10px;
+  .testimoni-slider {
+    overflow: hidden;
+    padding: 10px;
   }
-  .testimoni-track{
-    display:flex; gap:24px;
-    transition:transform 0.5s ease;
+
+  .testimoni-track {
+    display: flex;
+    gap: 24px;
+    transition: transform 0.5s ease;
   }
-  .testimoni-item{
-    flex:0 0 320px;
+
+  .testimoni-item {
+    flex: 0 0 320px;
     background: #fff;
-    border-radius:18px;
-    box-shadow:0 12px 28px rgba(0,0,0,.08);
-    padding:28px; position:relative;
-    transition:transform 0.35s ease, box-shadow 0.35s ease, background .35s ease;
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .08);
+    padding: 28px;
+    position: relative;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, background .35s ease;
   }
-  body.dark-theme .testimoni-item{
+
+  body.dark-theme .testimoni-item {
     background: #1e293b;
-    box-shadow:0 12px 28px rgba(0,0,0,.15);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .15);
   }
-  .testimoni-item:hover{
-    transform:translateY(-8px);
-    box-shadow:0 20px 48px rgba(0,0,0,.15);
+
+  .testimoni-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, .15);
   }
 
   /* Testimoni Content */
-  .testimoni-text{
-    font-size:1rem; line-height:1.6; margin-bottom:20px;
-    color:#333;
-    font-style:italic;
+  .testimoni-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #333;
+    font-style: italic;
   }
-  body.dark-theme .testimoni-text{ color:#e5e7eb; }
 
-  .testimoni-user{
-    display:flex; align-items:center; gap:12px;
+  body.dark-theme .testimoni-text {
+    color: #e5e7eb;
   }
-  .user-info h4{ margin:0; font-size:1rem; font-weight:700; color:#111; }
-  body.dark-theme .user-info h4{ color:#e5e7eb; }
 
-  /* Responsive */
-  @media (max-width:1199.98px){ .testimoni-item{ flex:0 0 280px; } }
-  @media (max-width:899.98px){ .testimoni-item{ flex:0 0 240px; } }
-  @media (max-width:575.98px){ 
-    .testimoni-item{ flex:0 0 90%; margin:0 auto; }
+  .testimoni-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
+
+  .user-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111;
+  }
+
+  body.dark-theme .user-info h4 {
+    color: #e5e7eb;
+  }
+/* ===== Testimoni Section ===== */
+
+/* ===== Responsive Breakpoints ===== */
+  /* Desktop Medium */
+  @media (max-width: 1199.98px) {
+    .testimoni-section {
+      padding: 80px 40px 60px;
+    }
+    .testimoni-item {
+      flex: 0 0 280px;
+    }
+  }
+
+  /* Tablet Landscape */
+  @media (max-width: 991.98px) {
+    .testimoni-section {
+      padding: 70px 30px 50px;
+    }
+    .testimoni-track {
+      gap: 20px;
+    }
+    .testimoni-item {
+      flex: 0 0 260px;
+      padding: 24px;
+    }
+    .testimoni-text {
+      font-size: 0.95rem;
+    }
+    .user-info h4 {
+      font-size: 0.95rem;
+    }
+  }
+
+  /* Tablet Portrait */
+  @media (max-width: 767.98px) {
+    .testimoni-section {
+      padding: 60px 25px 40px;
+    }
+    .testimoni-section .section-title {
+      font-size: 1.8rem;
+    }
+    .testimoni-item {
+      flex: 0 0 240px;
+      padding: 22px;
+    }
+    .testimoni-text {
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Smartphone */
+  @media (max-width: 575.98px) {
+    .testimoni-section {
+      padding: 50px 20px 35px;
+    }
+    .testimoni-section .section-title {
+      font-size: 1.6rem;
+    }
+    .testimoni-section .section-description {
+      font-size: 0.9rem;
+      margin-bottom: 40px;
+    }
+    .testimoni-track {
+      gap: 16px;
+    }
+    .testimoni-item {
+      flex: 0 0 90%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .testimoni-text {
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Small Smartphone */
+  @media (max-width: 375px) {
+    .testimoni-section {
+      padding: 40px 15px 30px;
+    }
+    .testimoni-section .section-title {
+      font-size: 1.4rem;
+    }
+    .testimoni-section .section-description {
+      font-size: 0.85rem;
+    }
+    .testimoni-item {
+      flex: 0 0 95%;
+      padding: 18px;
+    }
+    .testimoni-text {
+      font-size: 0.85rem;
+    }
+    .user-info h4 {
+      font-size: 0.9rem;
+    }
+  }
+  /* ===== End Testimoni Section ===== */
+
 /* ===== Testimoni Section ===== */
 
 
@@ -1717,144 +1970,206 @@
 
 
 
+/* ===== CTA Section ===== */
+  .cta-section {
+    position: relative;
+    padding: 120px 20px;
+    text-align: center;
+    overflow: hidden;
+    z-index: 1;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
 
+  /* Background */
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    background: url('{{ asset("img/galeri-proyek/3.jpg") }}') no-repeat center center/cover;
+    background-attachment: fixed;
+    opacity: 0.35;
+    filter: brightness(0.7);
+    z-index: 0;
+    pointer-events: none;
+  }
 
+  .cta-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+  }
 
+  .cta-title {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
 
+  .cta-description {
+    font-size: clamp(15px, 1.5vw, 18px);
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
 
+  /* Actions */
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 50px;
+  }
+  .cta-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 26px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.35s ease;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: #ffd93d;
+    color: #222;
+    box-shadow: 0 8px 24px rgba(255, 217, 61, .4);
+  }
+  .btn-primary:hover {
+    background: #e6c233;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(255, 217, 61, .55);
+  }
+  .btn-outline {
+    border: 2px solid currentColor;
+    background: transparent;
+  }
+  .btn-outline:hover {
+    background: currentColor;
+    color: var(--cta-bg-color);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.15);
+  }
 
+  /* Contact Info */
+  .contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+    font-size: 15px;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  .contact-item i {
+    font-size: 18px;
+    color: #ffd93d;
+  }
+  .contact-item:hover {
+    transform: translateY(-3px);
+    color: #ffd93d;
+  }
 
+  /* Theme Variables */
+  :root[data-theme="light"] {
+    --cta-text-color: #222;
+    --cta-subtext-color: #444;
+    --cta-bg-color: #fff;
+    --cta-btn-outline: #222;
+  }
+  :root[data-theme="dark"] {
+    --cta-text-color: #fff;
+    --cta-subtext-color: #f1f5f9;
+    --cta-bg-color: #111;
+    --cta-btn-outline: #fff;
+  }
 
+  /* Apply theme */
+  .cta-section,
+  .cta-title,
+  .cta-description,
+  .contact-item {
+    color: var(--cta-text-color);
+  }
+  .cta-description {
+    color: var(--cta-subtext-color);
+  }
+  .btn-outline {
+    color: var(--cta-btn-outline);
+    border-color: var(--cta-btn-outline);
+  }
+  .btn-outline:hover {
+    background: var(--cta-btn-outline);
+    color: var(--cta-bg-color);
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* CTA Section */
+  /* Responsive */
+  @media (max-width: 991.98px) {
     .cta-section {
-        position: relative;
-        padding: 100px 0;
-        color: white;
-        text-align: center;
+      padding: 100px 20px;
     }
-
-    .cta-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('{{ asset("img/bg/bg-texture.webp") }}');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        z-index: -2;
-        transition: all 0.3s ease;
+    .cta-actions .btn {
+      padding: 12px 22px;
+      font-size: 15px;
     }
-
-    /* Light theme cta bg */
-    body.light-theme .cta-bg {
-        background: url('{{ asset("img/bg/bg-texture-white.webp") }}');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
+  }
+  @media (max-width: 575.98px) {
+    .cta-section {
+      padding: 80px 16px;
     }
-
-    /* Dark theme cta bg */
-    body.dark-theme .cta-bg {
-        background: url('{{ asset("img/bg/bg-texture.webp") }}');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }
-
-    .cta-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: transparent;
-        z-index: -1;
-    }
-
     .cta-title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        margin-bottom: 20px;
+      font-size: 1.6rem;
     }
-
     .cta-description {
-        font-size: 1.2rem;
-        line-height: 1.7;
-        margin-bottom: 40px;
-        opacity: 0.9;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
+      font-size: 0.95rem;
     }
-
     .cta-actions {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        margin-bottom: 60px;
-        flex-wrap: wrap;
+      gap: 14px;
     }
-
+    .cta-actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
     .contact-info {
-        display: flex;
-        gap: 40px;
-        justify-content: center;
-        flex-wrap: wrap;
+      flex-direction: column;
+      gap: 18px;
     }
+  }
+/* ===== CTA Section ===== */
 
-    .contact-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 0.9rem;
-        opacity: 0.9;
-    }
 
-    /* Animations */
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
 
-    @keyframes fadeInRight {
-        from {
-            opacity: 0;
-            transform: translateX(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
 
-    /* Responsive Design */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsive Design and dark and light text mode */
     @media (max-width: 768px) {
         .hero-title {
             font-size: 2.5rem;
@@ -1975,6 +2290,8 @@
     body.dark-theme .grid-item span {
         color: #1e293b;
     }
+/* Responsive Design and dark and light text mode */
+
 </style>
 
 <script>
