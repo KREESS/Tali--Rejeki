@@ -1856,6 +1856,7 @@
   }
 /* ===== Testimoni Section ===== */
 
+
 /* ===== Responsive Breakpoints ===== */
   /* Desktop Medium */
   @media (max-width: 1199.98px) {
@@ -1954,20 +1955,6 @@
   /* ===== End Testimoni Section ===== */
 
 /* ===== Testimoni Section ===== */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* ===== CTA Section ===== */
