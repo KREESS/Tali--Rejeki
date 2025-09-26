@@ -456,7 +456,7 @@
 
     @for ($row = 1; $row <= 3; $row++)
       @php
-        $brands = range(1, 12);
+        $brands = range(1, 20);
         shuffle($brands); // acak urutan
       @endphp
 
@@ -1505,13 +1505,13 @@
 
   /* Arah animasi tiap baris */
   .slider-1 .brands-track {
-    animation: scroll-left 25s linear infinite;
+    animation: scroll-left 28s linear infinite;
   }
   .slider-2 .brands-track {
-    animation: scroll-right 28s linear infinite;
+    animation: scroll-right 31s linear infinite;
   }
   .slider-3 .brands-track {
-    animation: scroll-left 30s linear infinite;
+    animation: scroll-left 33s linear infinite;
   }
 /* OUR BRANDS */
 
@@ -2355,6 +2355,7 @@
       }
   });
 </script>
+
 <script>
   /* ===== HERO SLIDER: Autoplay tetap jalan saat scroll (rAF + deadline) ===== */
   (function(){
@@ -2470,6 +2471,7 @@
     rafId = requestAnimationFrame(tick);
   })();
 </script>
+
 <script>
   /* ===== Slider Auto Scroll Infinite Loop ===== */
   const track = document.querySelector('.testimoni-track');
@@ -2506,35 +2508,34 @@
   setInterval(slideTestimoni, 3500);
 </script>
 
-
 <script>
-/* ===== Count Up Animation on Scroll ===== */
-const counters = document.querySelectorAll('.count');
-const speed = 200;
+  /* ===== Count Up Animation on Scroll ===== */
+  const counters = document.querySelectorAll('.count');
+  const speed = 200;
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      const counter = entry.target;
-      const updateCount = () => {
-        const target = +counter.getAttribute('data-target');
-        const count = +counter.innerText;
-        const increment = Math.ceil(target / speed);
-        if(count < target){
-          counter.innerText = count + increment;
-          setTimeout(updateCount, 20);
-        } else {
-          counter.innerText = target;
-        }
-      };
-      updateCount();
-      observer.unobserve(counter);
-    }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const counter = entry.target;
+        const updateCount = () => {
+          const target = +counter.getAttribute('data-target');
+          const count = +counter.innerText;
+          const increment = Math.ceil(target / speed);
+          if(count < target){
+            counter.innerText = count + increment;
+            setTimeout(updateCount, 20);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        updateCount();
+        observer.unobserve(counter);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(counter => {
+    observer.observe(counter);
   });
-}, { threshold: 0.5 });
-
-counters.forEach(counter => {
-  observer.observe(counter);
-});
 </script>
 @endsection
