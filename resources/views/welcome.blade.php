@@ -326,10 +326,6 @@
 </section>
 
 
-
-
-
-
 <!-- Services Section -->
 <section class="services-section">
     <div class="container">
@@ -412,6 +408,47 @@
         </div>
     </div>
 </section>
+
+
+
+<!-- Our Brands Section -->
+<section id="brands" class="brands-section py-5">
+  <div class="container text-center">
+    <div class="section-badge mb-3">
+      <i class="fas fa-star"></i>
+      <span>merek kami</span>
+    </div>
+    <h2 class="section-title">Kami Bekerja Sama Dengan Brand Terkemuka</h2>
+    <p class="section-description">
+      Berikut adalah beberapa brand yang telah mempercayai kami.
+    </p>
+
+    @for ($row = 1; $row <= 3; $row++)
+      @php
+        $brands = range(1, 12);
+        shuffle($brands); // acak urutan
+      @endphp
+
+      <div class="brands-slider slider-{{ $row }}">
+        <div class="brands-track">
+          @foreach ($brands as $i)
+            <div class="brand-slide">
+              <img src="{{ asset('img/brands/' . $i . '.png') }}" alt="Brand {{ $i }}">
+            </div>
+          @endforeach
+
+          <!-- Duplicate untuk looping mulus -->
+          @foreach ($brands as $i)
+            <div class="brand-slide">
+              <img src="{{ asset('img/brands/' . $i . '.png') }}" alt="Brand {{ $i }}">
+            </div>
+          @endforeach
+        </div>
+      </div>
+    @endfor
+  </div>
+</section>
+
 
 
 
@@ -561,7 +598,7 @@
 /* main Section */
 
 /* Hero Section */
-  /* Hero Section */
+  /* ================= Hero Section ================= */
   :root{
     --slide-fade-dur: 1600ms;
     --img-zoom-dur:   14000ms;
@@ -577,11 +614,22 @@
   }
 
   .hero-section{
-    position:relative;min-height:100vh;min-height:80svh;overflow:hidden;display:block;isolation:isolate;
+    position:relative;
+    min-height:100vh;
+    min-height:80svh;
+    overflow:hidden;
+    display:block;
+    isolation:isolate;
   }
 
-  /* BG asli — TIDAK diubah */
-  .hero-bg{position:absolute;inset:0;background:url('{{ asset("img/bg/bg-texture.webp") }}');background-size:cover;background-position:center;background-attachment:fixed;background-repeat:no-repeat;z-index:-3;transition:all .3s ease;}
+  /* ================= Background ================= */
+  .hero-bg{
+    position:absolute;inset:0;
+    background:url('{{ asset("img/bg/bg-texture.webp") }}');
+    background-size:cover;background-position:center;
+    background-attachment:fixed;background-repeat:no-repeat;
+    z-index:-3;transition:all .3s ease;
+  }
   body.light-theme .hero-bg{background:url('{{ asset("img/bg/bg-texture-white.webp") }}') center/cover fixed no-repeat;}
   body.dark-theme  .hero-bg{background:url('{{ asset("img/bg/bg-texture.webp") }}') center/cover fixed no-repeat;}
   .hero-overlay{position:absolute;inset:0;background:transparent;z-index:-1;}
@@ -598,7 +646,7 @@
   .hero-particles .particle:nth-child(10){width:19px;height:19px;left:15%;top:10%;animation-delay:6s;}
   @keyframes heroFloat{0%,100%{transform:translateY(0) rotate(0);opacity:.3;}50%{transform:translateY(-20px) rotate(180deg);opacity:.8;}}
 
-  /* Slider core */
+  /* ================= Slider Core ================= */
   .hero-slider{position:relative;width:100%;height:min(100vh,90svh);}
   .hero-slide{
     position:absolute;inset:0;display:grid;place-items:stretch;
@@ -606,10 +654,9 @@
     transition: opacity var(--slide-fade-dur) var(--ease-out), transform var(--slide-fade-dur) var(--ease-out);
     z-index:0;
   }
-
   .hero-slide.is-active{opacity:1;pointer-events:auto;transform:translateX(0);z-index:1;}
 
-  /* Fullscreen slide background + ken burns */
+  /* Background + Ken Burns */
   .slide-bg{
     position:absolute;inset:0;background-image:var(--slide-bg);background-size:cover;background-position:center;
     transform:scale(1.04) translateY(-1vh);
@@ -617,7 +664,6 @@
     transition: opacity var(--img-fade-dur) var(--ease-out), filter 1200ms var(--ease-ken);
     z-index:-1;will-change:transform,opacity,filter;
   }
-
   .hero-slide[data-ken="right"].is-active .slide-bg{animation:ken-pan-right var(--img-zoom-dur) var(--ease-ken) both;}
   .hero-slide[data-ken="left"].is-active  .slide-bg{animation:ken-pan-left  var(--img-zoom-dur) var(--ease-ken) both;}
   .hero-slide[data-ken="up"].is-active    .slide-bg{animation:ken-pan-up    var(--img-zoom-dur) var(--ease-ken) both;}
@@ -633,7 +679,7 @@
     z-index:0;opacity:.98;
   }
 
-  /* Layout konten */
+  /* ================= Layout Content ================= */
   .hero-inner{
     position:relative; z-index:1;
     min-height:100svh; display:grid; align-items:start; justify-items:start;
@@ -650,6 +696,7 @@
   .hero-slide[data-align="center"] .hero-content{text-align:center;}
   .hero-slide[data-align="right"]  .hero-content{text-align:right;}
 
+  /* ================= Text ================= */
   .hero-badge{display:inline-flex;align-items:center;gap:8px;background:transparent;font-size:14px;font-weight:800;margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em;opacity:.9;} 
   .hero-title{margin:0 0 10px;line-height:1.1;display:grid;gap:6px;}
   .hero-title .highlight{font-size:clamp(30px,5.4vw,62px);font-weight:900;background:linear-gradient(135deg,#ff6b6b,#ffd93d);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.2px;}
@@ -659,77 +706,36 @@
   .hero-slide[data-align="center"] .hero-actions{justify-content:center;}
   .hero-slide[data-align="right"]  .hero-actions{justify-content:flex-end;}
 
-  /* Buttons */
+  /* ================= Buttons ================= */
   .btn{
     display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:14px;font-weight:800;
     text-decoration:none;border:2px solid transparent;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
     outline:none; -webkit-tap-highlight-color: transparent;
   }
+  .btn-primary{background:linear-gradient(135deg,#ff6b6b,#ffd93d);color:#222;box-shadow:0 10px 30px rgba(255,107,107,.32);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(255,107,107,.42);border-color:#ffd93d;color:#222;}
+  .btn-primary:focus,.btn-primary:focus-visible{outline:none !important;box-shadow:0 0 0 3px var(--ring-hero), 0 12px 34px rgba(255,107,107,.40);border-color:#ffd93d;}
+  .btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6);}
+  .btn-outline:hover{background:rgba(255,255,255,.15);border-color:#ffd93d;color:#ffd93d;transform:translateY(-2px);}
+  .btn:focus,.btn:focus-visible{outline:none !important;box-shadow:0 0 0 3px var(--ring-hero-soft), 0 10px 28px rgba(0,0,0,.25);}
+  .btn-primary:focus-visible{box-shadow:0 0 0 3px var(--ring-hero), 0 12px 34px rgba(255,107,107,.40);}
+  .btn-outline:focus-visible{border-color:rgba(255,255,255,.9);box-shadow:0 0 0 3px var(--ring-hero-soft);}
 
-  .btn-primary{
-    background:linear-gradient(135deg,#ff6b6b,#ffd93d);color:#222;
-    box-shadow:0 10px 30px rgba(255,107,107,.32);
-  }
-
-  /* Primary button hover + outline kuning */
-  .btn-primary:hover {
-    transform:translateY(-2px);box-shadow:0 14px 36px rgba(255,107,107,.42);
-    border-color: #ffd93d; /* border kuning saat hover */
-    color: #222; /* pastikan teks tetap gelap */
-  }
-
-  /* Primary button focus ring kuning */
-  .btn-primary:focus,
-  .btn-primary:focus-visible {
-    outline: none !important;
-    box-shadow: 0 0 0 3px var(--ring-hero), 0 12px 34px rgba(255,107,107,.40);
-    border-color: #ffd93d; /* border kuning saat fokus */
-  }
-
-  .btn-outline{
-    background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6);
-  }
-
-  .btn-outline:hover{
-    background:rgba(255,255,255,.15); /* lebih kontras */
-    border-color:rgba(255,217,61,1); /* sama seperti ring warna kuning */
-    color:#ffd93d; /* teks kuning supaya konsisten */
-    transform:translateY(-2px);
-  }
-
-  /* Focus Ring */
-  .btn:focus,
-  .btn:focus-visible{
-    outline:none !important;
-    box-shadow:0 0 0 3px var(--ring-hero-soft), 0 10px 28px rgba(0,0,0,.25);
-  }
-
-  .btn-primary:focus-visible{
-    box-shadow:0 0 0 3px var(--ring-hero), 0 12px 34px rgba(255,107,107,.40);
-  }
-
-  .btn-outline:focus-visible{
-    border-color:rgba(255,255,255,.9);
-    box-shadow:0 0 0 3px var(--ring-hero-soft);
-  }
-
-  /* NAV: pojok kanan bawah */
+  /* ================= Navigation ================= */
   .hero-nav{position:absolute;right:22px;bottom:22px;display:flex;gap:10px;z-index:2;}
   .hero-prev,.hero-next{
     border:none;background:rgba(0,0,0,.28);color:#fff;width:44px;height:44px;border-radius:999px;display:grid;place-items:center;backdrop-filter:blur(4px);transition:.2s ease;cursor:pointer;outline:none;
   }
   .hero-prev:hover,.hero-next:hover{background:rgba(0,0,0,.45);transform:translateY(-1px);} 
-  .hero-prev:focus-visible,.hero-next:focus-visible{
-    outline:none; box-shadow:0 0 0 3px var(--ring-hero);
-  }
+  .hero-prev:focus-visible,.hero-next:focus-visible{outline:none;box-shadow:0 0 0 3px var(--ring-hero);}
 
   /* Dots */
   .hero-dots{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;display:flex;gap:8px;z-index:2;}
   .hero-dots .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.45);border:none;cursor:pointer;transition:.2s ease;padding:0;}
   .hero-dots .dot.is-active{width:26px;border-radius:8px;background:#ffd93d;}
-  .hero-dots .dot:focus-visible{outline:none; box-shadow:0 0 0 3px var(--ring-hero);}
+  .hero-dots .dot:focus-visible{outline:none;box-shadow:0 0 0 3px var(--ring-hero);}
 
-  /* TEKS ANIMASI */
+  /* ================= Text Animation ================= */
   .hc{will-change:transform,opacity;}
   @keyframes inUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
   @keyframes outDown{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(14px)}}
@@ -742,12 +748,55 @@
   .hero-content.anim-out .hc-2{animation:outDown var(--text-out-dur) var(--ease-in) both;animation-delay:calc(2 * var(--stagger-step));}
   .hero-content.anim-out .hc-1{animation:outDown var(--text-out-dur) var(--ease-in) both;animation-delay:calc(3 * var(--stagger-step));}
 
-  /* Mobile tweaks */
-  @media (max-width: 992px){
-    .hero-inner{padding-block:clamp(24px,8vh,80px);} 
+  /* ================= Responsive ================= */
+
+  /* Tablet landscape dan desktop kecil */
+  @media (max-width: 1200px){
+    .hero-title .highlight{font-size:clamp(26px,4.8vw,54px);}
+    .hero-title .subtitle{font-size:clamp(15px,2vw,22px);}
+    .hero-description{font-size:15px;}
+    .hero-inner{padding-inline:32px;}
   }
 
-  /* iOS bg-attachment fix */
+  /* Tablet portrait */
+  @media (max-width: 992px){
+    .hero-inner{padding-block:clamp(24px,8vh,80px);padding-inline:24px;}
+    .hero-title .highlight{font-size:clamp(24px,5vw,46px);}
+    .hero-title .subtitle{font-size:clamp(14px,2vw,20px);}
+    .hero-description{font-size:14px;max-width:90%;}
+    .hero-actions{justify-content:center;}
+    .hero-nav{right:16px;bottom:16px;}
+  }
+
+  /* Smartphone besar */
+  @media (max-width: 768px){
+    .hero-title .highlight{font-size:clamp(22px,6vw,38px);}
+    .hero-title .subtitle{font-size:clamp(13px,3.2vw,18px);}
+    .hero-description{font-size:13px;line-height:1.5;}
+    .btn{padding:12px 18px;font-size:14px;}
+    .hero-nav{gap:6px;}
+    .hero-prev,.hero-next{width:38px;height:38px;}
+  }
+
+  /* Smartphone kecil */
+  @media (max-width: 576px){
+    .hero-title .highlight{font-size:20px;}
+    .hero-title .subtitle{font-size:14px;}
+    .hero-description{font-size:12px;line-height:1.5;}
+    .btn{padding:10px 16px;font-size:13px;border-radius:10px;}
+    .hero-dots{bottom:14px;}
+    .hero-prev,.hero-next{width:34px;height:34px;}
+  }
+
+  /* Ultra-wide monitor */
+  @media (min-width: 1600px){
+    .hero-inner{padding-inline:80px;}
+    .hero-title .highlight{font-size:72px;}
+    .hero-title .subtitle{font-size:30px;}
+    .hero-description{font-size:20px;max-width:80ch;}
+  }
+
+  /* iOS fix */
   @supports (-webkit-touch-callout: none){.hero-bg{background-attachment:scroll;}}
 
   /* Reduce motion */
@@ -777,13 +826,16 @@
   /* Header */
   .products-section .section-header{ text-align:center; margin-bottom:28px; }
   .products-section .section-badge{
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--accent, #ffb700);
-      margin-bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    background: #ffd93d;
+    color: #222;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(255, 217, 61, 0.35);
   }
 
   .section-badge i {
@@ -791,11 +843,17 @@
   }
   
   .products-section .section-title{
-    margin:10px 0 6px; font-weight:900; letter-spacing:-.01em;
-    font-size:clamp(1.5rem,1.1rem + 1vw,2rem);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 900;
+      margin-bottom: 16px;
+      color: var(--text-primary, #111);
   }
   .products-section .section-description{
-    color:var(--muted); max-width:680px; margin:0 auto;
+      font-size: clamp(14px, 1.6vw, 18px);
+      color: var(--text-secondary, #555);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
   }
 
   /* Grid & Item */
@@ -910,13 +968,16 @@
   }
 
   .section-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--accent, #ffb700);
-      margin-bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    background: #ffd93d;
+    color: #222;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(255, 217, 61, 0.35);
   }
 
   .section-badge i {
@@ -1010,6 +1071,97 @@
 
 
 
+/* OUR BRANDS */
+  /* === Our Brands Section === */
+  .brands-section {
+    padding: 80px 20px;
+    background: transparent;
+  }
+
+  .brands-section .section-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #ffd93d;
+    color: #222;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(255, 217, 61, 0.35);
+  }
+
+  .brands-section .section-title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 900;
+    margin-bottom: 16px;
+    color: var(--text-primary, #111);
+  }
+
+  .brands-section .section-description {
+    font-size: clamp(14px, 1.6vw, 18px);
+    color: var(--text-secondary, #555);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* === Slider Wrapper === */
+  .brands-slider {
+    margin-top: 30px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .brands-track {
+    display: flex;
+    width: max-content;
+  }
+
+  .brand-slide {
+    flex: 0 0 auto;
+    width: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .brand-slide img {
+    max-width: 180px;
+    max-height: 100px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .brand-slide img:hover {
+    transform: scale(1.15);
+  }
+
+  /* === Animasi Slide === */
+  @keyframes scroll-left {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes scroll-right {
+    0%   { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+
+  /* Arah animasi tiap baris */
+  .slider-1 .brands-track {
+    animation: scroll-left 25s linear infinite;
+  }
+  .slider-2 .brands-track {
+    animation: scroll-right 28s linear infinite;
+  }
+  .slider-3 .brands-track {
+    animation: scroll-left 30s linear infinite;
+  }
+/* OUR BRANDS */
 
 
 
