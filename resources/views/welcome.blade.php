@@ -326,6 +326,38 @@
 </section>
 
 
+<!-- ===== Pengalaman Kami Section ===== -->
+<section class="experience-section" id="experience">
+  <div class="background-image"></div>
+  <div class="overlay"></div> <!-- ✅ overlay transparan -->
+
+  <div class="section-header">
+    <span class="section-badge"><i class="fas fa-star"></i> Pengalaman Kami</span>
+    <h2 class="section-title">14+ Tahun Memberikan Layanan Terbaik</h2>
+    <p class="section-description">Kami berkomitmen memberikan produk dan layanan industri berkualitas tinggi dengan pengalaman yang luas.</p>
+  </div>
+
+  <div class="experience-grid">
+    <div class="experience-item">
+      <h3 class="count" data-target="14">0</h3>
+      <p>Tahun Pengalaman</p>
+    </div>
+    <div class="experience-item">
+      <h3 class="count" data-target="250">0</h3>
+      <p>Proyek Industri</p>
+    </div>
+    <div class="experience-item">
+      <h3 class="count" data-target="120">0</h3>
+      <p>Klien Terpuaskan</p>
+    </div>
+    <div class="experience-item">
+      <h3 class="count" data-target="50">0</h3>
+      <p>Tim Profesional</p>
+    </div>
+  </div>
+</section>
+
+
 <!-- Services Section -->
 <section class="services-section">
     <div class="container">
@@ -531,6 +563,167 @@
     </div>
   </div>
 </section>
+
+
+<!-- ===== Apa Kata Mereka Section ===== -->
+<section class="testimoni-section" id="testimoni">
+  <div class="section-header">
+    <span class="section-badge"><i class="fas fa-quote-left"></i> Apa Kata Mereka</span>
+    <h2 class="section-title">Testimoni Klien Kami</h2>
+    <p class="section-description">Pendapat dan pengalaman klien kami bekerja sama, menunjukkan kualitas dan kepuasan layanan industri kami.</p>
+  </div>
+
+  <div class="testimoni-slider">
+    <div class="testimoni-track">
+      <!-- Testimoni Items -->
+      <div class="testimoni-item">
+        <div class="testimoni-content">
+          <p class="testimoni-text">"Produk insulasi sangat berkualitas dan mudah diaplikasikan pada mesin produksi kami."</p>
+          <div class="testimoni-user">
+            <div class="user-info">
+              <h4>Jane Doe</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimoni-item">
+        <div class="testimoni-content">
+          <p class="testimoni-text">"Layanan cepat dan teknisi sangat membantu dalam pemasangan insulasi industri kami."</p>
+          <div class="testimoni-user">
+            <div class="user-info">
+              <h4>John Smith</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimoni-item">
+        <div class="testimoni-content">
+          <p class="testimoni-text">"Produk tahan lama dan mampu menahan panas tinggi, sangat cocok untuk pabrik kami."</p>
+          <div class="testimoni-user">
+            <div class="user-info">
+              <h4>Ali Rahman</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimoni-item">
+        <div class="testimoni-content">
+          <p class="testimoni-text">"Tim support selalu siap membantu, dan produk insulasi pas dengan spesifikasi kami."</p>
+          <div class="testimoni-user">
+            <div class="user-info">
+              <h4>Siti Nurhaliza</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimoni-item">
+        <div class="testimoni-content">
+          <p class="testimoni-text">"Sangat puas dengan hasil insulasi, mengurangi kebocoran panas dan meningkatkan efisiensi energi."</p>
+          <div class="testimoni-user">
+            <div class="user-info">
+              <h4>Budi Santoso</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimoni-item">
+        <div class="testimoni-content">
+          <p class="testimoni-text">"Material berkualitas tinggi dan pemasangan cepat membuat produksi kami tetap optimal."</p>
+          <div class="testimoni-user">
+            <div class="user-info">
+              <h4>Lina Kusuma</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimoni-item">
+        <div class="testimoni-content">
+          <p class="testimoni-text">"Produk insulasi aman dan sesuai standar industri, sangat merekomendasikan."</p>
+          <div class="testimoni-user">
+            <div class="user-info">
+              <h4>Rudi Hartono</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimoni-item">
+        <div class="testimoni-content">
+          <p class="testimoni-text">"Kualitas produk luar biasa dan tim sangat responsif dalam menangani pertanyaan kami."</p>
+          <div class="testimoni-user">
+            <div class="user-info">
+              <h4>Tari Wijaya</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimoni-item">
+        <div class="testimoni-content">
+          <p class="testimoni-text">"Insulasi bekerja sempurna pada mesin industri kami, efisiensi meningkat signifikan."</p>
+          <div class="testimoni-user">
+            <div class="user-info">
+              <h4>Andi Pratama</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimoni-item">
+        <div class="testimoni-content">
+          <p class="testimoni-text">"Sangat puas! Pemasangan cepat, material kuat, dan performa mesin meningkat."</p>
+          <div class="testimoni-user">
+            <div class="user-info">
+              <h4>Rina Safitri</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duplikasi untuk infinite loop -->
+      <div class="testimoni-item">
+        <div class="testimoni-content">
+          <p class="testimoni-text">"Produk insulasi sangat berkualitas dan mudah diaplikasikan pada mesin produksi kami."</p>
+          <div class="testimoni-user">
+            <div class="user-info">
+              <h4>Jane Doe</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimoni-item">
+        <div class="testimoni-content">
+          <p class="testimoni-text">"Layanan cepat dan teknisi sangat membantu dalam pemasangan insulasi industri kami."</p>
+          <div class="testimoni-user">
+            <div class="user-info">
+              <h4>John Smith</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1020,6 +1213,101 @@
   }
 /* Products Section */
 
+
+/* ===== Experience Section ===== */
+  .experience-section {
+    position: relative;
+    padding: 120px 60px;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  /* Background image (dibuat soft transparan) */
+  .experience-section .background-image {
+    position: absolute;
+    inset: 0;
+    background-image: url('{{ asset("img/galeri-proyek/2.jpg") }}');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.35;              /* ✅ lebih transparan */
+    filter: brightness(0.7);    /* ✅ agak gelap */
+    z-index: 0;
+    pointer-events: none;
+  }
+
+
+  /* Header */
+  .experience-section .section-header {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 80px;
+  }
+  .experience-section .section-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255,217,61,0.9);
+    color: #222;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    gap: 8px;
+    box-shadow: 0 6px 24px rgba(255,217,61,.35);
+  }
+  .experience-section .section-title {
+    font-size: clamp(32px,4vw,48px);
+    font-weight: 900;
+    margin: 20px 0 16px;
+    color: #fff;
+  }
+  .experience-section .section-description {
+    font-size: clamp(14px,1.5vw,18px);
+    color: #eee;
+    max-width: 750px;
+    margin: 0 auto 60px;
+    line-height: 1.6;
+  }
+
+  /* Grid */
+  .experience-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+    gap: 40px;
+    justify-items: center;
+  }
+  .experience-item {
+    background: rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 35px 25px;
+    box-shadow: 0 14px 32px rgba(0,0,0,.25);
+    transition: transform .35s ease, box-shadow .35s ease;
+    color: #fff;
+    width: 100%;
+    max-width: 220px;
+    backdrop-filter: blur(4px);
+  }
+  .experience-item:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 24px 60px rgba(0,0,0,.35);
+  }
+  .experience-item h3.count {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #ffd93d;
+    margin: 0 0 12px;
+  }
+  .experience-item p {
+    font-size: 1rem;
+    color: #fff;
+    margin: 0;
+  }
+/* ===== Experience Section ===== */
+
+
 /* Services Section */
   /* ---------------- Services Section Modern ---------------- */
   .services-section {
@@ -1239,99 +1527,217 @@
 
 
 /* ===== Proyek Kami Section ===== */
+  /* ===== Proyek Kami Section ===== */
+  .proyek-section{
+    padding:100px 40px 80px;
+    --ink:#0f172a; --muted:#64748b;
+    --brand:#7c1415; --brand-2:#b71c1c;
+    --border:rgba(2,6,23,.08); --hover:rgba(124,20,21,.06);
+    --ring:rgba(183,28,28,.18);
+    background:transparent; color:var(--ink);
+  }
+  body.dark-theme .proyek-section{
+    --ink:#e5e7eb; --muted:#94a3b8;
+    --border:rgba(255,255,255,.12);
+    --hover:rgba(183,28,28,.12);
+    --ring:rgba(239,68,68,.22);
+  }
+
+  /* Header */
+  .proyek-section .section-header{ text-align:center; margin-bottom:50px; }
+  .proyek-section .section-badge{
+    display:inline-flex; align-items:center;
+    background:#ffd93d; color:#222;
+    font-weight:600; padding:8px 20px;
+    border-radius:30px; font-size:14px; gap:8px;
+    box-shadow:0 4px 20px rgba(255,217,61,.35);
+  }
+  .proyek-section .section-title{
+    font-size:clamp(30px,4vw,44px);
+    font-weight:900; margin:18px 0 12px;
+    color:var(--text-primary,#111);
+  }
+  .proyek-section .section-description{
+    font-size:clamp(14px,1.5vw,18px);
+    color:var(--text-secondary,#555);
+    max-width:750px; margin:0 auto 60px; line-height:1.6;
+  }
+
+  /* Grid */
+  .proyek-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:28px;
+    justify-items:center;
+    padding:0 20px;
+  }
+
+  /* Item */
+  .proyek-item{
+    position:relative; overflow:hidden;
+    border-radius:18px; border:1px solid var(--border);
+    transition: transform .35s ease, box-shadow .35s ease;
+    width:100%;
+  }
+  .proyek-item:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 48px rgba(0,0,0,.15),0 0 0 3px var(--ring);
+  }
+
+  /* Thumbnail */
+  .proyek-thumb{
+    display:block; position:relative;
+    width:100%; aspect-ratio:1/1; overflow:hidden; border-radius:18px;
+  }
+  .proyek-thumb img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; border-radius:18px;
+    transition:transform .5s ease, opacity .5s ease;
+    backface-visibility:hidden;
+  }
+  .proyek-thumb img.front{ opacity:1; z-index:2; }
+  .proyek-thumb img.back{ opacity:0; transform:rotateY(90deg); z-index:1; }
+
+  .proyek-item:hover .proyek-thumb img.front{
+    transform:rotateY(90deg) scale(1.05); opacity:0;
+  }
+  .proyek-item:hover .proyek-thumb img.back{
+    transform:rotateY(0deg) scale(1.05); opacity:1;
+  }
+
+  /* Title */
+  .proyek-title{
+    font-weight:900; margin:14px 0 0;
+    text-align:center; font-size:1.15rem; color:var(--ink);
+    transition:color .3s ease;
+  }
+  .proyek-item:hover .proyek-title{ color:var(--brand-2); }
+
+  /* Responsive */
+  @media (max-width:1199.98px){ .proyek-grid{ gap:22px; } }
+  @media (max-width:899.98px){ .proyek-grid{ gap:18px; } }
+  @media (max-width:575.98px){ 
+    .proyek-grid{ gap:14px; padding:0 10px; } 
+    .proyek-title{ font-size:1rem; margin:10px 0 0; } 
+  }
 /* ===== Proyek Kami Section ===== */
-.proyek-section{
-  padding:100px 40px 80px;
-  --ink:#0f172a; --muted:#64748b;
-  --brand:#7c1415; --brand-2:#b71c1c;
-  --border:rgba(2,6,23,.08); --hover:rgba(124,20,21,.06);
-  --ring:rgba(183,28,28,.18);
-  background:transparent; color:var(--ink);
-}
-body.dark-theme .proyek-section{
-  --ink:#e5e7eb; --muted:#94a3b8;
-  --border:rgba(255,255,255,.12);
-  --hover:rgba(183,28,28,.12);
-  --ring:rgba(239,68,68,.22);
-}
 
-/* Header */
-.proyek-section .section-header{ text-align:center; margin-bottom:50px; }
-.proyek-section .section-badge{
-  display:inline-flex; align-items:center;
-  background:#ffd93d; color:#222;
-  font-weight:600; padding:8px 20px;
-  border-radius:30px; font-size:14px; gap:8px;
-  box-shadow:0 4px 20px rgba(255,217,61,.35);
-}
-.proyek-section .section-title{
-  font-size:clamp(30px,4vw,44px);
-  font-weight:900; margin:18px 0 12px;
-  color:var(--text-primary,#111);
-}
-.proyek-section .section-description{
-  font-size:clamp(14px,1.5vw,18px);
-  color:var(--text-secondary,#555);
-  max-width:750px; margin:0 auto 60px; line-height:1.6;
-}
 
-/* Grid */
-.proyek-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:28px;
-  justify-items:center;
-  padding:0 20px;
-}
+/* ===== Testimoni Section ===== */
+  /* ===== Testimoni Section ===== */
+  .testimoni-section{
+    padding:100px 60px 80px;
+    color:#111;
+    background:transparent;
+  }
+  body.dark-theme .testimoni-section{
+    color:#e5e7eb;
+  }
 
-/* Item */
-.proyek-item{
-  position:relative; overflow:hidden;
-  border-radius:18px; border:1px solid var(--border);
-  transition: transform .35s ease, box-shadow .35s ease;
-  width:100%;
-}
-.proyek-item:hover{
-  transform:translateY(-8px);
-  box-shadow:0 20px 48px rgba(0,0,0,.15),0 0 0 3px var(--ring);
-}
+  /* Header */
+  .testimoni-section .section-header{
+    text-align:center; margin-bottom:60px;
+  }
+  .testimoni-section .section-badge{
+    display:inline-flex; align-items:center;
+    background:#ffd93d; color:#222;
+    font-weight:600; padding:8px 20px;
+    border-radius:30px; font-size:14px; gap:8px;
+    box-shadow:0 4px 20px rgba(255,217,61,.35);
+  }
+  .testimoni-section .section-title{
+    font-size:clamp(30px,4vw,44px);
+    font-weight:900; margin:18px 0 12px;
+  }
+  .testimoni-section .section-description{
+    font-size:clamp(14px,1.5vw,18px);
+    color:#555; max-width:700px; margin:0 auto 60px;
+    line-height:1.6;
+  }
 
-/* Thumbnail */
-.proyek-thumb{
-  display:block; position:relative;
-  width:100%; aspect-ratio:1/1; overflow:hidden; border-radius:18px;
-}
-.proyek-thumb img{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; border-radius:18px;
-  transition:transform .5s ease, opacity .5s ease;
-  backface-visibility:hidden;
-}
-.proyek-thumb img.front{ opacity:1; z-index:2; }
-.proyek-thumb img.back{ opacity:0; transform:rotateY(90deg); z-index:1; }
+  /* Slider */
+  .testimoni-slider{
+    overflow:hidden; padding:10px 10px;
+  }
+  .testimoni-track{
+    display:flex; gap:24px;
+    transition:transform 0.5s ease;
+  }
+  .testimoni-item{
+    flex:0 0 320px;
+    background: #fff;
+    border-radius:18px;
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+    padding:28px; position:relative;
+    transition:transform 0.35s ease, box-shadow 0.35s ease, background .35s ease;
+  }
+  body.dark-theme .testimoni-item{
+    background: #1e293b;
+    box-shadow:0 12px 28px rgba(0,0,0,.15);
+  }
+  .testimoni-item:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 48px rgba(0,0,0,.15);
+  }
 
-.proyek-item:hover .proyek-thumb img.front{
-  transform:rotateY(90deg) scale(1.05); opacity:0;
-}
-.proyek-item:hover .proyek-thumb img.back{
-  transform:rotateY(0deg) scale(1.05); opacity:1;
-}
+  /* Testimoni Content */
+  .testimoni-text{
+    font-size:1rem; line-height:1.6; margin-bottom:20px;
+    color:#333;
+    font-style:italic;
+  }
+  body.dark-theme .testimoni-text{ color:#e5e7eb; }
 
-/* Title */
-.proyek-title{
-  font-weight:900; margin:14px 0 0;
-  text-align:center; font-size:1.15rem; color:var(--ink);
-  transition:color .3s ease;
-}
-.proyek-item:hover .proyek-title{ color:var(--brand-2); }
+  .testimoni-user{
+    display:flex; align-items:center; gap:12px;
+  }
+  .user-info h4{ margin:0; font-size:1rem; font-weight:700; color:#111; }
+  body.dark-theme .user-info h4{ color:#e5e7eb; }
 
-/* Responsive */
-@media (max-width:1199.98px){ .proyek-grid{ gap:22px; } }
-@media (max-width:899.98px){ .proyek-grid{ gap:18px; } }
-@media (max-width:575.98px){ 
-  .proyek-grid{ gap:14px; padding:0 10px; } 
-  .proyek-title{ font-size:1rem; margin:10px 0 0; } 
-}
+  /* Responsive */
+  @media (max-width:1199.98px){ .testimoni-item{ flex:0 0 280px; } }
+  @media (max-width:899.98px){ .testimoni-item{ flex:0 0 240px; } }
+  @media (max-width:575.98px){ 
+    .testimoni-item{ flex:0 0 90%; margin:0 auto; }
+  }
+/* ===== Testimoni Section ===== */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1646,65 +2052,81 @@ body.dark-theme .proyek-section{
   });
 </script>
 <script>
-/* ===== HERO SLIDER: Autoplay tetap jalan saat scroll (rAF + deadline) ===== */
-(function(){
-  const slider = document.querySelector('.hero-slider');
-  if (!slider) return;
+  /* ===== HERO SLIDER: Autoplay tetap jalan saat scroll (rAF + deadline) ===== */
+  (function(){
+    const slider = document.querySelector('.hero-slider');
+    if (!slider) return;
 
-  const slides = Array.from(slider.querySelectorAll('.hero-slide'));
-  const dots   = Array.from(slider.querySelectorAll('.hero-dots .dot'));
-  const prevBtn = slider.querySelector('.hero-prev');
-  const nextBtn = slider.querySelector('.hero-next');
+    const slides = Array.from(slider.querySelectorAll('.hero-slide'));
+    const dots   = Array.from(slider.querySelectorAll('.hero-dots .dot'));
+    const prevBtn = slider.querySelector('.hero-prev');
+    const nextBtn = slider.querySelector('.hero-next');
 
-  const AUTOPLAY = (slider.getAttribute('data-autoplay') || 'true') === 'true';
-  const INTERVAL = parseInt(slider.getAttribute('data-interval') || '5600', 10);
+    const AUTOPLAY = (slider.getAttribute('data-autoplay') || 'true') === 'true';
+    const INTERVAL = parseInt(slider.getAttribute('data-interval') || '5600', 10);
 
-  // Durasi sinkron dengan CSS
-  const STAGGER_STEP = 140;
-  const TEXT_IN  = 880;
-  const TEXT_OUT = 560;
-  const OUT_TOTAL = TEXT_OUT + (STAGGER_STEP * 3);
-  const SLIDE_FADE = 1600;
+    // Durasi sinkron dengan CSS
+    const STAGGER_STEP = 140;
+    const TEXT_IN  = 880;
+    const TEXT_OUT = 560;
+    const OUT_TOTAL = TEXT_OUT + (STAGGER_STEP * 3);
+    const SLIDE_FADE = 1600;
 
-  let index = Math.max(0, slides.findIndex(s => s.classList.contains('is-active')));
-  if (index < 0) index = 0;
+    let index = Math.max(0, slides.findIndex(s => s.classList.contains('is-active')));
+    if (index < 0) index = 0;
 
-  let isAnimating = false;
-  let rafId = null;
-  let deadline = performance.now() + INTERVAL;
+    let isAnimating = false;
+    let rafId = null;
+    let deadline = performance.now() + INTERVAL;
 
-  function updateAria(){
-    slides.forEach((s,i)=>{
-      const active = i === index;
-      s.setAttribute('aria-hidden', active ? 'false' : 'true');
-    });
-    dots.forEach((d,i)=>{
-      const active = i === index;
-      d.classList.toggle('is-active', active);
-      d.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
-  }
+    function updateAria(){
+      slides.forEach((s,i)=>{
+        const active = i === index;
+        s.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+      dots.forEach((d,i)=>{
+        const active = i === index;
+        d.classList.toggle('is-active', active);
+        d.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    }
 
-  function goTo(nextIndex, mode /* 'auto' | 'manual' */){
-    if (isAnimating) return;
-    nextIndex = (nextIndex + slides.length) % slides.length;
-    if (nextIndex === index) { deadline = performance.now() + INTERVAL; return; }
+    function goTo(nextIndex, mode /* 'auto' | 'manual' */){
+      if (isAnimating) return;
+      nextIndex = (nextIndex + slides.length) % slides.length;
+      if (nextIndex === index) { deadline = performance.now() + INTERVAL; return; }
 
-    const current = slides[index];
-    const next    = slides[nextIndex];
-    const currC   = current.querySelector('.hero-content');
-    const nextC   = next.querySelector('.hero-content');
+      const current = slides[index];
+      const next    = slides[nextIndex];
+      const currC   = current.querySelector('.hero-content');
+      const nextC   = next.querySelector('.hero-content');
 
-    isAnimating = true;
+      isAnimating = true;
 
-    if (mode === 'auto') {
-      currC?.classList.remove('anim-in','quick-hide');
-      void currC?.offsetWidth;
-      currC?.classList.add('anim-out');
+      if (mode === 'auto') {
+        currC?.classList.remove('anim-in','quick-hide');
+        void currC?.offsetWidth;
+        currC?.classList.add('anim-out');
 
-      setTimeout(() => {
-        current.classList.remove('is-active');
+        setTimeout(() => {
+          current.classList.remove('is-active');
+          next.classList.add('is-active');
+
+          nextC?.classList.remove('anim-out','quick-hide');
+          void nextC?.offsetWidth;
+          nextC?.classList.add('anim-in');
+
+          index = nextIndex;
+          updateAria();
+
+          setTimeout(() => { isAnimating = false; }, Math.max(SLIDE_FADE, TEXT_IN + (STAGGER_STEP * 3)));
+        }, OUT_TOTAL);
+      } else {
+        currC?.classList.remove('anim-in','anim-out');
+        currC?.classList.add('quick-hide');
+
         next.classList.add('is-active');
+        requestAnimationFrame(()=> current.classList.remove('is-active'));
 
         nextC?.classList.remove('anim-out','quick-hide');
         void nextC?.offsetWidth;
@@ -1713,52 +2135,102 @@ body.dark-theme .proyek-section{
         index = nextIndex;
         updateAria();
 
-        setTimeout(() => { isAnimating = false; }, Math.max(SLIDE_FADE, TEXT_IN + (STAGGER_STEP * 3)));
-      }, OUT_TOTAL);
-    } else {
-      currC?.classList.remove('anim-in','anim-out');
-      currC?.classList.add('quick-hide');
+        setTimeout(()=>{ isAnimating = false; }, SLIDE_FADE * 0.9);
+      }
 
-      next.classList.add('is-active');
-      requestAnimationFrame(()=> current.classList.remove('is-active'));
-
-      nextC?.classList.remove('anim-out','quick-hide');
-      void nextC?.offsetWidth;
-      nextC?.classList.add('anim-in');
-
-      index = nextIndex;
-      updateAria();
-
-      setTimeout(()=>{ isAnimating = false; }, SLIDE_FADE * 0.9);
-    }
-
-    deadline = performance.now() + INTERVAL;
-  }
-
-  function nextSlide(mode='auto'){ goTo(index+1, mode); }
-  function prevSlide(mode='manual'){ goTo(index-1, mode); }
-
-  function tick(now){
-    if (AUTOPLAY && !isAnimating && now >= deadline) {
-      nextSlide('auto');
-    }
-    rafId = requestAnimationFrame(tick);
-  }
-
-  nextBtn?.addEventListener('click', ()=> { nextSlide('manual'); });
-  prevBtn?.addEventListener('click', ()=> { prevSlide('manual'); });
-  dots.forEach((dot,i)=> dot.addEventListener('click', ()=> goTo(i,'manual')));
-
-  document.addEventListener('visibilitychange', ()=>{
-    if (document.visibilityState === 'visible') {
       deadline = performance.now() + INTERVAL;
     }
+
+    function nextSlide(mode='auto'){ goTo(index+1, mode); }
+    function prevSlide(mode='manual'){ goTo(index-1, mode); }
+
+    function tick(now){
+      if (AUTOPLAY && !isAnimating && now >= deadline) {
+        nextSlide('auto');
+      }
+      rafId = requestAnimationFrame(tick);
+    }
+
+    nextBtn?.addEventListener('click', ()=> { nextSlide('manual'); });
+    prevBtn?.addEventListener('click', ()=> { prevSlide('manual'); });
+    dots.forEach((dot,i)=> dot.addEventListener('click', ()=> goTo(i,'manual')));
+
+    document.addEventListener('visibilitychange', ()=>{
+      if (document.visibilityState === 'visible') {
+        deadline = performance.now() + INTERVAL;
+      }
+    });
+
+    updateAria();
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(tick);
+  })();
+</script>
+<script>
+  /* ===== Slider Auto Scroll Infinite Loop ===== */
+  const track = document.querySelector('.testimoni-track');
+  let position = 0;
+  let items = document.querySelectorAll('.testimoni-item');
+  const gap = 24;
+
+  function updateItemWidth(){
+    items = document.querySelectorAll('.testimoni-item');
+    return items[0].offsetWidth + gap;
+  }
+
+  let itemWidth = updateItemWidth();
+  const totalItems = items.length;
+
+  function slideTestimoni(){
+    position += itemWidth;
+    track.style.transition = 'transform 0.5s linear';
+    track.style.transform = `translateX(-${position}px)`;
+
+    if(position >= itemWidth * (totalItems / 2)){ // reset after half (duplikasi)
+      setTimeout(()=>{
+        track.style.transition = 'none';
+        position = 0;
+        track.style.transform = `translateX(-${position}px)`;
+      },500);
+    }
+  }
+
+  window.addEventListener('resize', ()=>{
+    itemWidth = updateItemWidth();
   });
 
-  updateAria();
-  cancelAnimationFrame(rafId);
-  rafId = requestAnimationFrame(tick);
-})();
+  setInterval(slideTestimoni, 3500);
 </script>
 
+
+<script>
+/* ===== Count Up Animation on Scroll ===== */
+const counters = document.querySelectorAll('.count');
+const speed = 200;
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const counter = entry.target;
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const increment = Math.ceil(target / speed);
+        if(count < target){
+          counter.innerText = count + increment;
+          setTimeout(updateCount, 20);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+      observer.unobserve(counter);
+    }
+  });
+}, { threshold: 0.5 });
+
+counters.forEach(counter => {
+  observer.observe(counter);
+});
+</script>
 @endsection
