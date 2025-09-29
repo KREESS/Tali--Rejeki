@@ -24,44 +24,45 @@
             <div class="col-xl-9 col-lg-10 hero-content" data-aos="fade-up">
                 <span class="hero-kicker">
                     <i class="fas fa-folder-open me-2"></i>
-                    Koleksi Digital
+                    Digital Collection
                 </span>
                 <h1 class="hero-title">
-                    Katalog <span class="hero-gradient">Insulasi Industri</span>
+                    Industrial Insulation <span class="hero-gradient">Catalog</span>
                 </h1>
                 <p class="hero-subtitle">
-                    Jelajahi <strong>brosur, spesifikasi, manual, dan sertifikat</strong>—semua terkurasi di satu tempat.
-                    Cari berdasarkan <em>produk, standar, atau aplikasi</em>, simpan favorit untuk nanti, dan unduh
-                    dokumen resmi <strong>dengan sekali klik</strong>.
+                    Explore <strong>brochures, specifications, manuals, and certificates</strong>—all curated in one place.
+                    Search by <em>product, standard, or application</em>, save favorites for later, and download
+                    official documents <strong>with a single click</strong>.
                 </p>
 
                 <ul class="hero-points">
                     <li data-aos="fade-up" data-aos-delay="100">
                         <i class="fas fa-magnifying-glass"></i> 
-                        <span>Pencarian cepat & akurat</span>
+                        <span>Fast & accurate search</span>
                     </li>
                     <li data-aos="fade-up" data-aos-delay="200">
                         <i class="fas fa-shield-alt"></i> 
-                        <span>Dokumen tepercaya & terbaru</span>
+                        <span>Reliable & up-to-date documents</span>
                     </li>
                     <li data-aos="fade-up" data-aos-delay="300">
                         <i class="fas fa-cloud-arrow-down"></i> 
-                        <span>Unduhan instan tanpa ribet</span>
+                        <span>Instant downloads, hassle-free</span>
                     </li>
                 </ul>
 
                 <div class="hero-actions" data-aos="fade-up" data-aos-delay="400">
                     <a href="#catalog-list" class="btn btn-hero-primary btn-lg">
-                        <i class="fas fa-book-open me-2"></i>Jelajahi Katalog
+                        <i class="fas fa-book-open me-2"></i>Explore Catalog
                     </a>
                     <a href="{{ route('en.contact') }}" class="btn btn-white-fixed btn-lg">
-                        <i class="fas fa-headset me-2"></i>Konsultasi Gratis
+                        <i class="fas fa-headset me-2"></i>Free Consultation
                     </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- ===== SCROLL PROGRESS BAR ===== -->
 <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
@@ -72,32 +73,32 @@
         <div class="info-content" data-aos="fade-up">
             <div class="info-main">
                 <div class="info-header">
-                    <h2 class="info-title">Platform Katalog Digital Terlengkap</h2>
-                    <p class="info-subtitle">Akses ribuan dokumen teknis insulasi industri dalam satu platform terintegrasi</p>
+                    <h2 class="info-title">The Most Comprehensive Digital Catalog Platform</h2>
+                    <p class="info-subtitle">Access thousands of industrial insulation technical documents on a single integrated platform</p>
                 </div>
                 
                 <div class="info-stats">
                     <div class="info-stat-item" data-aos="fade-up" data-aos-delay="100">
                         <div class="stat-number">{{ number_format($catalogItems->total()) }}+</div>
-                        <div class="stat-desc">Dokumen Katalog<br><span class="stat-note">Terus bertambah setiap minggu</span></div>
+                        <div class="stat-desc">Catalog Documents<br><span class="stat-note">Continuously updated weekly</span></div>
                         <div class="stat-icon-bg"><i class="fas fa-file-alt"></i></div>
                     </div>
                     
                     <div class="info-stat-item" data-aos="fade-up" data-aos-delay="200">
                         <div class="stat-number">24/7</div>
-                        <div class="stat-desc">Akses Tanpa Batas<br><span class="stat-note">Download kapan saja</span></div>
+                        <div class="stat-desc">Unlimited Access<br><span class="stat-note">Download anytime</span></div>
                         <div class="stat-icon-bg"><i class="fas fa-clock"></i></div>
                     </div>
                     
                     <div class="info-stat-item" data-aos="fade-up" data-aos-delay="300">
                         <div class="stat-number">100%</div>
-                        <div class="stat-desc">Dokumen Terverifikasi<br><span class="stat-note">Langsung dari manufaktur</span></div>
+                        <div class="stat-desc">Verified Documents<br><span class="stat-note">Direct from manufacturer</span></div>
                         <div class="stat-icon-bg"><i class="fas fa-certificate"></i></div>
                     </div>
                     
                     <div class="info-stat-item" data-aos="fade-up" data-aos-delay="400">
                         <div class="stat-number">50+</div>
-                        <div class="stat-desc">Brand Terpercaya<br><span class="stat-note">Partner resmi global</span></div>
+                        <div class="stat-desc">Trusted Brands<br><span class="stat-note">Official global partners</span></div>
                         <div class="stat-icon-bg"><i class="fas fa-handshake"></i></div>
                     </div>
                 </div>
@@ -106,35 +107,36 @@
             <div class="info-features" data-aos="fade-up" data-aos-delay="600">
                 <div class="feature-item">
                     <i class="fas fa-cloud-download-alt"></i>
-                    <span>Download Batch untuk Multiple Files</span>
+                    <span>Batch Download for Multiple Files</span>
                 </div>
                 <div class="feature-item">
                     <i class="fas fa-chart-line"></i>
-                    <span>Update Berkala & Notifikasi Otomatis</span>
+                    <span>Regular Updates & Automatic Notifications</span>
                 </div>
                 <div class="feature-item">
                     <i class="fas fa-headset"></i>
-                    <span>Support 24/7 dari Tim Ahli</span>
+                    <span>24/7 Support from Expert Team</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+
 <!-- ===== FEATURED CATEGORIES (Horizontal Snap) ===== -->
 @isset($featuredCategories)
   <section class="featured-cats">
       <div class="container">
           <div class="section-head" data-aos="fade-up">
-              <h2 class="section-title">Kategori Unggulan</h2>
-              <p class="section-sub">Telusuri kategori yang paling banyak dicari pengguna.</p>
+              <h2 class="section-title">Featured Categories</h2>
+              <p class="section-sub">Browse the categories most searched by users.</p>
           </div>
           <div class="cat-scroller" data-aos="fade-up">
               @foreach($featuredCategories as $fc)
               <a class="cat-card" href="{{ route('en.catalog.page', ['category' => $fc['slug']]) }}">
                   <div class="cc-icon"><i class="{{ $fc['icon'] ?? 'fas fa-shapes' }}"></i></div>
                   <div class="cc-name">{{ $fc['name'] }}</div>
-                  <div class="cc-meta">{{ $fc['count'] ?? 0 }} dokumen</div>
+                  <div class="cc-meta">{{ $fc['count'] ?? 0 }} documents</div>
               </a>
               @endforeach
           </div>
@@ -142,10 +144,11 @@
   </section>
 @endisset
 
+
 <!-- ===== PARTNERS / BRANDS MARQUEE ===== -->
 @isset($brandLogos)
   @if(count($brandLogos))
-    <section class="brands-marquee" aria-label="Merek pendukung">
+    <section class="brands-marquee" aria-label="Supporting Brands">
         <div class="container">
             <div class="marquee" data-aos="fade-up">
                 <div class="marquee-track">
@@ -162,19 +165,20 @@
   @endif
 @endisset
 
+
 <!-- ===== TOP DOWNLOADS ===== -->
 @isset($topDownloads)
   @if($topDownloads->count())
     <section class="top-downloads">
         <div class="container">
             <div class="section-head" data-aos="fade-up">
-                <h2 class="section-title">Paling Banyak Diunduh</h2>
-                <p class="section-sub">Dokumen favorit pengguna minggu ini.</p>
+                <h2 class="section-title">Most Downloaded</h2>
+                <p class="section-sub">User-favorite documents this week.</p>
             </div>
             <div class="td-grid">
                 @foreach($topDownloads as $i => $td)
                 <article class="td-card" data-rank="{{ $i+1 }}" data-aos="fade-up" data-aos-delay="{{ ($i%6)*50 }}">
-                    <button class="btn-like" type="button" aria-label="Favoritkan" data-id="{{ $td->id }}"><i class="fas fa-heart"></i></button>
+                    <button class="btn-like" type="button" aria-label="Add to Favorites" data-id="{{ $td->id }}"><i class="fas fa-heart"></i></button>
                     <a href="{{ route('en.catalog.detail', $td->slug) }}" class="td-thumb">
                         @if($td->image)
                             <img src="{{ asset('storage/' . $td->image) }}" alt="{{ $td->title }}" loading="lazy">
@@ -185,9 +189,9 @@
                     <div class="td-body">
                         <a class="td-cat" href="{{ route('en.catalog.page', ['category' => $td->category]) }}">{{ ucfirst(str_replace('-', ' ', $td->category ?? 'General')) }}</a>
                         <h3 class="td-title"><a href="{{ route('en.catalog.detail', $td->slug) }}">{{ $td->title }}</a></h3>
-                        <div class="td-meta"><i class="fas fa-download me-1"></i>{{ $td->download_count ?? 0 }} unduhan</div>
+                        <div class="td-meta"><i class="fas fa-download me-1"></i>{{ $td->download_count ?? 0 }} downloads</div>
                     </div>
-                    <div class="td-actions"><button class="btn btn-outline-secondary btn-compare" data-id="{{ $td->id }}"><i class="fas fa-code-compare me-2"></i>Bandingkan</button></div>
+                    <div class="td-actions"><button class="btn btn-outline-secondary btn-compare" data-id="{{ $td->id }}"><i class="fas fa-code-compare me-2"></i>Compare</button></div>
                 </article>
                 @endforeach
             </div>
@@ -195,6 +199,7 @@
     </section>
   @endif
 @endisset
+
 
 <!-- ===== CATALOG LIST ===== -->
 <section class="catalog-list-section" id="catalog-list">
@@ -206,14 +211,14 @@
             <div class="results-icon">
               <i class="fas fa-heart"></i>
             </div>
-            <h3 class="results-title">Kategori Terpilih</h3>
+            <h3 class="results-title">Selected Category</h3>
           </div>
           <div class="results-content">
-            <span class="results-main-text">Menampilkan {{ $catalogItems->firstItem() }}–{{ $catalogItems->lastItem() }} dari {{ $catalogItems->total() }} katalog premium</span>
+            <span class="results-main-text">Showing {{ $catalogItems->firstItem() }}–{{ $catalogItems->lastItem() }} of {{ $catalogItems->total() }} premium catalogs</span>
             <div class="results-features">
-              <span class="feature-item"><i class="fas fa-crown"></i> Kualitas Terjamin</span>
-              <span class="feature-item"><i class="fas fa-download"></i> Akses Instan</span>
-              <span class="feature-item"><i class="fas fa-file-alt"></i> Dokumen Resmi</span>
+              <span class="feature-item"><i class="fas fa-crown"></i> Guaranteed Quality</span>
+              <span class="feature-item"><i class="fas fa-download"></i> Instant Access</span>
+              <span class="feature-item"><i class="fas fa-file-alt"></i> Official Documents</span>
             </div>
           </div>
         </div>
@@ -222,10 +227,7 @@
       <div class="catalog-list" data-view="list">
         @foreach($catalogItems as $index => $item)
           @php
-            // Pastikan relasi ada walau tanpa eager load
             $item->loadMissing(['images','files']);
-
-            // Helper: URL langsung dari public/ (biarkan absolut)
             $toPublic = function (?string $path) {
                 if (!$path) return null;
                 $lower = strtolower($path);
@@ -234,21 +236,15 @@
                 if (\Illuminate\Support\Str::startsWith($path, 'public/')) $path = substr($path, 7);
                 return asset($path);
             };
-
-            // ===== KUMPULAN GAMBAR (catalog_images) =====
             $images = $item->images
                 ->sortBy([['is_primary','desc'], ['sort_order','asc'], ['id','asc']])
                 ->values();
-
-            // ===== FILE UTAMA (catalog_files): utamakan PDF =====
             $primaryFile = $item->files->sortBy(function($f){
                 $ext = strtolower(pathinfo($f->file_url ?? '', PATHINFO_EXTENSION));
                 return $ext === 'pdf' ? 0 : 1;
             })->first();
-
             $fileUrl = $primaryFile?->file_url ? $toPublic($primaryFile->file_url) : null;
             $ext     = $primaryFile?->file_url ? strtolower(pathinfo($primaryFile->file_url, PATHINFO_EXTENSION)) : null;
-
             $iconMap = [
                 'pdf'=>'file-pdf','doc'=>'file-word','docx'=>'file-word',
                 'xls'=>'file-excel','xlsx'=>'file-excel','ppt'=>'file-powerpoint','pptx'=>'file-powerpoint',
@@ -256,13 +252,10 @@
             $faIcon = $iconMap[$ext] ?? 'file';
             $badge  = strtoupper($ext ?: 'FILE');
             $fileSize = $primaryFile->size ?? ($item->file_size ?? null);
-
             $sliderId = 'thumb-slider-'.$item->id;
           @endphp
 
           <article class="catalog-row" data-aos="fade-up" data-aos-delay="{{ ($index%6)*50 }}">
-
-            {{-- ==== THUMB SLIDER ==== --}}
             <figure class="thumb-wrap thumb-has-slider" data-slider-id="{{ $sliderId }}">
               <div class="thumb-viewport">
                 @if($images->count() > 0)
@@ -281,12 +274,9 @@
                   </div>
                 @endif
               </div>
-
-              {{-- Nav + dots (auto-hidden jika <=1 gambar) --}}
-              <button class="thumb-nav prev" type="button" aria-label="Sebelumnya" data-dir="-1"><i class="fas fa-chevron-left"></i></button>
-              <button class="thumb-nav next" type="button" aria-label="Berikutnya" data-dir="1"><i class="fas fa-chevron-right"></i></button>
-              <div class="thumb-dots" role="tablist" aria-label="Navigasi gambar"></div>
-              {{-- (pastikan tidak ada overlay lain yang menutupi tombol di bawah) --}}
+              <button class="thumb-nav prev" type="button" aria-label="Previous" data-dir="-1"><i class="fas fa-chevron-left"></i></button>
+              <button class="thumb-nav next" type="button" aria-label="Next" data-dir="1"><i class="fas fa-chevron-right"></i></button>
+              <div class="thumb-dots" role="tablist" aria-label="Image Navigation"></div>
             </figure>
 
             <div class="content">
@@ -296,35 +286,32 @@
                 </a>
                 <div class="meta">
                   <span><i class="fas fa-calendar"></i> {{ $item->created_at->format('d M Y') }}</span>
-                  <span><i class="fas fa-shield-check"></i> Terverifikasi</span>
+                  <span><i class="fas fa-shield-check"></i> Verified</span>
                 </div>
               </div>
 
               <h3 class="title">{{ $item->name }}</h3>
               <p class="desc line-clamp-3">{{ \Illuminate\Support\Str::limit($item->description, 220) }}</p>
 
-              {{-- ===== CTA TANPA JS (langsung aksi) ===== --}}
               <div class="cta-enhanced">
                 @if($fileUrl)
                   <div class="primary-actions">
-                    {{-- Tombol Unduh: GET ke route download --}}
                     <form action="{{ route('en.catalog.download', $item->id) }}" method="GET" class="inline-form" style="display:inline">
-                      <button type="submit" class="btn btn-download" aria-label="Unduh {{ $item->name }}">
+                      <button type="submit" class="btn btn-download" aria-label="Download {{ $item->name }}">
                         <i class="fas fa-file-arrow-down"></i>
                         <span class="btn-text">
-                          <span class="btn-main">Unduh Dokumen</span>
+                          <span class="btn-main">Download Document</span>
                           <span class="btn-sub">Format: {{ strtoupper($ext ?? 'FILE') }}</span>
                         </span>
                       </button>
                     </form>
 
-                    {{-- Tombol Preview: buka tab baru --}}
                     <form action="{{ route('en.catalog.preview', $item->id) }}" method="GET" class="inline-form" style="display:inline" target="_blank" rel="noopener">
-                      <button type="submit" class="btn btn-preview" aria-label="Pratinjau {{ $item->name }}">
+                      <button type="submit" class="btn btn-preview" aria-label="Preview {{ $item->name }}">
                         <i class="fas fa-file-pdf"></i>
                         <span class="btn-text">
-                          <span class="btn-main">{{ ($ext === 'pdf') ? 'Lihat PDF' : 'Buka Dokumen' }}</span>
-                          <span class="btn-sub">Pratinjau di tab baru</span>
+                          <span class="btn-main">{{ ($ext === 'pdf') ? 'View PDF' : 'Open Document' }}</span>
+                          <span class="btn-sub">Preview in new tab</span>
                         </span>
                       </button>
                     </form>
@@ -334,15 +321,14 @@
                     <button class="btn btn-unavailable" disabled>
                       <i class="fas fa-ban"></i>
                       <span class="btn-text">
-                        <span class="btn-main">Tidak Tersedia</span>
-                        <span class="btn-sub">File belum upload</span>
+                        <span class="btn-main">Unavailable</span>
+                        <span class="btn-sub">File not uploaded</span>
                       </span>
                     </button>
                   </div>
                 @endif
               </div>
 
-              {{-- Hidden data for modal --}}
               <script type="application/json" id="catalog-data-{{ $item->id }}">
                 {
                   "id": {{ $item->id }},
@@ -368,27 +354,27 @@
         @endforeach
       </div>
     @else
-      <!-- Empty state -->
       <div class="no-catalog text-center" data-aos="fade-up">
         <div class="no-catalog-icon"><i class="fas fa-folder-open"></i></div>
-        <h3>Katalog Tidak Ditemukan</h3>
+        <h3>Catalog Not Found</h3>
         <p>
           @if(request('search') || request('category') || request('type'))
-            Tidak ada katalog yang sesuai dengan kriteria. Coba kata kunci atau filter lain.
+            No catalogs match your criteria. Try other keywords or filters.
           @else
-            Katalog digital sedang dalam tahap pengembangan. Silakan cek kembali nanti.
+            The digital catalog is under development. Please check back later.
           @endif
         </p>
 
         @if(request('search') || request('category') || request('type'))
-          <a href="{{ route('en.catalog.page') }}" class="btn btn-primary"><i class="fas fa-refresh"></i> Lihat Semua Katalog</a>
+          <a href="{{ route('en.catalog.page') }}" class="btn btn-primary"><i class="fas fa-refresh"></i> View All Catalogs</a>
         @else
-          <a href="{{ route('en.contact') }}" class="btn btn-primary"><i class="fas fa-phone"></i> Hubungi Kami</a>
+          <a href="{{ route('en.contact') }}" class="btn btn-primary"><i class="fas fa-phone"></i> Contact Us</a>
         @endif
       </div>
     @endif
   </div>
 </section>
+
 
 
 <!-- ===== MODERN DETAIL MODAL ===== -->
@@ -421,23 +407,23 @@
           <h2 class="modal-title" id="modalTitle"></h2>
           <div class="modal-meta">
             <span class="meta-item"><i class="fas fa-calendar"></i> <span id="modalDate"></span></span>
-            <span class="meta-item"><i class="fas fa-shield-check"></i> Terverifikasi</span>
+            <span class="meta-item"><i class="fas fa-shield-check"></i> Verified</span>
           </div>
         </div>
         
         <div class="info-body">
           <div class="description-section">
-            <h4><i class="fas fa-align-left"></i> Deskripsi</h4>
+            <h4><i class="fas fa-align-left"></i> Description</h4>
             <p id="modalDescription"></p>
           </div>
           
           <div class="features-section">
-            <h4><i class="fas fa-star"></i> Fitur Unggulan</h4>
+            <h4><i class="fas fa-star"></i> Key Features</h4>
             <div class="feature-list">
-              <div class="feature-item-modal"><i class="fas fa-download"></i> Download Instan</div>
-              <div class="feature-item-modal"><i class="fas fa-shield-check"></i> Dokumen Resmi</div>
-              <div class="feature-item-modal"><i class="fas fa-award"></i> Kualitas Terjamin</div>
-              <div class="feature-item-modal"><i class="fas fa-clock"></i> Update Berkala</div>
+              <div class="feature-item-modal"><i class="fas fa-download"></i> Instant Download</div>
+              <div class="feature-item-modal"><i class="fas fa-shield-check"></i> Official Document</div>
+              <div class="feature-item-modal"><i class="fas fa-award"></i> Guaranteed Quality</div>
+              <div class="feature-item-modal"><i class="fas fa-clock"></i> Regular Updates</div>
             </div>
           </div>
         </div>
@@ -445,11 +431,11 @@
         <div class="modal-actions">
           <button class="btn btn-download-modal" id="modalDownloadBtn">
             <i class="fas fa-download"></i>
-            <span>Download Sekarang</span>
+            <span>Download Now</span>
           </button>
           <button class="btn btn-preview-modal" id="modalPreviewBtn">
             <i class="fas fa-eye"></i>
-            <span>Preview Dokumen</span>
+            <span>Preview Document</span>
           </button>
         </div>
       </div>
@@ -457,61 +443,64 @@
   </div>
 </div>
 
+
 <!-- ===== STANDARDS & COMPLIANCE ===== -->
 <section class="standards-section">
     <div class="container">
         <div class="section-head" data-aos="fade-up">
-            <h2 class="section-title">Standar & Kepatuhan</h2>
-            <p class="section-sub">Referensi ke standar yang relevan untuk aplikasi industri Anda.</p>
+            <h2 class="section-title">Standards & Compliance</h2>
+            <p class="section-sub">References to relevant standards for your industrial applications.</p>
         </div>
         <div class="std-grid" data-aos="fade-up">
             <div class="std-card">
                 <div class="std-icon"><i class="fas fa-industry"></i></div>
                 <h4>ASTM</h4>
-                <p>Spesifikasi material & metode uji terkait insulasi.</p>
+                <p>Material specifications & testing methods related to insulation.</p>
             </div>
             <div class="std-card">
                 <div class="std-icon"><i class="fas fa-fire"></i></div>
                 <h4>FM/UL</h4>
-                <p>Sertifikasi keselamatan kebakaran & performa.</p>
+                <p>Fire safety & performance certifications.</p>
             </div>
             <div class="std-card">
                 <div class="std-icon"><i class="fas fa-leaf"></i></div>
                 <h4>ISO</h4>
-                <p>Manajemen mutu, lingkungan, & keselamatan.</p>
+                <p>Quality, environmental & safety management.</p>
             </div>
             <div class="std-card">
                 <div class="std-icon"><i class="fas fa-helmet-safety"></i></div>
                 <h4>OSHA</h4>
-                <p>Praktik kerja aman dalam instalasi di lapangan.</p>
+                <p>Safe work practices for field installation.</p>
             </div>
         </div>
     </div>
 </section>
 
+
 <!-- ===== FAQ ===== -->
 <section class="faq-section">
     <div class="container">
         <div class="section-head" data-aos="fade-up">
-            <h2 class="section-title">Pertanyaan Umum</h2>
-            <p class="section-sub">Jawaban cepat untuk hal-hal yang sering ditanyakan.</p>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-sub">Quick answers to common inquiries.</p>
         </div>
         <div class="faq-list" data-aos="fade-up">
             <details class="faq-item" {{ request('open')==='format' ? 'open' : '' }}>
-                <summary><i class="fas fa-file-circle-question me-2"></i>Format dokumen apa yang tersedia?</summary>
-                <div class="faq-body">Sebagian besar dokumen tersedia dalam format PDF, disertai gambar pendukung dan kadang XLS/DOC untuk spesifikasi teknis.</div>
+                <summary><i class="fas fa-file-circle-question me-2"></i>What document formats are available?</summary>
+                <div class="faq-body">Most documents are available in PDF format, with supporting images and occasionally XLS/DOC for technical specifications.</div>
             </details>
             <details class="faq-item">
-                <summary><i class="fas fa-rotate me-2"></i>Seberapa sering koleksi diperbarui?</summary>
-                <div class="faq-body">Kami memperbarui katalog secara berkala. Lihat cap tanggal di setiap item untuk mengetahui rilis terbaru.</div>
+                <summary><i class="fas fa-rotate me-2"></i>How often is the collection updated?</summary>
+                <div class="faq-body">We update the catalog regularly. Check the date stamp on each item to see the latest release.</div>
             </details>
             <details class="faq-item">
-                <summary><i class="fas fa-lock me-2"></i>Apakah dokumen resmi?</summary>
-                <div class="faq-body">Ya, semua dokumen bersumber dari vendor/pabrikan dan tim QC kami memastikan keasliannya.</div>
+                <summary><i class="fas fa-lock me-2"></i>Are the documents official?</summary>
+                <div class="faq-body">Yes, all documents come from vendors/manufacturers, and our QC team ensures their authenticity.</div>
             </details>
         </div>
     </div>
 </section>
+
 
 
 <!-- ===== CTA ===== -->
@@ -519,54 +508,58 @@
     <div class="container">
         <div class="cta-content text-center" data-aos="fade-up">
             <div class="cta-icon"><i class="fas fa-headset"></i></div>
-            <h2 class="cta-title">Butuh Bantuan Memilih Produk?</h2>
-            <p class="cta-description">Tim ahli kami siap membantu Anda memilih produk yang tepat sesuai kebutuhan proyek Anda.</p>
+            <h2 class="cta-title">Need Help Choosing a Product?</h2>
+            <p class="cta-description">Our expert team is ready to help you select the right product for your project needs.</p>
             <div class="cta-actions">
-                <a href="{{ route('en.contact') }}" class="btn btn-primary btn-lg me-3"><i class="fas fa-phone"></i> Konsultasi Gratis</a>
-                <a href="{{ route('en.products') }}" class="btn btn-outline-primary btn-lg"><i class="fas fa-cubes"></i> Lihat Produk</a>
+                <a href="{{ route('en.contact') }}" class="btn btn-primary btn-lg me-3"><i class="fas fa-phone"></i> Free Consultation</a>
+                <a href="{{ route('en.products') }}" class="btn btn-outline-primary btn-lg"><i class="fas fa-cubes"></i> View Products</a>
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- ===== NEWSLETTER / UPDATE SUBSCRIBE ===== -->
 <section class="newsletter">
   <div class="container">
     <div class="newsletter-inner" data-aos="fade-up">
       <div class="nl-text">
-        <h3>Dapatkan Update Katalog</h3>
-        <p>Kami kirimkan rilis dokumen terbaru langsung ke email Anda.</p>
+        <h3>Get Catalog Updates</h3>
+        <p>We send the latest document releases directly to your email.</p>
       </div>
       <form id="nl-form" class="nl-form">
-        <input type="email" placeholder="Email Anda" required>
+        <input type="email" placeholder="Your Email" required>
         <button type="submit" class="btn btn-primary">
-          <i class="fas fa-envelope-open-text me-2"></i>Berlangganan
+          <i class="fas fa-envelope-open-text me-2"></i>Subscribe
         </button>
       </form>
     </div>
   </div>
 </section>
 
+
 <!-- ===== CUSTOM ALERT MODAL ===== -->
 <div id="custom-alert" class="custom-alert hidden">
   <div class="custom-alert-box">
     <span class="custom-alert-icon">📩</span>
-    <h4>Terima Kasih!</h4>
-    <p>Anda berhasil berlangganan update katalog.</p>
-    <button id="close-alert">Tutup</button>
+    <h4>Thank You!</h4>
+    <p>You have successfully subscribed to catalog updates.</p>
+    <button id="close-alert">Close</button>
   </div>
 </div>
+
 
 <!-- ===== MINI CTA ===== -->
 <section class="mini-cta">
     <div class="container mini-cta-inner" data-aos="fade-up">
         <div class="mini-cta-text">
-            <h3>Kirim Permintaan Dokumen</h3>
-            <p>Tidak menemukan yang Anda cari? Kirimkan daftar dokumen yang Anda butuhkan—kami bantu carikan.</p>
+            <h3>Send a Document Request</h3>
+            <p>Can't find what you're looking for? Send us the list of documents you need—we'll help you find them.</p>
         </div>
-        <a href="{{ route('en.contact') }}" class="btn btn-outline-primary btn-lg"><i class="fas fa-paper-plane me-2"></i>Ajukan Permintaan</a>
+        <a href="{{ route('en.contact') }}" class="btn btn-outline-primary btn-lg"><i class="fas fa-paper-plane me-2"></i>Submit Request</a>
     </div>
 </section>
+
 
 <style>
   /* Enhanced Results Info Section */

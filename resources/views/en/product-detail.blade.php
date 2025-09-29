@@ -107,8 +107,8 @@
     <div class="container">
         <nav class="breadcrumb-nav" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/en') }}">Beranda</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('en.products') }}">Produk</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/en') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('en.products') }}">Products</a></li>
             </ol>
         </nav>
 
@@ -126,7 +126,7 @@
                 <div class="gallery-card glass card-contrast" data-aos="fade-right">
                     <div class="gallery-main">
                         @if($mainImage)
-                            <img id="mainImage" src="{{ $mainImage }}" alt="{{ $titleTxt }}" class="img-fluid lb-trigger" role="button" tabindex="0" aria-label="Perbesar gambar">
+                            <img id="mainImage" src="{{ $mainImage }}" alt="{{ $titleTxt }}" class="img-fluid lb-trigger" role="button" tabindex="0" aria-label="Enlarge image">
                         @else
                             <div class="no-image">
                                 <i class="fas fa-image"></i>
@@ -136,17 +136,17 @@
                         <span class="img-skeleton" aria-hidden="true"></span>
 
                         @if($thumbs->count() > 1)
-                        <button class="nav-btn nav-prev" type="button" aria-label="Gambar sebelumnya">
+                        <button class="nav-btn nav-prev" type="button" aria-label="Previous image">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <button class="nav-btn nav-next" type="button" aria-label="Gambar berikutnya">
+                        <button class="nav-btn nav-next" type="button" aria-label="Next image">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                         @endif
                     </div>
 
                     @if($thumbs->count() > 1)
-                    <div class="gallery-indicators" role="tablist" aria-label="Indikator galeri">
+                    <div class="gallery-indicators" role="tablist" aria-label="Gallery indicators">
                         @foreach($thumbs as $i => $t)
                             <button class="dot {{ $i===0?'active':'' }}" data-index="{{ $i }}" aria-label="Slide {{ $i+1 }}" aria-current="{{ $i===0?'true':'false' }}"></button>
                         @endforeach
@@ -154,9 +154,9 @@
                     @endif
 
                     @if($thumbs->count() > 1)
-                    <div class="gallery-thumbs" role="listbox" aria-label="Thumbnail gambar produk">
+                    <div class="gallery-thumbs" role="listbox" aria-label="Product image thumbnails">
                         @foreach($thumbs as $i => $t)
-                        <button class="thumb {{ $i===0?'active':'' }}" data-src="{{ $t }}" aria-label="Gambar {{ $i+1 }}">
+                        <button class="thumb {{ $i===0?'active':'' }}" data-src="{{ $t }}" aria-label="Image {{ $i+1 }}">
                             <img src="{{ $t }}" alt="thumb {{ $i+1 }}">
                         </button>
                         @endforeach
@@ -203,7 +203,7 @@
 
                     <div class="cta-row">
                         <a href="#" id="openMarketingModal" class="btn btn-primary btn-lg flex-fill">
-                            <i class="fas fa-phone"></i> Konsultasi / Penawaran
+                            <i class="fas fa-phone"></i> Consultation / Quotation
                         </a>
                     </div>
 
@@ -211,19 +211,19 @@
             </div>
         </div>
 
-        {{-- ====== SPESIFIKASI (GRID) ====== --}}
+        {{-- ====== SPECIFICATIONS (GRID) ====== --}}
         <div class="row mt-4">
             <div class="col-12">
                 <div class="spec-card glass card-contrast" data-aos="fade-up" aria-labelledby="specTitle">
                     <div class="spec-head">
                         <div class="spec-head-left">
-                            <div class="spec-chip">Spesifikasi</div>
-                            <h3 id="specTitle" class="spec-title">Detail Spesifikasi Produk</h3>
-                            <p class="spec-subtitle">Klik ikon salin untuk menyalin nilai per item, atau salin semua.</p>
+                            <div class="spec-chip">Specifications</div>
+                            <h3 id="specTitle" class="spec-title">Product Specification Details</h3>
+                            <p class="spec-subtitle">Click the copy icon to copy individual values, or copy all.</p>
                         </div>
                         <div class="spec-head-right">
-                            <button type="button" class="btn btn-outline-contrast btn-sm spec-copy-all" title="Salin seluruh spesifikasi">
-                                <i class="fas fa-clipboard"></i> Salin Semua
+                            <button type="button" class="btn btn-outline-contrast btn-sm spec-copy-all" title="Copy all specifications">
+                                <i class="fas fa-clipboard"></i> Copy All
                             </button>
                         </div>
                     </div>
@@ -236,9 +236,9 @@
                                     <div class="tile-head">
                                         <div class="tile-key-wrap">
                                             <span class="tile-bullet" aria-hidden="true"></span>
-                                            <span class="tile-key">Atribut {{ $i+1 }}</span>
+                                            <span class="tile-key">Attribute {{ $i+1 }}</span>
                                         </div>
-                                        <button class="tile-copy" type="button" data-text="{{ $val }}" aria-label="Salin Atribut {{ $i+1 }}" title="Salin nilai">
+                                        <button class="tile-copy" type="button" data-text="{{ $val }}" aria-label="Copy Attribute {{ $i+1 }}" title="Copy value">
                                             <i class="fas fa-copy" aria-hidden="true"></i>
                                         </button>
                                     </div>
@@ -249,34 +249,34 @@
                             @endforeach
                         </div>
                     @else
-                        <p class="muted px-3 pb-3">Spesifikasi belum tersedia.</p>
+                        <p class="muted px-3 pb-3">Specifications not available yet.</p>
                     @endif
                 </div>
             </div>
         </div>
 
-        {{-- ================= PRODUK LAINNYA (1 BARIS, TANPA SCROLLBAR) ================= --}}
+        {{-- ================= OTHER PRODUCTS (1 ROW, NO SCROLLBAR) ================= --}}
         @if($hasOthers)
         <div class="row mt-4">
             <div class="col-12">
                 <div class="strip-card glass card-contrast" data-aos="fade-up">
                     <div class="strip-head">
-                        <h3 class="strip-title"><i class="fas fa-fire"></i> Produk Lainnya</h3>
+                        <h3 class="strip-title"><i class="fas fa-fire"></i> Other Products</h3>
                         <div class="strip-actions">
-                            <a href="{{ route('en.products') }}" class="btn btn-outline-contrast btn-sm">Lihat Semua</a>
+                            <a href="{{ route('en.products') }}" class="btn btn-outline-contrast btn-sm">View All</a>
                             <div class="strip-nav">
-                                <button id="otherPrev" class="nav-btn mini" type="button" aria-label="Gulir kiri"><i class="fas fa-chevron-left"></i></button>
-                                <button id="otherNext" class="nav-btn mini" type="button" aria-label="Gulir kanan"><i class="fas fa-chevron-right"></i></button>
+                                <button id="otherPrev" class="nav-btn mini" type="button" aria-label="Scroll left"><i class="fas fa-chevron-left"></i></button>
+                                <button id="otherNext" class="nav-btn mini" type="button" aria-label="Scroll right"><i class="fas fa-chevron-right"></i></button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Satu baris horizontal -->
-                    <div id="otherStrip" class="strip-grid" role="listbox" aria-label="Produk lainnya">
+                    <!-- Single horizontal row -->
+                    <div id="otherStrip" class="strip-grid" role="listbox" aria-label="Other products">
                         @foreach($otherProducts as $index => $op)
                             @php
-                                $oCatSlug = optional(optional($op->subcategory)->category)->slug ?? optional($op->category)->slug ?? 'kategori';
-                                $oSubSlug = optional($op->subcategory)->slug ?? 'umum';
+                                $oCatSlug = optional(optional($op->subcategory)->category)->slug ?? optional($op->category)->slug ?? 'category';
+                                $oSubSlug = optional($op->subcategory)->slug ?? 'general';
                                 $oUrl = route('en.product.detail', ['category'=>$oCatSlug,'subcategory'=>$oSubSlug,'product'=>$op->slug]);
                                 $oImg = $imgPublic(data_get($op, 'images.0.image_path') ?: data_get($op,'featured_image') ?: data_get($op,'image_path'));
                             @endphp
@@ -305,16 +305,17 @@
     </div>
 </section>
 
+
 <!-- Modal Marketing -->
 <div id="marketingModal" class="modal-overlay" hidden>
   <div class="modal-card card-contrast" role="dialog" aria-modal="true" aria-labelledby="marketingTitle">
-    <button class="modal-close" type="button" aria-label="Tutup">&times;</button>
+    <button class="modal-close" type="button" aria-label="Close">&times;</button>
 
     <div class="modal-header">
       <div class="modal-header-left">
-        <div class="modal-chip">Konsultasi / Penawaran</div>
-        <h3 id="marketingTitle" class="modal-title" tabindex="-1">Hubungi Tim Marketing</h3>
-        <p class="modal-subtitle">Pilih kontak untuk chat WhatsApp — pesan otomatis menyertakan <strong>{{ $titleTxt }}</strong> & tautan produk ini.</p>
+        <div class="modal-chip">Consultation / Quotation</div>
+        <h3 id="marketingTitle" class="modal-title" tabindex="-1">Contact Marketing Team</h3>
+        <p class="modal-subtitle">Select a contact for WhatsApp chat — the automatic message will include <strong>{{ $titleTxt }}</strong> & this product link.</p>
       </div>
       <div class="modal-header-right">
         <i class="fas fa-headset"></i>
@@ -337,12 +338,12 @@
             <div class="contact-actions">
                 @if($m['wa'])
                 <a class="btn btn-primary btn-sm w-100" href="{{ $m['wa'] }}" target="_blank" rel="noopener">
-                    <i class="fab fa-whatsapp"></i> Chat WhatsApp
+                    <i class="fab fa-whatsapp"></i> WhatsApp Chat
                 </a>
                 @endif
                 @if($m['tel'])
                 <a class="btn btn-outline-contrast btn-sm w-100" href="{{ $m['tel'] }}">
-                    <i class="fas fa-phone-alt"></i> Panggil
+                    <i class="fas fa-phone-alt"></i> Call
                 </a>
                 @endif
             </div>
@@ -351,6 +352,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- LIGHTBOX -->
 <div id="imageLightbox" class="image-lightbox" role="dialog" aria-modal="true" aria-label="Pratinjau gambar" aria-hidden="true" hidden>

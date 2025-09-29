@@ -25,7 +25,7 @@
     $selectedCategory = optional(collect($categories)->firstWhere('slug', $paramCategory));
     $heroDescription = trim((string)($selectedCategory->meta_description ?? ''));
     if ($heroDescription === '') {
-        $heroDescription = 'Temukan produk insulasi industri berkualitas tinggi untuk berbagai kebutuhan aplikasi Anda';
+        $heroDescription = 'Find high-quality industrial insulation products for a wide range of application needs';
     }
 
     // Kumpulan subkategori (untuk grid & nav saat kategori aktif)
@@ -45,8 +45,8 @@
     <div class="container">
         <nav class="breadcrumb-nav" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/en') }}">Beranda</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('en.products') }}">Produk</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/en') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('en.products') }}">Products</a></li>
             </ol>
         </nav>
 
@@ -57,18 +57,19 @@
     </div>
 </section>
 
+
 <section class="products-section py-5">
     <div class="container">
         <div class="row g-3 g-lg-4">
             <!-- Sidebar: Single Navigation List -->
             <div class="col-lg-3">
                 <aside class="filters-sidebar glass">
-                    <h3 class="filter-title">Kategori</h3>
+                    <h3 class="filter-title">Category</h3>
 
                     <nav class="nav-card">
                         <ul class="nav-list">
                             @if(!$paramCategory)
-                                {{-- Mode awal: tampil daftar kategori --}}
+                                {{-- Initial mode: show category list --}}
                                 @foreach($categories as $cat)
                                     <li>
                                         <a class="nav-link-item {{ $paramCategory===$cat->slug ? 'active' : '' }}"
@@ -79,11 +80,11 @@
                                     </li>
                                 @endforeach
                             @else
-                                {{-- Sudah pilih kategori: tombol kembali + daftar subkategori --}}
+                                {{-- Category selected: back button + subcategory list --}}
                                 <li class="nav-back">
                                     <a class="nav-link-item" href="{{ route('en.products') }}">
                                         <i class="fas fa-arrow-left"></i>
-                                        <span class="label">Semua Kategori</span>
+                                        <span class="label">All Categories</span>
                                     </a>
                                 </li>
 
@@ -96,19 +97,19 @@
                                         </a>
                                     </li>
                                 @empty
-                                    <li class="nav-empty">Belum ada subkategori.</li>
+                                    <li class="nav-empty">No subcategories yet.</li>
                                 @endforelse
                             @endif
                         </ul>
                     </nav>
 
-                    {{-- Link cepat opsional (tetap simple) --}}
+                    {{-- Optional quick links --}}
                     <div class="quick-links mt-3">
                         <a href="{{ route('en.catalog.page') }}" class="quick-link">
-                            <i class="fas fa-download"></i> Download Katalog
+                            <i class="fas fa-download"></i> Download Catalog
                         </a>
                         <a href="{{ route('en.contact') }}" class="quick-link">
-                            <i class="fas fa-phone"></i> Konsultasi Produk
+                            <i class="fas fa-phone"></i> Product Consultation
                         </a>
                     </div>
                 </aside>
@@ -117,28 +118,25 @@
             <!-- Content -->
             <div class="col-lg-9">
                 @php
-                    // Mode produk aktif jika ada slug subcategory (route atau query)
                     $isSubMode = !empty($paramSub);
-
-                    // Subkategori list untuk grid jika belum pilih sub
                     $subs = $paramCategory ? $subsByCategory : $allSubs;
                     if ($paramCategory) {
                         $subs = $subs->filter(fn($s) => optional($s->category)->slug === $paramCategory);
                     }
                 @endphp
 
-                <!-- Toolbar (tetap simple) -->
+                <!-- Toolbar -->
                 <div class="products-toolbar glass">
                     <div class="toolbar-left">
                         @if(!$isSubMode)
-                            <span class="results-count">Subkategori: {{ $subs->count() }}</span>
+                            <span class="results-count">Subcategories: {{ $subs->count() }}</span>
                         @else
                             <span class="results-count">
-                                Produk: {{ $products->count() }} / {{ $products->total() }}
+                                Products: {{ $products->count() }} / {{ $products->total() }}
                             </span>
                             @if(request('search'))
                             <span class="search-info">
-                                untuk "<strong>{{ request('search') }}</strong>"
+                                for "<strong>{{ request('search') }}</strong>"
                             </span>
                             @endif
                         @endif
@@ -148,15 +146,14 @@
                         @if($isSubMode)
                         <div class="sort-dropdown">
                             <select name="sort" class="form-select form-select-sm" onchange="sortProducts(this.value)">
-                                <option value="newest" {{ request('sort') === 'newest' ? 'selected' : '' }}>Terbaru</option>
-                                <option value="name" {{ request('sort') === 'name' ? 'selected' : '' }}>Nama A–Z</option>
-                                <option value="price_low" {{ request('sort') === 'price_low' ? 'selected' : '' }}>Harga Terendah</option>
-                                <option value="price_high" {{ request('sort') === 'price_high' ? 'selected' : '' }}>Harga Tertinggi</option>
+                                <option value="newest" {{ request('sort') === 'newest' ? 'selected' : '' }}>Newest</option>
+                                <option value="name" {{ request('sort') === 'name' ? 'selected' : '' }}>Name A–Z</option>
+                                <option value="price_low" {{ request('sort') === 'price_low' ? 'selected' : '' }}>Lowest Price</option>
+                                <option value="price_high" {{ request('sort') === 'price_high' ? 'selected' : '' }}>Highest Price</option>
                             </select>
                         </div>
 
                         <div class="view-toggle">
-                            {{-- Default LIST pada mode produk (gambar kiri, info kanan) --}}
                             <button type="button" class="view-btn" data-view="grid" onclick="toggleView('grid')" title="Grid">
                                 <i class="fas fa-th"></i>
                             </button>
@@ -171,7 +168,7 @@
                 <!-- Grid -->
                 <div class="products-container">
                     @if(!$isSubMode)
-                        {{-- ===== SUBCATEGORY GRID (tetap grid) ===== --}}
+                        {{-- ===== SUBCATEGORY GRID ===== --}}
                         @if($subs->count() > 0)
                         <div class="products-grid" id="subcategories-grid">
                             @foreach($subs as $index => $sub)
@@ -205,7 +202,7 @@
                                         <div class="product-overlay">
                                             <div class="overlay-actions">
                                                 <a href="{{ $subUrl }}" class="btn btn-primary btn-sm">
-                                                    <i class="fas fa-eye"></i> Lihat Produk
+                                                    <i class="fas fa-eye"></i> View Products
                                                 </a>
                                             </div>
                                         </div>
@@ -217,16 +214,16 @@
                                         </h3>
 
                                         <p class="product-description">
-                                            {{ Str::limit($sub->meta_description ?? 'Eksplor beragam produk pada subkategori ini.', 120) }}
+                                            {{ Str::limit($sub->meta_description ?? 'Explore a variety of products in this subcategory.', 120) }}
                                         </p>
 
                                         <div class="product-actions">
                                             <a href="{{ url('en' . parse_url($subUrl, PHP_URL_PATH)) }}" class="btn btn-outline-primary btn-sm flex-fill">
                                                 <i class="fas fa-boxes-stacked"></i>
                                                 @if(!is_null($prodCount))
-                                                    Lihat Produk ({{ $prodCount }})
+                                                    View Products ({{ $prodCount }})
                                                 @else
-                                                    Lihat Produk
+                                                    View Products
                                                 @endif
                                             </a>
                                         </div>
@@ -241,29 +238,29 @@
                                     <div class="no-products-icon">
                                         <i class="fas fa-folder-open"></i>
                                     </div>
-                                    <h3>Subkategori tidak ditemukan</h3>
-                                    <p>Silakan pilih kategori lain atau lihat semua produk.</p>
+                                    <h3>No Subcategories Found</h3>
+                                    <p>Please select another category or view all products.</p>
                                     <div class="no-products-actions">
                                         <a href="{{ route('en.products') }}" class="btn btn-primary">
-                                            <i class="fas fa-arrow-left"></i> Lihat Semua
+                                            <i class="fas fa-arrow-left"></i> View All
                                         </a>
                                         <a href="{{ route('en.contact') }}" class="btn btn-outline-primary">
-                                            <i class="fas fa-phone"></i> Hubungi Kami
+                                            <i class="fas fa-phone"></i> Contact Us
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         @endif
                     @else
-                        {{-- ===== PRODUCT LIST (gambar kiri, penjelasan kanan) ===== --}}
+                        {{-- ===== PRODUCT LIST ===== --}}
                         @if($products->count() > 0)
                         <div class="products-grid list-view" id="products-grid" data-default-view="list">
                             @foreach($products as $index => $product)
                             @php
                                 $catSlug = optional(optional($product->subcategory)->category)->slug
                                            ?? optional($product->category)->slug
-                                           ?? 'kategori';
-                                $subSlug = optional($product->subcategory)->slug ?? 'umum';
+                                           ?? 'category';
+                                $subSlug = optional($product->subcategory)->slug ?? 'general';
 
                                 $detailUrl = route('en.product.detail', [
                                     'category'    => $catSlug,
@@ -281,7 +278,6 @@
                                     $brandList = array_filter(array_map('trim', preg_split('/[;,|]/', $product->brands)));
                                 }
 
-                                // Kumpulkan hingga 10 atribut (attr1..attr10)
                                 $attrs = collect(range(1,10))
                                     ->map(fn($i) => $product->{'attr'.$i} ?? null)
                                     ->filter()
@@ -304,7 +300,7 @@
                                         <div class="product-overlay">
                                             <div class="overlay-actions">
                                                 <a href="{{ $detailUrl }}" class="btn btn-primary btn-sm">
-                                                    <i class="fas fa-eye"></i> Lihat Detail
+                                                    <i class="fas fa-eye"></i> View Details
                                                 </a>
                                             </div>
                                         </div>
@@ -341,7 +337,6 @@
                                             $desc = $product->meta_description ?: ($product->attr1 ?? $product->attr2 ?? '');
                                         @endphp
 
-                                        {{-- ATTRIBUTES QUICK CHIPS (hingga 10, teks hitam) --}}
                                         @if($attrs->count())
                                         <div class="mb-2 attrs-wrap">
                                             @foreach($attrs as $a)
@@ -352,13 +347,12 @@
                                         </div>
                                         @endif
 
-                                        {{-- HARGA DIHILANGKAN SESUAI PERMINTAAN --}}
                                         <div class="product-actions">
                                             <a href="{{ $detailUrl }}" class="btn btn-outline-primary btn-sm flex-fill">
-                                                <i class="fas fa-info-circle"></i> Detail Produk
+                                                <i class="fas fa-info-circle"></i> Product Details
                                             </a>
                                             <a href="{{ route('en.contact') }}?product={{ $product->slug }}" class="btn btn-primary btn-sm flex-fill">
-                                                <i class="fas fa-phone"></i> Hubungi
+                                                <i class="fas fa-phone"></i> Contact
                                             </a>
                                         </div>
                                     </div>
@@ -376,14 +370,14 @@
                                 <div class="no-products-icon">
                                     <i class="fas fa-search"></i>
                                 </div>
-                                <h3>Produk tidak ditemukan</h3>
-                                <p>Coba ubah pilihan subkategori.</p>
+                                <h3>No Products Found</h3>
+                                <p>Try changing the subcategory selection.</p>
                                 <div class="no-products-actions">
                                     <a href="{{ route('en.products.category', $paramCategory) }}" class="btn btn-primary">
-                                        <i class="fas fa-arrow-left"></i> Kembali ke Subkategori
+                                        <i class="fas fa-arrow-left"></i> Back to Subcategories
                                     </a>
                                     <a href="{{ route('en.contact') }}" class="btn btn-outline-primary">
-                                        <i class="fas fa-phone"></i> Hubungi Kami
+                                        <i class="fas fa-phone"></i> Contact Us
                                     </a>
                                 </div>
                             </div>
@@ -395,6 +389,7 @@
         </div>
     </div>
 </section>
+
 
 <style>
 /* =====================================================
