@@ -358,98 +358,82 @@
 
 
 <!-- Services Section -->
-<section class="services-section">
-    <div class="container">
-        <div class="services-header">
-            <div class="section-badge">
-                <i class="fas fa-hand-holding-heart"></i>
-                <span>Tali Rejeki</span>
-            </div>
-            <h2 class="section-title">Solusi Lengkap untuk Semua Kebutuhan Anda</h2>
-            <p class="section-description">
-                Tali Rejeki hadir dengan berbagai layanan profesional dan terpercaya. 
-                Dari konsultasi, distribusi, hingga kualitas terjamin dengan harga yang bersahabat.
-            </p>
-        </div>
-
-        <div class="services-grid">
-            <div class="service-item">
-                <div class="service-icon">
-                    <i class="fas fa-hands-helping"></i>
-                </div>
-                <h4>Bimbingan Profesional</h4>
-                <p>Tim ahli siap membantu Anda dengan solusi tepat dan cepat.</p>
-            </div>
-
-            <div class="service-item">
-                <div class="service-icon">
-                    <i class="fas fa-comments"></i>
-                </div>
-                <h4>Konsultasi & Saran</h4>
-                <p>Dapatkan rekomendasi yang sesuai kebutuhan bisnis dan proyek Anda.</p>
-            </div>
-
-            <div class="service-item">
-                <div class="service-icon">
-                    <i class="fas fa-truck"></i>
-                </div>
-                <h4>Distribusi Luas</h4>
-                <p>Layanan pengiriman cepat ke seluruh wilayah Indonesia.</p>
-            </div>
-
-            <div class="service-item">
-                <div class="service-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h4>Kualitas Terjamin</h4>
-                <p>Setiap layanan dijalankan dengan standar profesional tinggi.</p>
-            </div>
-
-            <div class="service-item">
-                <div class="service-icon">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <h4>Tepat Waktu</h4>
-                <p>Menjaga jadwal proyek dan layanan agar selalu on-time.</p>
-            </div>
-
-            <div class="service-item">
-                <div class="service-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h4>Tim Profesional</h4>
-                <p>Didukung tenaga ahli berpengalaman dan berdedikasi.</p>
-            </div>
-
-            <div class="service-item">
-                <div class="service-icon">
-                    <i class="fas fa-tags"></i>
-                </div>
-                <h4>Harga Terjangkau</h4>
-                <p>Menawarkan layanan dengan biaya kompetitif tanpa mengurangi kualitas.</p>
-            </div>
-
-            <div class="service-item">
-                <div class="service-icon">
-                    <i class="fas fa-th-large"></i>
-                </div>
-                <h4>Layanan Lengkap</h4>
-                <p>Satu tempat dengan banyak pilihan layanan sesuai kebutuhan Anda.</p>
-            </div>
-        </div>
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="services-header fade-up">
+      <div class="section-badge">
+        <i class="fas fa-hand-holding-heart"></i>
+        <span>Tali Rejeki</span>
+      </div>
+      <h2 class="section-title">Solusi Lengkap untuk Semua Kebutuhan Anda</h2>
+      <p class="section-description">
+        Tali Rejeki hadir dengan berbagai layanan profesional dan terpercaya. 
+        Dari konsultasi, distribusi, hingga kualitas terjamin dengan harga yang bersahabat.
+      </p>
     </div>
+
+    <div class="services-grid">
+      <div class="service-item fade-up">
+        <div class="service-icon"><i class="fas fa-hands-helping"></i></div>
+        <h4>Bimbingan Profesional</h4>
+        <p>Tim ahli siap membantu Anda dengan solusi tepat dan cepat.</p>
+      </div>
+
+      <div class="service-item fade-up">
+        <div class="service-icon"><i class="fas fa-comments"></i></div>
+        <h4>Konsultasi & Saran</h4>
+        <p>Dapatkan rekomendasi yang sesuai kebutuhan bisnis dan proyek Anda.</p>
+      </div>
+
+      <div class="service-item fade-up">
+        <div class="service-icon"><i class="fas fa-truck"></i></div>
+        <h4>Distribusi Luas</h4>
+        <p>Layanan pengiriman cepat ke seluruh wilayah Indonesia.</p>
+      </div>
+
+      <div class="service-item fade-up">
+        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+        <h4>Kualitas Terjamin</h4>
+        <p>Setiap layanan dijalankan dengan standar profesional tinggi.</p>
+      </div>
+
+      <div class="service-item fade-up">
+        <div class="service-icon"><i class="fas fa-clock"></i></div>
+        <h4>Tepat Waktu</h4>
+        <p>Menjaga jadwal proyek dan layanan agar selalu on-time.</p>
+      </div>
+
+      <div class="service-item fade-up">
+        <div class="service-icon"><i class="fas fa-users"></i></div>
+        <h4>Tim Profesional</h4>
+        <p>Didukung tenaga ahli berpengalaman dan berdedikasi.</p>
+      </div>
+
+      <div class="service-item fade-up">
+        <div class="service-icon"><i class="fas fa-tags"></i></div>
+        <h4>Harga Terjangkau</h4>
+        <p>Menawarkan layanan dengan biaya kompetitif tanpa mengurangi kualitas.</p>
+      </div>
+
+      <div class="service-item fade-up">
+        <div class="service-icon"><i class="fas fa-th-large"></i></div>
+        <h4>Layanan Lengkap</h4>
+        <p>Satu tempat dengan banyak pilihan layanan sesuai kebutuhan Anda.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 
 <!-- Our Brands Section -->
-<section id="brands" class="brands-section py-5">
+<section id="brands" class="brands-section py-5 fade-section">
   <div class="container text-center">
-    <div class="section-badge mb-3">
+    <div class="section-badge mb-3 fade-up">
       <i class="fas fa-star"></i>
       <span>merek kami</span>
     </div>
-    <h2 class="section-title">Kami Bekerja Sama Dengan Brand Terkemuka</h2>
-    <p class="section-description">
+    <h2 class="section-title fade-up">Kami Bekerja Sama Dengan Brand Terkemuka</h2>
+    <p class="section-description fade-up">
       Berikut adalah beberapa brand yang telah mempercayai kami.
     </p>
 
@@ -459,17 +443,17 @@
         shuffle($brands); // acak urutan
       @endphp
 
-      <div class="brands-slider slider-{{ $row }}">
+      <div class="brands-slider slider-{{ $row }} fade-up">
         <div class="brands-track">
           @foreach ($brands as $i)
-            <div class="brand-slide">
+            <div class="brand-slide fade-stagger">
               <img src="{{ asset('img/brands/' . $i . '.png') }}" alt="Brand {{ $i }}">
             </div>
           @endforeach
 
           <!-- Duplicate untuk looping mulus -->
           @foreach ($brands as $i)
-            <div class="brand-slide">
+            <div class="brand-slide fade-stagger">
               <img src="{{ asset('img/brands/' . $i . '.png') }}" alt="Brand {{ $i }}">
             </div>
           @endforeach
@@ -481,16 +465,16 @@
 
 
 <!-- ===== Proyek Kami Section ===== -->
-<section class="proyek-section" id="proyek">
+<section class="proyek-section fade-section" id="proyek">
   <div class="section-header">
-    <span class="section-badge"><i class="fas fa-briefcase"></i> Proyek Kami</span>
-    <h2 class="section-title">Proyek yang Sudah Kami Kerjakan</h2>
-    <p class="section-description">Beberapa proyek terbaik kami, menampilkan kualitas tinggi dan hasil memuaskan.</p>
+    <span class="section-badge fade-up"><i class="fas fa-briefcase"></i> Proyek Kami</span>
+    <h2 class="section-title fade-up">Proyek yang Sudah Kami Kerjakan</h2>
+    <p class="section-description fade-up">Beberapa proyek terbaik kami, menampilkan kualitas tinggi dan hasil memuaskan.</p>
   </div>
 
   <div class="proyek-grid">
     <!-- PT Rainbow Indah Carpet -->
-    <div class="proyek-item">
+    <div class="proyek-item fade-stagger">
       <a href="#" class="proyek-thumb">
         <img class="front" src="img/proyek/carpet1.jpg" alt="PT Rainbow Indah Carpet">
         <img class="back" src="img/proyek/carpet2.jpg" alt="PT Rainbow Indah Carpet">
@@ -499,7 +483,7 @@
     </div>
 
     <!-- Proyek Bambulogy Mansion -->
-    <div class="proyek-item">
+    <div class="proyek-item fade-stagger">
       <a href="#" class="proyek-thumb">
         <img class="front" src="img/proyek/bambulogy1.jpg" alt="Proyek Bambulogy Mansion">
         <img class="back" src="img/proyek/bambulogy2.jpg" alt="Proyek Bambulogy Mansion">
@@ -508,7 +492,7 @@
     </div>
 
     <!-- PT Dohsung Indonesia -->
-    <div class="proyek-item">
+    <div class="proyek-item fade-stagger">
       <a href="#" class="proyek-thumb">
         <img class="front" src="img/proyek/dongsu1.jpg" alt="PT Dohsung Indonesia">
         <img class="back" src="img/proyek/dongsu2.jpg" alt="PT Dohsung Indonesia">
@@ -517,7 +501,7 @@
     </div>
 
     <!-- PT Nikomas Gemilang -->
-    <div class="proyek-item">
+    <div class="proyek-item fade-stagger">
       <a href="#" class="proyek-thumb">
         <img class="front" src="img/proyek/nikomas1.jpg" alt="PT Nikomas Gemilang">
         <img class="back" src="img/proyek/nikomas2.jpg" alt="PT Nikomas Gemilang">
@@ -526,7 +510,7 @@
     </div>
 
     <!-- PT Data Centre -->
-    <div class="proyek-item">
+    <div class="proyek-item fade-stagger">
       <a href="#" class="proyek-thumb">
         <img class="front" src="img/proyek/centre1.jpg" alt="PT Data Centre">
         <img class="back" src="img/proyek/centre2.jpg" alt="PT Data Centre">
@@ -535,7 +519,7 @@
     </div>
 
     <!-- Proyek Ainul Hayat Sejahtera -->
-    <div class="proyek-item">
+    <div class="proyek-item fade-stagger">
       <a href="#" class="proyek-thumb">
         <img class="front" src="img/proyek/ainul1.jpg" alt="Proyek Ainul Hayat Sejahtera">
         <img class="back" src="img/proyek/ainul2.jpg" alt="Proyek Ainul Hayat Sejahtera">
@@ -544,7 +528,7 @@
     </div>
 
     <!-- Proyek Peredam Genset -->
-    <div class="proyek-item">
+    <div class="proyek-item fade-stagger">
       <a href="#" class="proyek-thumb">
         <img class="front" src="img/proyek/genset1.jpg" alt="Proyek Peredam Genset">
         <img class="back" src="img/proyek/genset2.jpg" alt="Proyek Peredam Genset">
@@ -553,7 +537,7 @@
     </div>
 
     <!-- Wika Palu PLTU -->
-    <div class="proyek-item">
+    <div class="proyek-item fade-stagger">
       <a href="#" class="proyek-thumb">
         <img class="front" src="img/proyek/wika1.jpg" alt="Wika Palu PLTU">
         <img class="back" src="img/proyek/wika2.jpg" alt="Wika Palu PLTU">
@@ -1296,26 +1280,25 @@
 /* Services Section */
   /* ---------------- Services Section Modern ---------------- */
   .services-section {
-      padding: 80px 20px;
-      color: var(--text-primary, #111);
-      transition: all 0.3s ease;
-      background: transparent; /* background dihapus */
+    padding: 80px 20px;
+    color: var(--text-primary, #111);
+    background: transparent;
+    transition: all 0.3s ease;
   }
 
-  /* Dark mode */
   body.dark-theme .services-section {
-      --text-primary: #f5f5f5;
-      --text-secondary: #cfd8dc;
+    --text-primary: #f5f5f5;
+    --text-secondary: #cfd8dc;
   }
 
   .services-section .container {
-      max-width: 1200px;
-      margin: 0 auto;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .services-header {
-      text-align: center;
-      margin-bottom: 60px;
+    text-align: center;
+    margin-bottom: 60px;
   }
 
   .section-badge {
@@ -1330,97 +1313,100 @@
     gap: 8px;
     box-shadow: 0 4px 14px rgba(255, 217, 61, 0.35);
   }
-
-  .section-badge i {
-      font-size: 18px;
-  }
+  .section-badge i { font-size: 18px; }
 
   .section-title {
-      font-size: clamp(28px, 4vw, 40px);
-      font-weight: 900;
-      margin-bottom: 16px;
-      color: var(--text-primary, #111);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 900;
+    margin-bottom: 16px;
+    color: var(--text-primary, #111);
   }
-
   .section-description {
-      font-size: clamp(14px, 1.6vw, 18px);
-      color: var(--text-secondary, #555);
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.6;
+    font-size: clamp(14px, 1.6vw, 18px);
+    color: var(--text-secondary, #555);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
   }
 
   /* Services Grid */
   .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
   }
 
   /* Service Item */
   .service-item {
-      background: var(--card-bg, #fff);
-      color: var(--text-primary, #111);
-      border-radius: 16px;
-      padding: 30px 20px;
-      text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+    background: var(--card-bg, #fff);
+    color: var(--text-primary, #111);
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;             /* animasi awal */
+    transform: translateY(40px);
   }
-
   body.dark-theme .service-item {
-      --card-bg: #1e1e1e;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    --card-bg: #1e1e1e;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
   }
-
   .service-item:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
   }
 
   .service-icon {
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      background: var(--accent, #ffb700);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 18px;
-      font-size: 26px;
-      color: #fff;
-      transition: transform 0.3s ease;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: var(--accent, #ffb700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    font-size: 26px;
+    color: #fff;
+    transition: transform 0.3s ease;
   }
-
-  .service-item:hover .service-icon {
-      transform: scale(1.1);
-  }
+  .service-item:hover .service-icon { transform: scale(1.1); }
 
   .service-item h4 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--text-primary, #111);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary, #111);
   }
-
   .service-item p {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: var(--text-secondary, #555);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary, #555);
   }
 
-  /* Responsive tweaks */
+  /* Animation */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+  }
+  .fade-up.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive */
   @media (max-width: 768px){
-      .services-section { padding: 60px 15px; }
-      .section-title { font-size: 26px; }
+    .services-section { padding: 60px 15px; }
+    .section-title { font-size: 26px; }
   }
 /* Services Section */
 
 
 /* OUR BRANDS */
-  /* === Our Brands Section === */
+  /* OUR BRANDS */
   .brands-section {
     padding: 80px 20px;
     background: transparent;
@@ -1499,7 +1485,6 @@
     100% { transform: translateX(0); }
   }
 
-  /* Arah animasi tiap baris */
   .slider-1 .brands-track {
     animation: scroll-left 28s linear infinite;
   }
@@ -1508,6 +1493,28 @@
   }
   .slider-3 .brands-track {
     animation: scroll-left 33s linear infinite;
+  }
+
+  /* === Animasi Masuk (Fade + Slide) === */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.9s ease;
+  }
+  .fade-up.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Animasi stagger untuk logo */
+  .fade-stagger {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+  .fade-stagger.show {
+    opacity: 1;
+    transform: translateY(0);
   }
 /* OUR BRANDS */
 
@@ -1649,6 +1656,27 @@
 
   .proyek-item:hover .proyek-title {
     color: var(--brand-2);
+  }
+
+  /* ===== Animasi Masuk (Fade + Slide) ===== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.9s ease;
+  }
+  .fade-up.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-stagger {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+  .fade-stagger.show {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* ===== Responsive ===== */
@@ -2527,6 +2555,7 @@
   fadeUps.forEach(el => observerFade.observe(el));
 </script>
 
+
 <script>
   // Simple Intersection Observer untuk animasi masuk
   document.addEventListener("DOMContentLoaded", () => {
@@ -2543,4 +2572,46 @@
     reveals.forEach(el => observer.observe(el));
   });
 </script>
+
+
+<script>
+  /* Fade-Up Animation with Delay */
+  const fadeUps = document.querySelectorAll('.fade-up');
+
+  const observerFade = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if(entry.isIntersecting){
+        setTimeout(() => {
+          entry.target.classList.add('show');
+        }, i * 150); // delay antar item
+        observerFade.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  fadeUps.forEach(el => observerFade.observe(el));
+</script>
+
+
+<script>
+  /* Intersection Observer untuk animasi masuk */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Kalau ada class fade-stagger → kasih delay per elemen
+        if (entry.target.classList.contains("fade-stagger")) {
+          const index = [...entry.target.parentNode.children].indexOf(entry.target);
+          entry.target.style.transitionDelay = `${(index % 10) * 0.1}s`;
+        }
+        entry.target.classList.add("show");
+      }
+    });
+  }, { threshold: 0.15 });
+
+  // Apply ke semua elemen
+  document.querySelectorAll('.fade-up, .fade-stagger').forEach((el) => observer.observe(el));
+</script>
+
+
+
 @endsection
