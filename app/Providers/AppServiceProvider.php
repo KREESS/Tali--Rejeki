@@ -23,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
     {
         // Register view composer for navbar component
         View::composer('components.navbar', NavbarComposer::class);
+        View::composer('en.components.navbar', NavbarComposer::class);
     }
 }

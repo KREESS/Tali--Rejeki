@@ -6,7 +6,7 @@
                 <div class="promo-text">
                     <i class="fas fa-fire text-warning me-2" aria-hidden="true"></i>
                     <span class="promo-message" data-translate="promo-text">
-                        Diskon hingga 25% untuk semua produk insulasi
+                        Up to 25% Discount on All Insulation Products
                     </span>
                 </div>
             </div>
@@ -35,16 +35,16 @@
                             </div>
                         </div>
                     </button>
-<div class="language-toggle" role="group" aria-label="Language selection">
-    <button class="lang-btn" data-lang="id" title="Bahasa Indonesia" aria-label="Switch to Indonesian">
-        <img src="https://flagcdn.com/w20/id.png" alt="ID" class="flag-icon" loading="lazy">
-        <span class="lang-text">ID</span>
-    </button>
-    <button class="lang-btn" data-lang="en" title="English" aria-label="Switch to English">
-        <img src="https://flagcdn.com/w20/us.png" alt="EN" class="flag-icon" loading="lazy">
-        <span class="lang-text">EN</span>
-    </button>
-</div>
+                    <div class="language-toggle" role="group" aria-label="Language selection">
+                        <button class="lang-btn" data-lang="id" title="Bahasa Indonesia" aria-label="Switch to Indonesian">
+                            <img src="https://flagcdn.com/w20/id.png" alt="ID" class="flag-icon" loading="lazy">
+                            <span class="lang-text">ID</span>
+                        </button>
+                        <button class="lang-btn" data-lang="en" title="English" aria-label="Switch to English">
+                            <img src="https://flagcdn.com/w20/us.png" alt="EN" class="flag-icon" loading="lazy">
+                            <span class="lang-text">EN</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

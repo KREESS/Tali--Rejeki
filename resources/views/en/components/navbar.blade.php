@@ -6,7 +6,7 @@
                 <img src="{{ asset('img/icon-logo/tali-rejeki.jpg') }}" alt="Tali Rejeki" class="brand-logo">
                 <div class="brand-text">
                     <span class="brand-name">Tali Rejeki</span>
-                    <span class="brand-tagline">Distributor Insulasi Industri</span>
+                    <span class="brand-tagline">Industrial Insulation Distributor</span>
                 </div>
             </a>
         </div>
@@ -24,26 +24,26 @@
                 <li class="nav-item">
                     <a href="{{ route('en.home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" data-translate="nav-home">
                         <i class="fas fa-home"></i>
-                        <span>Beranda</span>
+                        <span>Home</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('en.about') }}" class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" data-translate="nav-about">
                         <i class="fas fa-info-circle"></i>
-                        <span>Tentang</span>
+                        <span>About Us</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="{{ route('en.products') }}" class="nav-link dropdown-toggle {{ request()->routeIs('products*') ? 'active' : '' }}" data-translate="nav-products">
                         <i class="fas fa-th-large"></i>
-                        <span>Produk</span>
+                        <span>Products</span>
                         <i class="fas fa-chevron-down"></i>
                     </a>
                     <div class="dropdown-menu" id="categoriesDropdown">
                         <!-- Categories will be loaded dynamically from database -->
                         @if(isset($categories) && $categories->count() > 0)
                             @foreach($categories as $category)
-                                <a href="{{ route('products.category', $category->slug) }}" class="dropdown-item">
+                                <a href="{{ route('en.products.category', $category->slug) }}" class="dropdown-item">
                                     <span class="item-title">{{ $category->name }}</span>
                                 </a>
                             @endforeach
@@ -53,40 +53,34 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('catalog1-page') }}" class="nav-link {{ request()->routeIs('catalog1-page*') ? 'active' : '' }}" data-translate="nav-catalog">
+                    <a href="{{ route('en.catalog.page') }}" class="nav-link {{ request()->routeIs('catalog1-page*') ? 'active' : '' }}" data-translate="nav-catalog">
                         <i class="fas fa-book"></i>
-                        <span>Katalog Produk</span>
+                        <span>Product Catalog</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('en.gallery') }}" class="nav-link {{ request()->routeIs('gallery*') ? 'active' : '' }}" data-translate="nav-gallery">
                         <i class="fas fa-images"></i>
-                        <span>Galeri</span>
+                        <span>Gallery</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('en.career') }}" class="nav-link {{ request()->routeIs('career*') ? 'active' : '' }}" data-translate="nav-career">
                         <i class="fas fa-briefcase"></i>
-                        <span>Karier</span>
+                        <span>Careers</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('en.contact') }}" class="nav-link {{ request()->routeIs('contact*') ? 'active' : '' }}" data-translate="nav-contact">
                         <i class="fas fa-phone"></i>
-                        <span>Hubungi Kami</span>
+                        <span>Contact Us</span>
                     </a>
                 </li>
             </ul>
-            
-            {{-- <!-- Theme Toggle Button -->
-            <div class="theme-toggle-container ms-3">
-                <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle theme">
-                    <i class="theme-icon fas fa-moon"></i>
-                </button>
-            </div> --}}
         </div>
     </div>
 </nav>
+
 
 <style>
     /* ===== MODERN NAVBAR STYLING ===== */

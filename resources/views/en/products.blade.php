@@ -45,8 +45,8 @@
     <div class="container">
         <nav class="breadcrumb-nav" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/') }}">Beranda</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('products') }}">Produk</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/en') }}">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('en.products') }}">Produk</a></li>
             </ol>
         </nav>
 
@@ -72,7 +72,7 @@
                                 @foreach($categories as $cat)
                                     <li>
                                         <a class="nav-link-item {{ $paramCategory===$cat->slug ? 'active' : '' }}"
-                                           href="{{ route('products.category', $cat->slug) }}">
+                                           href="{{ route('en.products.category', $cat->slug) }}">
                                             <span class="label">{{ $cat->name }}</span>
                                             <i class="fas fa-chevron-right"></i>
                                         </a>
@@ -81,7 +81,7 @@
                             @else
                                 {{-- Sudah pilih kategori: tombol kembali + daftar subkategori --}}
                                 <li class="nav-back">
-                                    <a class="nav-link-item" href="{{ route('products') }}">
+                                    <a class="nav-link-item" href="{{ route('en.products') }}">
                                         <i class="fas fa-arrow-left"></i>
                                         <span class="label">Semua Kategori</span>
                                     </a>
@@ -90,7 +90,7 @@
                                 @forelse($subsByCategory as $sub)
                                     <li>
                                         <a class="nav-link-item {{ $paramSub===$sub->slug ? 'active' : '' }}"
-                                           href="{{ route('products.subcategory', ['category'=>$paramCategory, 'subcategory'=>$sub->slug]) }}">
+                                           href="{{ route('en.products.subcategory', ['category'=>$paramCategory, 'subcategory'=>$sub->slug]) }}">
                                             <span class="label">{{ $sub->name }}</span>
                                             <i class="fas fa-chevron-right"></i>
                                         </a>
@@ -104,10 +104,10 @@
 
                     {{-- Link cepat opsional (tetap simple) --}}
                     <div class="quick-links mt-3">
-                        <a href="{{ route('catalog1-page') }}" class="quick-link">
+                        <a href="{{ route('en.catalog.page') }}" class="quick-link">
                             <i class="fas fa-download"></i> Download Katalog
                         </a>
-                        <a href="{{ route('contact') }}" class="quick-link">
+                        <a href="{{ route('en.contact') }}" class="quick-link">
                             <i class="fas fa-phone"></i> Konsultasi Produk
                         </a>
                     </div>
@@ -244,10 +244,10 @@
                                     <h3>Subkategori tidak ditemukan</h3>
                                     <p>Silakan pilih kategori lain atau lihat semua produk.</p>
                                     <div class="no-products-actions">
-                                        <a href="{{ route('products') }}" class="btn btn-primary">
+                                        <a href="{{ route('en.products') }}" class="btn btn-primary">
                                             <i class="fas fa-arrow-left"></i> Lihat Semua
                                         </a>
-                                        <a href="{{ route('contact') }}" class="btn btn-outline-primary">
+                                        <a href="{{ route('en.contact') }}" class="btn btn-outline-primary">
                                             <i class="fas fa-phone"></i> Hubungi Kami
                                         </a>
                                     </div>
@@ -265,7 +265,7 @@
                                            ?? 'kategori';
                                 $subSlug = optional($product->subcategory)->slug ?? 'umum';
 
-                                $detailUrl = route('product.detail', [
+                                $detailUrl = route('en.product.detail', [
                                     'category'    => $catSlug,
                                     'subcategory' => $subSlug,
                                     'product'     => $product->slug
@@ -357,7 +357,7 @@
                                             <a href="{{ $detailUrl }}" class="btn btn-outline-primary btn-sm flex-fill">
                                                 <i class="fas fa-info-circle"></i> Detail Produk
                                             </a>
-                                            <a href="{{ route('contact') }}?product={{ $product->slug }}" class="btn btn-primary btn-sm flex-fill">
+                                            <a href="{{ route('en.contact') }}?product={{ $product->slug }}" class="btn btn-primary btn-sm flex-fill">
                                                 <i class="fas fa-phone"></i> Hubungi
                                             </a>
                                         </div>
@@ -379,10 +379,10 @@
                                 <h3>Produk tidak ditemukan</h3>
                                 <p>Coba ubah pilihan subkategori.</p>
                                 <div class="no-products-actions">
-                                    <a href="{{ route('products.category', $paramCategory) }}" class="btn btn-primary">
+                                    <a href="{{ route('en.products.category', $paramCategory) }}" class="btn btn-primary">
                                         <i class="fas fa-arrow-left"></i> Kembali ke Subkategori
                                     </a>
-                                    <a href="{{ route('contact') }}" class="btn btn-outline-primary">
+                                    <a href="{{ route('en.contact') }}" class="btn btn-outline-primary">
                                         <i class="fas fa-phone"></i> Hubungi Kami
                                     </a>
                                 </div>

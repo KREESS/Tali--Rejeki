@@ -287,7 +287,7 @@
 
 
 <!-- Leadership Section -->
-<section class="leadership-section py-5">
+{{-- <section class="leadership-section py-5">
   <div class="container">
     <div class="section-header text-center mb-5" data-aos="fade-up">
       <div class="section-badge">
@@ -368,7 +368,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> --}}
 
 
 <!-- CTA Section -->
@@ -417,7 +417,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('img/about/7.png');
+        background-image: url('../img/about/7.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
