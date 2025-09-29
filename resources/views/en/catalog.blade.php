@@ -54,7 +54,7 @@
                     <a href="#catalog-list" class="btn btn-hero-primary btn-lg">
                         <i class="fas fa-book-open me-2"></i>Jelajahi Katalog
                     </a>
-                    <a href="{{ route('contact') }}" class="btn btn-white-fixed btn-lg">
+                    <a href="{{ route('en.contact') }}" class="btn btn-white-fixed btn-lg">
                         <i class="fas fa-headset me-2"></i>Konsultasi Gratis
                     </a>
                 </div>
@@ -131,7 +131,7 @@
           </div>
           <div class="cat-scroller" data-aos="fade-up">
               @foreach($featuredCategories as $fc)
-              <a class="cat-card" href="{{ route('catalog1-page', ['category' => $fc['slug']]) }}">
+              <a class="cat-card" href="{{ route('en.catalog.page', ['category' => $fc['slug']]) }}">
                   <div class="cc-icon"><i class="{{ $fc['icon'] ?? 'fas fa-shapes' }}"></i></div>
                   <div class="cc-name">{{ $fc['name'] }}</div>
                   <div class="cc-meta">{{ $fc['count'] ?? 0 }} dokumen</div>
@@ -175,7 +175,7 @@
                 @foreach($topDownloads as $i => $td)
                 <article class="td-card" data-rank="{{ $i+1 }}" data-aos="fade-up" data-aos-delay="{{ ($i%6)*50 }}">
                     <button class="btn-like" type="button" aria-label="Favoritkan" data-id="{{ $td->id }}"><i class="fas fa-heart"></i></button>
-                    <a href="{{ route('catalog1-page.detail', $td->slug) }}" class="td-thumb">
+                    <a href="{{ route('en.catalog.detail', $td->slug) }}" class="td-thumb">
                         @if($td->image)
                             <img src="{{ asset('storage/' . $td->image) }}" alt="{{ $td->title }}" loading="lazy">
                         @else
@@ -183,8 +183,8 @@
                         @endif
                     </a>
                     <div class="td-body">
-                        <a class="td-cat" href="{{ route('catalog1-page', ['category' => $td->category]) }}">{{ ucfirst(str_replace('-', ' ', $td->category ?? 'General')) }}</a>
-                        <h3 class="td-title"><a href="{{ route('catalog1-page.detail', $td->slug) }}">{{ $td->title }}</a></h3>
+                        <a class="td-cat" href="{{ route('en.catalog.page', ['category' => $td->category]) }}">{{ ucfirst(str_replace('-', ' ', $td->category ?? 'General')) }}</a>
+                        <h3 class="td-title"><a href="{{ route('en.catalog.detail', $td->slug) }}">{{ $td->title }}</a></h3>
                         <div class="td-meta"><i class="fas fa-download me-1"></i>{{ $td->download_count ?? 0 }} unduhan</div>
                     </div>
                     <div class="td-actions"><button class="btn btn-outline-secondary btn-compare" data-id="{{ $td->id }}"><i class="fas fa-code-compare me-2"></i>Bandingkan</button></div>
@@ -291,7 +291,7 @@
 
             <div class="content">
               <div class="topline">
-                <a href="{{ route('catalog1-page', ['category' => $item->category]) }}" class="category">
+                <a href="{{ route('en.catalog.page', ['category' => $item->category]) }}" class="category">
                   {{ ucfirst(str_replace('-', ' ', $item->category ?? 'General')) }}
                 </a>
                 <div class="meta">
@@ -308,7 +308,7 @@
                 @if($fileUrl)
                   <div class="primary-actions">
                     {{-- Tombol Unduh: GET ke route download --}}
-                    <form action="{{ route('catalog.download', $item->id) }}" method="GET" class="inline-form" style="display:inline">
+                    <form action="{{ route('en.catalog.download', $item->id) }}" method="GET" class="inline-form" style="display:inline">
                       <button type="submit" class="btn btn-download" aria-label="Unduh {{ $item->name }}">
                         <i class="fas fa-file-arrow-down"></i>
                         <span class="btn-text">
@@ -319,7 +319,7 @@
                     </form>
 
                     {{-- Tombol Preview: buka tab baru --}}
-                    <form action="{{ route('catalog.preview', $item->id) }}" method="GET" class="inline-form" style="display:inline" target="_blank" rel="noopener">
+                    <form action="{{ route('en.catalog.preview', $item->id) }}" method="GET" class="inline-form" style="display:inline" target="_blank" rel="noopener">
                       <button type="submit" class="btn btn-preview" aria-label="Pratinjau {{ $item->name }}">
                         <i class="fas fa-file-pdf"></i>
                         <span class="btn-text">
@@ -381,9 +381,9 @@
         </p>
 
         @if(request('search') || request('category') || request('type'))
-          <a href="{{ route('catalog1-page') }}" class="btn btn-primary"><i class="fas fa-refresh"></i> Lihat Semua Katalog</a>
+          <a href="{{ route('en.catalog.page') }}" class="btn btn-primary"><i class="fas fa-refresh"></i> Lihat Semua Katalog</a>
         @else
-          <a href="{{ route('contact') }}" class="btn btn-primary"><i class="fas fa-phone"></i> Hubungi Kami</a>
+          <a href="{{ route('en.contact') }}" class="btn btn-primary"><i class="fas fa-phone"></i> Hubungi Kami</a>
         @endif
       </div>
     @endif
@@ -522,8 +522,8 @@
             <h2 class="cta-title">Butuh Bantuan Memilih Produk?</h2>
             <p class="cta-description">Tim ahli kami siap membantu Anda memilih produk yang tepat sesuai kebutuhan proyek Anda.</p>
             <div class="cta-actions">
-                <a href="{{ route('contact') }}" class="btn btn-primary btn-lg me-3"><i class="fas fa-phone"></i> Konsultasi Gratis</a>
-                <a href="{{ route('products') }}" class="btn btn-outline-primary btn-lg"><i class="fas fa-cubes"></i> Lihat Produk</a>
+                <a href="{{ route('en.contact') }}" class="btn btn-primary btn-lg me-3"><i class="fas fa-phone"></i> Konsultasi Gratis</a>
+                <a href="{{ route('en.products') }}" class="btn btn-outline-primary btn-lg"><i class="fas fa-cubes"></i> Lihat Produk</a>
             </div>
         </div>
     </div>
@@ -564,7 +564,7 @@
             <h3>Kirim Permintaan Dokumen</h3>
             <p>Tidak menemukan yang Anda cari? Kirimkan daftar dokumen yang Anda butuhkan—kami bantu carikan.</p>
         </div>
-        <a href="{{ route('contact') }}" class="btn btn-outline-primary btn-lg"><i class="fas fa-paper-plane me-2"></i>Ajukan Permintaan</a>
+        <a href="{{ route('en.contact') }}" class="btn btn-outline-primary btn-lg"><i class="fas fa-paper-plane me-2"></i>Ajukan Permintaan</a>
     </div>
 </section>
 

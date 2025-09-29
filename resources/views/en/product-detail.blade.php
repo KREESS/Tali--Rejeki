@@ -52,7 +52,7 @@
         ->values();
 
     // URL detail (untuk WA pesan)
-    $detailUrl = route('product.detail', [
+    $detailUrl = route('en.product.detail', [
         'category'    => $catSlug,
         'subcategory' => $subSlug,
         'product'     => $product->slug ?? 'produk'

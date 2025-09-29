@@ -11,8 +11,8 @@
                 <div class="article-meta" data-aos="fade-up">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('blog') }}">Blog</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('en.home') }}">Beranda</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('en.blog') }}">Blog</a></li>
                             <li class="breadcrumb-item active">{{ Str::limit($article->title, 30) }}</li>
                         </ol>
                     </nav>
@@ -127,7 +127,7 @@
                                     <i class="fas fa-chevron-left"></i>
                                     Artikel Sebelumnya
                                 </span>
-                                <a href="{{ route('blog.detail', $previousArticle->slug) }}" class="nav-title">
+                                <a href="{{ route('en.blog.detail', $previousArticle->slug) }}" class="nav-title">
                                     {{ Str::limit($previousArticle->title, 50) }}
                                 </a>
                             </div>
@@ -141,7 +141,7 @@
                                     Artikel Selanjutnya
                                     <i class="fas fa-chevron-right"></i>
                                 </span>
-                                <a href="{{ route('blog.detail', $nextArticle->slug) }}" class="nav-title">
+                                <a href="{{ route('en.blog.detail', $nextArticle->slug) }}" class="nav-title">
                                     {{ Str::limit($nextArticle->title, 50) }}
                                 </a>
                             </div>
@@ -168,7 +168,7 @@
                                 @endif
                                 <div class="recent-content">
                                     <h6 class="recent-title">
-                                        <a href="{{ route('blog.detail', $recentArticle->slug) }}">
+                                        <a href="{{ route('en.blog.detail', $recentArticle->slug) }}">
                                             {{ Str::limit($recentArticle->title, 60) }}
                                         </a>
                                     </h6>
@@ -187,7 +187,7 @@
                         <h4 class="widget-title">Kategori</h4>
                         <div class="categories-list">
                             @foreach($categories as $category)
-                            <a href="{{ route('blog', ['category' => $category->slug]) }}" 
+                            <a href="{{ route('en.blog', ['category' => $category->slug]) }}" 
                                class="category-item">
                                 <span class="category-name">{{ $category->name }}</span>
                                 <span class="category-count">{{ $category->articles_count ?? 0 }}</span>
@@ -205,7 +205,7 @@
                                 <div class="popular-number">{{ $index + 1 }}</div>
                                 <div class="popular-content">
                                     <h6 class="popular-title">
-                                        <a href="{{ route('blog.detail', $popularArticle->slug) }}">
+                                        <a href="{{ route('en.blog.detail', $popularArticle->slug) }}">
                                             {{ Str::limit($popularArticle->title, 60) }}
                                         </a>
                                     </h6>
@@ -277,7 +277,7 @@
                     
                     <div class="article-content">
                         <h3 class="article-title">
-                            <a href="{{ route('blog.detail', $relatedArticle->slug) }}">
+                            <a href="{{ route('en.blog.detail', $relatedArticle->slug) }}">
                                 {{ $relatedArticle->title }}
                             </a>
                         </h3>
@@ -292,7 +292,7 @@
                                 {{ $relatedArticle->created_at->format('d M Y') }}
                             </span>
                             
-                            <a href="{{ route('blog.detail', $relatedArticle->slug) }}" class="read-more">
+                            <a href="{{ route('en.blog.detail', $relatedArticle->slug) }}" class="read-more">
                                 Baca Selengkapnya
                                 <i class="fas fa-arrow-right"></i>
                             </a>

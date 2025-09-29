@@ -15,12 +15,12 @@
         <nav aria-label="breadcrumb" class="mb-4">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('en.home') }}">
                         <i class="fas fa-home"></i> Beranda
                     </a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{ route('career') }}">Karier</a>
+                    <a href="{{ route('en.career') }}">Karier</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $job->title }}</li>
             </ol>
@@ -133,7 +133,7 @@
                         @endif
                     @endif
                     
-                    <a href="{{ route('career') }}" class="btn-apply secondary">
+                    <a href="{{ route('en.career') }}" class="btn-apply secondary">
                         <i class="fas fa-arrow-left"></i>
                         <span>Kembali ke Karier</span>
                     </a>
@@ -230,7 +230,7 @@
                             </div>
                         </div>
                         
-                        <a href="{{ route('about') }}" class="btn-link">
+                        <a href="{{ route('en.about') }}" class="btn-link">
                             <i class="fas fa-arrow-right"></i>
                             Pelajari Lebih Lanjut
                         </a>
@@ -284,7 +284,7 @@
                     </div>
                     <div class="jobs-list">
                         @foreach($otherJobs as $otherJob)
-                        <a href="{{ route('job.detail', $otherJob->slug) }}" class="job-item">
+                        <a href="{{ route('en.job.detail', $otherJob->slug) }}" class="job-item">
                             <div class="job-info">
                                 <h5>{{ $otherJob->title }}</h5>
                                 <div class="job-meta">
@@ -301,8 +301,8 @@
                         </a>
                         @endforeach
                     </div>
-                    
-                    <a href="{{ route('career') }}" class="view-all-btn">
+
+                    <a href="{{ route('en.career') }}" class="view-all-btn">
                         <i class="fas fa-eye"></i>
                         Lihat Semua Lowongan
                     </a>
@@ -325,7 +325,7 @@
             </div>
             <h3>Tidak menemukan posisi yang sesuai?</h3>
             <p>Kirim CV Anda kepada kami. Tim HR akan menghubungi ketika ada posisi yang sesuai dengan kualifikasi Anda.</p>
-            <a href="{{ route('contact') }}" class="cta-btn">
+            <a href="{{ route('en.contact') }}" class="cta-btn">
                 <i class="fas fa-envelope"></i>
                 <span>Kirim CV Inisiatif</span>
             </a>

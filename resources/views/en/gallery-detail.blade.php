@@ -11,8 +11,8 @@
                 <div class="header-content" data-aos="fade-up">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Beranda</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('gallery') }}">Galeri</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('en.home') }}">Beranda</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('en.gallery') }}">Galeri</a></li>
                             <li class="breadcrumb-item active">{{ Str::limit($gallery->title, 30) }}</li>
                         </ol>
                     </nav>
@@ -117,7 +117,7 @@
             </div>
             <h3>Belum Ada Foto</h3>
             <p>Galeri ini belum memiliki foto yang dapat ditampilkan.</p>
-            <a href="{{ route('gallery') }}" class="btn btn-primary">
+            <a href="{{ route('en.gallery') }}" class="btn btn-primary">
                 <i class="fas fa-arrow-left"></i>
                 Kembali ke Galeri
             </a>
@@ -250,7 +250,7 @@
                         @endif
                         
                         <div class="gallery-overlay">
-                            <a href="{{ route('gallery.detail', $relatedGallery->slug) }}" class="btn btn-primary">
+                            <a href="{{ route('en.gallery.detail', $relatedGallery->slug) }}" class="btn btn-primary">
                                 <i class="fas fa-eye"></i>
                                 Lihat Galeri
                             </a>
@@ -263,7 +263,7 @@
                     
                     <div class="gallery-content">
                         <h4 class="gallery-title">
-                            <a href="{{ route('gallery.detail', $relatedGallery->slug) }}">
+                            <a href="{{ route('en.gallery.detail', $relatedGallery->slug) }}">
                                 {{ $relatedGallery->title }}
                             </a>
                         </h4>
@@ -289,7 +289,7 @@
             <div class="col-12">
                 <div class="text-center">
                     <p class="text-muted">Tidak ada galeri terkait lainnya.</p>
-                    <a href="{{ route('gallery') }}" class="btn btn-primary">
+                    <a href="{{ route('en.gallery') }}" class="btn btn-primary">
                         <i class="fas fa-th"></i>
                         Lihat Semua Galeri
                     </a>

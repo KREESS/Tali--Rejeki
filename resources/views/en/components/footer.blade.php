@@ -1543,7 +1543,7 @@ body.dark-theme .footer-comp-social-link:hover img {
               @foreach($footerCategories as $index => $category)
                 <div class="footer-comp-product-category" data-aos="slide-right" data-aos-delay="{{ 800 + ($index * 100) }}" data-aos-duration="500">
                   <div class="footer-comp-category-name">
-                    <a href="{{ route('products.category', $category->slug) }}" class="footer-comp-category-link">
+                    <a href="{{ route('en.products.category', $category->slug) }}" class="footer-comp-category-link">
                       {{ $category->name }}
                     </a>
                   </div>
@@ -1552,7 +1552,7 @@ body.dark-theme .footer-comp-social-link:hover img {
             @else
               <div class="footer-comp-product-category" data-aos="slide-right" data-aos-delay="800" data-aos-duration="500">
                 <div class="footer-comp-category-name">
-                  <a href="{{ route('products.index') }}" class="footer-comp-category-link">
+                  <a href="{{ route('en.products.index') }}" class="footer-comp-category-link">
                     Semua Produk
                   </a>
                 </div>
@@ -1634,7 +1634,7 @@ body.dark-theme .footer-comp-social-link:hover img {
             <i class="fas fa-shield-alt"></i>
             Privacy Policy
           </a>
-          <a href="{{ route('contact') }}" class="footer-comp-link">
+          <a href="{{ route('en.contact') }}" class="footer-comp-link">
             <i class="fas fa-envelope"></i>
             Contact Us
           </a>

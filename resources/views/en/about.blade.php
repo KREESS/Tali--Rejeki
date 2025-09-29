@@ -386,11 +386,11 @@
     </p>
 
     <div class="cta-actions">
-      <a href="{{ route('contact') }}" class="btn btn-primary">
+      <a href="{{ route('en.contact') }}" class="btn btn-primary">
         <i class="fas fa-phone"></i>
         Contact Us
       </a>
-      <a href="{{ route('products') }}" class="btn btn-outline-primary">
+      <a href="{{ route('en.products') }}" class="btn btn-outline-primary">
         <i class="fas fa-cubes"></i>
         View Products
       </a>

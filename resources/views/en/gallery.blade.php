@@ -198,11 +198,11 @@
                 <h3>No Gallery Yet</h3>
                 <p>The project gallery is currently under development. Please check back later to see our latest portfolio.</p>
                 <div class="no-gallery-actions">
-                    <a href="{{ route('contact') }}" class="btn btn-primary">
+                    <a href="{{ route('en.contact') }}" class="btn btn-primary">
                         <i class="fas fa-phone"></i>
                         <span>Contact Us</span>
                     </a>
-                    <a href="{{ route('products') }}" class="btn btn-outline-primary">
+                    <a href="{{ route('en.products') }}" class="btn btn-outline-primary">
                         <i class="fas fa-cubes"></i>
                         <span>View Products</span>
                     </a>

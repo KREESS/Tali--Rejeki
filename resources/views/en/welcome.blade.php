@@ -180,7 +180,6 @@
 </section>
 
 
-
 <!-- Products Section (6 items, square images, flip on hover - robust) -->
 <section id="products" class="products-section">
   <div class="container">
@@ -199,7 +198,7 @@
       <!-- ROCKWOOL -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item reveal">
-          <a class="pi-thumb" href="{{ url('/products/rockwool') }}" aria-label="ROCKWOOL Details">
+          <a class="pi-thumb" href="{{ url('/en/products/rockwool') }}" aria-label="ROCKWOOL Details">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/22.png') }}" alt="Rockwool Front" loading="lazy" decoding="async">
               <img class="pi-img back"  src="{{ asset('img/landing/23.png') }}" alt="Rockwool Back" loading="lazy" decoding="async">
@@ -212,14 +211,14 @@
             <li><i class="fas fa-check"></i> Heat and sound reduction</li>
             <li><i class="fas fa-check"></i> Suitable for HVAC & industrial applications</li>
           </ul>
-          <a href="{{ url('/products/rockwool') }}" class="pi-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <a href="{{ url('/en/products/rockwool') }}" class="pi-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- GLASSWOOL -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item reveal">
-          <a class="pi-thumb" href="{{ url('/products/glasswool') }}" aria-label="GLASSWOOL Details">
+          <a class="pi-thumb" href="{{ url('/en/products/glasswool') }}" aria-label="GLASSWOOL Details">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/24.png') }}" alt="Glasswool Front" loading="lazy" decoding="async">
               <img class="pi-img back"  src="{{ asset('img/landing/25.png') }}" alt="Glasswool Back" loading="lazy" decoding="async">
@@ -232,14 +231,14 @@
             <li><i class="fas fa-check"></i> Soundproof</li>
             <li><i class="fas fa-check"></i> Mold & rust resistant</li>
           </ul>
-          <a href="{{ url('/products/glasswool') }}" class="pi-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <a href="{{ url('/en/products/glasswool') }}" class="pi-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- CALCIUM SILICATE -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item reveal">
-          <a class="pi-thumb" href="{{ url('/products/calcium-silicate') }}" aria-label="CALCIUM SILICATE Details">
+          <a class="pi-thumb" href="{{ url('/en/products/calcium-silicate') }}" aria-label="CALCIUM SILICATE Details">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/26.png') }}" alt="Calcium Silicate Front" loading="lazy" decoding="async">
               <img class="pi-img back"  src="{{ asset('img/landing/27.png') }}" alt="Calcium Silicate Back" loading="lazy" decoding="async">
@@ -252,14 +251,14 @@
             <li><i class="fas fa-check"></i> Strong & moisture resistant</li>
             <li><i class="fas fa-check"></i> Long service life</li>
           </ul>
-          <a href="{{ url('/products/calcium-silicate') }}" class="pi-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <a href="{{ url('/en/products/calcium-silicate') }}" class="pi-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- CERAMIC FIBER -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item reveal">
-          <a class="pi-thumb" href="{{ url('/products/ceramic-fiber') }}" aria-label="CERAMIC FIBER Details">
+          <a class="pi-thumb" href="{{ url('/en/products/ceramic-fiber') }}" aria-label="CERAMIC FIBER Details">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/28.png') }}" alt="Ceramic Fiber Front" loading="lazy" decoding="async">
               <img class="pi-img back"  src="{{ asset('img/landing/29.png') }}" alt="Ceramic Fiber Back" loading="lazy" decoding="async">
@@ -272,14 +271,14 @@
             <li><i class="fas fa-check"></i> Low thermal conductivity</li>
             <li><i class="fas fa-check"></i> Lightweight</li>
           </ul>
-          <a href="{{ url('/products/ceramic-fiber') }}" class="pi-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <a href="{{ url('/en/products/ceramic-fiber') }}" class="pi-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- ARMACEL / ARMAFLEX -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item reveal">
-          <a class="pi-thumb" href="{{ url('/products/armacel-armaflex') }}" aria-label="ARMACEL / ARMAFLEX Details">
+          <a class="pi-thumb" href="{{ url('/en/products/armacel-armaflex') }}" aria-label="ARMACEL / ARMAFLEX Details">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/30.png') }}" alt="Armacel Armaflex Front" loading="lazy" decoding="async">
               <img class="pi-img back"  src="{{ asset('img/landing/31.png') }}" alt="Armacel Armaflex Back" loading="lazy" decoding="async">
@@ -292,14 +291,14 @@
             <li><i class="fas fa-check"></i> Flexible & neat installation</li>
             <li><i class="fas fa-check"></i> Moisture resistant</li>
           </ul>
-          <a href="{{ url('/products/armaflex') }}" class="pi-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <a href="{{ url('/en/products/armaflex') }}" class="pi-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- ALUMINIUM SHEET [JACKETING] -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item reveal">
-          <a class="pi-thumb" href="{{ url('/products/aluminium-sheet-jacketing') }}" aria-label="ALUMINIUM SHEET [JACKETING] Details">
+          <a class="pi-thumb" href="{{ url('/en/products/aluminium-sheet-jacketing') }}" aria-label="ALUMINIUM SHEET [JACKETING] Details">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/32.png') }}" alt="Aluminium Sheet Jacketing Front" loading="lazy" decoding="async">
               <img class="pi-img back"  src="{{ asset('img/landing/33.png') }}" alt="Aluminium Sheet Jacketing Back" loading="lazy" decoding="async">
@@ -316,7 +315,7 @@
             <li><i class="fas fa-check"></i> Long-lasting & low maintenance</li>
           </ul>
 
-          <a href="{{ url('/products/aluminium-sheet') }}" class="pi-link">
+          <a href="{{ url('/en/products/aluminium-sheet') }}" class="pi-link">
             Learn More <i class="fas fa-arrow-right"></i>
           </a>
         </div>
@@ -325,7 +324,6 @@
     </div>
   </div>
 </section>
-
 
 
 <!-- ===== Our Experience Section ===== -->
@@ -360,7 +358,6 @@
     </div>
   </div>
 </section>
-
 
 
 <!-- Services Section -->
@@ -431,7 +428,6 @@
 </section>
 
 
-
 <!-- Our Brands Section -->
 <section id="brands" class="brands-section py-5 fade-section">
   <div class="container text-center">
@@ -469,7 +465,6 @@
     @endfor
   </div>
 </section>
-
 
 
 <!-- ===== Our Projects Section ===== -->
@@ -554,7 +549,6 @@
     </div>
   </div>
 </section>
-
 
 
 <!-- ===== What They Say Section ===== -->
@@ -695,7 +689,6 @@
 </section>
 
 
-
 <!-- CTA Section -->
 <section id="contact" class="cta-section">
   <!-- Background -->
@@ -745,6 +738,7 @@
     </div>
   </div>
 </section>
+
 
 <style>
 
@@ -2620,7 +2614,6 @@
   // Apply ke semua elemen
   document.querySelectorAll('.fade-up, .fade-stagger').forEach((el) => observer.observe(el));
 </script>
-
 
 
 @endsection

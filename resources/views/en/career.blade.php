@@ -310,7 +310,7 @@
                             </div>
                             
                             <h3 class="job-title">
-                                <a href="{{ route('job.detail', $job->slug) }}">{{ $job->title }}</a>
+                                <a href="{{ route('en.job.detail', $job->slug) }}">{{ $job->title }}</a>
                             </h3>
                             
                             <div class="job-department">
@@ -361,11 +361,11 @@
                             </div>
                             
                             <div class="job-actions">
-                                <a href="{{ route('job.detail', $job->slug) }}" class="btn btn-outline-primary btn-sm">
+                                <a href="{{ route('en.job.detail', $job->slug) }}" class="btn btn-outline-primary btn-sm">
                                     <i class="fas fa-info-circle"></i>
                                     Details
                                 </a>
-                                <a href="{{ route('job.detail', $job->slug) }}#apply" class="btn btn-primary btn-sm">
+                                <a href="{{ route('en.job.detail', $job->slug) }}#apply" class="btn btn-primary btn-sm">
                                     <i class="fas fa-paper-plane"></i>
                                     Apply
                                 </a>
@@ -390,7 +390,7 @@
             </div>
             <h3>No Job Openings Available</h3>
             <p>Currently, there are no open positions. Please check back regularly or send your CV to join our database.</p>
-            <a href="{{ route('contact') }}" class="btn btn-primary">
+            <a href="{{ route('en.contact') }}" class="btn btn-primary">
                 <i class="fas fa-envelope"></i>
                 Submit CV Proactively
             </a>
@@ -476,7 +476,7 @@
                     <i class="fas fa-search"></i>
                     View Open Positions
                 </a>
-                <a href="{{ route('contact') }}" class="btn btn-outline-primary btn-lg" data-aos="fade-left" data-aos-delay="1000">
+                <a href="{{ route('en.contact') }}" class="btn btn-outline-primary btn-lg" data-aos="fade-left" data-aos-delay="1000">
                     <i class="fas fa-envelope"></i>
                     Submit CV
                 </a>

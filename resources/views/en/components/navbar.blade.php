@@ -22,19 +22,19 @@
         <div class="navbar-menu" id="navbarMenu">
             <ul class="nav-links">
                 <li class="nav-item">
-                    <a href="{{ route('en.home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" data-translate="nav-home">
+                    <a href="{{ route('en.home') }}" class="nav-link {{ request()->routeIs('en.home') ? 'active' : '' }}" data-translate="nav-home">
                         <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('en.about') }}" class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" data-translate="nav-about">
+                    <a href="{{ route('en.about') }}" class="nav-link {{ request()->routeIs('en.about') ? 'active' : '' }}" data-translate="nav-about">
                         <i class="fas fa-info-circle"></i>
                         <span>About Us</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="{{ route('en.products') }}" class="nav-link dropdown-toggle {{ request()->routeIs('products*') ? 'active' : '' }}" data-translate="nav-products">
+                    <a href="{{ route('en.products') }}" class="nav-link dropdown-toggle {{ request()->routeIs('en.products*') ? 'active' : '' }}" data-translate="nav-products">
                         <i class="fas fa-th-large"></i>
                         <span>Products</span>
                         <i class="fas fa-chevron-down"></i>
@@ -53,25 +53,25 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('en.catalog.page') }}" class="nav-link {{ request()->routeIs('catalog1-page*') ? 'active' : '' }}" data-translate="nav-catalog">
+                    <a href="{{ route('en.catalog.page') }}" class="nav-link {{ request()->routeIs('en.catalog.page*') ? 'active' : '' }}" data-translate="nav-catalog">
                         <i class="fas fa-book"></i>
                         <span>Product Catalog</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('en.gallery') }}" class="nav-link {{ request()->routeIs('gallery*') ? 'active' : '' }}" data-translate="nav-gallery">
+                    <a href="{{ route('en.gallery') }}" class="nav-link {{ request()->routeIs('en.gallery*') ? 'active' : '' }}" data-translate="nav-gallery">
                         <i class="fas fa-images"></i>
                         <span>Gallery</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('en.career') }}" class="nav-link {{ request()->routeIs('career*') ? 'active' : '' }}" data-translate="nav-career">
+                    <a href="{{ route('en.career') }}" class="nav-link {{ request()->routeIs('en.career*') ? 'active' : '' }}" data-translate="nav-career">
                         <i class="fas fa-briefcase"></i>
                         <span>Careers</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('en.contact') }}" class="nav-link {{ request()->routeIs('contact*') ? 'active' : '' }}" data-translate="nav-contact">
+                    <a href="{{ route('en.contact') }}" class="nav-link {{ request()->routeIs('en.contact*') ? 'active' : '' }}" data-translate="nav-contact">
                         <i class="fas fa-phone"></i>
                         <span>Contact Us</span>
                     </a>

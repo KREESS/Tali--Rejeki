@@ -36,14 +36,23 @@
                         </div>
                     </button>
                     <div class="language-toggle" role="group" aria-label="Language selection">
-                        <button class="lang-btn" data-lang="id" title="Bahasa Indonesia" aria-label="Switch to Indonesian">
+                        <a href="{{ url('/') }}" 
+                        class="lang-btn" 
+                        data-lang="id" 
+                        title="Bahasa Indonesia" 
+                        aria-label="Switch to Indonesian">
                             <img src="https://flagcdn.com/w20/id.png" alt="ID" class="flag-icon" loading="lazy">
                             <span class="lang-text">ID</span>
-                        </button>
-                        <button class="lang-btn" data-lang="en" title="English" aria-label="Switch to English">
+                        </a>
+
+                        <a href="{{ url('/en') }}" 
+                        class="lang-btn" 
+                        data-lang="en" 
+                        title="English" 
+                        aria-label="Switch to English">
                             <img src="https://flagcdn.com/w20/us.png" alt="EN" class="flag-icon" loading="lazy">
                             <span class="lang-text">EN</span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1258,32 +1267,17 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeTheme();
 
     // ================= LANGUAGE =================
+    // ================= LANGUAGE =================
     function initializeLanguageFeature() {
         const langButtons = document.querySelectorAll('.lang-btn');
-        const savedLang = localStorage.getItem('language') || (window.location.pathname.startsWith('/en') ? 'en' : 'id');
-        setLanguage(savedLang, false);
+        const currentLang = window.location.pathname.startsWith('/en') ? 'en' : 'id';
 
         langButtons.forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const lang = this.dataset.lang;
-                setLanguage(lang, true);
-            });
+            btn.classList.remove('active');
+            if (btn.dataset.lang === currentLang) {
+                btn.classList.add('active');
+            }
         });
-    }
-
-    function setLanguage(lang, redirect = true) {
-        const langButtons = document.querySelectorAll('.lang-btn');
-        langButtons.forEach(btn => btn.classList.remove('active'));
-        document.querySelector(`.lang-btn[data-lang="${lang}"]`)?.classList.add('active');
-        localStorage.setItem('language', lang);
-
-        if (redirect) {
-            let targetUrl = '/';
-            if (lang === 'en') targetUrl = '/en';
-            if (lang === 'id' && window.location.pathname.startsWith('/en')) targetUrl = '/';
-            window.location.href = targetUrl;
-        }
     }
 
     // ================= TOPBAR & NAVBAR =================
