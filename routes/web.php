@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\EnPageController;
 use Illuminate\Support\Facades\Auth;
 
 // === MIDDLEWARE ===
@@ -57,6 +58,40 @@ Route::get('/blog', [PageController::class, 'blog'])->name('blog');
 Route::get('/blog/{slug}', [PageController::class, 'blogDetail'])->name('blog.detail');
 Route::get('/blog/category/{slug}', [PageController::class, 'blogByCategory'])->name('blog.category');
 Route::get('/search', [PageController::class, 'search'])->name('search');
+
+
+
+
+// ==================== LANDING PAGE EN ====================
+Route::get('/en', [EnPageController::class, 'index'])->name('en.home');
+
+// ==================== PUBLIC PAGES EN ====================
+Route::get('/en/about', [EnPageController::class, 'about'])->name('en.about');
+Route::get('/en/products', [EnPageController::class, 'products'])->name('en.products');
+Route::get('/en/products/{category:slug}', [EnPageController::class, 'productsByCategory'])->name('en.products.category');
+Route::get('/en/products/{category:slug}/{subcategory:slug}', [EnPageController::class, 'subcategory'])->name('en.products.subcategory');
+Route::get('/en/products/{category:slug}/{subcategory:slug}/{product:slug}', [EnPageController::class, 'show'])->name('en.product.detail');
+
+Route::get('/en/catalog-page', [EnPageController::class, 'catalog'])->name('en.catalog.page');
+Route::get('/en/catalog-page/{slug}', [EnPageController::class, 'catalogDetail'])->name('en.catalog.detail');
+Route::get('/en/catalog/{id}/download', [EnPageController::class, 'catalogDownload'])->name('en.catalog.download');
+Route::get('/en/catalog/{id}/preview', [EnPageController::class, 'catalogPreview'])->name('en.catalog.preview');
+
+Route::get('/en/gallery', [EnPageController::class, 'gallery'])->name('en.gallery');
+Route::get('/en/gallery/{slug}', [EnPageController::class, 'galleryDetail'])->name('en.gallery.detail');
+
+Route::get('/en/career', [EnPageController::class, 'career'])->name('en.career');
+Route::get('/en/career/{slug}', [EnPageController::class, 'jobDetail'])->name('en.job.detail');
+Route::post('/en/career/{slug}/apply', [EnPageController::class, 'jobApply'])->name('en.job.apply');
+
+Route::get('/en/contact', [EnPageController::class, 'contact'])->name('en.contact');
+Route::post('/en/contact', [EnPageController::class, 'contactSubmit'])->name('en.contact.submit');
+
+Route::get('/en/blog', [EnPageController::class, 'blog'])->name('en.blog');
+Route::get('/en/blog/{slug}', [EnPageController::class, 'blogDetail'])->name('en.blog.detail');
+Route::get('/en/blog/category/{slug}', [EnPageController::class, 'blogByCategory'])->name('en.blog.category');
+
+Route::get('/en/search', [EnPageController::class, 'search'])->name('en.search');
 
 // ==================== AUTHENTICATION ====================
 
