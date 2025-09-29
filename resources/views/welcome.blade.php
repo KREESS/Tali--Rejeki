@@ -197,12 +197,10 @@
     <div class="row product-grid">
       <!-- ROCKWOOL -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
-        <div class="product-item">
+        <div class="product-item reveal">
           <a class="pi-thumb" href="{{ url('/products/rockwool') }}" aria-label="Detail ROCKWOOL">
             <div class="pi-stage" aria-hidden="true">
-              <!-- front -->
               <img class="pi-img front" src="{{ asset('img/landing/22.png') }}" alt="" loading="lazy" decoding="async">
-              <!-- back -->
               <img class="pi-img back"  src="{{ asset('img/landing/23.png') }}" alt="" loading="lazy" decoding="async">
             </div>
           </a>
@@ -219,7 +217,7 @@
 
       <!-- GLASSWOOL -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
-        <div class="product-item">
+        <div class="product-item reveal">
           <a class="pi-thumb" href="{{ url('/products/glasswool') }}" aria-label="Detail GLASSWOOL">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/24.png') }}" alt="" loading="lazy" decoding="async">
@@ -239,7 +237,7 @@
 
       <!-- CALCIUM SILICATE -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
-        <div class="product-item">
+        <div class="product-item reveal">
           <a class="pi-thumb" href="{{ url('/products/calcium-silicate') }}" aria-label="Detail CALCIUM SILICATE">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/26.png') }}" alt="" loading="lazy" decoding="async">
@@ -259,7 +257,7 @@
 
       <!-- CERAMIC FIBER -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
-        <div class="product-item">
+        <div class="product-item reveal">
           <a class="pi-thumb" href="{{ url('/products/ceramic-fiber') }}" aria-label="Detail CERAMIC FIBER">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/28.png') }}" alt="" loading="lazy" decoding="async">
@@ -279,7 +277,7 @@
 
       <!-- ARMAFLEX -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
-        <div class="product-item">
+        <div class="product-item reveal">
           <a class="pi-thumb" href="{{ url('/products/armacel-armaflex') }}" aria-label="Detail ARMAFLEX">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/30.png') }}" alt="" loading="lazy" decoding="async">
@@ -299,7 +297,7 @@
 
       <!-- ALUMINIUMSHEET [JACKETING] -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
-        <div class="product-item">
+        <div class="product-item reveal">
           <a class="pi-thumb" href="{{ url('/products/aluminium-sheet-jacketing') }}" aria-label="Detail ALUMINIUMSHEET [JACKETING]">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/32.png') }}" alt="Aluminium Sheet Jacketing" loading="lazy" decoding="async">
@@ -1059,7 +1057,7 @@
 
 
 /* Products Section */
-  /* ===== Products (square images), Light & Dark aware ===== */
+  /* Products Section */
   .products-section{
     padding:72px 0 64px;
     --ink:#0f172a; --muted:#64748b;
@@ -1089,11 +1087,8 @@
     gap: 8px;
     box-shadow: 0 4px 14px rgba(255, 217, 61, 0.35);
   }
+  .section-badge i { font-size: 18px; }
 
-  .section-badge i {
-      font-size: 18px;
-  }
-  
   .products-section .section-title{
       font-size: clamp(28px, 4vw, 40px);
       font-weight: 900;
@@ -1117,6 +1112,11 @@
     border-radius:14px; background:transparent;
     transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
     position:relative; isolation:isolate;
+    opacity:0; transform:translateY(30px); /* animasi awal */
+  }
+  .product-item.show{
+    opacity:1; transform:translateY(0);
+    transition:all .6s ease;
   }
   .product-item:hover{
     transform:translateY(-4px);
@@ -1126,12 +1126,9 @@
   }
 
   /* === Square thumbnail (image-only flip) === */
-  .pi-thumb{
-    display:block; width:100%; padding:0 12px; outline:0;
-  }
+  .pi-thumb{ display:block; width:100%; padding:0 12px; outline:0; }
   .pi-thumb:focus-visible .pi-stage{ box-shadow:0 0 0 3px var(--ring); }
 
-  /* stage = area kotak gambar */
   .pi-stage{
     position:relative; width:100%; aspect-ratio:1/1;
     border-radius:12px; overflow:hidden;
@@ -1139,7 +1136,6 @@
     background:radial-gradient(120% 120% at 30% 20%, rgba(0,0,0,.04), transparent);
   }
 
-  /* dua gambar ditumpuk */
   .pi-img{
     position:absolute; inset:0; width:100%; height:100%;
     object-fit:cover;
@@ -1148,12 +1144,9 @@
     transition:transform .45s ease, opacity .45s ease;
     will-change:transform, opacity;
   }
-
-  /* state awal */
   .pi-img.front{ transform:rotateY(0deg);   opacity:1;  }
   .pi-img.back { transform:rotateY(-90deg); opacity:0;  }
 
-  /* saat hover/focus pada area gambar: front pergi, back datang */
   .pi-thumb:hover .pi-img.front,
   .pi-thumb:focus-visible .pi-img.front{
     transform:rotateY(90deg); opacity:0;
@@ -1163,7 +1156,6 @@
     transform:rotateY(0deg);  opacity:1;
   }
 
-  /* Reduce motion */
   @media (prefers-reduced-motion: reduce){
     .pi-img{ transition:none; }
     .pi-thumb:hover .pi-img.front,
@@ -1188,7 +1180,6 @@
   }
   .pi-link:hover{ gap:.75rem; background:color-mix(in srgb, var(--brand) 9%, transparent); color:var(--brand-2); }
 
-  /* Small tweak */
   @media (max-width:575.98px){
     .product-item{ padding:12px 2px 2px; }
   }
@@ -2509,4 +2500,20 @@
   });
 </script>
 
+<script>
+  // Simple Intersection Observer untuk animasi masuk
+  document.addEventListener("DOMContentLoaded", () => {
+    const reveals = document.querySelectorAll(".product-item");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target); // animasi sekali saja
+        }
+      });
+    }, { threshold: 0.2 });
+
+    reveals.forEach(el => observer.observe(el));
+  });
+</script>
 @endsection
