@@ -221,7 +221,7 @@
                                         </p>
 
                                         <div class="product-actions">
-                                            <a href="{{ $subUrl }}" class="btn btn-outline-primary btn-sm flex-fill">
+                                            <a href="{{ url('en' . parse_url($subUrl, PHP_URL_PATH)) }}" class="btn btn-outline-primary btn-sm flex-fill">
                                                 <i class="fas fa-boxes-stacked"></i>
                                                 @if(!is_null($prodCount))
                                                     Lihat Produk ({{ $prodCount }})

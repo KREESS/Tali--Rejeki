@@ -107,8 +107,8 @@
     <div class="container">
         <nav class="breadcrumb-nav" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/') }}">Beranda</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('products') }}">Produk</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/en') }}">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('en.products') }}">Produk</a></li>
             </ol>
         </nav>
 
@@ -169,9 +169,9 @@
             <div class="col-lg-6">
                 <div class="info-card glass card-contrast" data-aos="fade-left">
                     <div class="mini-category">
-                        <a href="{{ route('products.category', $catSlug) }}">{{ $catName }}</a>
+                        <a href="{{ route('en.products.category', $catSlug) }}">{{ $catName }}</a>
                         <span class="sep">/</span>
-                        <a href="{{ route('products.subcategory', ['category'=>$catSlug,'subcategory'=>$subSlug]) }}">{{ $subName }}</a>
+                        <a href="{{ route('en.products.subcategory', ['category'=>$catSlug,'subcategory'=>$subSlug]) }}">{{ $subName }}</a>
                     </div>
 
                     <h2 class="title">{{ $titleTxt }}</h2>
@@ -263,7 +263,7 @@
                     <div class="strip-head">
                         <h3 class="strip-title"><i class="fas fa-fire"></i> Produk Lainnya</h3>
                         <div class="strip-actions">
-                            <a href="{{ route('products') }}" class="btn btn-outline-contrast btn-sm">Lihat Semua</a>
+                            <a href="{{ route('en.products') }}" class="btn btn-outline-contrast btn-sm">Lihat Semua</a>
                             <div class="strip-nav">
                                 <button id="otherPrev" class="nav-btn mini" type="button" aria-label="Gulir kiri"><i class="fas fa-chevron-left"></i></button>
                                 <button id="otherNext" class="nav-btn mini" type="button" aria-label="Gulir kanan"><i class="fas fa-chevron-right"></i></button>
@@ -277,7 +277,7 @@
                             @php
                                 $oCatSlug = optional(optional($op->subcategory)->category)->slug ?? optional($op->category)->slug ?? 'kategori';
                                 $oSubSlug = optional($op->subcategory)->slug ?? 'umum';
-                                $oUrl = route('product.detail', ['category'=>$oCatSlug,'subcategory'=>$oSubSlug,'product'=>$op->slug]);
+                                $oUrl = route('en.product.detail', ['category'=>$oCatSlug,'subcategory'=>$oSubSlug,'product'=>$op->slug]);
                                 $oImg = $imgPublic(data_get($op, 'images.0.image_path') ?: data_get($op,'featured_image') ?: data_get($op,'image_path'));
                             @endphp
                             <a href="{{ $oUrl }}" class="product-card strip card-contrast" role="option" data-aos="fade-up" data-aos-delay="{{ $index*20 }}">
