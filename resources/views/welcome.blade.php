@@ -330,26 +330,26 @@
   <div class="background-image"></div>
   <div class="overlay"></div> <!-- ✅ overlay transparan -->
 
-  <div class="section-header">
+  <div class="section-header fade-up">
     <span class="section-badge"><i class="fas fa-star"></i> Pengalaman Kami</span>
     <h2 class="section-title">14+ Tahun Memberikan Layanan Terbaik</h2>
     <p class="section-description">Kami berkomitmen memberikan produk dan layanan industri berkualitas tinggi dengan pengalaman yang luas.</p>
   </div>
 
   <div class="experience-grid">
-    <div class="experience-item">
+    <div class="experience-item fade-up">
       <h3 class="count" data-target="14">0</h3>
       <p>Tahun Pengalaman</p>
     </div>
-    <div class="experience-item">
+    <div class="experience-item fade-up">
       <h3 class="count" data-target="250">0</h3>
       <p>Proyek Industri</p>
     </div>
-    <div class="experience-item">
+    <div class="experience-item fade-up">
       <h3 class="count" data-target="120">0</h3>
       <p>Klien Terpuaskan</p>
     </div>
-    <div class="experience-item">
+    <div class="experience-item fade-up">
       <h3 class="count" data-target="50">0</h3>
       <p>Tim Profesional</p>
     </div>
@@ -1187,6 +1187,7 @@
 
 
 /* ===== Experience Section ===== */
+  /* ===== Experience Section ===== */
   .experience-section {
     position: relative;
     padding: 120px 60px;
@@ -1203,12 +1204,11 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    opacity: 0.35;              /* ✅ lebih transparan */
-    filter: brightness(0.7);    /* ✅ agak gelap */
+    opacity: 0.35;
+    filter: brightness(0.7);
     z-index: 0;
     pointer-events: none;
   }
-
 
   /* Header */
   .experience-section .section-header {
@@ -1261,6 +1261,8 @@
     width: 100%;
     max-width: 220px;
     backdrop-filter: blur(4px);
+    opacity: 0; /* awal hidden */
+    transform: translateY(40px); /* start animasi */
   }
   .experience-item:hover {
     transform: translateY(-8px) scale(1.05);
@@ -1276,6 +1278,17 @@
     font-size: 1rem;
     color: #fff;
     margin: 0;
+  }
+
+  /* ===== Animation Styles ===== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+  }
+  .fade-up.show {
+    opacity: 1;
+    transform: translateY(0);
   }
 /* ===== Experience Section ===== */
 
@@ -2474,7 +2487,7 @@
   const counters = document.querySelectorAll('.count');
   const speed = 200;
 
-  const observer = new IntersectionObserver(entries => {
+  const observerCount = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if(entry.isIntersecting){
         const counter = entry.target;
@@ -2490,14 +2503,28 @@
           }
         };
         updateCount();
-        observer.unobserve(counter);
+        observerCount.unobserve(counter);
       }
     });
   }, { threshold: 0.5 });
 
   counters.forEach(counter => {
-    observer.observe(counter);
+    observerCount.observe(counter);
   });
+
+  /* ===== Fade-Up Animation on Scroll ===== */
+  const fadeUps = document.querySelectorAll('.fade-up');
+
+  const observerFade = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+        observerFade.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  fadeUps.forEach(el => observerFade.observe(el));
 </script>
 
 <script>
