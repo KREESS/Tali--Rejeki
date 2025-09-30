@@ -5,8 +5,8 @@
             <div class="promo-section">
                 <div class="promo-text">
                     <i class="fas fa-fire text-warning me-2" aria-hidden="true"></i>
-                    <span class="promo-message" data-translate="promo-text">
-                        Up to 25% Discount on All Insulation Products
+                    <span class="promo-message">
+                        Up to <strong>25% OFF</strong> on All Insulation Products – Grab This Limited Offer Before It’s Gone!
                     </span>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <button class="search-btn" title="Search" aria-label="Open search" onclick="toggleSearch()">
                         <i class="fas fa-search" aria-hidden="true"></i>
                     </button>
-                    <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle theme" onclick="toggleTheme()">
+                    <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
                         <div class="theme-toggle-track">
                             <div class="theme-toggle-thumb">
                                 <i class="fas fa-sun sun-icon" aria-hidden="true"></i>
@@ -36,23 +36,14 @@
                         </div>
                     </button>
                     <div class="language-toggle" role="group" aria-label="Language selection">
-                        <a href="{{ url('/') }}" 
-                        class="lang-btn" 
-                        data-lang="id" 
-                        title="Bahasa Indonesia" 
-                        aria-label="Switch to Indonesian">
+                        <button class="lang-btn" data-lang="id" title="Bahasa Indonesia" aria-label="Switch to Indonesian">
                             <img src="https://flagcdn.com/w20/id.png" alt="ID" class="flag-icon" loading="lazy">
                             <span class="lang-text">ID</span>
-                        </a>
-
-                        <a href="{{ url('/en') }}" 
-                        class="lang-btn" 
-                        data-lang="en" 
-                        title="English" 
-                        aria-label="Switch to English">
+                        </button>
+                        <button class="lang-btn" data-lang="en" title="English" aria-label="Switch to English">
                             <img src="https://flagcdn.com/w20/us.png" alt="EN" class="flag-icon" loading="lazy">
                             <span class="lang-text">EN</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -661,7 +652,7 @@
     }
     
     .theme-toggle.dark .theme-toggle-thumb {
-        transform: translateX(20px);
+        transform: translateX(24px);
     }
     
     .theme-toggle-thumb .sun-icon,
@@ -1143,28 +1134,28 @@ html, body {
 }
 
 /* Loading state optimization */
-.topbar {
-    will-change: transform;
-    contain: layout style paint;
-}
-
-.search-box {
-    will-change: opacity, transform;
-    contain: layout style paint;
-}
-
-/* Safari specific fixes */
-@supports (-webkit-appearance: none) {
-    .search-input {
-        -webkit-appearance: none;
-        border-radius: 25px;
+    .topbar {
+        will-change: transform;
+        contain: layout style paint;
     }
-    
-    .search-submit,
-    .search-close {
-        -webkit-appearance: none;
+
+    .search-box {
+        will-change: opacity, transform;
+        contain: layout style paint;
     }
-}
+
+    /* Safari specific fixes */
+    @supports (-webkit-appearance: none) {
+        .search-input {
+            -webkit-appearance: none;
+            border-radius: 25px;
+        }
+        
+        .search-submit,
+        .search-close {
+            -webkit-appearance: none;
+        }
+    }
 
 /* Dark Theme Styles */
 body.dark-theme .promo-text {
@@ -1258,115 +1249,129 @@ body.light-theme .search-box {
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // ================= INIT =================
-    initializeLanguageFeature();
-    initializeTopbar();
-    initializeSearch();
-    initializeSocialLinks();
-    initializeTheme();
+    document.addEventListener('DOMContentLoaded', function() {
+        // ================= INIT =================
+        initializeLanguageFeature();
+        initializeTopbar();
+        initializeSearch();
+        initializeSocialLinks();
+        initializeTheme(); // panggil terakhir
 
-    // ================= LANGUAGE =================
-    // ================= LANGUAGE =================
-    function initializeLanguageFeature() {
-        const langButtons = document.querySelectorAll('.lang-btn');
-        const currentLang = window.location.pathname.startsWith('/en') ? 'en' : 'id';
+        // ================= LANGUAGE =================
+        function initializeLanguageFeature() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const currentLang = window.location.pathname.startsWith('/en') ? 'en' : 'id';
 
-        langButtons.forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.dataset.lang === currentLang) {
-                btn.classList.add('active');
-            }
-        });
-    }
-
-    // ================= TOPBAR & NAVBAR =================
-    function initializeTopbar() {
-        let lastScrollTop = 0;
-        const topbar = document.querySelector('.topbar');
-        const navbar = document.querySelector('.premium-navbar');
-        const searchBox = document.getElementById('searchBox');
-
-        window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                topbar?.classList.add('hidden');
-                if (navbar) navbar.style.top = '0px';
-                if (searchBox?.classList.contains('active')) toggleSearch();
-            } else {
-                topbar?.classList.remove('hidden');
-                if (navbar) navbar.style.top = '45px';
-            }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        });
-    }
-
-    // ================= SEARCH =================
-    function initializeSearch() {
-        const searchBox = document.getElementById('searchBox');
-        const searchInput = document.getElementById('searchInput');
-        const searchSubmit = document.querySelector('.search-submit');
-
-        window.toggleSearch = function() {
-            searchBox.classList.toggle('active');
-            searchBox.setAttribute('aria-hidden', !searchBox.classList.contains('active'));
-            if (searchBox.classList.contains('active')) setTimeout(() => searchInput.focus(), 300);
-        };
-
-        searchInput.addEventListener('keypress', e => {
-            if (e.key === 'Enter') performSearch();
-        });
-        searchSubmit?.addEventListener('click', performSearch);
-
-        document.addEventListener('click', e => {
-            if (!searchBox.contains(e.target) && !e.target.closest('.search-btn')) {
-                if (searchBox.classList.contains('active')) toggleSearch();
-            }
-        });
-
-        function performSearch() {
-            const query = searchInput.value.trim();
-            if (!query) return;
-            // Redirect ke search page
-            const langPrefix = localStorage.getItem('language') === 'en' ? '/en' : '';
-            window.location.href = `${langPrefix}/search?q=${encodeURIComponent(query)}`;
-        }
-    }
-
-    // ================= SOCIAL LINKS =================
-    function initializeSocialLinks() {
-        document.querySelectorAll('.social-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const platform = this.querySelector('i')?.className || '';
-                let url = '';
-                if (platform.includes('tiktok')) url = 'https://www.tiktok.com/@pt.tali.rejeki';
-                else if (platform.includes('instagram')) url = 'https://instagram.com/PTTaliRejeki';
-                else if (platform.includes('facebook')) url = 'https://facebook.com/PTTaliRejeki';
-                if (url) window.open(url, '_blank');
+            langButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === currentLang) btn.classList.add('active');
             });
-        });
-    }
-
-    // ================= THEME =================
-    function initializeTheme() {
-        const themeToggle = document.querySelector('.theme-toggle');
-        const body = document.body;
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        setTheme(savedTheme);
-
-        window.toggleTheme = function() {
-            const newTheme = body.classList.contains('dark-theme') ? 'light' : 'dark';
-            setTheme(newTheme);
-        };
-
-        function setTheme(theme) {
-            body.classList.toggle('dark-theme', theme === 'dark');
-            body.classList.toggle('light-theme', theme === 'light');
-            themeToggle?.classList.toggle('dark', theme === 'dark');
-            localStorage.setItem('theme', theme);
-            document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
         }
-    }
-});
+
+        // ================= TOPBAR & NAVBAR =================
+        function initializeTopbar() {
+            let lastScrollTop = 0;
+            const topbar = document.querySelector('.topbar');
+            const navbar = document.querySelector('.premium-navbar');
+            const searchBox = document.getElementById('searchBox');
+
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    topbar?.classList.add('hidden');
+                    if (navbar) navbar.style.top = '0px';
+                    if (searchBox?.classList.contains('active')) toggleSearch();
+                } else {
+                    topbar?.classList.remove('hidden');
+                    if (navbar) navbar.style.top = '45px';
+                }
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            });
+        }
+
+        // ================= SEARCH =================
+        function initializeSearch() {
+            const searchBox = document.getElementById('searchBox');
+            const searchInput = document.getElementById('searchInput');
+            const searchSubmit = document.querySelector('.search-submit');
+
+            window.toggleSearch = function() {
+                searchBox.classList.toggle('active');
+                searchBox.setAttribute('aria-hidden', !searchBox.classList.contains('active'));
+                if (searchBox.classList.contains('active')) setTimeout(() => searchInput.focus(), 300);
+            };
+
+            searchInput.addEventListener('keypress', e => { if (e.key === 'Enter') performSearch(); });
+            searchSubmit?.addEventListener('click', performSearch);
+
+            document.addEventListener('click', e => {
+                if (!searchBox.contains(e.target) && !e.target.closest('.search-btn')) {
+                    if (searchBox.classList.contains('active')) toggleSearch();
+                }
+            });
+
+            function performSearch() {
+                const query = searchInput.value.trim();
+                if (!query) return;
+                const langPrefix = localStorage.getItem('language') === 'en' ? '/en' : '';
+                window.location.href = `${langPrefix}/search?q=${encodeURIComponent(query)}`;
+            }
+        }
+
+        // ================= SOCIAL LINKS =================
+        function initializeSocialLinks() {
+            document.querySelectorAll('.social-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const platform = this.querySelector('i')?.className || '';
+                    let url = '';
+                    if (platform.includes('tiktok')) url = 'https://www.tiktok.com/@pt.tali.rejeki';
+                    else if (platform.includes('instagram')) url = 'https://instagram.com/PTTaliRejeki';
+                    else if (platform.includes('facebook')) url = 'https://facebook.com/PTTaliRejeki';
+                    if (url) window.open(url, '_blank');
+                });
+            });
+        }
+
+        // ================= THEME =================
+        function initializeTheme() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const thumb = themeToggle.querySelector('.theme-toggle-thumb');
+            const body = document.body;
+
+            // Ambil theme dari localStorage atau default system
+            let savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            applyTheme(savedTheme);
+
+            // Klik toggle
+            themeToggle.addEventListener('click', function() {
+                const newTheme = body.classList.contains('dark-theme') ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+
+            function applyTheme(theme) {
+                // Body
+                body.classList.toggle('dark-theme', theme === 'dark');
+                body.classList.toggle('light-theme', theme === 'light');
+
+                // Button
+                themeToggle.classList.toggle('dark', theme === 'dark');
+
+                // Animasi thumb dan ikon
+                if (theme === 'dark') {
+                    thumb.style.transform = 'translateX(24px)';
+                    thumb.querySelector('.sun-icon').style.opacity = '0';
+                    thumb.querySelector('.moon-icon').style.opacity = '1';
+                } else {
+                    thumb.style.transform = 'translateX(0)';
+                    thumb.querySelector('.sun-icon').style.opacity = '1';
+                    thumb.querySelector('.moon-icon').style.opacity = '0';
+                }
+
+                // Simpan ke localStorage
+                localStorage.setItem('theme', theme);
+            }
+        }
+    });
 </script>
+

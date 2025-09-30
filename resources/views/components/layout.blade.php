@@ -150,21 +150,7 @@
     <!-- Advanced Language Translator -->
     <script src="{{ asset('js/advanced-translator.js') }}"></script>
     
-    <script>
-        // Initialize theme before page load
-        (function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            const body = document.body;
-            
-            if (savedTheme === 'dark') {
-                body.classList.add('dark-theme');
-                body.classList.remove('light-theme');
-            } else {
-                body.classList.add('light-theme');
-                body.classList.remove('dark-theme');
-            }
-        })();
-        
+    <script>        
         // Hide loading screen when page is loaded
         window.addEventListener('load', function() {
             const loading = document.getElementById('loadingScreen');

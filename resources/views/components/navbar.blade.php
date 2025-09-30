@@ -23,19 +23,16 @@
             <ul class="nav-links">
                 <li class="nav-item">
                     <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" data-translate="nav-home">
-                        <i class="fas fa-home"></i>
                         <span>Beranda</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" data-translate="nav-about">
-                        <i class="fas fa-info-circle"></i>
                         <span>Tentang</span>
                     </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="{{ route('products') }}" class="nav-link dropdown-toggle {{ request()->routeIs('products*') ? 'active' : '' }}" data-translate="nav-products">
-                        <i class="fas fa-th-large"></i>
                         <span>Produk</span>
                         <i class="fas fa-chevron-down"></i>
                     </a>
@@ -54,25 +51,21 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('catalog1-page') }}" class="nav-link {{ request()->routeIs('catalog1-page*') ? 'active' : '' }}" data-translate="nav-catalog">
-                        <i class="fas fa-book"></i>
                         <span>Katalog Produk</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('gallery') }}" class="nav-link {{ request()->routeIs('gallery*') ? 'active' : '' }}" data-translate="nav-gallery">
-                        <i class="fas fa-images"></i>
                         <span>Galeri</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('career') }}" class="nav-link {{ request()->routeIs('career*') ? 'active' : '' }}" data-translate="nav-career">
-                        <i class="fas fa-briefcase"></i>
                         <span>Karier</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact*') ? 'active' : '' }}" data-translate="nav-contact">
-                        <i class="fas fa-phone"></i>
                         <span>Hubungi Kami</span>
                     </a>
                 </li>

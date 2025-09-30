@@ -271,20 +271,3 @@ function toggleSearch() {
         }
     }
 }
-
-function toggleTheme() {
-    const body = document.body;
-    const themeToggle = document.querySelector('.theme-toggle');
-    
-    if (body.classList.contains('dark-theme')) {
-        body.classList.remove('dark-theme');
-        body.classList.add('light-theme');
-        localStorage.setItem('theme', 'light');
-        if (themeToggle) themeToggle.classList.remove('dark');
-    } else {
-        body.classList.remove('light-theme');
-        body.classList.add('dark-theme');
-        localStorage.setItem('theme', 'dark');
-        if (themeToggle) themeToggle.classList.add('dark');
-    }
-}
