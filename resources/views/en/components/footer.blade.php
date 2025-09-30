@@ -1415,18 +1415,18 @@ body.dark-theme .footer-comp-social-link:hover img {
             <img src="{{ asset('img/icon-logo/tali-rejeki.jpg') }}" alt="PT Tali Rejeki" class="footer-comp-company-logo" data-aos="zoom-in" data-aos-delay="500" data-aos-duration="600">
             <div>
               <h3 class="footer-comp-company-title" data-aos="fade-up" data-aos-delay="600" data-aos-duration="600">PT TALI REJEKI</h3>
-              <p class="footer-comp-company-tagline" data-aos="fade-up" data-aos-delay="700" data-aos-duration="600">Solusi Terpercaya Sejak 2011</p>
+              <p class="footer-comp-company-tagline" data-aos="fade-up" data-aos-delay="700" data-aos-duration="600">Trusted Solutions Since 2011</p>
             </div>
           </div>
           
           <p class="footer-comp-company-description" data-aos="fade-up" data-aos-delay="800" data-aos-duration="600">
-            PT Tali Rejeki adalah perusahaan terpercaya yang telah berpengalaman lebih dari satu dekade dalam menyediakan produk berkualitas tinggi dengan pelayanan profesional untuk memenuhi kebutuhan industri dan konsumen.
+            PT Tali Rejeki is a trusted company with over a decade of experience providing high-quality products with professional service to meet the needs of industries and consumers.
           </p>
           
           <div class="footer-comp-company-address" data-aos="slide-up" data-aos-delay="900" data-aos-duration="700">
             <div class="footer-comp-address-title">
               <i class="fas fa-map-marker-alt"></i>
-              Alamat Kantor
+              Office Address
             </div>
             <div class="footer-comp-address-text">
               JL. RAYA TARUMAJAYA NO. 11<br>
@@ -1440,11 +1440,11 @@ body.dark-theme .footer-comp-social-link:hover img {
 
         <!-- Contact Information -->
         <div class="footer-comp-contact" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
-          <h4 class="footer-comp-section-title" data-aos="fade-down" data-aos-delay="500" data-aos-duration="600">Informasi Kontak</h4>
+          <h4 class="footer-comp-section-title" data-aos="fade-down" data-aos-delay="500" data-aos-duration="600">Contact Information</h4>
           
           <div class="footer-comp-contact-info" data-aos="slide-up" data-aos-delay="600" data-aos-duration="700">
             <div class="footer-comp-contact-group">
-              <div class="footer-comp-contact-group-title">Telepon Kantor</div>
+              <div class="footer-comp-contact-group-title">Office Phone</div>
               <div class="footer-comp-contact-item" data-aos="fade-left" data-aos-delay="700" data-aos-duration="500">
                 <i class="fas fa-phone"></i>
                 <a href="tel:02129470622">021-29470622</a>
@@ -1469,21 +1469,21 @@ body.dark-theme .footer-comp-social-link:hover img {
           </div>
           
           <div class="footer-comp-operating-hours" data-aos="flip-up" data-aos-delay="900" data-aos-duration="700">
-            <div class="footer-comp-contact-group-title" style="margin-bottom: 0.75rem;">Jam Operasional</div>
+            <div class="footer-comp-contact-group-title" style="margin-bottom: 0.75rem;">Operating Hours</div>
             <div class="footer-comp-hours-item">
-              <span class="footer-comp-day">Senin - Jumat</span>
+              <span class="footer-comp-day">Monday - Friday</span>
               <span class="footer-comp-time">08:00 - 17:00 WIB</span>
             </div>
             <div class="footer-comp-hours-item">
-              <span class="footer-comp-day">Sabtu - Minggu</span>
-              <span class="footer-comp-time">Tutup</span>
+              <span class="footer-comp-day">Saturday - Sunday</span>
+              <span class="footer-comp-time">Closed</span>
             </div>
           </div>
         </div>
 
         <!-- Marketing Team -->
         <div class="footer-comp-team" data-aos="fade-left" data-aos-duration="800" data-aos-delay="500">
-          <h4 class="footer-comp-section-title" data-aos="fade-down" data-aos-delay="600" data-aos-duration="600">Tim Marketing</h4>
+          <h4 class="footer-comp-section-title" data-aos="fade-down" data-aos-delay="600" data-aos-duration="600">Marketing Team</h4>
           
           <div class="footer-comp-team-grid">
             <div class="footer-comp-team-member" data-aos="zoom-in" data-aos-delay="700" data-aos-duration="600">
@@ -1536,7 +1536,7 @@ body.dark-theme .footer-comp-social-link:hover img {
 
         <!-- Product Categories -->
         <div class="footer-comp-products" data-aos="fade-down" data-aos-duration="800" data-aos-delay="600">
-          <h4 class="footer-comp-section-title" data-aos="fade-down" data-aos-delay="700" data-aos-duration="600">Produk Kami</h4>
+          <h4 class="footer-comp-section-title" data-aos="fade-down" data-aos-delay="700" data-aos-duration="600">Our Products</h4>
           
           <div class="footer-comp-products-grid">
             @if($footerCategories->count() > 0)
@@ -1553,13 +1553,11 @@ body.dark-theme .footer-comp-social-link:hover img {
               <div class="footer-comp-product-category" data-aos="slide-right" data-aos-delay="800" data-aos-duration="500">
                 <div class="footer-comp-category-name">
                   <a href="{{ route('en.products.index') }}" class="footer-comp-category-link">
-                    Semua Produk
+                    All Products
                   </a>
                 </div>
               </div>
             @endif
-            
-            <!-- Quick Links - Removed as requested -->
           </div>
         </div>
         
@@ -1567,7 +1565,7 @@ body.dark-theme .footer-comp-social-link:hover img {
 
       <!-- Social Media Section -->
       <div class="footer-comp-social-section" data-aos="fade-up" data-aos-delay="1000" data-aos-duration="800">
-        <h4 class="footer-comp-social-title" data-aos="bounce" data-aos-delay="1100" data-aos-duration="600">Ikuti Kami</h4>
+        <h4 class="footer-comp-social-title" data-aos="bounce" data-aos-delay="1100" data-aos-duration="600">Follow Us</h4>
         <div class="footer-comp-social-links">
           <!-- WhatsApp -->
           <a href="https://wa.me/6281382523722" target="_blank" class="footer-comp-social-link whatsapp" title="WhatsApp" data-aos="flip-left" data-aos-delay="1200" data-aos-duration="500">
@@ -1580,7 +1578,7 @@ body.dark-theme .footer-comp-social-link:hover img {
           </a>
           
           <!-- Phone -->
-          <a href="tel:02129470622" class="footer-comp-social-link phone" title="Telepon" data-aos="flip-left" data-aos-delay="1300" data-aos-duration="500">
+          <a href="tel:02129470622" class="footer-comp-social-link phone" title="Phone" data-aos="flip-left" data-aos-delay="1300" data-aos-duration="500">
             <i class="fas fa-phone"></i>
           </a>
           
@@ -1643,6 +1641,7 @@ body.dark-theme .footer-comp-social-link:hover img {
     </div>
   </div>
 </footer>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
