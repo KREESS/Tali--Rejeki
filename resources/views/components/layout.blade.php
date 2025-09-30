@@ -220,14 +220,16 @@
 
     <!-- Navigation -->
     @include('components.navbar')
-<!-- SEARCH POPUP -->
-<div class="search-box-popup" id="searchBox" aria-hidden="true">
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Cari produk insulasi...">
-        <button class="search-submit"><i class="fas fa-search"></i></button>
-        <button class="search-close"><i class="fas fa-times"></i></button>
+
+    <!-- SEARCH POPUP -->
+    <div class="search-box-popup" id="searchBox" aria-hidden="true">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Cari produk insulasi...">
+            <button class="search-submit"><i class="fas fa-search"></i></button>
+            <button class="search-close"><i class="fas fa-times"></i></button>
+        </div>
     </div>
-</div>
+
     <!-- Main Content -->
     <main>
         @yield('content')
@@ -280,48 +282,46 @@
             });
         });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const searchBox = document.getElementById('searchBox');
-    const searchBtn = document.querySelector('.search-btn');
-    const searchClose = searchBox.querySelector('.search-close');
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBox = document.getElementById('searchBox');
+            const searchBtn = document.querySelector('.search-btn');
+            const searchClose = searchBox.querySelector('.search-close');
 
-    function toggleSearch() {
-        searchBox.classList.toggle('active');
-        if(searchBox.classList.contains('active')) {
-            document.getElementById('searchInput').focus();
-        }
-    }
+            function toggleSearch() {
+                searchBox.classList.toggle('active');
+                if(searchBox.classList.contains('active')) {
+                    document.getElementById('searchInput').focus();
+                }
+            }
 
-    // Tombol search
-    searchBtn.addEventListener('click', function(e) {
-        e.stopPropagation(); 
-        toggleSearch();
-    });
+            // Tombol search
+            searchBtn.addEventListener('click', function(e) {
+                e.stopPropagation(); 
+                toggleSearch();
+            });
 
-    // Tombol close
-    searchClose.addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleSearch();
-    });
+            // Tombol close
+            searchClose.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleSearch();
+            });
 
-    // Klik di luar popup untuk menutup
-    document.addEventListener('click', function(e) {
-        if (searchBox.classList.contains('active') &&
-            !searchBox.contains(e.target) &&
-            !searchBtn.contains(e.target)) {
-            toggleSearch();
-        }
-    });
+            // Klik di luar popup untuk menutup
+            document.addEventListener('click', function(e) {
+                if (searchBox.classList.contains('active') &&
+                    !searchBox.contains(e.target) &&
+                    !searchBtn.contains(e.target)) {
+                    toggleSearch();
+                }
+            });
 
-    // ESC key untuk menutup
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && searchBox.classList.contains('active')) {
-            toggleSearch();
-        }
-    });
-});
-
-
+            // ESC key untuk menutup
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && searchBox.classList.contains('active')) {
+                    toggleSearch();
+                }
+            });
+        });
     </script>
 </body>
 </html>
