@@ -620,19 +620,44 @@ class PageController extends Controller
      */
     public function searchAjax(Request $request)
     {
-        $query = $request->get('q', '');
+        $query = trim($request->get('q', ''));
 
-        $products = Product::where('name', 'like', "%{$query}%")->take(5)->get(['id', 'name']);
-        $articles = Article::where('title', 'like', "%{$query}%")->take(5)->get(['id', 'title']);
-        $galleries = Gallery::where('title', 'like', "%{$query}%")->take(5)->get(['id', 'title']);
+        if (!$query) {
+            return response()->json([
+                'products' => [],
+                'articles' => [],
+                'galleries' => []
+            ]);
+        }
+
+        // --------------------
+        // Produk
+        // --------------------
+        $products = Product::query()
+            ->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($query) . '%'])
+            ->take(5)
+            ->get()
+            ->map(function ($p) {
+                // Cek relasi subcategory & category
+                $url = '#';
+                if ($p->subcategory && $p->subcategory->category) {
+                    $url = route('product.detail', [
+                        'category' => $p->subcategory->category->slug,
+                        'subcategory' => $p->subcategory->slug,
+                        'product' => $p->slug
+                    ]);
+                }
+                return [
+                    'id' => $p->id,
+                    'name' => $p->name,
+                    'url' => $url
+                ];
+            });
 
         return response()->json([
             'products' => $products,
-            'articles' => $articles,
-            'galleries' => $galleries
         ]);
     }
-
 
     /**
      * Download catalog file.

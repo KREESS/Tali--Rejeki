@@ -284,25 +284,45 @@ class EnPageController extends Controller
     }
 
     // =================== SEARCH ===================
-    public function search(Request $request)
+    public function searchAjax(Request $request)
     {
-        $searchTerm = $request->get('q');
-        if (!$searchTerm) return redirect()->route('en.home')->with('error', 'Mohon masukkan kata kunci pencarian.');
+        $query = trim($request->get('q', ''));
 
-        $products = Product::with(['subcategory.category', 'images'])
-            ->where(fn($q) => $this->applySearch($q, $searchTerm))
-            ->take(5)->get();
+        if (!$query) {
+            return response()->json([
+                'products' => [],
+                'articles' => [],
+                'galleries' => []
+            ]);
+        }
 
-        $articles = Article::with('category')->published()
-            ->where(fn($q) => $q->where('title', 'like', "%{$searchTerm}%")->orWhere('content', 'like', "%{$searchTerm}%"))
-            ->take(5)->get();
+        // --------------------
+        // Produk
+        // --------------------
+        $products = Product::query()
+            ->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($query) . '%'])
+            ->take(5)
+            ->get()
+            ->map(function ($p) {
+                // Cek relasi subcategory & category
+                $url = '#';
+                if ($p->subcategory && $p->subcategory->category) {
+                    $url = route('en.product.detail', [
+                        'category' => $p->subcategory->category->slug,
+                        'subcategory' => $p->subcategory->slug,
+                        'product' => $p->slug
+                    ]);
+                }
+                return [
+                    'id' => $p->id,
+                    'name' => $p->name,
+                    'url' => $url
+                ];
+            });
 
-        $galleries = Gallery::published()
-            ->where(fn($q) => $q->where('title', 'like', "%{$searchTerm}%")->orWhere('description', 'like', "%{$searchTerm}%"))
-            ->take(5)->get();
-
-        return view('en.search-results', compact('products', 'articles', 'galleries', 'searchTerm'))
-            ->with('title', 'Hasil Pencarian: ' . $searchTerm);
+        return response()->json([
+            'products' => $products,
+        ]);
     }
 
     // =================== CATALOG DOWNLOAD / PREVIEW ===================

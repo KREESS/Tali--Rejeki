@@ -91,7 +91,7 @@ Route::get('/en/blog', [EnPageController::class, 'blog'])->name('en.blog');
 Route::get('/en/blog/{slug}', [EnPageController::class, 'blogDetail'])->name('en.blog.detail');
 Route::get('/en/blog/category/{slug}', [EnPageController::class, 'blogByCategory'])->name('en.blog.category');
 
-Route::get('/en/search', [EnPageController::class, 'search'])->name('en.search');
+Route::get('/en/search-ajax', [EnPageController::class, 'searchAjax'])->name('en.search.ajax');
 
 // ==================== AUTHENTICATION ====================
 

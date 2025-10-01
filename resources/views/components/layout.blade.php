@@ -150,18 +150,20 @@
         /* Popup Container */
         .search-box-popup {
             position: fixed;
-            top: 70px; /* Sesuaikan tinggi navbar */
+            top: 70px;
             right: 20px;
-            width: 320px;
-            background: #fff;
-            padding: 14px 18px;
-            border-radius: 20px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            width: 350px;
+            max-width: 90%;
+            background: #ffffff;
+            padding: 16px 20px;
+            border-radius: 25px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
             opacity: 0;
             visibility: hidden;
-            transform: translateY(-15px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-20px);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 999;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         /* Popup Active */
@@ -175,105 +177,155 @@
         .search-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         /* Input Field */
         .search-container input {
             flex: 1;
-            padding: 10px 16px;
+            padding: 12px 20px;
             border-radius: 50px;
-            border: 1px solid #ddd;
+            border: 1px solid #ccc;
             outline: none;
-            font-size: 15px;
-            transition: all 0.25s ease;
-            background: #fafafa;
+            font-size: 16px;
+            background: #fefefe;
+            transition: all 0.3s ease;
+            color: #222;
+        }
+
+        .search-container input::placeholder {
+            color: #999;
         }
 
         .search-container input:focus {
             border-color: #b71c1c;
             background: #fff;
-            box-shadow: 0 0 6px rgba(183,28,28,0.25);
+            box-shadow: 0 0 8px rgba(183,28,28,0.25);
         }
 
-        /* Reset Button Style */
-        .search-container button {
-            all: unset; /* reset bawaan browser */
-            display: flex;
+        /* Tombol Search & Close (Pure Icon) */
+        #searchSubmit, #searchClose {
+            all: unset; /* reset semua style */
+            cursor: pointer;
+            font-size: 22px; /* ukuran icon lebih jelas */
+            color: #b71c1c; /* merah default */
+            transition: color 0.25s ease;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            transition: all 0.2s ease;
         }
 
-        /* Search Button (merah) */
-        .search-container .search-submit {
-            color: #b71c1c;
+        /* Hover efek hanya icon */
+        #searchSubmit:hover,
+        #searchClose:hover {
+            color: #ff4d4d; /* merah lebih terang saat hover */
         }
 
-        .search-container .search-submit:hover {
-            color: #7f1414;
-            transform: scale(1.1);
+        /* Optional: kalau pakai <i> langsung */
+        #searchSubmit i,
+        #searchClose i {
+            pointer-events: none; /* biar klik tetap tombol */
         }
 
-        /* Close Button (abu polos) */
-        .search-container .search-close {
-            color: #444;
-        }
-
-        .search-container .search-close:hover {
-            color: #000;
-            transform: scale(1.1);
-        }
-
-        .search-container button i {
-            font-size: 18px;
-            pointer-events: none;
-        }
-
-        /* Close Button (ikon X) */
-        .search-container .search-close {
-            color: #000; /* jelas hitam */
-            background: none !important; /* pastikan tanpa lingkaran */
-            border: none !important; /* hapus border */
-            box-shadow: none !important; /* hapus efek bayangan */
-            outline: none !important;
-        }
-
-        .search-container .search-close:hover {
-            color: #b71c1c; /* merah saat hover biar keren */
-            transform: scale(1.1);
-        }
-
+        /* Search Results Modern & Keren */
         .search-results {
-            margin-top: 10px;
-            max-height: 300px;
+            margin-top: 14px;
+            max-height: 360px;
             overflow-y: auto;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 8px 0;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.15);
             display: none;
-            font-size: 14px;
+            font-size: 15px;
+            color: #222;
+            border: none;
+            width: 100%;
         }
 
+        /* Scrollbar custom (modern style) */
+        .search-results::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .search-results::-webkit-scrollbar-thumb {
+            background-color: rgba(183,28,28,0.5);
+            border-radius: 3px;
+        }
+
+        .search-results::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* Remove default list style */
         .search-results ul {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
+        /* List item style modern */
         .search-results li {
-            padding: 6px 8px;
-            border-bottom: 1px solid #eee;
+            padding: 10px 16px;
+            margin: 4px 12px;
+            border-radius: 14px;
             cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #222;
+            font-weight: 500;
+            background: #fafafa;
         }
 
+        /* Hover efek modern */
         .search-results li:hover {
-            background: #f5f5f5;
+            background: #ffe5e5; /* soft merah */
+            color: #b71c1c;
+            transform: translateX(3px);
+            box-shadow: 0 6px 18px rgba(183,28,28,0.15);
+        }
+
+        /* Optional: icon di kiri list item */
+        .search-results li::before {
+            content: "🔎"; /* bisa diganti sesuai kebutuhan */
+            font-size: 16px;
+            color: #b71c1c;
+            flex-shrink: 0;
+        }
+
+        /* Subjudul kategori */
+        .search-results strong {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #b71c1c;
+            padding: 6px 16px 4px;
+            text-transform: uppercase;
+        }
+
+        /* Link dalam li agar clickable seluruh area */
+        .search-results li a {
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Hover untuk link */
+        .search-results li a:hover {
+            color: inherit;
+        }
+
+        /* Pesan "Tidak ada hasil ditemukan" */
+        .search-results p {
+            padding: 12px 16px;
+            color: #555;
+            font-style: italic;
+            text-align: center;
+            margin: 0;
         }
 
         /* Responsive */
@@ -310,11 +362,21 @@
 
     <!-- SEARCH POPUP -->
     <div class="search-box-popup" id="searchBox" aria-hidden="true">
-        <form id="searchForm" class="search-container" action="javascript:void(0)">
-            <input type="text" id="searchInput" name="q" placeholder="Cari produk insulasi..." autocomplete="off">
-            <button type="submit" class="search-submit" aria-label="Search"><i class="fas fa-search"></i></button>
-            <button type="button" class="search-close" aria-label="Close"><i class="fas fa-times"></i></button>
-        </form>
+        <div id="searchContainer" class="search-container">
+            <input type="text" id="searchInput" placeholder="Cari produk insulasi..." autocomplete="off">
+            
+            <!-- Tombol Search -->
+            <button type="button" id="searchSubmit" aria-label="Search">
+                <i class="fas fa-search"></i>
+            </button>
+            
+            <!-- Tombol Close -->
+            <button type="button" id="searchClose" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Container hasil pencarian -->
         <div id="searchResults" class="search-results"></div>
     </div>
 
@@ -371,15 +433,13 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-            const searchBox = document.getElementById('searchBox');
-            const searchBtn = document.querySelector('.search-btn');
-            const searchClose = searchBox.querySelector('.search-close');
-            const searchForm = document.getElementById('searchForm');
-            const searchInput = document.getElementById('searchInput');
+            const searchBox     = document.getElementById('searchBox');
+            const searchBtn     = document.querySelector('.search-btn'); 
+            const searchClose   = document.getElementById('searchClose');
+            const searchInput   = document.getElementById('searchInput');
             const searchResults = document.getElementById('searchResults');
-            const searchSubmit = searchForm.querySelector('.search-submit');
+            const searchSubmit  = document.getElementById('searchSubmit');
 
-            // Toggle popup search
             function toggleSearch() {
                 searchBox.classList.toggle('active');
                 if (searchBox.classList.contains('active')) {
@@ -390,52 +450,49 @@
                 }
             }
 
-            // Open popup search
-            searchBtn.addEventListener('click', e => {
-                e.stopPropagation();
+            if(searchBtn) {
+                searchBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    toggleSearch();
+                });
+            }
+
+            searchClose.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
                 toggleSearch();
             });
 
-            // Close popup search
-            searchClose.addEventListener('click', e => {
-                e.stopPropagation();
-                toggleSearch();
-            });
-
-            // Klik di luar popup untuk menutup
-            document.addEventListener('click', e => {
-                if (searchBox.classList.contains('active') &&
-                    !searchBox.contains(e.target) &&
-                    !searchBtn.contains(e.target)) {
+            document.addEventListener('click', function(e) {
+                if(searchBox.classList.contains('active') && !searchBox.contains(e.target) && !searchBtn.contains(e.target)) {
                     toggleSearch();
                 }
             });
 
-            // ESC key untuk menutup
-            document.addEventListener('keydown', e => {
-                if (e.key === 'Escape' && searchBox.classList.contains('active')) {
+            document.addEventListener('keydown', function(e) {
+                if(e.key === 'Escape' && searchBox.classList.contains('active')) {
                     toggleSearch();
                 }
             });
 
-            // Handle klik tombol search
             searchSubmit.addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopImmediatePropagation();
                 performSearch();
             });
 
-            // Handle enter key di input
             searchInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
+                if(e.key === 'Enter') {
                     e.preventDefault();
+                    e.stopImmediatePropagation();
                     performSearch();
                 }
             });
 
-            // Fungsi AJAX search
             function performSearch() {
                 const query = searchInput.value.trim();
-                if (!query) return;
+                if(!query) return;
 
                 fetch(`/search-ajax?q=${encodeURIComponent(query)}`)
                     .then(res => res.json())
@@ -443,36 +500,44 @@
                         let html = '';
 
                         // Produk
-                        if (data.products && data.products.length) {
+                        if(data.products && data.products.length){
                             html += '<strong>Produk</strong><ul>';
                             data.products.forEach(p => {
-                                html += `<li>${p.name}</li>`;
+                                html += `<li><a href="${p.url}" class="search-link">${p.name}</a></li>`;
                             });
                             html += '</ul>';
                         }
 
                         // Artikel
-                        if (data.articles && data.articles.length) {
+                        if(data.articles && data.articles.length){
                             html += '<strong>Artikel</strong><ul>';
                             data.articles.forEach(a => {
-                                html += `<li>${a.title}</li>`;
+                                html += `<li><a href="${a.url}" class="search-link">${a.title}</a></li>`;
                             });
                             html += '</ul>';
                         }
 
                         // Galeri
-                        if (data.galleries && data.galleries.length) {
+                        if(data.galleries && data.galleries.length){
                             html += '<strong>Galeri</strong><ul>';
                             data.galleries.forEach(g => {
-                                html += `<li>${g.title}</li>`;
+                                html += `<li><a href="${g.url}" class="search-link">${g.title}</a></li>`;
                             });
                             html += '</ul>';
                         }
 
-                        if (!html) html = '<p>Tidak ada hasil ditemukan.</p>';
+                        if(!html) html = '<p>Tidak ada hasil ditemukan.</p>';
 
                         searchResults.innerHTML = html;
                         searchResults.style.display = 'block';
+
+                        // Optional: close popup saat klik hasil
+                        const links = searchResults.querySelectorAll('.search-link');
+                        links.forEach(link => {
+                            link.addEventListener('click', function() {
+                                toggleSearch();
+                            });
+                        });
                     })
                     .catch(err => {
                         console.error('Error fetch search-ajax:', err);
@@ -481,7 +546,6 @@
                     });
             }
         });
-
     </script>
 </body>
 </html>
