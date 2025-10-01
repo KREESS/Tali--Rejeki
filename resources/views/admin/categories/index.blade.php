@@ -281,7 +281,9 @@
                                         <span class="text-muted">{{ Str::limit($category->meta_title, 25) }}</span>
                                     </td>
                                     <td>
-                                        <small class="text-muted">{{ $category->created_at->format('d M Y') }}</small>
+                                        <small class="text-muted">
+                                            {{ optional($category->created_at)->format('d M Y') ?? '-' }}
+                                        </small>
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group" role="group">

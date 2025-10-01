@@ -38,11 +38,20 @@
                         </div>
                     </button>
                     <div class="language-toggle" role="group" aria-label="Language selection">
-                        <button class="lang-btn" data-lang="id" title="Bahasa Indonesia" aria-label="Switch to Indonesian">
+                        <button class="lang-btn {{ request()->is('') || request()->is('id*') ? 'active' : '' }}" 
+                                data-lang="id" 
+                                title="Bahasa Indonesia" 
+                                aria-label="Switch to Indonesian"
+                                onclick="window.location.href='/'">
                             <img src="https://flagcdn.com/w20/id.png" alt="ID" class="flag-icon" loading="lazy">
                             <span class="lang-text">ID</span>
                         </button>
-                        <button class="lang-btn" data-lang="en" title="English" aria-label="Switch to English">
+
+                        <button class="lang-btn {{ request()->is('en*') ? 'active' : '' }}" 
+                                data-lang="en" 
+                                title="English" 
+                                aria-label="Switch to English"
+                                onclick="window.location.href='/en'">
                             <img src="https://flagcdn.com/w20/us.png" alt="EN" class="flag-icon" loading="lazy">
                             <span class="lang-text">EN</span>
                         </button>

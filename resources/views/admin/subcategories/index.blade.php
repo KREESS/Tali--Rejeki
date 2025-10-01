@@ -425,16 +425,14 @@ function filterTable() {
 
 // Delete subcategory function with modern confirmation
 function deleteSubcategory(subcategoryId) {
-    // Show modern confirmation modal instead of Bootstrap modal
     showModernConfirm(
         'Hapus Sub Kategori?', 
         'Apakah Anda yakin ingin menghapus sub kategori ini? Peringatan: Sub kategori yang memiliki produk tidak dapat dihapus!',
         'fas fa-trash-alt',
         'danger',
         function() {
-            // Show loading alert
             showModernAlert('info', 'Memproses...', 'Sedang menghapus sub kategori, harap tunggu.', 'fas fa-spinner fa-spin', 0);
-            
+
             fetch(`/admin/subcategories/${subcategoryId}`, {
                 method: 'DELETE',
                 headers: {
@@ -444,37 +442,33 @@ function deleteSubcategory(subcategoryId) {
                 }
             })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 return response.json();
             })
             .then(data => {
-                // Remove loading alert
                 removeAlert();
-                
+
                 if (data.success) {
                     showModernAlert('success', 'Berhasil!', data.message || 'Sub kategori berhasil dihapus.', 'fas fa-check-circle');
-                    
-                    // Remove the row from table after 2 seconds
+
+                    // Remove the row safely
                     setTimeout(() => {
-                        const row = document.querySelector(`tr:has(button[onclick="deleteSubcategory(${subcategoryId})"])`);
+                        const button = document.querySelector(`button[onclick="deleteSubcategory(${subcategoryId})"]`);
+                        const row = button ? button.closest('tr') : null;
                         if (row) {
                             row.style.animation = 'fadeOut 0.5s ease-out forwards';
                             setTimeout(() => {
                                 row.remove();
-                                // Update row numbers
                                 updateRowNumbers();
                             }, 500);
                         }
-                        removeAlert();
                     }, 2000);
+
                 } else {
                     showModernAlert('danger', 'Gagal!', data.message || 'Gagal menghapus sub kategori.', 'fas fa-exclamation-triangle');
                 }
             })
             .catch(error => {
-                // Remove loading alert
                 removeAlert();
                 console.error('Error:', error);
                 showModernAlert('danger', 'Error!', 'Terjadi kesalahan saat menghapus sub kategori: ' + error.message, 'fas fa-exclamation-circle');
@@ -482,6 +476,7 @@ function deleteSubcategory(subcategoryId) {
         }
     );
 }
+
 
 // Enhanced form submission handling
 document.addEventListener('DOMContentLoaded', function() {

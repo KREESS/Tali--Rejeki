@@ -278,7 +278,7 @@
       <!-- ARMAFLEX -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item reveal">
-          <a class="pi-thumb" href="{{ url('/products/armacel-armaflex') }}" aria-label="Detail ARMAFLEX">
+          <a class="pi-thumb" href="{{ url('/products/armacell-armaflex') }}" aria-label="Detail ARMAFLEX">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/30.png') }}" alt="" loading="lazy" decoding="async">
               <img class="pi-img back"  src="{{ asset('img/landing/31.png') }}" alt="" loading="lazy" decoding="async">
@@ -291,14 +291,14 @@
             <li><i class="fas fa-check"></i> Fleksibel & rapi</li>
             <li><i class="fas fa-check"></i> Tahan lembab</li>
           </ul>
-          <a href="{{ url('/products/armaflex') }}" class="pi-link">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+          <a href="{{ url('/products/armacell-armaflex') }}" class="pi-link">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- ALUMINIUMSHEET [JACKETING] -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item reveal">
-          <a class="pi-thumb" href="{{ url('/products/aluminium-sheet-jacketing') }}" aria-label="Detail ALUMINIUMSHEET [JACKETING]">
+          <a class="pi-thumb" href="{{ url('/products/aluminiumsheet-jacketing') }}" aria-label="Detail ALUMINIUMSHEET [JACKETING]">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/32.png') }}" alt="Aluminium Sheet Jacketing" loading="lazy" decoding="async">
               <img class="pi-img back"  src="{{ asset('img/landing/33.png') }}" alt="Aluminium Sheet Jacketing Back" loading="lazy" decoding="async">
@@ -315,7 +315,7 @@
             <li><i class="fas fa-check"></i> Umur pakai panjang & perawatan mudah</li>
           </ul>
 
-          <a href="{{ url('/products/aluminium-sheet') }}" class="pi-link">
+          <a href="{{ url('/products/aluminiumsheet-jacketing') }}" class="pi-link">
             Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i>
           </a>
         </div>

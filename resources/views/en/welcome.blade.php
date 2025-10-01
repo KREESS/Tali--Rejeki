@@ -278,7 +278,7 @@
       <!-- ARMACEL / ARMAFLEX -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item reveal">
-          <a class="pi-thumb" href="{{ url('/en/products/armacel-armaflex') }}" aria-label="ARMACEL / ARMAFLEX Details">
+          <a class="pi-thumb" href="{{ url('/en/products/armacell-armaflex') }}" aria-label="ARMACEL / ARMAFLEX Details">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/30.png') }}" alt="Armacel Armaflex Front" loading="lazy" decoding="async">
               <img class="pi-img back"  src="{{ asset('img/landing/31.png') }}" alt="Armacel Armaflex Back" loading="lazy" decoding="async">
@@ -291,14 +291,14 @@
             <li><i class="fas fa-check"></i> Flexible & neat installation</li>
             <li><i class="fas fa-check"></i> Moisture resistant</li>
           </ul>
-          <a href="{{ url('/en/products/armaflex') }}" class="pi-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <a href="{{ url('/en/products/armacell-armaflex') }}" class="pi-link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- ALUMINIUM SHEET [JACKETING] -->
       <div class="col-xl-4 col-lg-4 col-md-6 mb-4">
         <div class="product-item reveal">
-          <a class="pi-thumb" href="{{ url('/en/products/aluminium-sheet-jacketing') }}" aria-label="ALUMINIUM SHEET [JACKETING] Details">
+          <a class="pi-thumb" href="{{ url('/en/products/aluminiumsheet-jacketing') }}" aria-label="ALUMINIUM SHEET [JACKETING] Details">
             <div class="pi-stage" aria-hidden="true">
               <img class="pi-img front" src="{{ asset('img/landing/32.png') }}" alt="Aluminium Sheet Jacketing Front" loading="lazy" decoding="async">
               <img class="pi-img back"  src="{{ asset('img/landing/33.png') }}" alt="Aluminium Sheet Jacketing Back" loading="lazy" decoding="async">
@@ -315,7 +315,7 @@
             <li><i class="fas fa-check"></i> Long-lasting & low maintenance</li>
           </ul>
 
-          <a href="{{ url('/en/products/aluminium-sheet') }}" class="pi-link">
+          <a href="{{ url('/en/products/aluminiumsheet-jacketing') }}" class="pi-link">
             Learn More <i class="fas fa-arrow-right"></i>
           </a>
         </div>
