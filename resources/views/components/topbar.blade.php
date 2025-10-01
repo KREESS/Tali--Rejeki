@@ -25,11 +25,10 @@
                     </a>
                     <div class="divider" aria-hidden="true"></div>
                     <!-- Search Button -->
-<!-- Tombol Search di Topbar -->
-<button class="search-btn" title="Search" aria-label="Open search">
-    <i class="fas fa-search" aria-hidden="true"></i>
-</button>
-
+                    <!-- Tombol Search di Topbar -->
+                    <button class="search-btn" title="Search" aria-label="Open search">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </button>
                     <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
                         <div class="theme-toggle-track">
                             <div class="theme-toggle-thumb">
@@ -1199,6 +1198,35 @@ body.light-theme .search-box {
                     if (url) window.open(url, '_blank');
                 });
             });
+        }
+
+        // ================= SEARCH =================
+        function initializeSearch() {
+            const searchBox = document.getElementById('searchBox');
+            const searchInput = document.getElementById('searchInput');
+            const searchSubmit = document.querySelector('.search-submit');
+
+            window.toggleSearch = function() {
+                searchBox.classList.toggle('active');
+                searchBox.setAttribute('aria-hidden', !searchBox.classList.contains('active'));
+                if (searchBox.classList.contains('active')) setTimeout(() => searchInput.focus(), 300);
+            };
+
+            searchInput.addEventListener('keypress', e => { if (e.key === 'Enter') performSearch(); });
+            searchSubmit?.addEventListener('click', performSearch);
+
+            document.addEventListener('click', e => {
+                if (!searchBox.contains(e.target) && !e.target.closest('.search-btn')) {
+                    if (searchBox.classList.contains('active')) toggleSearch();
+                }
+            });
+
+            function performSearch() {
+                const query = searchInput.value.trim();
+                if (!query) return;
+                const langPrefix = localStorage.getItem('language') === 'en' ? '/en' : '';
+                window.location.href = `${langPrefix}/search?q=${encodeURIComponent(query)}`;
+            }
         }
 
         // ================= THEME =================

@@ -618,60 +618,21 @@ class PageController extends Controller
     /**
      * Search functionality.
      */
-    public function search(Request $request)
+    public function searchAjax(Request $request)
     {
-        $searchTerm = $request->get('q');
+        $query = $request->get('q', '');
 
-        if (empty($searchTerm)) {
-            return redirect()->route('home')->with('error', 'Mohon masukkan kata kunci pencarian.');
-        }
+        $products = Product::where('name', 'like', "%{$query}%")->take(5)->get(['id', 'name']);
+        $articles = Article::where('title', 'like', "%{$query}%")->take(5)->get(['id', 'title']);
+        $galleries = Gallery::where('title', 'like', "%{$query}%")->take(5)->get(['id', 'title']);
 
-        // Search in products
-        $products = Product::with(['subcategory.category', 'images'])
-            ->where(function ($q) use ($searchTerm) {
-                $q->where('name', 'like', "%{$searchTerm}%")
-                    ->orWhere('meta_description', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr1', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr2', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr3', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr4', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr5', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr6', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr7', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr8', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr9', 'like', "%{$searchTerm}%")
-                    ->orWhere('attr10', 'like', "%{$searchTerm}%");
-            })
-            ->take(5)
-            ->get();
-
-        // Search in articles
-        $articles = Article::with('category')
-            ->published()
-            ->where(function ($q) use ($searchTerm) {
-                $q->where('title', 'like', "%{$searchTerm}%")
-                    ->orWhere('content', 'like', "%{$searchTerm}%");
-            })
-            ->take(5)
-            ->get();
-
-        // Search in galleries
-        $galleries = Gallery::published()
-            ->where(function ($q) use ($searchTerm) {
-                $q->where('title', 'like', "%{$searchTerm}%")
-                    ->orWhere('description', 'like', "%{$searchTerm}%");
-            })
-            ->take(5)
-            ->get();
-
-        return view('pages.search-results', [
-            'title' => 'Hasil Pencarian: ' . $searchTerm,
-            'searchTerm' => $searchTerm,
+        return response()->json([
             'products' => $products,
             'articles' => $articles,
             'galleries' => $galleries
         ]);
     }
+
 
     /**
      * Download catalog file.

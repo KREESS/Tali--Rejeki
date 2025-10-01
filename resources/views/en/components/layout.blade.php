@@ -37,7 +37,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
@@ -53,7 +53,7 @@
             position: relative;
             transition: all 0.3s ease;
         }
-        
+
         /* Light Theme (Default) */
         body.light-theme {
             background: url('{{ asset("img/bg/bg-texture-white.webp") }}');
@@ -63,7 +63,7 @@
             background-repeat: no-repeat;
             color: #1e293b;
         }
-        
+
         /* Dark Theme */
         body.dark-theme {
             background: url('{{ asset("img/bg/bg-texture.webp") }}');
@@ -73,21 +73,21 @@
             background-repeat: no-repeat;
             color: #f1f5f9;
         }
-        
+
         main {
             flex: 1;
             min-height: calc(100vh - 200px);
         }
-        
+
         .container-fluid {
             padding: 0;
         }
-        
+
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
         }
-        
+
         /* Loading animation */
         .loading {
             position: fixed;
@@ -102,12 +102,12 @@
             z-index: 9999;
             transition: opacity 0.3s ease;
         }
-        
+
         .loading.hidden {
             opacity: 0;
             pointer-events: none;
         }
-        
+
         .spinner {
             width: 50px;
             height: 50px;
@@ -116,10 +116,96 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
-        
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        /* Popup Container */
+        .search-box-popup {
+            position: fixed;
+            top: 70px; /* Sesuaikan tinggi navbar */
+            right: 20px;
+            width: 320px;
+            background: #fff;
+            padding: 12px 16px;
+            border-radius: 30px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            margin-top: 60px;
+        }
+
+        /* Popup Active */
+        .search-box-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Search Container Flex */
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Input Field Modern */
+        .search-container input {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 50px;
+            border: 1px solid #ddd;
+            outline: none;
+            font-size: 16px;
+            transition: all 0.25s ease;
+        }
+
+        .search-container input:focus {
+            border-color: #b71c1c;
+            box-shadow: 0 0 8px rgba(183,28,28,0.3);
+        }
+
+        /* Buttons */
+        .search-container button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #b71c1c;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .search-container button:hover {
+            background: #7f1414;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .search-box-popup {
+                width: 90%;
+                right: 5%;
+                top: 60px;
+            }
+
+            .search-container input {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .search-container button {
+                width: 36px;
+                height: 36px;
+            }
         }
     </style>
 </head>
@@ -131,11 +217,17 @@
 
     <!-- Topbar -->
     @include('en.components.topbar')
-    @stack('scripts')
 
     <!-- Navigation -->
     @include('en.components.navbar')
-
+    <!-- SEARCH POPUP -->
+    <div class="search-box-popup" id="searchBox" aria-hidden="true">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Cari produk insulasi...">
+            <button class="search-submit"><i class="fas fa-search"></i></button>
+            <button class="search-close"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
     <!-- Main Content -->
     <main>
         @yield('content')
@@ -147,12 +239,11 @@
     @include('en.components.whatsapp')
 
     @stack('scripts')
-    
+
     <!-- Advanced Language Translator -->
     <script src="{{ asset('js/advanced-translator.js') }}"></script>
-    
-    <script>
-        
+
+    <script>        
         // Hide loading screen when page is loaded
         window.addEventListener('load', function() {
             const loading = document.getElementById('loadingScreen');
@@ -185,6 +276,47 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBox = document.getElementById('searchBox');
+            const searchBtn = document.querySelector('.search-btn');
+            const searchClose = searchBox.querySelector('.search-close');
+
+            function toggleSearch() {
+                searchBox.classList.toggle('active');
+                if(searchBox.classList.contains('active')) {
+                    document.getElementById('searchInput').focus();
+                }
+            }
+
+            // Tombol search
+            searchBtn.addEventListener('click', function(e) {
+                e.stopPropagation(); 
+                toggleSearch();
+            });
+
+            // Tombol close
+            searchClose.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleSearch();
+            });
+
+            // Klik di luar popup untuk menutup
+            document.addEventListener('click', function(e) {
+                if (searchBox.classList.contains('active') &&
+                    !searchBox.contains(e.target) &&
+                    !searchBtn.contains(e.target)) {
+                    toggleSearch();
+                }
+            });
+
+            // ESC key untuk menutup
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && searchBox.classList.contains('active')) {
+                    toggleSearch();
                 }
             });
         });

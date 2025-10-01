@@ -147,6 +147,30 @@
             transform: translateY(0);
         }
 
+        /* Popup Container */
+        .search-box-popup {
+            position: fixed;
+            top: 70px; /* Sesuaikan tinggi navbar */
+            right: 20px;
+            width: 320px;
+            background: #fff;
+            padding: 14px 18px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+        }
+
+        /* Popup Active */
+        .search-box-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
         /* Search Container Flex */
         .search-container {
             display: flex;
@@ -154,47 +178,111 @@
             gap: 10px;
         }
 
-        /* Input Field Modern */
+        /* Input Field */
         .search-container input {
             flex: 1;
             padding: 10px 16px;
             border-radius: 50px;
             border: 1px solid #ddd;
             outline: none;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.25s ease;
+            background: #fafafa;
         }
 
         .search-container input:focus {
             border-color: #b71c1c;
-            box-shadow: 0 0 8px rgba(183,28,28,0.3);
+            background: #fff;
+            box-shadow: 0 0 6px rgba(183,28,28,0.25);
         }
 
-        /* Buttons */
+        /* Reset Button Style */
         .search-container button {
+            all: unset; /* reset bawaan browser */
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #b71c1c;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .search-container button:hover {
-            background: #7f1414;
+        /* Search Button (merah) */
+        .search-container .search-submit {
+            color: #b71c1c;
+        }
+
+        .search-container .search-submit:hover {
+            color: #7f1414;
+            transform: scale(1.1);
+        }
+
+        /* Close Button (abu polos) */
+        .search-container .search-close {
+            color: #444;
+        }
+
+        .search-container .search-close:hover {
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        .search-container button i {
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        /* Close Button (ikon X) */
+        .search-container .search-close {
+            color: #000; /* jelas hitam */
+            background: none !important; /* pastikan tanpa lingkaran */
+            border: none !important; /* hapus border */
+            box-shadow: none !important; /* hapus efek bayangan */
+            outline: none !important;
+        }
+
+        .search-container .search-close:hover {
+            color: #b71c1c; /* merah saat hover biar keren */
+            transform: scale(1.1);
+        }
+
+        .search-results {
+            margin-top: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: none;
+            font-size: 14px;
+        }
+
+        .search-results ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .search-results li {
+            padding: 6px 8px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .search-results li:hover {
+            background: #f5f5f5;
         }
 
         /* Responsive */
         @media (max-width: 480px) {
             .search-box-popup {
-                width: 90%;
-                right: 5%;
+                width: 92%;
+                right: 4%;
                 top: 60px;
+                padding: 12px 14px;
             }
 
             .search-container input {
@@ -203,18 +291,17 @@
             }
 
             .search-container button {
-                width: 36px;
-                height: 36px;
+                width: 34px;
+                height: 34px;
+            }
+
+            .search-container button i {
+                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading" id="loadingScreen">
-        <div class="spinner"></div>
-    </div>
-
     <!-- Topbar -->
     @include('components.topbar')
 
@@ -223,11 +310,12 @@
 
     <!-- SEARCH POPUP -->
     <div class="search-box-popup" id="searchBox" aria-hidden="true">
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Cari produk insulasi...">
-            <button class="search-submit"><i class="fas fa-search"></i></button>
-            <button class="search-close"><i class="fas fa-times"></i></button>
-        </div>
+        <form id="searchForm" class="search-container" action="javascript:void(0)">
+            <input type="text" id="searchInput" name="q" placeholder="Cari produk insulasi..." autocomplete="off">
+            <button type="submit" class="search-submit" aria-label="Search"><i class="fas fa-search"></i></button>
+            <button type="button" class="search-close" aria-label="Close"><i class="fas fa-times"></i></button>
+        </form>
+        <div id="searchResults" class="search-results"></div>
     </div>
 
     <!-- Main Content -->
@@ -241,33 +329,11 @@
     @include('components.whatsapp')
 
     @stack('scripts')
-    
+
     <!-- Advanced Language Translator -->
     <script src="{{ asset('js/advanced-translator.js') }}"></script>
-    
-    <script>        
-        // Hide loading screen when page is loaded
-        window.addEventListener('load', function() {
-            const loading = document.getElementById('loadingScreen');
-            if (loading) {
-                loading.classList.add('hidden');
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                }, 300);
-            }
-            
-            // Initialize AOS (Animate On Scroll)
-            if (typeof AOS !== 'undefined') {
-                AOS.init({
-                    duration: 800,
-                    easing: 'ease-in-out',
-                    once: true,
-                    offset: 100,
-                    delay: 0
-                });
-            }
-        });
-        
+
+    <script>
         // Add smooth scroll to all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -286,28 +352,36 @@
             const searchBox = document.getElementById('searchBox');
             const searchBtn = document.querySelector('.search-btn');
             const searchClose = searchBox.querySelector('.search-close');
+            const searchForm = document.getElementById('searchForm');
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            const searchSubmit = searchForm.querySelector('.search-submit');
 
+            // Toggle popup search
             function toggleSearch() {
                 searchBox.classList.toggle('active');
-                if(searchBox.classList.contains('active')) {
-                    document.getElementById('searchInput').focus();
+                if (searchBox.classList.contains('active')) {
+                    searchInput.focus();
+                } else {
+                    searchResults.style.display = 'none';
+                    searchResults.innerHTML = '';
                 }
             }
 
-            // Tombol search
-            searchBtn.addEventListener('click', function(e) {
-                e.stopPropagation(); 
+            // Open popup search
+            searchBtn.addEventListener('click', e => {
+                e.stopPropagation();
                 toggleSearch();
             });
 
-            // Tombol close
-            searchClose.addEventListener('click', function(e) {
+            // Close popup search
+            searchClose.addEventListener('click', e => {
                 e.stopPropagation();
                 toggleSearch();
             });
 
             // Klik di luar popup untuk menutup
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', e => {
                 if (searchBox.classList.contains('active') &&
                     !searchBox.contains(e.target) &&
                     !searchBtn.contains(e.target)) {
@@ -316,12 +390,76 @@
             });
 
             // ESC key untuk menutup
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', e => {
                 if (e.key === 'Escape' && searchBox.classList.contains('active')) {
                     toggleSearch();
                 }
             });
+
+            // Handle klik tombol search
+            searchSubmit.addEventListener('click', function(e) {
+                e.preventDefault();
+                performSearch();
+            });
+
+            // Handle enter key di input
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    performSearch();
+                }
+            });
+
+            // Fungsi AJAX search
+            function performSearch() {
+                const query = searchInput.value.trim();
+                if (!query) return;
+
+                fetch(`/search-ajax?q=${encodeURIComponent(query)}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        let html = '';
+
+                        // Produk
+                        if (data.products && data.products.length) {
+                            html += '<strong>Produk</strong><ul>';
+                            data.products.forEach(p => {
+                                html += `<li>${p.name}</li>`;
+                            });
+                            html += '</ul>';
+                        }
+
+                        // Artikel
+                        if (data.articles && data.articles.length) {
+                            html += '<strong>Artikel</strong><ul>';
+                            data.articles.forEach(a => {
+                                html += `<li>${a.title}</li>`;
+                            });
+                            html += '</ul>';
+                        }
+
+                        // Galeri
+                        if (data.galleries && data.galleries.length) {
+                            html += '<strong>Galeri</strong><ul>';
+                            data.galleries.forEach(g => {
+                                html += `<li>${g.title}</li>`;
+                            });
+                            html += '</ul>';
+                        }
+
+                        if (!html) html = '<p>Tidak ada hasil ditemukan.</p>';
+
+                        searchResults.innerHTML = html;
+                        searchResults.style.display = 'block';
+                    })
+                    .catch(err => {
+                        console.error('Error fetch search-ajax:', err);
+                        searchResults.innerHTML = '<p>Terjadi kesalahan. Silakan coba lagi.</p>';
+                        searchResults.style.display = 'block';
+                    });
+            }
         });
+
     </script>
 </body>
 </html>

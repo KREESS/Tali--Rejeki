@@ -24,7 +24,9 @@
                         <i class="fab fa-facebook-f" aria-hidden="true"></i>
                     </a>
                     <div class="divider" aria-hidden="true"></div>
-                    <button class="search-btn" title="Search" aria-label="Open search" onclick="toggleSearch()">
+                    <!-- Search Button -->
+                    <!-- Tombol Search di Topbar -->
+                    <button class="search-btn" title="Search" aria-label="Open search">
                         <i class="fas fa-search" aria-hidden="true"></i>
                     </button>
                     <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
@@ -46,19 +48,6 @@
                         </button>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Search Box (Hidden by default) -->
-        <div class="search-box" id="searchBox" role="search" aria-hidden="true">
-            <div class="search-container">
-                <input type="text" class="search-input" data-translate="search-placeholder" placeholder="Cari produk insulasi..." id="searchInput" aria-label="Search products">
-                <button class="search-submit" type="button" aria-label="Submit search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                </button>
-                <button class="search-close" onclick="toggleSearch()" aria-label="Close search">
-                    <i class="fas fa-times" aria-hidden="true"></i>
-                </button>
             </div>
         </div>
     </div>
@@ -444,114 +433,21 @@
     letter-spacing: 0.5px;
 }
 
-/* Enhanced Search Box */
-.search-box {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: 
-        linear-gradient(135deg, 
-            rgba(255, 255, 255, 0.98) 0%, 
-            rgba(248, 250, 252, 0.95) 100%
-        );
-    backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(124, 20, 21, 0.1);
-    box-shadow: 0 8px 25px rgba(124, 20, 21, 0.15);
-    padding: 20px 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    width: 100%;
-    max-width: 100vw;
-    overflow: hidden;
-}
 
-.search-box.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
 
-.search-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    max-width: 600px;
-    margin: 0 auto;
-    position: relative;
-    padding: 0 30px;
-    width: 100%;
-    box-sizing: border-box;
-}
 
-.search-input {
-    flex: 1;
-    padding: 15px 20px;
-    border: 2px solid rgba(124, 20, 21, 0.1);
-    border-radius: 25px;
-    font-size: 16px;
-    background: rgba(255, 255, 255, 0.9);
-    color: #2d3748;
-    outline: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(124, 20, 21, 0.08);
-    min-width: 0;
-    width: 100%;
-}
 
-.search-input:focus {
-    border-color: #7c1415;
-    box-shadow: 0 6px 20px rgba(124, 20, 21, 0.15);
-    background: rgba(255, 255, 255, 1);
-}
 
-.search-input::placeholder {
-    color: #64748b;
-    font-weight: 500;
-}
 
-.search-submit {
-    padding: 15px 20px;
-    background: linear-gradient(135deg, #7c1415, #b71c1c);
-    border: none;
-    border-radius: 25px;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(124, 20, 21, 0.3);
-    font-size: 16px;
-    min-width: 60px;
-    flex-shrink: 0;
-}
 
-.search-submit:hover {
-    background: linear-gradient(135deg, #b71c1c, #dc2626);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(124, 20, 21, 0.4);
-}
 
-.search-close {
-    padding: 10px;
-    background: rgba(124, 20, 21, 0.1);
-    border: none;
-    border-radius: 50%;
-    color: #7c1415;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
 
-.search-close:hover {
-    background: rgba(124, 20, 21, 0.2);
-    transform: scale(1.1);
-}
+
+
+
+
+
+
 
 /* Animations */
 @keyframes slideInLeft {
@@ -652,7 +548,7 @@
     }
     
     .theme-toggle.dark .theme-toggle-thumb {
-        transform: translateX(24px);
+        transform: translateX(20px);
     }
     
     .theme-toggle-thumb .sun-icon,
@@ -1134,28 +1030,28 @@ html, body {
 }
 
 /* Loading state optimization */
-    .topbar {
-        will-change: transform;
-        contain: layout style paint;
-    }
+.topbar {
+    will-change: transform;
+    contain: layout style paint;
+}
 
-    .search-box {
-        will-change: opacity, transform;
-        contain: layout style paint;
-    }
+.search-box {
+    will-change: opacity, transform;
+    contain: layout style paint;
+}
 
-    /* Safari specific fixes */
-    @supports (-webkit-appearance: none) {
-        .search-input {
-            -webkit-appearance: none;
-            border-radius: 25px;
-        }
-        
-        .search-submit,
-        .search-close {
-            -webkit-appearance: none;
-        }
+/* Safari specific fixes */
+@supports (-webkit-appearance: none) {
+    .search-input {
+        -webkit-appearance: none;
+        border-radius: 25px;
     }
+    
+    .search-submit,
+    .search-close {
+        -webkit-appearance: none;
+    }
+}
 
 /* Dark Theme Styles */
 body.dark-theme .promo-text {
@@ -1289,6 +1185,21 @@ body.light-theme .search-box {
             });
         }
 
+        // ================= SOCIAL LINKS =================
+        function initializeSocialLinks() {
+            document.querySelectorAll('.social-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const platform = this.querySelector('i')?.className || '';
+                    let url = '';
+                    if (platform.includes('tiktok')) url = 'https://www.tiktok.com/@pt.tali.rejeki';
+                    else if (platform.includes('instagram')) url = 'https://instagram.com/PTTaliRejeki';
+                    else if (platform.includes('facebook')) url = 'https://facebook.com/PTTaliRejeki';
+                    if (url) window.open(url, '_blank');
+                });
+            });
+        }
+
         // ================= SEARCH =================
         function initializeSearch() {
             const searchBox = document.getElementById('searchBox');
@@ -1316,21 +1227,6 @@ body.light-theme .search-box {
                 const langPrefix = localStorage.getItem('language') === 'en' ? '/en' : '';
                 window.location.href = `${langPrefix}/search?q=${encodeURIComponent(query)}`;
             }
-        }
-
-        // ================= SOCIAL LINKS =================
-        function initializeSocialLinks() {
-            document.querySelectorAll('.social-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const platform = this.querySelector('i')?.className || '';
-                    let url = '';
-                    if (platform.includes('tiktok')) url = 'https://www.tiktok.com/@pt.tali.rejeki';
-                    else if (platform.includes('instagram')) url = 'https://instagram.com/PTTaliRejeki';
-                    else if (platform.includes('facebook')) url = 'https://facebook.com/PTTaliRejeki';
-                    if (url) window.open(url, '_blank');
-                });
-            });
         }
 
         // ================= THEME =================
@@ -1374,4 +1270,3 @@ body.light-theme .search-box {
         }
     });
 </script>
-
