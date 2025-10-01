@@ -334,6 +334,28 @@
     <script src="{{ asset('js/advanced-translator.js') }}"></script>
 
     <script>
+        // Hide loading screen when page is loaded
+        window.addEventListener('load', function() {
+            const loading = document.getElementById('loadingScreen');
+            if (loading) {
+                loading.classList.add('hidden');
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 300);
+            }
+            
+            // Initialize AOS (Animate On Scroll)
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    easing: 'ease-in-out',
+                    once: true,
+                    offset: 100,
+                    delay: 0
+                });
+            }
+        });
+
         // Add smooth scroll to all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

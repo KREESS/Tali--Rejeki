@@ -210,11 +210,6 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading" id="loadingScreen">
-        <div class="spinner"></div>
-    </div>
-
     <!-- Topbar -->
     @include('en.components.topbar')
 
@@ -243,7 +238,7 @@
     <!-- Advanced Language Translator -->
     <script src="{{ asset('js/advanced-translator.js') }}"></script>
 
-    <script>        
+    <script>
         // Hide loading screen when page is loaded
         window.addEventListener('load', function() {
             const loading = document.getElementById('loadingScreen');
