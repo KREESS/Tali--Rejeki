@@ -189,10 +189,38 @@ Route::middleware(['auth', 'role:admin'])
             ]);
         })->name('dashboard');
 
+        // Category Management Routes
+        Route::prefix('categories')->name('categories.')->group(function () {
+            Route::get('/', [CategoryController::class, 'index'])->name('index');
+            Route::get('/create', [CategoryController::class, 'create'])->name('create');
+            Route::post('/', [CategoryController::class, 'store'])->name('store');
+            Route::get('/{category}', [CategoryController::class, 'show'])->name('show');
+            Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('edit');
+            Route::put('/{category}', [CategoryController::class, 'update'])->name('update');
+            Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
+        });
+
+        // Subcategory Management Routes
+        Route::prefix('subcategories')->name('subcategories.')->group(function () {
+            Route::get('/', [SubcategoryController::class, 'index'])->name('index');
+            Route::get('/create', [SubcategoryController::class, 'create'])->name('create');
+            Route::post('/', [SubcategoryController::class, 'store'])->name('store');
+            Route::get('/{subcategory}', [SubcategoryController::class, 'show'])->name('show');
+            Route::get('/{subcategory}/edit', [SubcategoryController::class, 'edit'])->name('edit');
+            Route::put('/{subcategory}', [SubcategoryController::class, 'update'])->name('update');
+            Route::delete('/{subcategory}', [SubcategoryController::class, 'destroy'])->name('destroy');
+        });
+
         // Product Management Routes
-        Route::resource('categories', CategoryController::class);
-        Route::resource('subcategories', SubcategoryController::class);
-        Route::resource('products', ProductController::class);
+        Route::prefix('products')->name('products.')->group(function () {
+            Route::get('/', [ProductController::class, 'index'])->name('index');
+            Route::get('/create', [ProductController::class, 'create'])->name('create');
+            Route::post('/', [ProductController::class, 'store'])->name('store');
+            Route::get('/{product}', [ProductController::class, 'show'])->name('show');
+            Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('edit');
+            Route::put('/{product}', [ProductController::class, 'update'])->name('update');
+            Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
+        });
 
         // Product Image Management
         Route::delete('/products/images/{image}', [ProductController::class, 'deleteImage'])

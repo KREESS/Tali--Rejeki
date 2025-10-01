@@ -8,6 +8,8 @@ use App\Models\Subcategory;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -219,41 +221,71 @@ class ProductController extends Controller
             ->with('success', 'Produk berhasil diperbarui!');
     }
 
-    public function destroy(Product $product)
+    public function destroy($id)
     {
         try {
+            // Find the product or throw 404
+            $product = Product::findOrFail($id);
+
+            // Start database transaction
+            DB::beginTransaction();
+
+            $productName = $product->name;
+
             // Delete all product images from public directory
             foreach ($product->images as $image) {
-                $imagePath = public_path($image->image_path);
-                if (file_exists($imagePath)) {
-                    unlink($imagePath);
+                try {
+                    $imagePath = public_path($image->image_path);
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath);
+                    }
+                } catch (\Exception $e) {
+                    Log::warning("Failed to delete image file: {$image->image_path}", [
+                        'error' => $e->getMessage(),
+                        'product_id' => $id
+                    ]);
+                    // Continue deletion even if image removal fails
                 }
             }
 
-            $productName = $product->name;
-            $product->delete();
+            // Delete related records first
+            $product->images()->delete();
 
-            // Check if request expects JSON (AJAX)
-            if (request()->expectsJson()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => "Produk '{$productName}' berhasil dihapus!"
-                ]);
+            // Delete the product
+            $deleted = $product->delete();
+
+            if (!$deleted) {
+                throw new \Exception('Failed to delete product record');
             }
 
-            // Traditional form submission
-            return redirect()->route('admin.products.index')
-                ->with('success', "Produk '{$productName}' berhasil dihapus!");
+            // Commit transaction
+            DB::commit();
+
+            // Return success response
+            return response()->json([
+                'success' => true,
+                'message' => "Produk '{$productName}' berhasil dihapus!"
+            ]);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Produk tidak ditemukan. Mungkin sudah dihapus sebelumnya.'
+            ], 404);
         } catch (\Exception $e) {
-            if (request()->expectsJson()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Terjadi kesalahan saat menghapus produk: ' . $e->getMessage()
-                ], 500);
+            // Rollback transaction if it was started
+            if (DB::transactionLevel() > 0) {
+                DB::rollBack();
             }
 
-            return redirect()->route('admin.products.index')
-                ->with('error', 'Gagal menghapus produk!');
+            Log::error("Failed to delete product: {$id}", [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat menghapus produk. Silakan coba lagi.'
+            ], 500);
         }
     }
 

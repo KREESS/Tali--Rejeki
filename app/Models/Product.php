@@ -101,9 +101,18 @@ class Product extends Model
         };
     }
 
-    // app/Models/Category.php (juga di Subcategory.php & Product.php)
+    // Route model binding configuration
     public function getRouteKeyName(): string
     {
-        return 'slug';
+        return 'id';
+    }
+
+    public function resolveRouteBinding($value, $field = null)
+    {
+        $product = $this->where('id', $value)->first();
+        if (!$product) {
+            abort(404, 'Produk tidak ditemukan.');
+        }
+        return $product;
     }
 }

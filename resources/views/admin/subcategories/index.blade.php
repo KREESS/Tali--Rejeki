@@ -425,54 +425,77 @@ function filterTable() {
 
 // Delete subcategory function with modern confirmation
 function deleteSubcategory(subcategoryId) {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]');
+    if (!csrfToken) {
+        showModernAlert('danger', 'Error!', 'CSRF token tidak ditemukan.', 'fas fa-exclamation-circle');
+        return;
+    }
+
     showModernConfirm(
         'Hapus Sub Kategori?', 
         'Apakah Anda yakin ingin menghapus sub kategori ini? Peringatan: Sub kategori yang memiliki produk tidak dapat dihapus!',
         'fas fa-trash-alt',
         'danger',
-        function() {
-            showModernAlert('info', 'Memproses...', 'Sedang menghapus sub kategori, harap tunggu.', 'fas fa-spinner fa-spin', 0);
+        async function() {
+            try {
+                showModernAlert('info', 'Memproses...', 'Sedang menghapus sub kategori, harap tunggu.', 'fas fa-spinner fa-spin', 0);
 
-            fetch(`/admin/subcategories/${subcategoryId}`, {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                const response = await fetch(`/admin/subcategories/${subcategoryId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken.getAttribute('content'),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    // Handle 404 and other errors properly
+                    credentials: 'same-origin'
+                });
+
+                let data;
+                try {
+                    data = await response.json();
+                } catch (e) {
+                    throw new Error(`Gagal mengurai respons: ${response.statusText}`);
                 }
-            })
-            .then(response => {
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                return response.json();
-            })
-            .then(data => {
+
                 removeAlert();
+
+                // Check for specific error responses
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error('Sub kategori tidak ditemukan');
+                    } else if (response.status === 403) {
+                        throw new Error('Anda tidak memiliki izin untuk menghapus sub kategori ini');
+                    } else if (response.status === 409) {
+                        throw new Error('Sub kategori tidak dapat dihapus karena masih memiliki produk terkait');
+                    } else {
+                        throw new Error(data.message || 'Terjadi kesalahan saat menghapus sub kategori');
+                    }
+                }
 
                 if (data.success) {
                     showModernAlert('success', 'Berhasil!', data.message || 'Sub kategori berhasil dihapus.', 'fas fa-check-circle');
 
-                    // Remove the row safely
-                    setTimeout(() => {
-                        const button = document.querySelector(`button[onclick="deleteSubcategory(${subcategoryId})"]`);
-                        const row = button ? button.closest('tr') : null;
-                        if (row) {
-                            row.style.animation = 'fadeOut 0.5s ease-out forwards';
-                            setTimeout(() => {
-                                row.remove();
-                                updateRowNumbers();
-                            }, 500);
-                        }
-                    }, 2000);
-
+                    // Remove the row with animation
+                    const button = document.querySelector(`button[onclick="deleteSubcategory(${subcategoryId})"]`);
+                    const row = button?.closest('tr');
+                    if (row) {
+                        row.style.animation = 'fadeOut 0.5s ease-out forwards';
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                        row.remove();
+                        updateRowNumbers();
+                    } else {
+                        // If row not found, refresh the page
+                        location.reload();
+                    }
                 } else {
                     showModernAlert('danger', 'Gagal!', data.message || 'Gagal menghapus sub kategori.', 'fas fa-exclamation-triangle');
                 }
-            })
-            .catch(error => {
+            } catch (error) {
                 removeAlert();
                 console.error('Error:', error);
-                showModernAlert('danger', 'Error!', 'Terjadi kesalahan saat menghapus sub kategori: ' + error.message, 'fas fa-exclamation-circle');
-            });
+                showModernAlert('danger', 'Error!', error.message || 'Terjadi kesalahan saat menghapus sub kategori', 'fas fa-exclamation-circle');
+            }
         }
     );
 }

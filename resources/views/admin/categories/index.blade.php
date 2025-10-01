@@ -366,60 +366,82 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 
 // Delete category function with modern confirmation
 function deleteCategory(categoryId) {
-    // Show modern confirmation modal instead of Bootstrap modal
+    const csrfToken = document.querySelector('meta[name="csrf-token"]');
+    if (!csrfToken) {
+        showModernAlert('danger', 'Error!', 'CSRF token tidak ditemukan.', 'fas fa-exclamation-circle');
+        return;
+    }
+
+    // Ensure categoryId is valid
+    if (!categoryId) {
+        showModernAlert('danger', 'Error!', 'ID kategori tidak valid.', 'fas fa-exclamation-circle');
+        return;
+    }
+
     showModernConfirm(
         'Hapus Kategori?', 
-        'Apakah Anda yakin ingin menghapus kategori ini? Peringatan: Kategori yang memiliki sub kategori tidak dapat dihapus!',
+        'Apakah Anda yakin ingin menghapus kategori ini? Peringatan: Kategori yang memiliki sub kategori atau produk tidak dapat dihapus!',
         'fas fa-trash-alt',
         'danger',
-        function() {
-            // Show loading alert
-            showModernAlert('info', 'Memproses...', 'Sedang menghapus kategori, harap tunggu.', 'fas fa-spinner fa-spin', 0);
-            
-            fetch(`/admin/categories/${categoryId}`, {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+        async function() {
+            try {
+                showModernAlert('info', 'Memproses...', 'Sedang menghapus kategori, harap tunggu.', 'fas fa-spinner fa-spin', 0);
+
+                const response = await fetch(`/admin/categories/${categoryId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken.getAttribute('content'),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'same-origin'
+                });
+
+                let data;
+                try {
+                    data = await response.json();
+                } catch (e) {
+                    throw new Error(`Gagal mengurai respons: ${response.statusText}`);
                 }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Remove loading alert
+
                 removeAlert();
-                
+
+                // Check for specific error responses
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error('Kategori tidak ditemukan');
+                    } else if (response.status === 403) {
+                        throw new Error('Anda tidak memiliki izin untuk menghapus kategori ini');
+                    } else if (response.status === 409) {
+                        throw new Error(data.message || 'Kategori tidak dapat dihapus karena masih memiliki sub kategori atau produk');
+                    } else {
+                        throw new Error(data.message || 'Terjadi kesalahan saat menghapus kategori');
+                    }
+                }
+
                 if (data.success) {
                     showModernAlert('success', 'Berhasil!', data.message || 'Kategori berhasil dihapus.', 'fas fa-check-circle');
-                    
-                    // Remove the row from table after 2 seconds
-                    setTimeout(() => {
-                        const row = document.querySelector(`tr:has(button[onclick="deleteCategory(${categoryId})"])`);
-                        if (row) {
-                            row.style.animation = 'fadeOut 0.5s ease-out forwards';
-                            setTimeout(() => {
-                                row.remove();
-                                // Update row numbers
-                                updateRowNumbers();
-                            }, 500);
-                        }
-                        removeAlert();
-                    }, 2000);
+
+                    // Remove the row with animation
+                    const button = document.querySelector(`button[onclick="deleteCategory(${categoryId})"]`);
+                    const row = button?.closest('tr');
+                    if (row) {
+                        row.style.animation = 'fadeOut 0.5s ease-out forwards';
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                        row.remove();
+                        updateRowNumbers();
+                    } else {
+                        // If row not found, refresh the page
+                        location.reload();
+                    }
                 } else {
                     showModernAlert('danger', 'Gagal!', data.message || 'Gagal menghapus kategori.', 'fas fa-exclamation-triangle');
                 }
-            })
-            .catch(error => {
-                // Remove loading alert
+            } catch (error) {
                 removeAlert();
                 console.error('Error:', error);
-                showModernAlert('danger', 'Error!', 'Terjadi kesalahan saat menghapus kategori: ' + error.message, 'fas fa-exclamation-circle');
-            });
+                showModernAlert('danger', 'Error!', error.message || 'Terjadi kesalahan saat menghapus kategori', 'fas fa-exclamation-circle');
+            }
         }
     );
 }

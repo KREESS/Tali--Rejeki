@@ -252,8 +252,6 @@
     box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.1);
     background: white;
 }
-    transform: scale(1.05);
-}
 
 .product-badge {
     position: absolute;
@@ -595,6 +593,7 @@
             <div id="gridView" class="product-grid">
                 @foreach($products as $product)
                 <div class="product-card" 
+                     data-id="{{ $product->id }}"
                      data-name="{{ strtolower($product->name) }}"
                      data-subcategory="{{ $product->subcategory_id }}"
                      data-price="{{ $product->price ? 'with_price' : 'without_price' }}">
@@ -868,53 +867,86 @@ function clearFilters() {
 
 // Delete product function with modern confirmation
 function deleteProduct(productId) {
-    // Show modern confirmation modal instead of Bootstrap modal
+    const csrfToken = document.querySelector('meta[name="csrf-token"]');
+    if (!csrfToken) {
+        showModernAlert('danger', 'Error!', 'CSRF token tidak ditemukan.', 'fas fa-exclamation-circle');
+        return;
+    }
+
     showModernConfirm(
-        'Hapus Produk?', 
+        'Hapus Produk?',
         'Apakah Anda yakin ingin menghapus produk ini? Tindakan ini akan menghapus semua gambar produk dan tidak dapat dibatalkan!',
         'fas fa-trash-alt',
         'danger',
-        function() {
-            // Show loading alert
-            showModernAlert('info', 'Memproses...', 'Sedang menghapus produk, harap tunggu.', 'fas fa-spinner fa-spin', 0);
-            
-            fetch(`/admin/products/${productId}`, {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+        async function() {
+            try {
+                // Show loading state
+                const deleteBtn = document.querySelector(`button[onclick="deleteProduct(${productId})"]`);
+                if (deleteBtn) {
+                    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menghapus...';
+                    deleteBtn.disabled = true;
                 }
-            })
-            .then(response => {
+
+                const response = await fetch(`/admin/products/${productId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken.content,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    if (response.status === 404) {
+                        showModernAlert('warning', 'Produk Tidak Ditemukan', 
+                            'Produk yang akan dihapus tidak ditemukan. Mungkin sudah dihapus sebelumnya.', 
+                            'fas fa-exclamation-circle');
+                        
+                        // Remove the element from DOM if it exists
+                        const elements = document.querySelectorAll(`[data-id="${productId}"]`);
+                        elements.forEach(el => el.remove());
+                        return;
+                    }
+                    throw new Error(data.message || `Error: ${response.status}`);
                 }
-                return response.json();
-            })
-            .then(data => {
-                // Remove loading alert
-                removeAlert();
+
+                // Remove product from both grid and list views
+                const elements = document.querySelectorAll(`[data-id="${productId}"]`);
+                elements.forEach(element => {
+                    element.style.transition = 'all 0.3s ease-out';
+                    element.style.opacity = '0';
+                    element.style.transform = 'scale(0.9)';
+                    setTimeout(() => element.remove(), 300);
+                });
+
+                // Update count if available
+                const countElement = document.querySelector('.text-dark');
+                if (countElement) {
+                    const currentCount = parseInt(countElement.textContent) - 1;
+                    countElement.textContent = currentCount;
+                }
+
+                showModernAlert('success', 'Berhasil!', data.message || 'Produk berhasil dihapus.', 'fas fa-check-circle');
+
+            } catch (error) {
+                console.error('Delete error:', error);
                 
-                if (data.success) {
-                    // Remove product from DOM
-                    const gridCard = document.querySelector(`[onclick="deleteProduct(${productId})"]`).closest('.product-card');
-                    const listRow = document.querySelector(`[onclick="deleteProduct(${productId})"]`).closest('tr');
-                    
-                    if (gridCard) gridCard.remove();
-                    if (listRow) listRow.remove();
-                    
-                    showModernAlert('success', 'Berhasil!', data.message || 'Produk berhasil dihapus.', 'fas fa-check-circle');
-                } else {
-                    showModernAlert('danger', 'Gagal!', data.message || 'Gagal menghapus produk.', 'fas fa-exclamation-triangle');
+                // Reset button state if it exists
+                const deleteBtn = document.querySelector(`button[onclick="deleteProduct(${productId})"]`);
+                if (deleteBtn) {
+                    deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i> Hapus';
+                    deleteBtn.disabled = false;
                 }
-            })
-            .catch(error => {
-                // Remove loading alert
-                removeAlert();
-                console.error('Error:', error);
-                showModernAlert('danger', 'Error!', 'Terjadi kesalahan saat menghapus produk: ' + error.message, 'fas fa-exclamation-circle');
-            });
+
+                let errorMessage = error.message;
+                if (error.message.includes('No query results')) {
+                    errorMessage = 'Produk tidak ditemukan. Mungkin sudah dihapus sebelumnya.';
+                }
+
+                showModernAlert('error', 'Gagal!', errorMessage, 'fas fa-exclamation-circle');
+            }
         }
     );
 }

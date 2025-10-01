@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -89,40 +90,50 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         try {
+            // Check if category exists and get a fresh instance
+            $category = Category::findOrFail($category->id);
+
             // Check if category has subcategories
             if ($category->subcategories()->count() > 0) {
-                if (request()->expectsJson()) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Tidak dapat menghapus kategori yang masih memiliki sub kategori!'
-                    ], 422);
-                }
-
-                return redirect()->route('admin.categories.index')
-                    ->with('error', 'Tidak dapat menghapus kategori yang masih memiliki sub kategori!');
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tidak dapat menghapus kategori yang masih memiliki sub kategori!'
+                ], 409); // Using 409 Conflict for business rule violation
             }
 
-            $category->delete();
+            // Check if category has associated products through subcategories
+            if ($category->products()->count() > 0) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tidak dapat menghapus kategori yang masih memiliki produk!'
+                ], 409);
+            }
 
-            if (request()->expectsJson()) {
+            // Begin transaction
+            DB::beginTransaction();
+
+            try {
+                $category->delete();
+                DB::commit();
+
                 return response()->json([
                     'success' => true,
                     'message' => 'Kategori berhasil dihapus!'
                 ]);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
             }
-
-            return redirect()->route('admin.categories.index')
-                ->with('success', 'Kategori berhasil dihapus!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan database saat menghapus kategori: ' . $e->getMessage()
+            ], 500);
         } catch (\Exception $e) {
-            if (request()->expectsJson()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Terjadi kesalahan saat menghapus kategori: ' . $e->getMessage()
-                ], 500);
-            }
-
-            return redirect()->route('admin.categories.index')
-                ->with('error', 'Terjadi kesalahan saat menghapus kategori!');
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat menghapus kategori: ' . $e->getMessage()
+            ], 500);
         }
     }
 }

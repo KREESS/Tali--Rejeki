@@ -544,53 +544,394 @@
     </div>
 </div>
 
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)); backdrop-filter: blur(10px); border: 1px solid rgba(139, 0, 0, 0.2);">
-            <div class="modal-header" style="border-color: rgba(139, 0, 0, 0.2);">
-                <h5 class="modal-title">
-                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
-                    Konfirmasi Hapus
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <p>Apakah Anda yakin ingin menghapus sub kategori <strong>{{ $subcategory->name }}</strong>?</p>
-                <p class="text-danger mb-0">
-                    <i class="fas fa-exclamation-circle me-1"></i>
-                    <small>Tindakan ini tidak dapat dibatalkan!</small>
-                </p>
-            </div>
-            <div class="modal-footer" style="border-color: rgba(139, 0, 0, 0.2);">
-                <button type="button" class="premium-btn" style="background: rgba(255, 255, 255, 0.95); border: 2px solid rgba(139, 0, 0, 0.3); color: #8b0000;" data-bs-dismiss="modal">Batal</button>
-                <form id="deleteForm" method="POST" action="{{ route('admin.subcategories.destroy', $subcategory) }}" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="premium-btn" style="background: linear-gradient(135deg, #dc3545, #c82333);">
-                        <i class="fas fa-trash me-1"></i>
-                        Hapus
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @push('scripts')
 <script>
-// Delete subcategory function
+// Delete subcategory function with modern confirmation
 function deleteSubcategory(subcategoryId) {
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    deleteModal.show();
+    const csrfToken = document.querySelector('meta[name="csrf-token"]');
+    if (!csrfToken) {
+        showModernAlert('danger', 'Error!', 'CSRF token tidak ditemukan.', 'fas fa-exclamation-circle');
+        return;
+    }
+
+    // Ensure subcategoryId is valid
+    if (!subcategoryId) {
+        showModernAlert('danger', 'Error!', 'ID sub kategori tidak valid.', 'fas fa-exclamation-circle');
+        return;
+    }
+
+    showModernConfirm(
+        'Hapus Sub Kategori?', 
+        'Apakah Anda yakin ingin menghapus sub kategori ini? Peringatan: Sub kategori yang memiliki produk tidak dapat dihapus!',
+        'fas fa-trash-alt',
+        'danger',
+        async function() {
+            try {
+                showModernAlert('info', 'Memproses...', 'Sedang menghapus sub kategori, harap tunggu.', 'fas fa-spinner fa-spin', 0);
+
+                const response = await fetch(`/admin/subcategories/${subcategoryId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken.getAttribute('content'),
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'same-origin'
+                });
+
+                let data;
+                try {
+                    data = await response.json();
+                } catch (e) {
+                    throw new Error(`Gagal mengurai respons: ${response.statusText}`);
+                }
+
+                removeAlert();
+
+                // Check for specific error responses
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error('Sub kategori tidak ditemukan');
+                    } else if (response.status === 403) {
+                        throw new Error('Anda tidak memiliki izin untuk menghapus sub kategori ini');
+                    } else if (response.status === 422) {
+                        throw new Error(data.message || 'Sub kategori tidak dapat dihapus karena masih memiliki produk');
+                    } else {
+                        throw new Error(data.message || 'Terjadi kesalahan saat menghapus sub kategori');
+                    }
+                }
+
+                if (data.success) {
+                    showModernAlert('success', 'Berhasil!', data.message || 'Sub kategori berhasil dihapus.', 'fas fa-check-circle');
+                    // Redirect to index page after successful deletion
+                    setTimeout(() => {
+                        window.location.href = '/admin/subcategories';
+                    }, 1500);
+                } else {
+                    showModernAlert('danger', 'Gagal!', data.message || 'Gagal menghapus sub kategori.', 'fas fa-exclamation-triangle');
+                }
+            } catch (error) {
+                removeAlert();
+                console.error('Error:', error);
+                showModernAlert('danger', 'Error!', error.message || 'Terjadi kesalahan saat menghapus sub kategori', 'fas fa-exclamation-circle');
+            }
+        }
+    );
 }
 
-// Add loading states to form submission
-document.getElementById('deleteForm').addEventListener('submit', function() {
-    const submitBtn = this.querySelector('button[type="submit"]');
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Menghapus...';
-    submitBtn.disabled = true;
-});
+// Modern Alert System
+function showModernAlert(type, title, message, icon, duration = 4000) {
+    // Remove existing alerts
+    removeAlert();
+    
+    const alertTypes = {
+        'success': {
+            bg: 'linear-gradient(135deg, #d1e7dd, #f8fff9)',
+            border: '#badbcc',
+            color: '#0f5132',
+            iconColor: '#198754'
+        },
+        'danger': {
+            bg: 'linear-gradient(135deg, #f8d7da, #fef5f5)',
+            border: '#f5c2c7',
+            color: '#842029',
+            iconColor: '#dc3545'
+        },
+        'warning': {
+            bg: 'linear-gradient(135deg, #fff3cd, #fffef5)',
+            border: '#ffecb5',
+            color: '#664d03',
+            iconColor: '#ffc107'
+        },
+        'info': {
+            bg: 'linear-gradient(135deg, #d1ecf1, #f5feff)',
+            border: '#b6d7e2',
+            color: '#055160',
+            iconColor: '#0dcaf0'
+        }
+    };
+    
+    const alertStyle = alertTypes[type] || alertTypes['info'];
+    
+    const alertHtml = `
+        <div class="modern-alert" id="modernAlert" style="
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            min-width: 350px;
+            max-width: 450px;
+            background: ${alertStyle.bg};
+            border: 1px solid ${alertStyle.border};
+            border-left: 4px solid ${alertStyle.iconColor};
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            padding: 20px;
+            color: ${alertStyle.color};
+            font-family: 'Inter', sans-serif;
+            animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        ">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background: ${alertStyle.iconColor};
+                    color: white;
+                    font-size: 16px;
+                    flex-shrink: 0;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                ">
+                    <i class="${icon}"></i>
+                </div>
+                <div style="flex: 1; padding-top: 2px;">
+                    <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">${title}</div>
+                    <div style="font-size: 14px; line-height: 1.4; opacity: 0.9;">${message}</div>
+                </div>
+                <button onclick="removeAlert()" style="
+                    background: none;
+                    border: none;
+                    color: ${alertStyle.color};
+                    font-size: 18px;
+                    line-height: 1;
+                    padding: 0;
+                    width: 24px;
+                    height: 24px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50%;
+                    opacity: 0.6;
+                    transition: all 0.2s ease;
+                    cursor: pointer;
+                    flex-shrink: 0;
+                " onmouseover="this.style.opacity='1'; this.style.background='rgba(0,0,0,0.1)'" onmouseout="this.style.opacity='0.6'; this.style.background='none'">
+                    ×
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', alertHtml);
+    
+    if (duration > 0) {
+        setTimeout(() => {
+            const alert = document.getElementById('modernAlert');
+            if (alert) {
+                alert.style.animation = 'slideOutRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+                setTimeout(() => removeAlert(), 400);
+            }
+        }, duration);
+    }
+}
+
+function removeAlert() {
+    const existingAlert = document.getElementById('modernAlert');
+    if (existingAlert) {
+        existingAlert.remove();
+    }
+}
+
+// Modern Confirmation Modal
+function showModernConfirm(title, message, icon, type = 'danger', onConfirm) {
+    const typeColors = {
+        'danger': { primary: '#dc3545', secondary: '#f8d7da' },
+        'warning': { primary: '#ffc107', secondary: '#fff3cd' },
+        'info': { primary: '#0dcaf0', secondary: '#d1ecf1' }
+    };
+    
+    const colors = typeColors[type] || typeColors['danger'];
+    
+    const modalHtml = `
+        <div class="modern-confirm-overlay" id="modernConfirmOverlay" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(5px);
+        ">
+            <div class="modern-confirm-modal" style="
+                background: white;
+                border-radius: 20px;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+                max-width: 450px;
+                width: 90%;
+                animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow: hidden;
+            ">
+                <div style="
+                    background: ${colors.secondary};
+                    padding: 30px 30px 20px;
+                    text-align: center;
+                    border-bottom: 1px solid rgba(0,0,0,0.1);
+                ">
+                    <div style="
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        background: ${colors.primary};
+                        color: white;
+                        font-size: 24px;
+                        margin-bottom: 20px;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                    ">
+                        <i class="${icon}"></i>
+                    </div>
+                    <h5 style="margin: 0 0 10px; font-weight: 600; color: #333;">${title}</h5>
+                    <p style="margin: 0; color: #666; font-size: 14px; line-height: 1.5;">${message}</p>
+                </div>
+                
+                <div style="
+                    padding: 20px 30px;
+                    display: flex;
+                    gap: 12px;
+                    justify-content: flex-end;
+                ">
+                    <button onclick="removeConfirm()" style="
+                        background: rgba(108, 117, 125, 0.1);
+                        border: none;
+                        color: #6c757d;
+                        padding: 12px 24px;
+                        border-radius: 12px;
+                        font-weight: 600;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        min-width: 100px;
+                    " onmouseover="this.style.background='rgba(108, 117, 125, 0.2)'" onmouseout="this.style.background='rgba(108, 117, 125, 0.1)'">
+                        Batal
+                    </button>
+                    <button onclick="confirmAction()" style="
+                        background: linear-gradient(135deg, ${colors.primary}, ${colors.primary}dd);
+                        border: none;
+                        color: white;
+                        padding: 12px 24px;
+                        border-radius: 12px;
+                        font-weight: 600;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        min-width: 100px;
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)'">
+                        Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <style>
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        @keyframes scaleOut {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideInRight {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            0% {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100%) scale(0.8);
+                opacity: 0;
+            }
+        }
+        </style>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    
+    // Store the confirm callback
+    window.modernConfirmCallback = onConfirm;
+    
+    // Close on overlay click
+    document.getElementById('modernConfirmOverlay').addEventListener('click', function(e) {
+        if (e.target === this) {
+            removeConfirm();
+        }
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', function escapeHandler(e) {
+        if (e.key === 'Escape') {
+            removeConfirm();
+            document.removeEventListener('keydown', escapeHandler);
+        }
+    });
+}
+
+function removeConfirm() {
+    const overlay = document.getElementById('modernConfirmOverlay');
+    if (overlay) {
+        const modal = overlay.querySelector('.modern-confirm-modal');
+        modal.style.animation = 'scaleOut 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        overlay.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => {
+            overlay.remove();
+            window.modernConfirmCallback = null;
+        }, 300);
+    }
+}
+
+function confirmAction() {
+    if (window.modernConfirmCallback) {
+        window.modernConfirmCallback();
+    }
+    removeConfirm();
+}
 </script>
 @endpush

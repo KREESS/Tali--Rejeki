@@ -18,9 +18,10 @@ class Category extends Model
         return $this->hasManyThrough(Product::class, Subcategory::class);
     }
 
-    // app/Models/Category.php (juga di Subcategory.php & Product.php)
+    // app/Models/Category.php
     public function getRouteKeyName(): string
     {
-        return 'slug';
+        // Use ID for DELETE requests, slug for others
+        return request()->isMethod('DELETE') ? 'id' : 'slug';
     }
 }

@@ -7,6 +7,8 @@ use App\Models\Subcategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SubcategoryController extends Controller
 {
@@ -123,43 +125,48 @@ class SubcategoryController extends Controller
             ->with('success', 'Sub kategori berhasil diperbarui!');
     }
 
-    public function destroy(Subcategory $subcategory)
+    public function destroy($id)
     {
         try {
+            // Find the subcategory or throw 404
+            $subcategory = Subcategory::findOrFail($id);
+
             // Check if subcategory has products
             if ($subcategory->products()->count() > 0) {
-                if (request()->expectsJson()) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'Tidak dapat menghapus sub kategori yang masih memiliki produk!'
-                    ], 422);
-                }
-
-                return redirect()->route('admin.subcategories.index')
-                    ->with('error', 'Tidak dapat menghapus sub kategori yang masih memiliki produk!');
-            }
-
-            $subcategory->delete();
-
-            if (request()->expectsJson()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Sub kategori berhasil dihapus!'
-                ]);
-            }
-
-            return redirect()->route('admin.subcategories.index')
-                ->with('success', 'Sub kategori berhasil dihapus!');
-        } catch (\Exception $e) {
-            if (request()->expectsJson()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Terjadi kesalahan saat menghapus sub kategori: ' . $e->getMessage()
-                ], 500);
+                    'message' => 'Tidak dapat menghapus sub kategori yang masih memiliki produk!'
+                ], 422);
             }
 
-            return redirect()->route('admin.subcategories.index')
-                ->with('error', 'Terjadi kesalahan saat menghapus sub kategori!');
+            $name = $subcategory->name;
+
+            // Delete the subcategory
+            $deleted = $subcategory->delete();
+
+            if (!$deleted) {
+                throw new \Exception('Gagal menghapus sub kategori');
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => "Sub kategori '{$name}' berhasil dihapus!"
+            ]);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sub kategori tidak ditemukan. Mungkin sudah dihapus sebelumnya.'
+            ], 404);
+        } catch (\Exception $e) {
+            Log::error("Failed to delete subcategory: {$id}", [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat menghapus sub kategori. Silakan coba lagi.'
+            ], 500);
         }
     }
 }
