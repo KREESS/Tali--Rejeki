@@ -26,7 +26,7 @@ use Spatie\WelcomeNotification\WelcomesNewUsers;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes - Tali Rejeki
+| Web Routes - Tali Rejeki Indonesia
 |--------------------------------------------------------------------------
 | Distributor Insulasi Industri
 | Routes untuk landing page, authentication, dan admin area
@@ -62,7 +62,7 @@ Route::get('/search-ajax', [PageController::class, 'searchAjax'])->name('search.
 
 
 
-// ==================== LANDING PAGE EN ====================
+// ==================== LANDING PAGE EN Inggris ====================
 Route::get('/en', [EnPageController::class, 'index'])->name('en.home');
 
 // ==================== PUBLIC PAGES EN ====================
