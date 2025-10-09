@@ -282,7 +282,7 @@
 </section>
 
 <!-- Leadership Section -->
-<section class="leadership-section py-5">
+{{-- <section class="leadership-section py-5">
   <div class="container">
     <div class="section-header text-center mb-5" data-aos="fade-up">
       <div class="section-badge">
@@ -363,7 +363,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> --}}
 
 <!-- CTA Section -->
 <section class="cta-section py-5">

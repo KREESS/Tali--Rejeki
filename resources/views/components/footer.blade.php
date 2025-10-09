@@ -1488,7 +1488,6 @@ body.dark-theme .footer-comp-social-link:hover img {
           <div class="footer-comp-team-grid">
             <div class="footer-comp-team-member" data-aos="zoom-in" data-aos-delay="700" data-aos-duration="600">
               <div class="footer-comp-member-name">Yovien Agustina</div>
-              <div class="footer-comp-member-contact">Marketing Manager</div>
               <a href="https://wa.me/6281385231149" target="_blank" class="footer-comp-whatsapp-btn">
                 <i class="fab fa-whatsapp"></i>
                 0813-8523-1149
@@ -1497,7 +1496,6 @@ body.dark-theme .footer-comp-social-link:hover img {
             
             <div class="footer-comp-team-member" data-aos="zoom-in" data-aos-delay="750" data-aos-duration="600">
               <div class="footer-comp-member-name">Siti</div>
-              <div class="footer-comp-member-contact">Marketing Executive</div>
               <a href="https://wa.me/6281382523722" target="_blank" class="footer-comp-whatsapp-btn">
                 <i class="fab fa-whatsapp"></i>
                 0813 8252 3722
@@ -1506,7 +1504,6 @@ body.dark-theme .footer-comp-social-link:hover img {
             
             <div class="footer-comp-team-member" data-aos="zoom-in" data-aos-delay="800" data-aos-duration="600">
               <div class="footer-comp-member-name">Kurnia</div>
-              <div class="footer-comp-member-contact">Marketing Specialist</div>
               <a href="https://wa.me/6281384808218" target="_blank" class="footer-comp-whatsapp-btn">
                 <i class="fab fa-whatsapp"></i>
                 0813 8480 8218
@@ -1516,7 +1513,6 @@ body.dark-theme .footer-comp-social-link:hover img {
             
             <div class="footer-comp-team-member" data-aos="zoom-in" data-aos-delay="850" data-aos-duration="600">
               <div class="footer-comp-member-name">Sari</div>
-              <div class="footer-comp-member-contact">Marketing Consultant</div>
               <a href="https://wa.me/6281316826959" target="_blank" class="footer-comp-whatsapp-btn">
                 <i class="fab fa-whatsapp"></i>
                 0813 1682 6959
@@ -1525,7 +1521,6 @@ body.dark-theme .footer-comp-social-link:hover img {
             
             <div class="footer-comp-team-member" data-aos="zoom-in" data-aos-delay="900" data-aos-duration="600">
               <div class="footer-comp-member-name">Edy Purwanto</div>
-              <div class="footer-comp-member-contact">Senior Marketing</div>
               <a href="https://wa.me/6281514515990" target="_blank" class="footer-comp-whatsapp-btn">
                 <i class="fab fa-whatsapp"></i>
                 0815 1451 5990

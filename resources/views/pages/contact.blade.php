@@ -730,7 +730,6 @@
                         </div>
                     </div>
                     <h5 class="person-name fw-bold mb-2" data-aos="fade-up" data-aos-delay="500">Siti</h5>
-                    <p class="person-role mb-3" data-aos="fade-up" data-aos-delay="600">Marketing Executive</p>
                     <a href="https://wa.me/6281382523722?text=Halo%20Siti,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" target="_blank" rel="noopener" class="btn btn-whatsapp w-100 mb-2" data-aos="fade-up" data-aos-delay="700">
                         <i class="fab fa-whatsapp me-2"></i>0813 8252 3722
                     </a>
@@ -745,7 +744,6 @@
                         </div>
                     </div>
                     <h5 class="person-name fw-bold mb-2" data-aos="fade-up" data-aos-delay="600">Kurnia</h5>
-                    <p class="person-role mb-3" data-aos="fade-up" data-aos-delay="700">Marketing Specialist</p>
                     <a href="https://wa.me/6281384808218?text=Halo%20Kurnia,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" target="_blank" rel="noopener" class="btn btn-whatsapp w-100 mb-2" data-aos="fade-up" data-aos-delay="800">
                         <i class="fab fa-whatsapp me-2"></i>0813 8480 8218
                     </a>
@@ -761,7 +759,6 @@
                         </div>
                     </div>
                     <h5 class="person-name fw-bold mb-2" data-aos="fade-up" data-aos-delay="700">Yovien Agustina</h5>
-                    <p class="person-role mb-3" data-aos="fade-up" data-aos-delay="800">Marketing Consultant</p>
                     <a href="https://wa.me/6281385231149?text=Halo%20Yovien,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" target="_blank" rel="noopener" class="btn btn-whatsapp w-100 mb-2" data-aos="fade-up" data-aos-delay="900">
                         <i class="fab fa-whatsapp me-2"></i>0813 8523 1149
                     </a>
@@ -776,7 +773,6 @@
                         </div>
                     </div>
                     <h5 class="person-name fw-bold mb-2" data-aos="fade-up" data-aos-delay="800">Edy Purwanto</h5>
-                    <p class="person-role mb-3" data-aos="fade-up" data-aos-delay="900">Senior Marketing</p>
                     <a href="https://wa.me/6281514515990?text=Halo%20Edy,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" target="_blank" rel="noopener" class="btn btn-whatsapp w-100 mb-2" data-aos="fade-up" data-aos-delay="1000">
                         <i class="fab fa-whatsapp me-2"></i>0815 1451 5990
                     </a>
