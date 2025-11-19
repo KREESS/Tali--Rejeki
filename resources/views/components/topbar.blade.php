@@ -29,14 +29,6 @@
                     <button class="search-btn" title="Search" aria-label="Open search">
                         <i class="fas fa-search" aria-hidden="true"></i>
                     </button>
-                    <button class="theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
-                        <div class="theme-toggle-track">
-                            <div class="theme-toggle-thumb">
-                                <i class="fas fa-sun sun-icon" aria-hidden="true"></i>
-                                <i class="fas fa-moon moon-icon" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </button>
                     <div class="language-toggle" role="group" aria-label="Language selection">
                         <button class="lang-btn {{ request()->is('') || request()->is('id*') ? 'active' : '' }}" 
                                 data-lang="id" 
@@ -255,112 +247,6 @@
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }
 
-/* Theme Toggle Button */
-.theme-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 26px;
-    background: rgba(255, 255, 255, 0.15);
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    margin-left: 10px;
-    box-shadow: 
-        inset 0 2px 4px rgba(0, 0, 0, 0.1),
-        0 2px 8px rgba(255, 255, 255, 0.1);
-}
-
-.theme-toggle:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
-    box-shadow: 
-        inset 0 2px 4px rgba(0, 0, 0, 0.15),
-        0 4px 12px rgba(255, 255, 255, 0.2);
-}
-
-.theme-toggle-track {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.theme-toggle-thumb {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 22px;
-    height: 22px;
-    background: linear-gradient(135deg, #ffd93d, #ff9800);
-    border-radius: 50%;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 
-        0 2px 8px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transform: translateX(0);
-}
-
-.theme-toggle-thumb .sun-icon,
-.theme-toggle-thumb .moon-icon {
-    position: absolute;
-    font-size: 10px;
-    transition: all 0.3s ease;
-}
-
-.theme-toggle-thumb .sun-icon {
-    color: #f59e0b;
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-}
-
-.theme-toggle-thumb .moon-icon {
-    color: #1e293b;
-    opacity: 0;
-    transform: rotate(180deg) scale(0.5);
-}
-
-/* Dark mode state */
-.theme-toggle.dark .theme-toggle-thumb {
-    transform: translateX(24px);
-    background: linear-gradient(135deg, #1e293b, #475569);
-    box-shadow: 
-        0 2px 8px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.theme-toggle.dark .theme-toggle-thumb .sun-icon {
-    opacity: 0;
-    transform: rotate(-180deg) scale(0.5);
-}
-
-.theme-toggle.dark .theme-toggle-thumb .moon-icon {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-    color: #fbbf24;
-}
-
-.theme-toggle.dark {
-    background: rgba(30, 41, 59, 0.6);
-    box-shadow: 
-        inset 0 2px 4px rgba(0, 0, 0, 0.3),
-        0 2px 8px rgba(255, 255, 255, 0.05);
-}
-
-.theme-toggle.dark:hover {
-    background: rgba(30, 41, 59, 0.8);
-    box-shadow: 
-        inset 0 2px 4px rgba(0, 0, 0, 0.4),
-        0 4px 12px rgba(255, 255, 255, 0.1);
-}
-
 /* Language Toggle */
 .language-toggle {
     display: flex;
@@ -442,22 +328,6 @@
     letter-spacing: 0.5px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Animations */
 @keyframes slideInLeft {
     from {
@@ -484,16 +354,6 @@
     
     .social-links {
         gap: 12px;
-    }
-    
-    .search-input {
-        font-size: 15px;
-        padding: 13px 18px;
-    }
-    
-    .search-submit {
-        padding: 13px 18px;
-        font-size: 15px;
     }
 }
 
@@ -542,29 +402,6 @@
         flex-shrink: 0;
     }
     
-    .theme-toggle {
-        width: 44px;
-        height: 24px;
-        margin-left: 6px;
-        flex-shrink: 0;
-    }
-    
-    .theme-toggle-thumb {
-        width: 20px;
-        height: 20px;
-        top: 2px;
-        left: 2px;
-    }
-    
-    .theme-toggle.dark .theme-toggle-thumb {
-        transform: translateX(20px);
-    }
-    
-    .theme-toggle-thumb .sun-icon,
-    .theme-toggle-thumb .moon-icon {
-        font-size: 9px;
-    }
-    
     .language-toggle {
         margin-left: 6px;
         padding: 2px;
@@ -584,22 +421,6 @@
     
     .lang-text {
         font-size: 9px;
-    }
-    
-    .search-input {
-        font-size: 14px;
-        padding: 12px 16px;
-    }
-    
-    .search-submit {
-        padding: 12px 16px;
-        font-size: 14px;
-        min-width: 52px;
-    }
-    
-    .search-close {
-        width: 36px;
-        height: 36px;
     }
 }
 
@@ -666,29 +487,6 @@
         margin: 0 3px;
     }
     
-    .theme-toggle {
-        width: 38px;
-        height: 20px;
-        margin-left: 4px;
-        flex-shrink: 0;
-    }
-    
-    .theme-toggle-thumb {
-        width: 16px;
-        height: 16px;
-        top: 2px;
-        left: 2px;
-    }
-    
-    .theme-toggle.dark .theme-toggle-thumb {
-        transform: translateX(18px);
-    }
-    
-    .theme-toggle-thumb .sun-icon,
-    .theme-toggle-thumb .moon-icon {
-        font-size: 7px;
-    }
-    
     .language-toggle {
         margin-left: 4px;
         padding: 2px;
@@ -710,32 +508,6 @@
     .lang-text {
         font-size: 8px;
         font-weight: 700;
-    }
-    
-    .search-box {
-        padding: 15px 0;
-    }
-    
-    .search-container {
-        padding: 0 15px;
-        gap: 8px;
-    }
-    
-    .search-input {
-        font-size: 14px;
-        padding: 10px 14px;
-    }
-    
-    .search-submit {
-        padding: 10px 14px;
-        font-size: 13px;
-        min-width: 46px;
-    }
-    
-    .search-close {
-        width: 32px;
-        height: 32px;
-        font-size: 12px;
     }
 }
 
@@ -776,28 +548,6 @@
         margin: 0 2px;
     }
     
-    .theme-toggle {
-        width: 34px;
-        height: 18px;
-        margin-left: 3px;
-    }
-    
-    .theme-toggle-thumb {
-        width: 14px;
-        height: 14px;
-        top: 2px;
-        left: 2px;
-    }
-    
-    .theme-toggle.dark .theme-toggle-thumb {
-        transform: translateX(16px);
-    }
-    
-    .theme-toggle-thumb .sun-icon,
-    .theme-toggle-thumb .moon-icon {
-        font-size: 6px;
-    }
-    
     .language-toggle {
         margin-left: 3px;
         padding: 1px;
@@ -817,28 +567,6 @@
     
     .lang-text {
         font-size: 7px;
-    }
-    
-    .search-container {
-        padding: 0 12px;
-        gap: 6px;
-    }
-    
-    .search-input {
-        font-size: 13px;
-        padding: 8px 12px;
-    }
-    
-    .search-submit {
-        padding: 8px 12px;
-        font-size: 12px;
-        min-width: 40px;
-    }
-    
-    .search-close {
-        width: 28px;
-        height: 28px;
-        font-size: 11px;
     }
 }
 
@@ -879,28 +607,6 @@
         margin: 0 1px;
     }
     
-    .theme-toggle {
-        width: 30px;
-        height: 16px;
-        margin-left: 2px;
-    }
-    
-    .theme-toggle-thumb {
-        width: 12px;
-        height: 12px;
-        top: 2px;
-        left: 2px;
-    }
-    
-    .theme-toggle.dark .theme-toggle-thumb {
-        transform: translateX(14px);
-    }
-    
-    .theme-toggle-thumb .sun-icon,
-    .theme-toggle-thumb .moon-icon {
-        font-size: 5px;
-    }
-    
     .language-toggle {
         margin-left: 2px;
         padding: 1px;
@@ -920,35 +626,6 @@
     
     .lang-text {
         font-size: 6px;
-    }
-    
-    .search-container {
-        padding: 0 10px;
-        gap: 4px;
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .search-input {
-        font-size: 12px;
-        padding: 6px 10px;
-        margin-bottom: 5px;
-    }
-    
-    .search-submit {
-        padding: 6px 10px;
-        font-size: 11px;
-        min-width: 36px;
-        align-self: flex-end;
-    }
-    
-    .search-close {
-        width: 24px;
-        height: 24px;
-        font-size: 10px;
-        position: absolute;
-        top: 10px;
-        right: 10px;
     }
 }
 
@@ -980,7 +657,6 @@ html, body {
 /* Button and Icon Accessibility */
 .social-link,
 .search-btn,
-.theme-toggle,
 .lang-btn {
     touch-action: manipulation;
     user-select: none;
@@ -990,11 +666,7 @@ html, body {
 /* Focus states for accessibility */
 .social-link:focus,
 .search-btn:focus,
-.theme-toggle:focus,
-.lang-btn:focus,
-.search-input:focus,
-.search-submit:focus,
-.search-close:focus {
+.lang-btn:focus {
     outline: 2px solid rgba(255, 255, 255, 0.8);
     outline-offset: 2px;
 }
@@ -1002,7 +674,6 @@ html, body {
 /* Prevent text selection on UI elements */
 .topbar-content,
 .social-links,
-.theme-toggle,
 .language-toggle {
     user-select: none;
     -webkit-user-select: none;
@@ -1014,20 +685,6 @@ html, body {
 @media (prefers-reduced-motion: no-preference) {
     .topbar {
         scroll-behavior: smooth;
-    }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .topbar {
-        border-bottom: 2px solid rgba(255, 255, 255, 0.8);
-    }
-    
-    .social-link,
-    .search-btn,
-    .theme-toggle,
-    .lang-btn {
-        border: 1px solid rgba(255, 255, 255, 0.5);
     }
 }
 
@@ -1044,11 +701,6 @@ html, body {
     contain: layout style paint;
 }
 
-.search-box {
-    will-change: opacity, transform;
-    contain: layout style paint;
-}
-
 /* Safari specific fixes */
 @supports (-webkit-appearance: none) {
     .search-input {
@@ -1061,96 +713,6 @@ html, body {
         -webkit-appearance: none;
     }
 }
-
-/* Dark Theme Styles */
-body.dark-theme .promo-text {
-    color: #f1f5f9;
-}
-
-body.dark-theme .promo-message .highlight {
-    color: #fbbf24;
-}
-
-body.dark-theme .search-input {
-    background: rgba(30, 41, 59, 0.9);
-    border-color: rgba(71, 85, 105, 0.3);
-    color: #f1f5f9;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-body.dark-theme .search-input:focus {
-    border-color: #7c1415;
-    background: rgba(30, 41, 59, 1);
-    box-shadow: 0 6px 20px rgba(124, 20, 21, 0.3);
-}
-
-body.dark-theme .search-input::placeholder {
-    color: #94a3b8;
-}
-
-body.dark-theme .search-close {
-    background: rgba(71, 85, 105, 0.3);
-    color: #cbd5e1;
-}
-
-body.dark-theme .search-close:hover {
-    background: rgba(71, 85, 105, 0.5);
-}
-
-body.dark-theme .search-box {
-    background: 
-        linear-gradient(135deg, 
-            rgba(15, 23, 42, 0.98) 0%, 
-            rgba(30, 41, 59, 0.95) 100%
-        );
-    border-bottom: 1px solid rgba(71, 85, 105, 0.3);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-/* Light Theme Styles */
-body.light-theme .promo-text {
-    color: #ffffff;
-}
-
-body.light-theme .promo-message .highlight {
-    color: #ffd93d;
-}
-
-body.light-theme .search-input {
-    background: rgba(255, 255, 255, 0.9);
-    border-color: rgba(124, 20, 21, 0.1);
-    color: #2d3748;
-    box-shadow: 0 4px 15px rgba(124, 20, 21, 0.08);
-}
-
-body.light-theme .search-input:focus {
-    border-color: #7c1415;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0 6px 20px rgba(124, 20, 21, 0.15);
-}
-
-body.light-theme .search-input::placeholder {
-    color: #64748b;
-}
-
-body.light-theme .search-close {
-    background: rgba(124, 20, 21, 0.1);
-    color: #7c1415;
-}
-
-body.light-theme .search-close:hover {
-    background: rgba(124, 20, 21, 0.2);
-}
-
-body.light-theme .search-box {
-    background: 
-        linear-gradient(135deg, 
-            rgba(255, 255, 255, 0.98) 0%, 
-            rgba(248, 250, 252, 0.95) 100%
-        );
-    border-bottom: 1px solid rgba(124, 20, 21, 0.1);
-    box-shadow: 0 8px 25px rgba(124, 20, 21, 0.15);
-}
 </style>
 
 <script>
@@ -1160,7 +722,6 @@ body.light-theme .search-box {
         initializeTopbar();
         initializeSearch();
         initializeSocialLinks();
-        initializeTheme(); // panggil terakhir
 
         // ================= LANGUAGE =================
         function initializeLanguageFeature() {
@@ -1233,48 +794,8 @@ body.light-theme .search-box {
             function performSearch() {
                 const query = searchInput.value.trim();
                 if (!query) return;
-                const langPrefix = localStorage.getItem('language') === 'en' ? '/en' : '';
+                const langPrefix = window.location.pathname.startsWith('/en') ? '/en' : '';
                 window.location.href = `${langPrefix}/search?q=${encodeURIComponent(query)}`;
-            }
-        }
-
-        // ================= THEME =================
-        function initializeTheme() {
-            const themeToggle = document.querySelector('.theme-toggle');
-            const thumb = themeToggle.querySelector('.theme-toggle-thumb');
-            const body = document.body;
-
-            // Ambil theme dari localStorage atau default system
-            let savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            applyTheme(savedTheme);
-
-            // Klik toggle
-            themeToggle.addEventListener('click', function() {
-                const newTheme = body.classList.contains('dark-theme') ? 'light' : 'dark';
-                applyTheme(newTheme);
-            });
-
-            function applyTheme(theme) {
-                // Body
-                body.classList.toggle('dark-theme', theme === 'dark');
-                body.classList.toggle('light-theme', theme === 'light');
-
-                // Button
-                themeToggle.classList.toggle('dark', theme === 'dark');
-
-                // Animasi thumb dan ikon
-                if (theme === 'dark') {
-                    thumb.style.transform = 'translateX(24px)';
-                    thumb.querySelector('.sun-icon').style.opacity = '0';
-                    thumb.querySelector('.moon-icon').style.opacity = '1';
-                } else {
-                    thumb.style.transform = 'translateX(0)';
-                    thumb.querySelector('.sun-icon').style.opacity = '1';
-                    thumb.querySelector('.moon-icon').style.opacity = '0';
-                }
-
-                // Simpan ke localStorage
-                localStorage.setItem('theme', theme);
             }
         }
     });

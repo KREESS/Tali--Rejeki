@@ -54,26 +54,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Light Theme (Default) */
-        body.light-theme {
-            background: url('{{ asset("img/bg/bg-texture-white.webp") }}');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: #1e293b;
-        }
-
-        /* Dark Theme */
-        body.dark-theme {
-            background: url('{{ asset("img/bg/bg-texture.webp") }}');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: #f1f5f9;
-        }
-
         main {
             flex: 1;
             min-height: calc(100vh - 200px);
@@ -287,11 +267,12 @@
             box-shadow: 0 6px 18px rgba(183,28,28,0.15);
         }
 
-        /* Optional: icon di kiri list item */
-        .search-results li::before {
-            content: "🔎"; /* bisa diganti sesuai kebutuhan */
-            font-size: 16px;
-            color: #b71c1c;
+        /* Product image in search results */
+        .search-results .product-image {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 8px;
             flex-shrink: 0;
         }
 
@@ -312,6 +293,7 @@
             width: 100%;
             display: flex;
             align-items: center;
+            gap: 10px;
         }
 
         /* Hover untuk link */
@@ -349,6 +331,11 @@
 
             .search-container button i {
                 font-size: 16px;
+            }
+            
+            .search-results .product-image {
+                width: 35px;
+                height: 35px;
             }
         }
     </style>
@@ -499,29 +486,56 @@
                     .then(data => {
                         let html = '';
 
-                        // Produk
+                        // Produk - dengan gambar produk
                         if(data.products && data.products.length){
                             html += '<strong>Produk</strong><ul>';
                             data.products.forEach(p => {
-                                html += `<li><a href="${p.url}" class="search-link">${p.name}</a></li>`;
+                                // Gunakan gambar produk atau default jika tidak ada
+                                const productImage = p.image || '{{ asset("img/default-product.jpg") }}';
+                                html += `<li>
+                                    <a href="${p.url}" class="search-link">
+                                        <img src="${productImage}" alt="${p.name}" class="product-image">
+                                        <span>${p.name}</span>
+                                    </a>
+                                </li>`;
                             });
                             html += '</ul>';
                         }
 
-                        // Artikel
+                        // Artikel - dengan icon artikel
                         if(data.articles && data.articles.length){
                             html += '<strong>Artikel</strong><ul>';
                             data.articles.forEach(a => {
-                                html += `<li><a href="${a.url}" class="search-link">${a.title}</a></li>`;
+                                html += `<li>
+                                    <a href="${a.url}" class="search-link">
+                                        <i class="fas fa-file-alt" style="font-size: 20px; color: #b71c1c;"></i>
+                                        <span>${a.title}</span>
+                                    </a>
+                                </li>`;
                             });
                             html += '</ul>';
                         }
 
-                        // Galeri
+                        // Galeri - dengan icon galeri
                         if(data.galleries && data.galleries.length){
                             html += '<strong>Galeri</strong><ul>';
                             data.galleries.forEach(g => {
-                                html += `<li><a href="${g.url}" class="search-link">${g.title}</a></li>`;
+                                // Jika ada gambar thumbnail, gunakan itu
+                                if(g.image) {
+                                    html += `<li>
+                                        <a href="${g.url}" class="search-link">
+                                            <img src="${g.image}" alt="${g.title}" class="product-image">
+                                            <span>${g.title}</span>
+                                        </a>
+                                    </li>`;
+                                } else {
+                                    html += `<li>
+                                        <a href="${g.url}" class="search-link">
+                                            <i class="fas fa-images" style="font-size: 20px; color: #b71c1c;"></i>
+                                            <span>${g.title}</span>
+                                        </a>
+                                    </li>`;
+                                }
                             });
                             html += '</ul>';
                         }

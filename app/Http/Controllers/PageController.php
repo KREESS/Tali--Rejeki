@@ -267,7 +267,7 @@ class PageController extends Controller
             'primaryImage',
         ]);
 
-        // --- Produk Terkait (biarkan seperti sebelumnya)
+        // --- Produk Terkait (dibatasi menjadi 15)
         $relatedSub = Product::query()
             ->where('id', '!=', $product->id)
             ->where('subcategory_id', $subcategory->id)
@@ -276,7 +276,7 @@ class PageController extends Controller
                 'images' => fn($q) => $q->orderBy('sort_order'),
             ])
             ->orderByDesc('updated_at')
-            ->limit(12)
+            ->limit(15) // <--- DIUBAH MENJADI 15
             ->get();
 
         $relatedCat = Product::query()
@@ -287,28 +287,28 @@ class PageController extends Controller
                 'images' => fn($q) => $q->orderBy('sort_order'),
             ])
             ->orderByDesc('updated_at')
-            ->limit(12)
+            ->limit(15) // <--- DIUBAH MENJADI 15
             ->get();
 
         $relatedProducts = $relatedSub->isNotEmpty() ? $relatedSub : $relatedCat;
 
-        // --- Produk Lainnya: AMBIL SEMUA PRODUK (tanpa pengecualian, tanpa filter subkategori/kategori)
+        // --- Produk Lainnya: AMBIL MAKSIMAL 15 PRODUK TERBARU
         $moreProducts = Product::query()
             ->with([
                 'subcategory.category',
                 'images' => fn($q) => $q->orderBy('sort_order'),
             ])
             ->orderByDesc('updated_at')
-            ->get(); // semua produk
+            ->limit(15) // <--- DIBATASI MENJADI 15
+            ->get();
 
         return view('pages.product-detail', [
             'title'           => $product->name,
             'product'         => $product,
-            'relatedProducts' => $relatedProducts, // untuk section "Produk Terkait"
-            'moreProducts'    => $moreProducts,    // untuk strip "Produk Lainnya" (semua produk)
+            'relatedProducts' => $relatedProducts, // untuk section "Produk Terkait" (maks 15)
+            'moreProducts'    => $moreProducts,    // untuk strip "Produk Lainnya" (maks 15)
         ]);
     }
-
 
     /**
      * Display the catalog page.
