@@ -223,12 +223,7 @@
                         <div class="spec-head-left">
                             <div class="spec-chip">Spesifikasi</div>
                             <h3 id="specTitle" class="spec-title">Detail Spesifikasi Produk</h3>
-                            <p class="spec-subtitle">Klik ikon salin untuk menyalin nilai per item, atau salin semua.</p>
-                        </div>
-                        <div class="spec-head-right">
-                            <button type="button" class="btn btn-outline-primary btn-sm spec-copy-all" title="Salin seluruh spesifikasi">
-                                <i class="fas fa-clipboard"></i> Salin Semua
-                            </button>
+                            <p class="spec-subtitle">Spesifikasi lengkap produk</p>
                         </div>
                     </div>
 
@@ -242,9 +237,6 @@
                                             <span class="tile-bullet" aria-hidden="true"></span>
                                             <span class="tile-key">Atribut {{ $i+1 }}</span>
                                         </div>
-                                        <button class="tile-copy" type="button" data-text="{{ $val }}" aria-label="Salin Atribut {{ $i+1 }}" title="Salin nilai">
-                                            <i class="fas fa-copy" aria-hidden="true"></i>
-                                        </button>
                                     </div>
                                     <div class="tile-body">
                                         {{ $val }}
@@ -592,7 +584,7 @@ body {
     color: #212529;
 }
 
-/* Buttons */
+/* Buttons - Override Bootstrap with higher specificity */
 .btn {
     font-weight: 900;
     border-width: 0;
@@ -618,6 +610,90 @@ body {
 .btn-outline-primary:hover {
     color: #ffffff;
     background-color: #7a0e0e;
+}
+
+/* Specific fix for Konsultasi/Penawaran button */
+#openMarketingModal.btn.btn-primary.btn-lg.flex-fill,
+#openMarketingModal.btn.btn-primary.btn-lg.flex-fill:hover,
+#openMarketingModal.btn.btn-primary.btn-lg.flex-fill:focus,
+#openMarketingModal.btn.btn-primary.btn-lg.flex-fill:active,
+#openMarketingModal.btn.btn-primary.btn-lg.flex-fill:not(:disabled):not(.disabled):active {
+    background-color: #7a0e0e !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+#openMarketingModal.btn.btn-primary.btn-lg.flex-fill:hover,
+#openMarketingModal.btn.btn-primary.btn-lg.flex-fill:focus {
+    background-color: #a30f0f !important;
+    transform: translateY(-1px) !important;
+}
+
+#openMarketingModal.btn.btn-primary.btn-lg.flex-fill:active,
+#openMarketingModal.btn.btn-primary.btn-lg.flex-fill:not(:disabled):not(.disabled):active {
+    background-color: #a30f0f !important;
+    transform: translateY(0) !important;
+}
+
+/* Specific fix for Lihat Semua button */
+.strip-actions .btn.btn-outline-primary.btn-sm,
+.strip-actions .btn.btn-outline-primary.btn-sm:hover,
+.strip-actions .btn.btn-outline-primary.btn-sm:focus,
+.strip-actions .btn.btn-outline-primary.btn-sm:active,
+.strip-actions .btn.btn-outline-primary.btn-sm:not(:disabled):not(.disabled):active {
+    color: #7a0e0e !important;
+    background: transparent !important;
+    border: 1.8px solid #7a0e0e !important;
+    box-shadow: none !important;
+}
+
+.strip-actions .btn.btn-outline-primary.btn-sm:hover,
+.strip-actions .btn.btn-outline-primary.btn-sm:focus {
+    color: #ffffff !important;
+    background-color: #7a0e0e !important;
+    border-color: #7a0e0e !important;
+    transform: translateY(-1px) !important;
+    box-shadow: none !important;
+}
+
+.strip-actions .btn.btn-outline-primary.btn-sm:active,
+.strip-actions .btn.btn-outline-primary.btn-sm:not(:disabled):not(.disabled):active {
+    color: #ffffff !important;
+    background-color: #a30f0f !important;
+    border-color: #a30f0f !important;
+    transform: translateY(0) !important;
+    box-shadow: none !important;
+}
+
+/* Fix for modal contact buttons */
+.contact-actions .btn.btn-outline-primary.btn-sm,
+.contact-actions .btn.btn-outline-primary.btn-sm:hover,
+.contact-actions .btn.btn-outline-primary.btn-sm:focus,
+.contact-actions .btn.btn-outline-primary.btn-sm:active,
+.contact-actions .btn.btn-outline-primary.btn-sm:not(:disabled):not(.disabled):active {
+    color: #7a0e0e !important;
+    background: transparent !important;
+    border: 1.8px solid #7a0e0e !important;
+    box-shadow: none !important;
+}
+
+.contact-actions .btn.btn-outline-primary.btn-sm:hover,
+.contact-actions .btn.btn-outline-primary.btn-sm:focus {
+    color: #ffffff !important;
+    background-color: #7a0e0e !important;
+    border-color: #7a0e0e !important;
+    transform: translateY(-1px) !important;
+    box-shadow: none !important;
+}
+
+.contact-actions .btn.btn-outline-primary.btn-sm:active,
+.contact-actions .btn.btn-outline-primary.btn-sm:not(:disabled):not(.disabled):active {
+    color: #ffffff !important;
+    background-color: #a30f0f !important;
+    border-color: #a30f0f !important;
+    transform: translateY(0) !important;
+    box-shadow: none !important;
 }
 
 /* Spec card */
@@ -670,7 +746,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
-    min-height: 120px;
+    min-height: 100px;
     background-color: #ffffff;
     border: 1px solid #dee2e6;
     border-radius: 12px;
@@ -685,7 +761,7 @@ body {
 .tile-head {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 0.6rem;
 }
 
@@ -694,6 +770,7 @@ body {
     height: 10px;
     border-radius: 50%;
     background-color: #7a0e0e;
+    flex-shrink: 0;
 }
 
 .tile-key {
@@ -703,30 +780,6 @@ body {
     text-transform: uppercase;
     color: #6c757d;
     white-space: nowrap;
-}
-
-.tile-copy {
-    border: 1px solid #dee2e6;
-    background-color: #ffffff;
-    color: #212529;
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    transition: background-color 0.15s ease;
-    cursor: pointer;
-}
-
-.tile-copy:hover {
-    background-color: #f8f9fa;
-}
-
-.tile-copy.copied {
-    border-color: #7a0e0e;
-    background-color: #7a0e0e;
-    color: #ffffff;
 }
 
 .tile-body {

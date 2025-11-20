@@ -773,37 +773,104 @@ body {
   font-size: 0.75rem;
 }
 
-/* Buttons */
-.btn {
-  font-weight: 600;
-  border-width: 0;
-  transition: 0.15s ease;
-  border-radius: 6px;
-  font-size: 0.85rem;
+/* Buttons - Override Bootstrap with higher specificity */
+.btn,
+.btn.btn-primary,
+.btn.btn-outline-primary,
+a.btn,
+a.btn.btn-primary,
+a.btn.btn-outline-primary,
+button.btn,
+button.btn.btn-primary,
+button.btn.btn-outline-primary {
+  font-weight: 600 !important;
+  border-width: 0 !important;
+  transition: 0.15s ease !important;
+  border-radius: 6px !important;
+  font-size: 0.85rem !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
 }
 
-.btn-primary {
-  background: var(--brand-1);
-  color: #fff;
-  border: none;
+/* Primary Button - Force Red Theme */
+.btn.btn-primary,
+a.btn.btn-primary,
+button.btn.btn-primary {
+  background: var(--brand-1) !important;
+  color: #fff !important;
+  border: none !important;
 }
 
-.btn-primary:hover {
-  background: var(--brand-2);
-  transform: translateY(-1px);
+.btn.btn-primary:hover,
+.btn.btn-primary:focus,
+.btn.btn-primary:active,
+.btn.btn-primary:not(:disabled):not(.disabled):active,
+a.btn.btn-primary:hover,
+a.btn.btn-primary:focus,
+a.btn.btn-primary:active,
+button.btn.btn-primary:hover,
+button.btn.btn-primary:focus,
+button.btn.btn-primary:active {
+  background: var(--brand-2) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-.btn-outline-primary {
-  color: var(--brand-1);
-  background: transparent;
-  border: 1.5px solid var(--brand-1);
+.btn.btn-primary:active,
+.btn.btn-primary:not(:disabled):not(.disabled):active,
+a.btn.btn-primary:active,
+button.btn.btn-primary:active {
+  background: var(--brand-2) !important;
+  transform: translateY(0) !important;
 }
 
-.btn-outline-primary:hover {
-  color: #fff;
-  background: var(--brand-1);
-  border-color: var(--brand-1);
-  transform: translateY(-1px);
+/* Outline Primary Button - Force Red Theme */
+.btn.btn-outline-primary,
+a.btn.btn-outline-primary,
+button.btn.btn-outline-primary {
+  color: var(--brand-1) !important;
+  background: transparent !important;
+  border: 1.5px solid var(--brand-1) !important;
+}
+
+.btn.btn-outline-primary:hover,
+.btn.btn-outline-primary:focus,
+.btn.btn-outline-primary:active,
+.btn.btn-outline-primary:not(:disabled):not(.disabled):active,
+a.btn.btn-outline-primary:hover,
+a.btn.btn-outline-primary:focus,
+a.btn.btn-outline-primary:active,
+button.btn.btn-outline-primary:hover,
+button.btn.btn-outline-primary:focus,
+button.btn.btn-outline-primary:active {
+  color: #fff !important;
+  background: var(--brand-1) !important;
+  border-color: var(--brand-1) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: none !important;
+}
+
+.btn.btn-outline-primary:active,
+.btn.btn-outline-primary:not(:disabled):not(.disabled):active,
+a.btn.btn-outline-primary:active,
+button.btn.btn-outline-primary:active {
+  color: #fff !important;
+  background: var(--brand-2) !important;
+  border-color: var(--brand-2) !important;
+  transform: translateY(0) !important;
+}
+
+/* Remove all blue colors from buttons */
+.btn:focus,
+.btn-primary:focus,
+.btn-outline-primary:focus,
+.btn:not(:disabled):not(.disabled):focus,
+.btn-primary:not(:disabled):not(.disabled):focus,
+.btn-outline-primary:not(:disabled):not(.disabled):focus {
+  box-shadow: var(--ring) !important;
+  color: #fff !important;
 }
 
 /* Empty State */
@@ -827,7 +894,7 @@ body {
   margin: 0 auto 0.8rem;
 }
 
-/* Pagination */
+/* Pagination - Override Bootstrap */
 .pagination-wrapper {
   display: flex;
   justify-content: center;
@@ -849,44 +916,56 @@ body {
   margin: 0 2px;
 }
 
-.pagination .page-link {
+.pagination .page-link,
+.pagination .page-link:hover,
+.pagination .page-link:focus,
+.pagination .page-link:active {
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 42px;
   height: 42px;
   padding: 0 12px;
-  color: var(--brand-1);
-  background-color: var(--card);
-  border: 2px solid var(--line);
-  border-radius: 6px;
+  color: var(--brand-1) !important;
+  background-color: var(--card) !important;
+  border: 2px solid var(--line) !important;
+  border-radius: 6px !important;
   font-weight: 600;
   font-size: 0.9rem;
   transition: all 0.2s ease;
-  text-decoration: none;
+  text-decoration: none !important;
   position: relative;
+  box-shadow: none !important;
 }
 
-.pagination .page-link:hover {
-  background-color: var(--brand-1);
-  color: #fff;
-  border-color: var(--brand-1);
+.pagination .page-link:hover,
+.pagination .page-link:focus {
+  background-color: var(--brand-1) !important;
+  color: #fff !important;
+  border-color: var(--brand-1) !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(153, 27, 27, 0.2);
+  box-shadow: 0 4px 8px rgba(153, 27, 27, 0.2) !important;
+}
+
+.pagination .page-link:active {
+  background-color: var(--brand-2) !important;
+  color: #fff !important;
+  border-color: var(--brand-2) !important;
+  transform: translateY(0) !important;
 }
 
 .pagination .page-item.active .page-link {
-  background-color: var(--brand-1);
-  border-color: var(--brand-1);
-  color: #fff;
+  background-color: var(--brand-1) !important;
+  border-color: var(--brand-1) !important;
+  color: #fff !important;
   font-weight: 700;
-  box-shadow: 0 2px 4px rgba(153, 27, 27, 0.3);
+  box-shadow: 0 2px 4px rgba(153, 27, 27, 0.3) !important;
 }
 
 .pagination .page-item.disabled .page-link {
-  color: var(--muted);
-  background-color: var(--soft);
-  border-color: var(--line);
+  color: var(--muted) !important;
+  background-color: var(--soft) !important;
+  border-color: var(--line) !important;
   opacity: 0.6;
   cursor: not-allowed;
 }
