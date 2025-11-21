@@ -45,12 +45,6 @@
     $mainImage = $imgPublic($images->first());
     $thumbs    = $images->slice(0, 8)->map(fn($p) => $imgPublic($p));
 
-    // Atribut (maks 10)
-    $attrs = collect(range(1,10))
-        ->map(fn($i) => $product->{'attr'.$i} ?? null)
-        ->filter()
-        ->values();
-
     // URL detail (untuk WA pesan)
     $detailUrl = route('product.detail', [
         'category'    => $catSlug,
@@ -114,6 +108,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Beranda</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('products') }}">Produk</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $titleTxt }}</li>
             </ol>
         </nav>
 
@@ -197,14 +192,6 @@
                         @endif
                     </div>
 
-                    @if($attrs->count())
-                    <div class="attr-chips">
-                        @foreach($attrs->take(10) as $a)
-                            <span class="chip">{{ Str::limit($a, 40) }}</span>
-                        @endforeach
-                    </div>
-                    @endif
-
                     <div class="cta-row">
                         <a href="#" id="openMarketingModal" class="btn btn-primary btn-lg flex-fill">
                             <i class="fas fa-phone"></i> Konsultasi / Penawaran
@@ -227,17 +214,19 @@
                         </div>
                     </div>
 
+                    @php
+                        // Mengambil kembali data atribut untuk ditampilkan di spesifikasi
+                        $attrs = collect(range(1,10))
+                            ->map(fn($i) => $product->{'attr'.$i} ?? null)
+                            ->filter()
+                            ->values();
+                    @endphp
+
                     @if($attrs->count())
                         <div class="spec-grid" role="list">
                             @foreach($attrs as $i => $a)
                                 @php $val = trim($a); @endphp
                                 <div class="spec-tile" role="listitem" data-index="{{ $i }}">
-                                    <div class="tile-head">
-                                        <div class="tile-key-wrap">
-                                            <span class="tile-bullet" aria-hidden="true"></span>
-                                            <span class="tile-key">Atribut {{ $i+1 }}</span>
-                                        </div>
-                                    </div>
                                     <div class="tile-body">
                                         {{ $val }}
                                     </div>
@@ -382,6 +371,11 @@ body {
 .breadcrumb .breadcrumb-item a {
     color: var(--primary-color);
     text-decoration: none;
+    font-weight: 800;
+}
+
+.breadcrumb .breadcrumb-item.active {
+    color: #6c757d;
     font-weight: 800;
 }
 
@@ -558,7 +552,7 @@ body {
     margin-bottom: 0.35rem;
 }
 
-/* Badges & chips */
+/* Badges */
 .brand-badge {
     background-color: var(--primary-color);
     color: #ffffff;
@@ -570,23 +564,6 @@ body {
 
 .brand-badge.more {
     background-color: #6c757d;
-}
-
-.attr-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.42rem;
-    margin: 0.5rem 0 0.95rem;
-}
-
-.attr-chips .chip {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 50px;
-    padding: 0.28rem 0.64rem;
-    font-weight: 800;
-    font-size: 0.88rem;
-    color: #212529;
 }
 
 /* Buttons - Override Bootstrap with higher specificity */
@@ -761,30 +738,6 @@ body {
 
 .spec-tile:hover {
     border-color: var(--primary-color);
-}
-
-.tile-head {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0.6rem;
-}
-
-.tile-bullet {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    flex-shrink: 0;
-}
-
-.tile-key {
-    font-size: 0.78rem;
-    font-weight: 900;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #6c757d;
-    white-space: nowrap;
 }
 
 .tile-body {
@@ -1196,6 +1149,421 @@ body {
     padding: 6px 10px;
     border-radius: 8px;
     border: 1px solid #dee2e6;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+/* Tablet and below */
+@media (max-width: 991.98px) {
+    .gallery-card,
+    .info-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .title {
+        font-size: 1.6rem;
+    }
+    
+    .spec-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .strip-grid .product-card.strip {
+        min-width: 200px;
+    }
+}
+
+/* Mobile landscape */
+@media (max-width: 767.98px) {
+    .simple-header {
+        padding: 15px 0 8px;
+    }
+    
+    .page-title {
+        font-size: 1.8rem;
+    }
+    
+    .gallery-card {
+        padding: 0.8rem;
+    }
+    
+    .info-card {
+        padding: 0.8rem 1rem;
+    }
+    
+    .title {
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .mini-category {
+        font-size: 0.8rem;
+    }
+    
+    .sku-line {
+        font-size: 0.9rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .brand-badge {
+        font-size: 0.75rem;
+        padding: 0.15rem 0.45rem;
+    }
+    
+    .spec-head {
+        padding: 14px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .spec-title {
+        font-size: 1.1rem;
+    }
+    
+    .spec-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .spec-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 0.8rem;
+        padding: 12px 14px 16px;
+    }
+    
+    .spec-tile {
+        padding: 0.8rem;
+        min-height: 80px;
+    }
+    
+    .tile-body {
+        font-size: 0.9rem;
+    }
+    
+    .strip-head {
+        padding: 14px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+    
+    .strip-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .strip-grid {
+        padding: 12px 14px 16px;
+    }
+    
+    .strip-grid .product-card.strip {
+        min-width: 160px;
+        padding: 0.7rem;
+    }
+    
+    .strip-grid .product-card.strip .product-title {
+        font-size: 0.9rem;
+    }
+    
+    .strip-grid .product-card.strip .product-category {
+        font-size: 0.8rem;
+    }
+    
+    .modal-card-simple {
+        width: min(600px, 95vw);
+        max-height: 90vh;
+    }
+    
+    .modal-header-simple {
+        padding: 16px 20px 14px;
+    }
+    
+    .modal-title-simple {
+        font-size: 1.1rem;
+    }
+    
+    .modal-subtitle-simple {
+        font-size: 0.85rem;
+    }
+    
+    .contact-list-simple {
+        padding: 14px 20px 20px;
+    }
+    
+    .contact-item-simple {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px;
+    }
+    
+    .contact-actions-simple {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .btn-wa-simple,
+    .btn-call-simple {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .image-lightbox {
+        padding: 16px;
+    }
+    
+    .ilb-container {
+        width: min(800px, 95vw);
+        height: min(800px, 95vw);
+    }
+    
+    .image-lightbox .ilb-nav,
+    .image-lightbox .ilb-close {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .ilb-prev {
+        left: 12px;
+    }
+    
+    .ilb-next {
+        right: 12px;
+    }
+    
+    .ilb-close {
+        top: 8px;
+        right: 10px;
+        font-size: 22px;
+    }
+    
+    .ilb-counter {
+        bottom: 10px;
+        right: 12px;
+        padding: 5px 8px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Mobile portrait */
+@media (max-width: 575.98px) {
+    .simple-header {
+        padding: 12px 0 6px;
+    }
+    
+    .page-title {
+        font-size: 1.6rem;
+    }
+    
+    .gallery-card {
+        padding: 0.6rem;
+    }
+    
+    .info-card {
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .title {
+        font-size: 1.4rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .mini-category {
+        font-size: 0.75rem;
+    }
+    
+    .sku-line {
+        font-size: 0.85rem;
+    }
+    
+    .brand-badge {
+        font-size: 0.7rem;
+        padding: 0.1rem 0.4rem;
+    }
+    
+    .cta-row {
+        margin-top: 0.8rem;
+    }
+    
+    .spec-head {
+        padding: 12px 14px;
+    }
+    
+    .spec-title {
+        font-size: 1rem;
+    }
+    
+    .spec-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .spec-grid {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+        padding: 10px 12px 14px;
+    }
+    
+    .spec-tile {
+        padding: 0.7rem;
+        min-height: 70px;
+    }
+    
+    .tile-body {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 4;
+    }
+    
+    .strip-head {
+        padding: 12px 14px;
+    }
+    
+    .strip-title {
+        font-size: 1.1rem;
+    }
+    
+    .strip-grid {
+        padding: 10px 12px 14px;
+    }
+    
+    .strip-grid .product-card.strip {
+        min-width: 140px;
+        padding: 0.6rem;
+    }
+    
+    .strip-grid .product-card.strip .product-title {
+        font-size: 0.85rem;
+    }
+    
+    .strip-grid .product-card.strip .product-category {
+        font-size: 0.75rem;
+    }
+    
+    .modal-card-simple {
+        width: 95vw;
+        max-height: 92vh;
+    }
+    
+    .modal-header-simple {
+        padding: 14px 16px 12px;
+    }
+    
+    .modal-title-simple {
+        font-size: 1rem;
+    }
+    
+    .modal-subtitle-simple {
+        font-size: 0.8rem;
+    }
+    
+    .contact-list-simple {
+        padding: 12px 16px 16px;
+    }
+    
+    .contact-item-simple {
+        padding: 12px;
+    }
+    
+    .contact-avatar-simple {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .contact-name-simple {
+        font-size: 0.95rem;
+    }
+    
+    .contact-phone-simple {
+        font-size: 0.8rem;
+    }
+    
+    .btn-wa-simple,
+    .btn-call-simple {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .image-lightbox {
+        padding: 12px;
+    }
+    
+    .ilb-container {
+        width: min(600px, 95vw);
+        height: min(600px, 95vw);
+    }
+    
+    .image-lightbox .ilb-nav,
+    .image-lightbox .ilb-close {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .ilb-prev {
+        left: 8px;
+    }
+    
+    .ilb-next {
+        right: 8px;
+    }
+    
+    .ilb-close {
+        top: 6px;
+        right: 8px;
+        font-size: 20px;
+    }
+    
+    .ilb-counter {
+        bottom: 8px;
+        right: 10px;
+        padding: 4px 6px;
+        font-size: 0.8rem;
+    }
+    
+    .gallery-thumbs .thumb {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .nav-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .nav-prev {
+        left: 8px;
+    }
+    
+    .nav-next {
+        right: 8px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 399.98px) {
+    .page-title {
+        font-size: 1.4rem;
+    }
+    
+    .title {
+        font-size: 1.3rem;
+    }
+    
+    .strip-grid .product-card.strip {
+        min-width: 120px;
+    }
+    
+    .modal-card-simple {
+        width: 98vw;
+    }
+    
+    .ilb-container {
+        width: min(500px, 95vw);
+        height: min(500px, 95vw);
+    }
 }
 </style>
 

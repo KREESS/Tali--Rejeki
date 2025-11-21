@@ -17,11 +17,11 @@
             </p>
 
             <div class="hero-actions">
-                <a href="#catalog-list" class="btn btn-hero btn-primary btn-lg">
+                <a href="#catalog-list" class="btn-hero btn-hero-primary">
                     <i class="fas fa-search me-2"></i>
                     <span>Jelajahi Katalog</span>
                 </a>
-                <a href="{{ route('contact') }}" class="btn btn-hero btn-outline-light btn-lg">
+                <a href="{{ route('contact') }}" class="btn-hero btn-hero-outline">
                     <i class="fas fa-headset me-2"></i>
                     <span>Konsultasi Gratis</span>
                 </a>
@@ -129,7 +129,7 @@
                     <div class="download-meta">{{ $td->download_count ?? 0 }} unduhan</div>
                 </div>
                 <div class="download-actions">
-                    <button class="btn btn-outline-primary btn-compare" data-id="{{ $td->id }}">Bandingkan</button>
+                    <button class="btn-custom btn-outline-primary btn-compare" data-id="{{ $td->id }}">Bandingkan</button>
                 </div>
             </div>
             @endforeach
@@ -242,20 +242,20 @@
                     <div class="catalog-actions">
                         @if($fileUrl)
                             <form action="{{ route('catalog.download', $item->id) }}" method="GET" class="inline-form">
-                                <button type="submit" class="btn-catalog-download">
+                                <button type="submit" class="btn-custom btn-catalog-download">
                                     <i class="fas fa-download"></i>
                                     Unduh {{ $badge }}
                                 </button>
                             </form>
 
                             <form action="{{ route('catalog.preview', $item->id) }}" method="GET" class="inline-form" target="_blank" rel="noopener">
-                                <button type="submit" class="btn-catalog-preview">
+                                <button type="submit" class="btn-custom btn-catalog-preview">
                                     <i class="fas fa-eye"></i>
                                     Preview
                                 </button>
                             </form>
                         @else
-                            <button class="btn btn-secondary" disabled>
+                            <button class="btn-custom btn-secondary" disabled>
                                 <i class="fas fa-ban"></i>
                                 Tidak Tersedia
                             </button>
@@ -280,9 +280,9 @@
             </p>
 
             @if(request('search') || request('category') || request('type'))
-                <a href="{{ route('catalog1-page') }}" class="btn btn-primary">Lihat Semua Katalog</a>
+                <a href="{{ route('catalog1-page') }}" class="btn-custom btn-primary">Lihat Semua Katalog</a>
             @else
-                <a href="{{ route('contact') }}" class="btn btn-primary">Hubungi Kami</a>
+                <a href="{{ route('contact') }}" class="btn-custom btn-primary">Hubungi Kami</a>
             @endif
         </div>
     </div>
@@ -349,10 +349,10 @@
             <h2 class="cta-title">Butuh Bantuan Memilih Produk?</h2>
             <p class="cta-description">Tim ahli kami siap membantu Anda memilih produk yang tepat untuk proyek Anda.</p>
             <div class="cta-actions">
-                <a href="{{ route('contact') }}" class="btn btn-primary btn-lg me-3">
+                <a href="{{ route('contact') }}" class="btn-custom btn-primary btn-lg">
                     <i class="fas fa-phone me-2"></i>Konsultasi Gratis
                 </a>
-                <a href="{{ route('products') }}" class="cta-custom-btn btn-lg">
+                <a href="{{ route('products') }}" class="btn-custom btn-outline-light btn-lg">
                     <i class="fas fa-cubes me-2"></i>Lihat Produk
                 </a>
             </div>
@@ -443,7 +443,7 @@ body.dark-theme {
 .fade-up-item:nth-child(8) { transition-delay: 0.8s; }
 
 /* ====== BUTTONS ====== */
-.btn {
+.btn-custom {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -459,47 +459,53 @@ body.dark-theme {
     white-space: nowrap;
 }
 
-.btn-primary {
+.btn-custom.btn-primary {
     background: var(--primary-color);
     color: white;
     box-shadow: 0 2px 4px rgba(139, 0, 0, 0.2);
 }
 
-.btn-primary:hover {
+.btn-custom.btn-primary:hover {
     background: var(--primary-hover);
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(139, 0, 0, 0.3);
+    color: white;
 }
 
-.btn-outline-primary {
+.btn-custom.btn-primary:focus {
+    color: white;
+}
+
+.btn-custom.btn-outline-primary {
     background: transparent;
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
 }
 
-.btn-outline-primary:hover {
+.btn-custom.btn-outline-primary:hover {
     background: var(--primary-color);
     color: white;
 }
 
-.btn-outline-light {
+.btn-custom.btn-outline-light {
     background: transparent;
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.8);
 }
 
-.btn-outline-light:hover {
+.btn-custom.btn-outline-light:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: white;
+    color: white;
 }
 
-.btn-secondary {
+.btn-custom.btn-secondary {
     background: var(--light-tertiary);
     color: var(--light-text-secondary);
     border: 1px solid var(--light-border);
 }
 
-.btn-lg {
+.btn-custom.btn-lg {
     padding: 16px 32px;
     font-size: 16px;
 }
@@ -527,6 +533,11 @@ body.dark-theme {
     background: var(--primary-hover);
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(139, 0, 0, 0.3);
+    color: white;
+}
+
+.btn-catalog-download:focus {
+    color: white;
 }
 
 .btn-catalog-preview {
@@ -554,6 +565,10 @@ body.dark-theme {
     box-shadow: 0 4px 8px rgba(139, 0, 0, 0.3);
 }
 
+.btn-catalog-preview:focus {
+    color: var(--primary-color);
+}
+
 /* Remove focus outline for all buttons */
 .btn-catalog-download:focus,
 .btn-catalog-preview:focus {
@@ -567,6 +582,15 @@ body.dark-theme {
     border-radius: 8px;
     font-weight: 700;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 32px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
 }
 
 .btn-hero::before {
@@ -581,70 +605,47 @@ body.dark-theme {
     transition: all 0.3s ease;
 }
 
-.btn-hero.btn-primary {
+.btn-hero-primary {
     background: var(--primary-color);
     color: white;
     border: none;
 }
 
-.btn-hero.btn-outline-light {
+.btn-hero-primary:hover {
+    background: var(--primary-hover);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(139, 0, 0, 0.3);
+}
+
+.btn-hero-primary:hover::before {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
+}
+
+.btn-hero-primary:focus {
+    color: white;
+}
+
+.btn-hero-outline {
     background: rgba(255, 255, 255, 0.1);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.8);
 }
 
-.btn-hero:hover::before {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
-}
-
-.btn-hero:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* ====== CTA CUSTOM BUTTON ====== */
-.cta-custom-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 16px 32px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 16px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.8);
+.btn-hero-outline:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: white;
     color: white;
-    background: rgba(255, 255, 255, 0.1);
-    white-space: nowrap;
-    position: relative;
-    overflow: hidden;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.cta-custom-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
-    z-index: 1;
-    transition: all 0.3s ease;
-}
-
-.cta-custom-btn:hover::before {
+.btn-hero-outline:hover::before {
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
 }
 
-.cta-custom-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 255, 255, 0.15);
-    /* Tidak ada perubahan border pada hover */
-    border: 2px solid rgba(255, 255, 255, 0.8);
+.btn-hero-outline:focus {
+    color: white;
 }
 
 /* ====== HERO SECTION ====== */
@@ -1560,6 +1561,10 @@ body.dark-theme .faq-body {
 
 /* ====== RESPONSIVE DESIGN ====== */
 @media (max-width: 1200px) {
+    .container {
+        padding: 0 20px;
+    }
+    
     .catalog-item {
         gap: 24px;
     }
@@ -1567,9 +1572,26 @@ body.dark-theme .faq-body {
     .catalog-image {
         height: 550px;
     }
+    
+    .hero-title {
+        font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+    }
+    
+    .info-title,
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .catalog-title {
+        font-size: 22px;
+    }
 }
 
 @media (max-width: 992px) {
+    .container {
+        padding: 0 18px;
+    }
+    
     .catalog-item {
         grid-template-columns: 1fr;
         grid-template-areas: "image" "content" !important;
@@ -1580,57 +1602,8 @@ body.dark-theme .faq-body {
         height: 500px;
     }
     
-    .standards-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 0 16px;
-    }
-    
-    .hero-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .hero-actions .btn {
-        width: 100%;
-        max-width: 280px;
-    }
-    
-    .info-stats,
-    .categories-grid,
-    .brands-grid,
-    .downloads-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .catalog-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-    
-    .catalog-meta {
-        gap: 12px;
-    }
-    
-    .cta-actions {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .cta-actions .btn,
-    .cta-actions .cta-custom-btn {
-        width: 100%;
-        max-width: 280px;
-    }
-    
     .hero-title {
-        font-size: clamp(2rem, 8vw, 3.5rem);
+        font-size: clamp(2rem, 5vw, 4rem);
     }
     
     .info-title,
@@ -1640,6 +1613,41 @@ body.dark-theme .faq-body {
     
     .catalog-title {
         font-size: 20px;
+    }
+    
+    .standards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+    
+    .hero-actions .btn-hero {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+    }
+    
+    .info-title,
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .catalog-title {
+        font-size: 18px;
     }
     
     .catalog-image {
@@ -1683,9 +1691,31 @@ body.dark-theme .faq-body {
         width: 20px;
     }
     
-    .standards-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+    .info-stats,
+    .categories-grid,
+    .brands-grid,
+    .downloads-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .catalog-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .catalog-meta {
+        gap: 12px;
+    }
+    
+    .cta-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-actions .btn-custom {
+        width: 100%;
+        max-width: 280px;
     }
     
     .standard-card {
@@ -1702,6 +1732,23 @@ body.dark-theme .faq-body {
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.6rem, 4vw, 3rem);
+    }
+    
+    .info-title,
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .catalog-title {
+        font-size: 16px;
+    }
+    
     .catalog-image {
         height: 350px;
     }
@@ -1744,6 +1791,27 @@ body.dark-theme .faq-body {
     
     .standard-card p {
         font-size: 14px;
+    }
+    
+    .info-stat-item {
+        padding: 24px 16px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .catalog-content {
+        padding: 24px;
+    }
+    
+    .catalog-actions {
+        flex-direction: column;
+    }
+    
+    .catalog-actions .btn-catalog-download,
+    .catalog-actions .btn-catalog-preview {
+        width: 100%;
     }
 }
 </style>

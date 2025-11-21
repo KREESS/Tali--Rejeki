@@ -32,43 +32,38 @@
         <img src="{{ asset('img/kontak/hubungi-kami.jpg') }}" alt="Hubungi Kami PT. Tali Rejeki">
         <div class="hero-overlay"></div>
     </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <!-- Konten di tengah -->
-            <div class="col-lg-8 col-md-10">
-                <div class="hero-content hero-content-center" data-aos="fade-up">
-                    <h1 class="hero-title" data-aos="fade-up">Hubungi Kami</h1>
-                    <p class="hero-description" data-aos="fade-up" data-aos-delay="100">
-                        Temukan lokasi dan hubungi PT. Tali Rejeki untuk kebutuhan Anda. 
-                        Kami siap melayani dengan profesional.
-                    </p>
-                    <div class="hero-actions" data-aos="fade-up" data-aos-delay="200">
-                        <a href="#contact-info" class="hero-btn-primary" onclick="return scrollToContact(event)">
-                            Info Kontak
-                        </a>
-                        <a href="https://wa.me/6281382523722?text=Halo,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" 
-                           target="_blank" 
-                           rel="noopener noreferrer" 
-                           class="hero-btn-secondary" 
-                           onclick="return trackWhatsAppClick(event)">
-                            Chat WhatsApp
-                        </a>
-                    </div>
-                    
-                    <div class="hero-stats" data-aos="fade-up" data-aos-delay="300">
-                        <div class="stat-item">
-                            <div class="stat-number">Senin-Jumat</div>
-                            <div class="stat-label">08:00 - 17:00 WIB</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">14+</div>
-                            <div class="stat-label">Tahun Pengalaman</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">1000+</div>
-                            <div class="stat-label">Klien Puas</div>
-                        </div>
-                    </div>
+    <div class="hero-container">
+        <div class="hero-content" data-aos="fade-up">
+            <h1 class="hero-title" data-aos="fade-up">Hubungi Kami</h1>
+            <p class="hero-description" data-aos="fade-up" data-aos-delay="100">
+                Temukan lokasi dan hubungi PT. Tali Rejeki untuk kebutuhan Anda. 
+                Kami siap melayani dengan profesional.
+            </p>
+            <div class="hero-actions" data-aos="fade-up" data-aos-delay="200">
+                <a href="#contact-info" class="hero-btn-primary" onclick="return scrollToContact(event)">
+                    Info Kontak
+                </a>
+                <a href="https://wa.me/6281382523722?text=Halo,%20saya%20ingin%20bertanya%20tentang%20produk%20PT.%20Tali%20Rejeki" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="hero-btn-secondary" 
+                   onclick="return trackWhatsAppClick(event)">
+                    Chat WhatsApp
+                </a>
+            </div>
+            
+            <div class="hero-stats" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-item">
+                    <div class="stat-number">Senin-Jumat</div>
+                    <div class="stat-label">08:00 - 17:00 WIB</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">14+</div>
+                    <div class="stat-label">Tahun Pengalaman</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Klien Puas</div>
                 </div>
             </div>
         </div>
@@ -416,13 +411,16 @@ body {
     color: white;
 }
 
-/* ===== HERO SECTION ===== */
+/* ===== HERO SECTION - PERBAIKAN TINGGI GAMBAR ===== */
 .hero-section {
     position: relative;
-    height: 583px; /* Sesuai dengan tinggi gambar yang diinginkan */
+    min-height: 60vh;
+    height: 60vh;
+    max-height: 500px;
     overflow: hidden;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .hero-background {
@@ -431,7 +429,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: -2;
 }
 
 .hero-background img {
@@ -439,10 +437,6 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    /* Memastikan gambar ditampilkan dengan resolusi penuh */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
 }
 
 .hero-overlay {
@@ -451,77 +445,83 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3));
-    z-index: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+    z-index: -1;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
-}
-
-/* Perubahan untuk konten di tengah */
-.hero-content-center {
     text-align: center;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
 }
 
-.hero-content-center .hero-actions {
-    justify-content: center;
-}
-
-.hero-content-center .hero-stats {
-    justify-content: center;
-}
-
-/* PERUBAHAN HANYA PADA TEKS HERO SECTION */
+/* PERUBAHAN HANYA PADA TEKS HERO SECTION - UKURAN LEBIH KECIL */
 .hero-title {
-    color: #FFFFFF; /* Warna putih solid untuk kontras maksimal */
-    font-size: 2.5rem;
+    color: #FFFFFF;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-weight: 700;
     margin-bottom: 1rem;
-    /* Tambahkan bayangan teks yang kuat untuk kontras */
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    line-height: 1.2;
 }
 
 .hero-description {
-    color: #FFFFFF; /* Warna putih solid */
-    font-size: 1.1rem;
+    color: #FFFFFF;
+    font-size: clamp(0.875rem, 2vw, 1.1rem);
     margin-bottom: 2rem;
-    /* Tambahkan bayangan teks untuk kontras */
     text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+    line-height: 1.5;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-actions {
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .hero-stats {
     display: flex;
     gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .stat-item {
     text-align: center;
-    color: #FFFFFF; /* Warna putih solid */
+    color: #FFFFFF;
+    min-width: 100px;
 }
 
 .stat-number {
-    font-size: 1.3rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
     font-weight: 700;
     display: block;
-    margin-bottom: 0.25rem;
-    /* Tambahkan bayangan teks untuk kontras */
+    margin-bottom: 0.5rem;
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
 }
 
 .stat-label {
-    font-size: 0.9rem;
-    /* Hapus opacity dan ganti dengan warna solid */
+    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
     color: #FFFFFF;
-    /* Tambahkan bayangan teks untuk kontras */
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
 
@@ -647,16 +647,15 @@ body {
     font-size: 0.9rem;
 }
 
-/* ===== CONTACT INFO GRID (PERUBAHAN UTAMA) ===== */
+/* ===== CONTACT INFO GRID ===== */
 .contact-info-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Dua kolom */
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
-/* Membuat item terakhir (Jam Operasional) memenuhi lebar penuh */
 .contact-info-item:last-child {
-    grid-column: 1 / -1; /* Membentang dari kolom pertama hingga terakhir */
+    grid-column: 1 / -1;
 }
 
 /* ===== CONTACT INFO ITEMS ===== */
@@ -1012,7 +1011,19 @@ body {
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 1200px) {
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (max-width: 1199.98px) {
+    .container {
+        max-width: 1140px;
+    }
+    
     .person-card {
         min-width: 180px;
         max-width: 220px;
@@ -1035,13 +1046,16 @@ body {
     }
 }
 
-@media (max-width: 992px) {
-    /* Kembali ke satu kolom di layar kecil */
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 991.98px) {
+    .container {
+        max-width: 960px;
+    }
+    
     .contact-info-grid {
         grid-template-columns: 1fr;
     }
     
-    /* Reset span kolom untuk item terakhir */
     .contact-info-item:last-child {
         grid-column: auto;
     }
@@ -1070,19 +1084,54 @@ body {
     .actions-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-}
-
-@media (max-width: 768px) {
-    .hero-section {
-        height: 400px; /* Menyesuaikan tinggi untuk layar kecil */
+    
+    .company-header {
+        flex-direction: column;
+        text-align: center;
     }
     
+    .company-logo {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 767.98px) {
+    .container {
+        max-width: 720px;
+    }
+    
+    .hero-section {
+        min-height: 50vh;
+        height: 50vh;
+        max-height: 400px;
+    }
+    
+    .hero-container {
+        padding: 0 15px;
+    }
+    
+    .hero-content {
+        padding: 15px;
+    }
+    
+    /* Hero text sizes for tablets */
     .hero-title {
-        font-size: 2rem;
+        font-size: clamp(1.3rem, 3.5vw, 1.8rem);
     }
     
     .hero-description {
-        font-size: 1rem;
+        font-size: clamp(0.8rem, 2vw, 0.95rem);
+        margin-bottom: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: clamp(0.8rem, 2vw, 1rem);
+    }
+    
+    .stat-label {
+        font-size: clamp(0.65rem, 1.5vw, 0.8rem);
     }
     
     .section-title {
@@ -1100,11 +1149,14 @@ body {
     .hero-actions {
         flex-direction: column;
         gap: 1rem;
+        align-items: center;
     }
     
     .hero-btn-primary, .hero-btn-secondary {
         width: 100%;
-        max-width: 250px;
+        max-width: 280px;
+        font-size: 0.8rem;
+        padding: 10px 20px;
     }
     
     .team-marketing-row {
@@ -1136,16 +1188,63 @@ body {
     .actions-grid {
         grid-template-columns: 1fr;
     }
-}
-
-@media (max-width: 576px) {
-    .hero-section {
-        height: 300px; /* Menyesuaikan tinggi untuk layar sangat kecil */
-        padding: 2rem 0;
+    
+    .company-info-card, .contact-form-card {
+        padding: 1.5rem;
     }
     
+    .action-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .container {
+        max-width: 540px;
+    }
+    
+    .hero-section {
+        min-height: 45vh;
+        height: 45vh;
+        max-height: 350px;
+    }
+    
+    .hero-container {
+        padding: 0 10px;
+    }
+    
+    .hero-content {
+        padding: 10px;
+    }
+    
+    /* Hero text sizes for mobile */
     .hero-title {
-        font-size: 1.5rem;
+        font-size: clamp(1.1rem, 3vw, 1.5rem);
+        margin-bottom: 0.8rem;
+    }
+    
+    .hero-description {
+        font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+        margin-bottom: 1.2rem;
+        line-height: 1.4;
+    }
+    
+    .stat-number {
+        font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+    }
+    
+    .stat-label {
+        font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+    }
+    
+    .hero-stats {
+        gap: 1rem;
+    }
+    
+    .stat-item {
+        min-width: 80px;
     }
     
     .section-title {
@@ -1161,11 +1260,11 @@ body {
     }
     
     .company-info-card, .contact-form-card {
-        padding: 1.5rem;
+        padding: 1.2rem;
     }
     
     .action-card {
-        padding: 1.5rem;
+        padding: 1.2rem;
         margin-bottom: 1rem;
     }
     
@@ -1197,23 +1296,134 @@ body {
         padding: 0.25rem 0.35rem;
     }
     
+    .map-controls {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .map-control-btn {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Ultra small devices (very small phones, less than 400px) */
+@media (max-width: 399.98px) {
+    .container {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    
+    .hero-section {
+        min-height: 40vh;
+        height: 40vh;
+        max-height: 300px;
+    }
+    
+    .hero-container {
+        padding: 0 5px;
+    }
+    
+    .hero-content {
+        padding: 5px;
+    }
+    
+    /* Hero text sizes for very small phones */
+    .hero-title {
+        font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+        margin-bottom: 0.6rem;
+    }
+    
+    .hero-description {
+        font-size: clamp(0.7rem, 1.5vw, 0.75rem);
+        margin-bottom: 1rem;
+        line-height: 1.3;
+    }
+    
+    .stat-number {
+        font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+    }
+    
+    .stat-label {
+        font-size: clamp(0.55rem, 1.2vw, 0.6rem);
+    }
+    
     .hero-stats {
-        flex-direction: column;
-        gap: 1rem;
+        gap: 0.8rem;
     }
     
-    /* Perubahan untuk mobile */
-    .hero-content-center {
-        text-align: center;
-        margin-left: 0;
+    .stat-item {
+        min-width: 70px;
     }
     
-    .hero-content-center .hero-actions {
-        justify-content: center;
+    .section-title {
+        font-size: 1.2rem;
     }
     
-    .hero-content-center .hero-stats {
-        justify-content: center;
+    .person-card {
+        min-width: 100px;
+        max-width: 140px;
+        padding: 0.6rem;
+    }
+    
+    .btn-whatsapp {
+        font-size: 0.5rem;
+        padding: 0.2rem 0.3rem;
+    }
+    
+    .company-info-card, .contact-form-card {
+        padding: 1rem;
+    }
+    
+    .action-card {
+        padding: 1rem;
+    }
+    
+    .contact-info-item {
+        padding: 1rem;
+    }
+    
+    .info-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .info-title {
+        font-size: 1rem;
+    }
+    
+    .form-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .form-title {
+        font-size: 1.1rem;
+    }
+    
+    .action-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .action-title {
+        font-size: 1rem;
+    }
+    
+    .action-description {
+        font-size: 0.85rem;
+    }
+    
+    .action-btn {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .stat-text {
+        font-size: 0.75rem;
     }
 }
 </style>

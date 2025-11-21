@@ -93,6 +93,7 @@
   left: 0;
   bottom: 70px;
   width: 300px;
+  max-width: calc(100vw - 32px);
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -174,16 +175,21 @@
   justify-content: center;
   font-weight: 600;
   margin-right: 12px;
+  flex-shrink: 0;
 }
 
 /* 联系人信息 */
 .wa-info {
   flex: 1;
+  min-width: 0;
 }
 
 .wa-name {
   font-weight: 600;
   font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .wa-note {
@@ -196,6 +202,9 @@
   font-size: 13px;
   color: #666;
   margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* 暗色模式 */
@@ -223,16 +232,166 @@
   }
 }
 
-/* 小屏幕调整 */
-@media (max-width: 480px) {
+/* 响应式调整 */
+/* 大屏幕 (桌面) */
+@media (min-width: 1200px) {
+  .wa-panel {
+    width: 320px;
+  }
+  
+  .wa-list {
+    max-height: 400px;
+  }
+}
+
+/* 中等屏幕 (平板横屏) */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .wa-panel {
+    width: 300px;
+  }
+  
+  .wa-list {
+    max-height: 350px;
+  }
+}
+
+/* 小屏幕 (平板竖屏) */
+@media (max-width: 991px) and (min-width: 768px) {
+  .wa-panel {
+    width: 280px;
+  }
+  
+  .wa-panel-title {
+    font-size: 15px;
+  }
+  
+  .wa-name {
+    font-size: 13px;
+  }
+  
+  .wa-phone {
+    font-size: 12px;
+  }
+  
+  .wa-list {
+    max-height: 300px;
+  }
+}
+
+/* 手机横屏 */
+@media (max-width: 767px) and (min-width: 576px) and (orientation: landscape) {
+  .wa-panel {
+    width: 320px;
+    max-height: calc(100vh - 100px);
+  }
+  
+  .wa-list {
+    max-height: calc(100vh - 180px);
+  }
+  
+  .wa-fab {
+    bottom: 12px;
+    left: 12px;
+  }
+}
+
+/* 手机竖屏 */
+@media (max-width: 575px) {
   .wa-fab {
     left: 12px;
     bottom: 12px;
   }
   
+  .wa-btn {
+    width: 50px;
+    height: 50px;
+  }
+  
   .wa-panel {
     width: calc(100vw - 24px);
     left: 12px;
+    max-height: calc(100vh - 80px);
+  }
+  
+  .wa-list {
+    max-height: calc(100vh - 140px);
+  }
+  
+  .wa-panel-head {
+    padding: 10px 14px;
+  }
+  
+  .wa-panel-title {
+    font-size: 15px;
+  }
+  
+  .wa-item {
+    padding: 10px 14px;
+  }
+  
+  .wa-avatar {
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+  }
+  
+  .wa-name {
+    font-size: 13px;
+  }
+  
+  .wa-note {
+    font-size: 11px;
+  }
+  
+  .wa-phone {
+    font-size: 12px;
+  }
+}
+
+/* 超小屏幕 */
+@media (max-width: 360px) {
+  .wa-fab {
+    left: 8px;
+    bottom: 8px;
+  }
+  
+  .wa-panel {
+    width: calc(100vw - 16px);
+    left: 8px;
+  }
+  
+  .wa-item {
+    padding: 8px 12px;
+  }
+  
+  .wa-avatar {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+  }
+  
+  .wa-name {
+    font-size: 12px;
+  }
+  
+  .wa-note {
+    font-size: 10px;
+  }
+  
+  .wa-phone {
+    font-size: 11px;
+  }
+}
+
+/* 确保在所有设备上都不会与其他元素重叠 */
+@media (max-height: 500px) and (orientation: landscape) {
+  .wa-panel {
+    max-height: calc(100vh - 100px);
+    bottom: 70px;
+  }
+  
+  .wa-list {
+    max-height: calc(100vh - 150px);
   }
 }
 </style>
