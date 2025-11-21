@@ -68,10 +68,10 @@
     };
 
     $marketing = [
+        ['name'=>'Sari','phone'=>'0813 1682 6959'],
         ['name'=>'Yovien Agustina','phone'=>'0813-8523-1149'],
         ['name'=>'Siti','phone'=>'0813 8252 3722'],
         ['name'=>'Kurnia','phone'=>'0813 8480 8218'],
-        ['name'=>'Sari','phone'=>'0813 1682 6959'],
         ['name'=>'Edy Purwanto','phone'=>'0815 1451 5990'],
     ];
 
@@ -300,41 +300,38 @@
     </div>
 </section>
 
-<!-- Modal Marketing -->
+<!-- Modal Marketing - Simple & Clean Design -->
 <div id="marketingModal" class="modal-overlay" hidden>
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="marketingTitle">
-    <button class="modal-close" type="button" aria-label="Tutup">&times;</button>
+  <div class="modal-card-simple" role="dialog" aria-modal="true" aria-labelledby="marketingTitle">
+    <button class="modal-close-simple" type="button" aria-label="Tutup">&times;</button>
 
-    <div class="modal-header">
-      <div class="modal-header-left">
-        <div class="modal-chip">Konsultasi / Penawaran</div>
-        <h3 id="marketingTitle" class="modal-title" tabindex="-1">Hubungi Tim Marketing</h3>
-        <p class="modal-subtitle">Pilih kontak untuk chat WhatsApp — pesan otomatis menyertakan <strong>{{ $titleTxt }}</strong> & tautan produk ini.</p>
-      </div>
+    <div class="modal-header-simple">
+      <h3 id="marketingTitle" class="modal-title-simple" tabindex="-1">Hubungi Tim Marketing</h3>
+      <p class="modal-subtitle-simple">Pilih kontak untuk konsultasi produk ini</p>
     </div>
 
-    <div class="contact-grid">
+    <div class="contact-list-simple">
       @foreach($marketing as $m)
         @php
           $initials = collect(explode(' ', $m['name']))->map(fn($p)=>mb_substr($p,0,1))->take(2)->implode('');
         @endphp
-        <div class="contact-item">
-            <div class="contact-row">
-                <div class="contact-avatar" aria-hidden="true">{{ $initials }}</div>
-                <div class="contact-meta">
-                    <div class="contact-name">{{ $m['name'] }}</div>
-                    <div class="contact-phone">{{ $m['phone'] }}</div>
+        <div class="contact-item-simple">
+            <div class="contact-info-simple">
+                <div class="contact-avatar-simple">{{ $initials }}</div>
+                <div class="contact-details-simple">
+                    <div class="contact-name-simple">{{ $m['name'] }}</div>
+                    <div class="contact-phone-simple">{{ $m['phone'] }}</div>
                 </div>
             </div>
-            <div class="contact-actions">
+            <div class="contact-actions-simple">
                 @if($m['wa'])
-                <a class="btn btn-primary btn-sm w-100" href="{{ $m['wa'] }}" target="_blank" rel="noopener">
-                    <i class="fab fa-whatsapp"></i> Chat WhatsApp
+                <a class="btn-wa-simple" href="{{ $m['wa'] }}" target="_blank" rel="noopener">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
                 @endif
                 @if($m['tel'])
-                <a class="btn btn-outline-primary btn-sm w-100" href="{{ $m['tel'] }}">
-                    <i class="fas fa-phone-alt"></i> Panggil
+                <a class="btn-call-simple" href="{{ $m['tel'] }}">
+                    <i class="fas fa-phone"></i> Panggil
                 </a>
                 @endif
             </div>
@@ -346,7 +343,9 @@
 
 <!-- LIGHTBOX -->
 <div id="imageLightbox" class="image-lightbox" role="dialog" aria-modal="true" aria-label="Pratinjau gambar" aria-hidden="true" hidden>
-  <img class="ilb-img" src="" alt="Gambar produk" tabindex="0">
+  <div class="ilb-container">
+    <img class="ilb-img" src="" alt="Gambar produk" tabindex="0">
+  </div>
   <button class="ilb-close" type="button" aria-label="Tutup">&times;</button>
   <button class="ilb-nav ilb-prev" type="button" aria-label="Gambar sebelumnya"><i class="fas fa-chevron-left"></i></button>
   <button class="ilb-nav ilb-next" type="button" aria-label="Gambar berikutnya"><i class="fas fa-chevron-right"></i></button>
@@ -357,6 +356,12 @@
 /* =====================================================
    CLEAN & DEFAULT THEME
    ===================================================== */
+:root {
+    --primary-color: #c62828; /* Warna merah yang lebih terang namun tetap profesional */
+    --primary-hover: #e53935; /* Warna hover yang lebih terang */
+    --primary-dark: #b71c1c; /* Warna untuk state aktif */
+}
+
 body {
     background-color: #ffffff;
     color: #212529;
@@ -375,7 +380,7 @@ body {
 }
 
 .breadcrumb .breadcrumb-item a {
-    color: #7a0e0e;
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: 800;
 }
@@ -407,7 +412,7 @@ body {
 
 .gallery-main {
     position: relative;
-    aspect-ratio: 4/3;
+    aspect-ratio: 1 / 1; /* Mengubah dari 4/3 menjadi 1/1 untuk rasio persegi */
     background-color: #f8f9fa;
     border-radius: 8px;
     overflow: hidden;
@@ -418,7 +423,7 @@ body {
 .gallery-main img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: contain; /* Menjaga gambar agar tidak terpotong */
     padding: 12px;
     cursor: zoom-in;
 }
@@ -485,7 +490,7 @@ body {
 }
 
 .gallery-indicators .dot.active {
-    background-color: #7a0e0e;
+    background-color: var(--primary-color);
 }
 
 .gallery-thumbs {
@@ -515,11 +520,11 @@ body {
 }
 
 .gallery-thumbs .thumb:hover {
-    border-color: #7a0e0e;
+    border-color: var(--primary-color);
 }
 
 .gallery-thumbs .thumb.active {
-    border-color: #7a0e0e;
+    border-color: var(--primary-color);
 }
 
 /* Info */
@@ -534,7 +539,7 @@ body {
 
 .mini-category a {
     color: #ffffff;
-    background-color: #7a0e0e;
+    background-color: var(--primary-color);
     padding: 0.12rem 0.52rem;
     border-radius: 50px;
     text-decoration: none;
@@ -555,7 +560,7 @@ body {
 
 /* Badges & chips */
 .brand-badge {
-    background-color: #7a0e0e;
+    background-color: var(--primary-color);
     color: #ffffff;
     border-radius: 50px;
     padding: 0.2rem 0.58rem;
@@ -593,23 +598,23 @@ body {
 }
 
 .btn-primary {
-    background-color: #7a0e0e;
+    background-color: var(--primary-color);
     color: #ffffff;
 }
 
 .btn-primary:hover {
-    background-color: #a30f0f;
+    background-color: var(--primary-hover);
 }
 
 .btn-outline-primary {
-    color: #7a0e0e;
+    color: var(--primary-color);
     background: transparent;
-    border: 1.8px solid #7a0e0e;
+    border: 1.8px solid var(--primary-color);
 }
 
 .btn-outline-primary:hover {
     color: #ffffff;
-    background-color: #7a0e0e;
+    background-color: var(--primary-color);
 }
 
 /* Specific fix for Konsultasi/Penawaran button */
@@ -618,7 +623,7 @@ body {
 #openMarketingModal.btn.btn-primary.btn-lg.flex-fill:focus,
 #openMarketingModal.btn.btn-primary.btn-lg.flex-fill:active,
 #openMarketingModal.btn.btn-primary.btn-lg.flex-fill:not(:disabled):not(.disabled):active {
-    background-color: #7a0e0e !important;
+    background-color: var(--primary-color) !important;
     color: #ffffff !important;
     border: none !important;
     box-shadow: none !important;
@@ -626,13 +631,13 @@ body {
 
 #openMarketingModal.btn.btn-primary.btn-lg.flex-fill:hover,
 #openMarketingModal.btn.btn-primary.btn-lg.flex-fill:focus {
-    background-color: #a30f0f !important;
+    background-color: var(--primary-hover) !important;
     transform: translateY(-1px) !important;
 }
 
 #openMarketingModal.btn.btn-primary.btn-lg.flex-fill:active,
 #openMarketingModal.btn.btn-primary.btn-lg.flex-fill:not(:disabled):not(.disabled):active {
-    background-color: #a30f0f !important;
+    background-color: var(--primary-dark) !important;
     transform: translateY(0) !important;
 }
 
@@ -642,17 +647,17 @@ body {
 .strip-actions .btn.btn-outline-primary.btn-sm:focus,
 .strip-actions .btn.btn-outline-primary.btn-sm:active,
 .strip-actions .btn.btn-outline-primary.btn-sm:not(:disabled):not(.disabled):active {
-    color: #7a0e0e !important;
+    color: var(--primary-color) !important;
     background: transparent !important;
-    border: 1.8px solid #7a0e0e !important;
+    border: 1.8px solid var(--primary-color) !important;
     box-shadow: none !important;
 }
 
 .strip-actions .btn.btn-outline-primary.btn-sm:hover,
 .strip-actions .btn.btn-outline-primary.btn-sm:focus {
     color: #ffffff !important;
-    background-color: #7a0e0e !important;
-    border-color: #7a0e0e !important;
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
     transform: translateY(-1px) !important;
     box-shadow: none !important;
 }
@@ -660,8 +665,8 @@ body {
 .strip-actions .btn.btn-outline-primary.btn-sm:active,
 .strip-actions .btn.btn-outline-primary.btn-sm:not(:disabled):not(.disabled):active {
     color: #ffffff !important;
-    background-color: #a30f0f !important;
-    border-color: #a30f0f !important;
+    background-color: var(--primary-dark) !important;
+    border-color: var(--primary-dark) !important;
     transform: translateY(0) !important;
     box-shadow: none !important;
 }
@@ -672,17 +677,17 @@ body {
 .contact-actions .btn.btn-outline-primary.btn-sm:focus,
 .contact-actions .btn.btn-outline-primary.btn-sm:active,
 .contact-actions .btn.btn-outline-primary.btn-sm:not(:disabled):not(.disabled):active {
-    color: #7a0e0e !important;
+    color: var(--primary-color) !important;
     background: transparent !important;
-    border: 1.8px solid #7a0e0e !important;
+    border: 1.8px solid var(--primary-color) !important;
     box-shadow: none !important;
 }
 
 .contact-actions .btn.btn-outline-primary.btn-sm:hover,
 .contact-actions .btn.btn-outline-primary.btn-sm:focus {
     color: #ffffff !important;
-    background-color: #7a0e0e !important;
-    border-color: #7a0e0e !important;
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
     transform: translateY(-1px) !important;
     box-shadow: none !important;
 }
@@ -690,8 +695,8 @@ body {
 .contact-actions .btn.btn-outline-primary.btn-sm:active,
 .contact-actions .btn.btn-outline-primary.btn-sm:not(:disabled):not(.disabled):active {
     color: #ffffff !important;
-    background-color: #a30f0f !important;
-    border-color: #a30f0f !important;
+    background-color: var(--primary-dark) !important;
+    border-color: var(--primary-dark) !important;
     transform: translateY(0) !important;
     box-shadow: none !important;
 }
@@ -718,7 +723,7 @@ body {
     font-size: 0.7rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    background-color: #7a0e0e;
+    background-color: var(--primary-color);
     color: #ffffff;
     padding: 0.22rem 0.5rem;
     border-radius: 50px;
@@ -755,7 +760,7 @@ body {
 }
 
 .spec-tile:hover {
-    border-color: #7a0e0e;
+    border-color: var(--primary-color);
 }
 
 .tile-head {
@@ -769,7 +774,7 @@ body {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #7a0e0e;
+    background-color: var(--primary-color);
     flex-shrink: 0;
 }
 
@@ -882,13 +887,13 @@ body {
 }
 
 .strip-grid .product-card.strip:hover {
-    border-color: #7a0e0e;
+    border-color: var(--primary-color);
 }
 
 .strip-grid .product-card.strip .product-image {
     position: relative;
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1; /* Rasio persegi 1:1 */
     background-color: #f8f9fa;
     border: 1px solid #dee2e6;
     border-radius: 8px;
@@ -900,7 +905,7 @@ body {
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: contain; /* Menjaga gambar agar tidak terpotong */
     padding: 10px;
 }
 
@@ -952,128 +957,165 @@ body {
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-card {
+/* SIMPLE & CLEAN MODAL DESIGN */
+.modal-card-simple {
     position: relative;
-    width: min(960px, 96vw);
-    max-height: 88vh;
+    width: min(600px, 90vw);
+    max-height: 85vh;
     overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     background-color: #ffffff;
+    color: #212529;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header-simple {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-title-simple {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 6px;
     color: #212529;
 }
 
-.modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.8rem;
-    padding: 16px 18px;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-}
-
-.modal-chip {
-    display: inline-block;
-    font-weight: 900;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background-color: #7a0e0e;
-    color: #ffffff;
-    padding: 0.22rem 0.5rem;
-    border-radius: 50px;
-}
-
-.modal-title {
-    font-size: 1.35rem;
-    font-weight: 900;
-    margin: 0.25rem 0 0;
-}
-
-.modal-subtitle {
-    margin: 0.15rem 0 0;
+.modal-subtitle-simple {
+    font-size: 0.9rem;
+    margin: 0;
     color: #6c757d;
 }
 
-.modal-close {
+.modal-close-simple {
     position: absolute;
-    top: 10px;
-    right: 12px;
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    border: 1px solid #dee2e6;
-    background-color: #ffffff;
-    color: #212529;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    border: none;
+    color: #6c757d;
     cursor: pointer;
-    font-size: 22px;
-    line-height: 1;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
     z-index: 5;
 }
 
-.modal-close:hover {
-    background-color: #f8f9fa;
+.modal-close-simple:hover {
+    background-color: #e9ecef;
+    color: #495057;
 }
 
-.contact-grid {
-    padding: 14px 16px 18px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 0.9rem;
-    overflow: auto;
-    max-height: calc(88vh - 78px);
-}
-
-.contact-item {
+.contact-list-simple {
+    padding: 16px 24px 24px;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    background-color: #ffffff;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    padding: 0.85rem 0.9rem;
-    transition: border-color 0.15s ease;
+    gap: 12px;
 }
 
-.contact-item:hover {
-    border-color: #7a0e0e;
-}
-
-.contact-row {
+.contact-item-simple {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    justify-content: space-between;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    transition: background-color 0.2s ease;
 }
 
-.contact-avatar {
-    width: 54px;
-    height: 54px;
+.contact-item-simple:hover {
+    background-color: #f1f3f5;
+}
+
+.contact-info-simple {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-avatar-simple {
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    display: grid;
-    place-items: center;
-    font-weight: 900;
-    background-color: #7a0e0e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    background-color: var(--primary-color);
     color: #ffffff;
-    border: 1px solid #dee2e6;
+    font-size: 1.1rem;
 }
 
-.contact-name {
-    font-weight: 900;
+.contact-details-simple {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-name-simple {
+    font-weight: 600;
     font-size: 1rem;
     margin: 0;
+    color: #212529;
 }
 
-.contact-phone {
-    font-size: 0.95rem;
+.contact-phone-simple {
+    font-size: 0.85rem;
     color: #6c757d;
-    margin-top: 0.25rem;
+    margin-top: 2px;
+}
+
+.contact-actions-simple {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-wa-simple {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.btn-wa-simple:hover {
+    background-color: #128C7E;
+}
+
+.btn-call-simple {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    color: #495057;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-call-simple:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
 }
 
 /* IMAGE LIGHTBOX */
@@ -1087,9 +1129,21 @@ body {
     padding: 24px;
 }
 
+.ilb-container {
+    position: relative;
+    width: min(1200px, 92vw);
+    height: min(1200px, 92vw); /* Membuat container lightbox juga persegi */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .image-lightbox .ilb-img {
-    max-width: min(1200px, 92vw);
-    max-height: 88vh;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Menjaga gambar agar tidak terpotong */
     border-radius: 8px;
     outline: none;
 }
@@ -1197,10 +1251,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (e.key === 'ArrowLeft') showAt(currentIndex - 1);
   });
 
-  // Modal Marketing
+  // Modal Marketing - Simple & Clean
   const modal = document.getElementById('marketingModal');
   const openBtn = document.getElementById('openMarketingModal');
-  const closeBtn = document.querySelector('.modal-close');
+  const closeBtn = document.querySelector('.modal-close-simple');
 
   function lockScroll(lock){
     document.documentElement.classList.toggle('modal-open', lock);
@@ -1230,7 +1284,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (openBtn) openBtn.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); });
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (modal){
-    modal.addEventListener('click', (e)=>{ if (e.target === modal || e.target.classList.contains('modal-close')) closeModal(); });
+    modal.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape' && !modal.hidden) closeModal(); });
   }
 

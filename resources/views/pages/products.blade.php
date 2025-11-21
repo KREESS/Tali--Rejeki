@@ -155,8 +155,8 @@
                         @if($isSubMode)
                             <div class="sort-dropdown">
                                 <select name="sort" class="form-select form-select-sm" onchange="sortProducts(this.value)">
-                                    <option value="newest" {{ request('sort') === 'newest' ? 'selected' : '' }}>Terbaru</option>
-                                    <option value="name" {{ request('sort') === 'name' ? 'selected' : '' }}>Nama A–Z</option>
+                                    <option value="newest" {{ request('sort') === 'newest' ? 'selected' : '' }}">Terbaru</option>
+                                    <option value="name" {{ request('sort') === 'name' ? 'selected' : '' }}">Nama A–Z</option>
                                 </select>
                             </div>
 
@@ -194,38 +194,36 @@
                                             ?? (isset($sub->products) ? $sub->products->count() : null);
                                     @endphp
                                     <div class="product-item" data-aos="fade-up" data-aos-delay="{{ ($index % 4) * 100 }}">
-                                        <div class="product-card">
-                                            <div class="product-image">
-                                                @if($thumb)
-                                                    <img src="{{ $thumb }}" alt="{{ $sub->name }}" class="img-fluid" loading="lazy">
-                                                @else
-                                                    <div class="no-image">
-                                                        <i class="fas fa-layer-group"></i>
-                                                        <span>{{ $sub->name }}</span>
-                                                    </div>
-                                                @endif
-                                            </div>
+                                        <a href="{{ $subUrl }}" class="product-card-link">
+                                            <div class="product-card">
+                                                <div class="product-image">
+                                                    @if($thumb)
+                                                        <img src="{{ $thumb }}" alt="{{ $sub->name }}" class="img-fluid" loading="lazy">
+                                                    @else
+                                                        <div class="no-image">
+                                                            <i class="fas fa-layer-group"></i>
+                                                            <span>{{ $sub->name }}</span>
+                                                        </div>
+                                                    @endif
+                                                </div>
 
-                                            <div class="product-content">
-                                                <h3 class="product-title">
-                                                    <a href="{{ $subUrl }}">{{ $sub->name }}</a>
-                                                </h3>
+                                                <div class="product-content">
+                                                    <h3 class="product-title">{{ $sub->name }}</h3>
 
-                                                <p class="product-description">
-                                                    {{ Str::limit($sub->meta_description ?? 'Eksplor beragam produk pada subkategori ini.', 120) }}
-                                                </p>
+                                                    <p class="product-description">
+                                                        {{ Str::limit($sub->meta_description ?? 'Eksplor beragam produk pada subkategori ini.', 120) }}
+                                                    </p>
 
-                                                <div class="product-actions">
-                                                    <a href="{{ $subUrl }}" class="btn btn-primary btn-sm">
+                                                    <div class="product-count">
                                                         @if(!is_null($prodCount))
-                                                            Lihat Produk ({{ $prodCount }})
+                                                            {{ $prodCount }} Produk
                                                         @else
                                                             Lihat Produk
                                                         @endif
-                                                    </a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                 @endforeach
                             </div>
@@ -281,66 +279,57 @@
                                     @endphp
 
                                     <div class="product-item" data-aos="fade-up" data-aos-delay="{{ ($index % 4) * 100 }}">
-                                        <div class="product-card">
-                                            <div class="product-image">
-                                                @if($imgUrl)
-                                                    <img src="{{ $imgUrl }}" alt="{{ $product->name }}" class="img-fluid" loading="lazy">
-                                                @else
-                                                    <div class="no-image">
-                                                        <i class="fas fa-image"></i>
-                                                        <span>No Image</span>
-                                                    </div>
-                                                @endif
-
-                                                @if(!empty($product->is_featured))
-                                                    <div class="product-badge featured" title="Featured">
-                                                        <i class="fas fa-star"></i> Featured
-                                                    </div>
-                                                @endif
-                                            </div>
-
-                                            <div class="product-content">
-                                                <h3 class="product-title">
-                                                    <a href="{{ $detailUrl }}">{{ $product->name }}</a>
-                                                </h3>
-
-                                                <div class="small text-muted mb-1 sku-line">
-                                                    @if($product->sku)
-                                                        <span class="me-2"><i class="fas fa-barcode"></i> SKU: {{ $product->sku }}</span>
+                                        <a href="{{ $detailUrl }}" class="product-card-link">
+                                            <div class="product-card">
+                                                <div class="product-image">
+                                                    @if($imgUrl)
+                                                        <img src="{{ $imgUrl }}" alt="{{ $product->name }}" class="img-fluid" loading="lazy">
+                                                    @else
+                                                        <div class="no-image">
+                                                            <i class="fas fa-image"></i>
+                                                            <span>No Image</span>
+                                                        </div>
                                                     @endif
-                                                    @if(count($brandList))
-                                                        <span><i class="fas fa-tags"></i>
-                                                            @foreach(array_slice($brandList,0,3) as $b)
-                                                                <span class="badge rounded-pill bg-light text-dark border">{{ $b }}</span>
-                                                            @endforeach
-                                                            @if(count($brandList) > 3)
-                                                                <span class="badge rounded-pill bg-light text-dark border">+{{ count($brandList)-3 }}</span>
-                                                            @endif
-                                                        </span>
+
+                                                    @if(!empty($product->is_featured))
+                                                        <div class="product-badge featured" title="Featured">
+                                                            <i class="fas fa-star"></i> Featured
+                                                        </div>
                                                     @endif
                                                 </div>
 
-                                                {{-- Atribut Chips --}}
-                                                @if($attrs->count())
-                                                    <div class="mb-2 attrs-wrap">
-                                                        @foreach($attrs as $a)
-                                                            <span class="badge rounded-pill attr-chip">
-                                                                {{ Str::limit($a, 48) }}
+                                                <div class="product-content">
+                                                    <h3 class="product-title">{{ $product->name }}</h3>
+
+                                                    <div class="small text-muted mb-1 sku-line">
+                                                        @if($product->sku)
+                                                            <span class="me-2"><i class="fas fa-barcode"></i> SKU: {{ $product->sku }}</span>
+                                                        @endif
+                                                        @if(count($brandList))
+                                                            <span><i class="fas fa-tags"></i>
+                                                                @foreach(array_slice($brandList,0,3) as $b)
+                                                                    <span class="badge rounded-pill bg-light text-dark border">{{ $b }}</span>
+                                                                @endforeach
+                                                                @if(count($brandList) > 3)
+                                                                    <span class="badge rounded-pill bg-light text-dark border">+{{ count($brandList)-3 }}</span>
+                                                                @endif
                                                             </span>
-                                                        @endforeach
+                                                        @endif
                                                     </div>
-                                                @endif
 
-                                                <div class="product-actions">
-                                                    <a href="{{ $detailUrl }}" class="btn btn-outline-primary btn-sm">
-                                                        <i class="fas fa-info-circle"></i> Detail Produk
-                                                    </a>
-                                                    <a href="{{ route('contact') }}?product={{ $product->slug }}" class="btn btn-primary btn-sm">
-                                                        <i class="fas fa-phone"></i> Hubungi
-                                                    </a>
+                                                    {{-- Atribut Chips --}}
+                                                    @if($attrs->count())
+                                                        <div class="mb-2 attrs-wrap">
+                                                            @foreach($attrs as $a)
+                                                                <span class="badge rounded-pill attr-chip">
+                                                                    {{ Str::limit($a, 48) }}
+                                                                </span>
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
                                 @endforeach
                             </div>
@@ -419,10 +408,10 @@ body {
   transition: color .25s;
 }
 
-/* Container */
+/* Container - REDUCED MARGINS */
 .container-custom {
-  padding-left: 0.5rem !important;
-  padding-right: 0.5rem !important;
+  padding-left: 0.25rem !important;  /* Reduced from 0.5rem */
+  padding-right: 0.25rem !important; /* Reduced from 0.5rem */
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
@@ -430,22 +419,22 @@ body {
 
 @media (min-width: 768px) {
   .container-custom {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-left: 0.5rem !important;  /* Reduced from 1rem */
+    padding-right: 0.5rem !important; /* Reduced from 1rem */
   }
 }
 
 @media (min-width: 992px) {
   .container-custom {
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
+    padding-left: 0.75rem !important;  /* Reduced from 1.5rem */
+    padding-right: 0.75rem !important; /* Reduced from 1.5rem */
   }
 }
 
 @media (min-width: 1400px) {
   .container-custom {
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
+    padding-left: 1rem !important;  /* Reduced from 2rem */
+    padding-right: 1rem !important; /* Reduced from 2rem */
   }
 }
 
@@ -632,17 +621,34 @@ body {
   color: #fff;
 }
 
-/* Grid & Cards */
+/* Grid & Cards - FIXED HEIGHT AND ALIGNMENT */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
   margin-bottom: 1rem;
-  min-height: 200px;
+}
+
+/* Ensure all cards in the same row have the same height */
+.products-grid {
+  grid-auto-rows: 1fr;
 }
 
 .products-grid.list-view {
   grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+}
+
+.product-item {
+  display: flex;
+  height: 100%;
+}
+
+.product-card-link {
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
 }
 
 .product-card {
@@ -651,35 +657,39 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100%;
+  min-height: 380px; /* Fixed minimum height for consistency */
   box-shadow: var(--shadow-1);
   position: relative;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: all 0.2s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-2);
+  border-color: var(--brand-3);
 }
 
-/* Image */
+/* Image - SQUARE ASPECT RATIO WITH WHITE BACKGROUND */
 .product-image {
   position: relative;
-  aspect-ratio: 4/3;
-  background: var(--soft);
+  aspect-ratio: 1/1; /* Square images */
+  background: #ffffff !important; /* Changed to white */
   border-bottom: 1px solid var(--line-2);
   display: grid;
   place-items: center;
   overflow: hidden;
-  min-height: 180px;
+  flex-shrink: 0; /* Prevent image container from shrinking */
 }
 
 .products-grid.list-view .product-image {
   width: 220px;
-  aspect-ratio: unset;
-  height: 160px;
+  aspect-ratio: 1/1; /* Square images in list view */
+  height: 220px; /* Fixed height for list view */
   border-bottom: none;
   border-right: 1px solid var(--line-2);
+  flex-shrink: 0;
 }
 
 .product-image img {
@@ -687,22 +697,26 @@ body {
   height: 100%;
   object-fit: contain;
   padding: 8px;
-  transition: transform 0.15s;
+  transition: transform 0.2s ease;
 }
 
 .product-card:hover .product-image img {
-  transform: scale(1.02);
+  transform: scale(1.05);
 }
 
 /* List Layout */
 .products-grid.list-view .product-card {
   flex-direction: row;
   height: auto;
+  min-height: 220px; /* Consistent height for list view */
 }
 
 .products-grid.list-view .product-content {
-  padding: 0.8rem 0.9rem;
+  padding: 1rem;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 /* Badge */
@@ -715,46 +729,70 @@ body {
   font-size: 0.7rem;
   font-weight: 600;
   color: #fff;
+  z-index: 2;
 }
 
 .product-badge.featured {
   background: var(--brand-1);
 }
 
-/* Content */
+/* Content - FIXED LAYOUT */
 .product-content {
-  padding: 0.8rem 0.8rem 0.9rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex: 1;
+  min-height: 0; /* Allow content to shrink if needed */
 }
 
 .product-title {
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
   line-height: 1.3;
-}
-
-.product-title a {
   color: var(--ink);
-  text-decoration: none;
+  transition: color 0.2s ease;
+  /* Fixed height for title consistency */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.6em; /* 2 lines */
 }
 
-.product-title a:hover {
-  color: var(--brand-2);
+.product-card:hover .product-title {
+  color: var(--brand-1);
 }
 
 .product-description {
   color: var(--muted);
   font-size: 0.85rem;
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
   flex-grow: 1;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  min-height: 3.6em; /* 3 lines */
+}
+
+.product-count {
+  color: var(--brand-1);
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+/* SKU and Brands - FIXED LAYOUT */
+.sku-line {
+  margin-bottom: 0.5rem !important;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  min-height: 1.3em;
 }
 
 /* Attributes */
@@ -762,6 +800,9 @@ body {
   display: flex;
   gap: 0.25rem;
   flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+  max-height: 60px; /* Limit height for attributes */
+  overflow: hidden;
 }
 
 .attr-chip {
@@ -769,20 +810,15 @@ body {
   border: 1px solid var(--line);
   color: #000 !important;
   font-weight: 600;
-  padding: 0.25rem 0.45rem;
-  font-size: 0.75rem;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.7rem;
 }
 
 /* Buttons - Override Bootstrap with higher specificity */
 .btn,
 .btn.btn-primary,
-.btn.btn-outline-primary,
 a.btn,
-a.btn.btn-primary,
-a.btn.btn-outline-primary,
-button.btn,
-button.btn.btn-primary,
-button.btn.btn-outline-primary {
+button.btn {
   font-weight: 600 !important;
   border-width: 0 !important;
   transition: 0.15s ease !important;
@@ -826,49 +862,11 @@ button.btn.btn-primary:active {
   transform: translateY(0) !important;
 }
 
-/* Outline Primary Button - Force Red Theme */
-.btn.btn-outline-primary,
-a.btn.btn-outline-primary,
-button.btn.btn-outline-primary {
-  color: var(--brand-1) !important;
-  background: transparent !important;
-  border: 1.5px solid var(--brand-1) !important;
-}
-
-.btn.btn-outline-primary:hover,
-.btn.btn-outline-primary:focus,
-.btn.btn-outline-primary:active,
-.btn.btn-outline-primary:not(:disabled):not(.disabled):active,
-a.btn.btn-outline-primary:hover,
-a.btn.btn-outline-primary:focus,
-a.btn.btn-outline-primary:active,
-button.btn.btn-outline-primary:hover,
-button.btn.btn-outline-primary:focus,
-button.btn.btn-outline-primary:active {
-  color: #fff !important;
-  background: var(--brand-1) !important;
-  border-color: var(--brand-1) !important;
-  transform: translateY(-1px) !important;
-  box-shadow: none !important;
-}
-
-.btn.btn-outline-primary:active,
-.btn.btn-outline-primary:not(:disabled):not(.disabled):active,
-a.btn.btn-outline-primary:active,
-button.btn.btn-outline-primary:active {
-  color: #fff !important;
-  background: var(--brand-2) !important;
-  border-color: var(--brand-2) !important;
-  transform: translateY(0) !important;
-}
-
 /* Remove all blue colors from buttons */
 .btn:focus,
 .btn-primary:focus,
-.btn-outline-primary:focus,
 .btn:not(:disabled):not(.disabled):focus,
-.btn-primary:not(:disabled):not(.disabled):focus,
-.btn-outline-primary:not(:disabled):not(.disabled):focus {
+.btn-primary:not(:disabled):not(.disabled):focus {
   box-shadow: var(--ring) !important;
   color: #fff !important;
 }
@@ -990,8 +988,12 @@ button.btn.btn-outline-primary:active {
 /* Responsive */
 @media (max-width: 1024px) {
   .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 0.7rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.9rem;
+  }
+
+  .product-card {
+    min-height: 360px;
   }
 
   .pagination .page-link {
@@ -1018,18 +1020,25 @@ button.btn.btn-outline-primary:active {
   }
 
   .products-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.8rem;
   }
 
   .products-grid.list-view .product-card {
     flex-direction: column;
+    min-height: auto;
   }
 
   .products-grid.list-view .product-image {
     width: 100%;
-    height: 160px;
+    aspect-ratio: 1/1;
+    height: auto;
     border-right: none;
     border-bottom: 1px solid var(--line-2);
+  }
+
+  .products-grid.list-view .product-content {
+    padding: 0.8rem;
   }
 
   .pagination {
@@ -1050,9 +1059,13 @@ button.btn.btn-outline-primary:active {
 }
 
 @media (max-width: 480px) {
-  .product-actions {
-    flex-direction: column;
-    gap: 0.4rem;
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .product-card {
+    min-height: 340px;
   }
 
   .pagination .page-link {
